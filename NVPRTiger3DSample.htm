@@ -28,10 +28,13 @@
 <!--Navbar-->
 <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
   <div class="container">
-	<div class="navbar-header" style="">
+	<div class="row">
 	  <!--<button class="navbar-toggle" type="button"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>-->
-	  <div class="logo-header">
-		<a class="navbar-brand logo" href="http://developer.nvidia.com/gameworks"><img alt="NVidia Gameworks" height="21" src="./images/developerzone_gameworks_logo.png" width="245"></a>
+	  <div class="logo-header col-sm-8 col-md-9">
+		<a class="navbar-brand logo" href="http://developer.nvidia.com/gameworks"><img alt="NVidia GameWorks" height="21" src="./images/developerzone_gameworks_logo.png" width="245"></a>
+	  </div>
+	  <div class="logo-header navbar-right col-sm-4 col-md-3">
+		<a class="navbar-brand logo" href="https://github.com/NVIDIAGameWorks/GraphicsSamples"><img src="./images/gameworks_at_github.png" alt="GameWorks at GitHub" height="21" width="226"/></a>
 	  </div>
 	</div>
   </div>
@@ -41,7 +44,14 @@
 <div id="content" class="container">
 
 <div class="row" id="subprojcontent">
-<div class="col-md-8">
+ <div class="col-xs-12">
+    <ol class="breadcrumb"><br/>
+		<li><a href="./index.html">Home</a></li>
+		
+		<li><a href="./gfx_samples_gl.htm">GameWorks OpenGL Graphics Samples</a></li>
+		
+		<li class="active">NVPR Tiger 3D Sample</li>
+	</ol> 
 	<div class="page-header">
 		<h1>NVPR Tiger 3D Sample</h1>
 	</div>

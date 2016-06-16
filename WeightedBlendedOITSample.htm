@@ -4,8 +4,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta charset="utf-8" />
 	
-	<title>ModelTestVk Sample</title>
-	<meta name="description" content="ModelTestVk Sample" />
+	<title>Weighted Blended OIT Sample</title>
+	<meta name="description" content="Weighted Blended OIT Sample" />
 	
 	<!-- CSS files -->
     <link href="./css/application.css" rel="stylesheet" type="text/css" />
@@ -47,13 +47,13 @@
  <div class="col-xs-12">
     <ol class="breadcrumb"><br/>
 		<li><a href="./index.html">Home</a></li>
-		<
-		<li><a href="./gfx_samples_vk.htm">GameWorks Vulkan Graphics Samples</a></li>
 		
-		<li class="active">ModelTestVk Sample</li>
+		<li><a href="./gfx_samples_gl.htm">GameWorks OpenGL Graphics Samples</a></li>
+		
+		<li class="active">Weighted Blended OIT Sample</li>
 	</ol> 
 	<div class="page-header">
-		<h1>ModelTestVk Sample</h1>
+		<h1>Weighted Blended OIT Sample</h1>
 	</div>
 
 	<div class="row">
@@ -61,13 +61,15 @@
 			<div class="subprojmetadata">
 			<b class="small">Category:</b>
 			
-				<span class="btn btn-primary btn-xs subprojmetacat">&nbsp;Vulkan&nbsp;</span>
+				<span class="btn btn-primary btn-xs subprojmetacat">&nbsp;Performance&nbsp;</span>
+			
+				<span class="btn btn-primary btn-xs subprojmetacat">&nbsp;Visuals&nbsp;</span>
 			
 			</div>
 		
 		<div class="subprojmetadata">
 			<b class="small">Min PC GPU:</b>
-			<span class="subprojmetagpu">GeForce Kepler-class</span>
+			<span class="subprojmetagpu">GeForce Fermi-class</span>
 		</div>
 		
 		<div class="subprojmetadata">
@@ -79,9 +81,9 @@
 	
 	<div class="row">
 		<h3>Description</h3>
-		<p>This sample demonstrates how to render rigid models using Vulkan, including transforms and materials.</p>
+		<p>Weighted Blended OIT Sample demonstrates how plausible OIT (Order Independent Transparency) can be rendered in a single geometry pass without any depth sorting, as described in McGuire and Bavoil 2013. The idea is to use additive blending to compute a weighted average of the translucent colors with a weighting function that falls off as the linear depth increases. This sample compares the quality and performance of Weighted Blended OIT with Depth Peeling.</p>
 			
-		<a data-colorbox="true" href="images/modeltestvk-screenshot.png"><img class="subprojscreen" src="images/modeltestvk-screenshot.png" width="400" alt="Screenshot" /></a>
+		<a data-colorbox="true" href="images/weightedblendedoit-screenshot.jpg"><img class="subprojscreen" src="images/weightedblendedoit-screenshot.jpg" width="400" alt="Screenshot" /></a>
 		
 	</div>
 	
@@ -90,7 +92,7 @@
 		<h3>APIs Used</h3>
 		<ul>
 		
-		  <li class="odd">Vulkan 1.0</li>
+		  <li class="odd">OpenGL 4.0</li>
 		
 		</ul>
 	</div>
@@ -249,13 +251,61 @@
 	<div class="row" id="subprojfulldoc">
 		<h3>Technical Details</h3>
 		<div id="detaileddoc">
+<p>This sample is an implementation of the Weighted Blended OIT (Order Independent Transparency) algorithm from this research paper:<br/>
+<a href="http://jcgt.org/published/0002/02/09/">McGuire and Bavoil, Weighted Blended Order-Independent Transparency, Journal of Computer Graphics Techniques (JCGT), vol. 2, no. 2, 122--141, 2013</a>.
+</p>
 
-    <p>This simple sample shows the basics of using DescriptorSets, both dynamic and static to implement basic model rendering.</p>
+<h4>Implementation</h4>
+<p>
+This SDK sample has two rendering methods for order-independent transparency:</p>
+<ul>
+<li>Depth peeling is performing one geometry pass per peeled layer until there are no more fragments to be peeled. The layers are blended as they are peeled, in front-to-back order.</li>
+  <li>
+    Weighted Blended OIT is a fast approximation of the depth peeling result, in a single geometry pass. In this geometry pass, the fragments are blended into a Frame Buffer Object with 2 draw buffers.
+    In the first draw buffer (with format RGBA16F),
+    <ul>
+    <li>
+      <code>RGB</code> stores <code>Sum[FragColor.rgb * FragColor.a * Weight(FragDepth)]</code>
+    </li>
+    <li>
+      <code>Alpha</code> stores <code>Sum[FragColor.a * Weight(FragDepth)]</code>
+    </li>
+  </ul>
+    <p>In the second draw buffer (with format R8),</p>
+    <ul>
+      <li><code>R</code> stores <code>Product[1.0 - FragColor.a]</code></li>
+    </ul>
+  </li>
+</ul>
+
 
 </div>
 	</div>
 	
 
+	
+	<div class="row" id="subprojseealso">
+		<h3>See Also</h3>
+		<ul>
+		
+		  <li class="odd">
+		  <!-- tbd file static refs will need to turn into an nvidia.com relative URL... -->
+		  <span class="subprojseeone">
+		  <a href="http://jcgt.org/published/0002/02/09/">
+		  [McGuire and Bavoil 2013] Morgan McGuire and Louis Bavoil. &#39;Weighted Blended Order-Independent Transparency&#39;. Journal of Computer Graphics Techniques (JCGT), vol. 2, no. 2, 122--141, 2013.
+		  </a>
+		  </span></li>
+		
+		  <li class="even">
+		  <!-- tbd file static refs will need to turn into an nvidia.com relative URL... -->
+		  <span class="subprojseeone">
+		  <a href="http://developer.download.nvidia.com/SDK/10/opengl/screenshots/samples/dual_depth_peeling.html">
+		  [Bavoil and Myers 2008] Louis Bavoil and Kevin Myers. &#39;Order Independent Transparency with Dual Depth Peeling&#39;. NVIDIA Whitepaper. 2008.
+		  </a>
+		  </span></li>
+		
+		</ul>
+	</div>
 		
 	
 </div>
