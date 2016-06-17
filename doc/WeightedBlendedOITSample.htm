@@ -4,8 +4,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta charset="utf-8" />
 	
-	<title>Compute Basic GLSL Sample</title>
-	<meta name="description" content="Compute Basic GLSL Sample" />
+	<title>Weighted Blended OIT Sample</title>
+	<meta name="description" content="Weighted Blended OIT Sample" />
 	
 	<!-- CSS files -->
     <link href="./css/application.css" rel="stylesheet" type="text/css" />
@@ -50,10 +50,10 @@
 		
 		<li><a href="./gfx_samples_gl.htm">GameWorks OpenGL Graphics Samples</a></li>
 		
-		<li class="active">Compute Basic GLSL Sample</li>
+		<li class="active">Weighted Blended OIT Sample</li>
 	</ol> 
 	<div class="page-header">
-		<h1>Compute Basic GLSL Sample</h1>
+		<h1>Weighted Blended OIT Sample</h1>
 	</div>
 
 	<div class="row">
@@ -61,7 +61,9 @@
 			<div class="subprojmetadata">
 			<b class="small">Category:</b>
 			
-				<span class="btn btn-primary btn-xs subprojmetacat">&nbsp;Compute&nbsp;</span>
+				<span class="btn btn-primary btn-xs subprojmetacat">&nbsp;Performance&nbsp;</span>
+			
+				<span class="btn btn-primary btn-xs subprojmetacat">&nbsp;Visuals&nbsp;</span>
 			
 			</div>
 		
@@ -78,16 +80,16 @@
 		
 		<div class="subprojmetadata">
 			<b class="small">@ GitHub:</b>
-			<span class="subprojmetagpu"><a target="_blank" href="https://github.com/NVIDIAGameWorks/GraphicsSamples/tree/master/samples/es3aep-kepler/ComputeBasicGLSL">Compute Basic GLSL Sample Source Code</a></span>
+			<span class="subprojmetagpu"><a target="_blank" href="https://github.com/NVIDIAGameWorks/GraphicsSamples/tree/master/samples/gl4-kepler/WeightedBlendedOIT">Weighted Blended OIT Sample Source Code</a></span>
 		</div>
 		
 	</div>
 	
 	<div class="row">
 		<h3>Description</h3>
-		<p>This basic sample demonstrates how to interoperate between OpenGL [ES] and a simple OpenGL Compute Shader-based compute kernel.</p>
+		<p>Weighted Blended OIT Sample demonstrates how plausible OIT (Order Independent Transparency) can be rendered in a single geometry pass without any depth sorting, as described in McGuire and Bavoil 2013. The idea is to use additive blending to compute a weighted average of the translucent colors with a weighting function that falls off as the linear depth increases. This sample compares the quality and performance of Weighted Blended OIT with Depth Peeling.</p>
 			
-		<a data-colorbox="true" href="images/computebasicglsl-screenshot.jpg"><img class="subprojscreen" src="images/computebasicglsl-screenshot.jpg" width="400" alt="Screenshot" /></a>
+		<a data-colorbox="true" href="images/weightedblendedoit-screenshot.jpg"><img class="subprojscreen" src="images/weightedblendedoit-screenshot.jpg" width="400" alt="Screenshot" /></a>
 		
 	</div>
 	
@@ -96,9 +98,7 @@
 		<h3>APIs Used</h3>
 		<ul>
 		
-		  <li class="odd">GL_ARB_compute_shader</li>
-		
-		  <li class="even">GL_COMPUTE_SHADER</li>
+		  <li class="odd">OpenGL 4.0</li>
 		
 		</ul>
 	</div>
@@ -257,14 +257,34 @@
 	<div class="row" id="subprojfulldoc">
 		<h3>Technical Details</h3>
 		<div id="detaileddoc">
-<p>This sample shows how to access GL textures efficiently from a compute shader, for both reading and writing.</p>
-<p>It loads a source texture from a dds file, creates an output texture of equal size, then performs the following every frame:</p>
-<ol>
-<li><p>Bind both input and output textures to image units for compute use.</p></li>
-<li><p>Execute the compute kernel, which performs a simple color invert.</p></li>
-<li><p>Draw output texture to screen.</p></li>
-</ol>
-<p>The Compute filter pass can be toggled from the UI.</p>
+<p>This sample is an implementation of the Weighted Blended OIT (Order Independent Transparency) algorithm from this research paper:<br/>
+<a href="http://jcgt.org/published/0002/02/09/">McGuire and Bavoil, Weighted Blended Order-Independent Transparency, Journal of Computer Graphics Techniques (JCGT), vol. 2, no. 2, 122--141, 2013</a>.
+</p>
+
+<h4>Implementation</h4>
+<p>
+This SDK sample has two rendering methods for order-independent transparency:</p>
+<ul>
+<li>Depth peeling is performing one geometry pass per peeled layer until there are no more fragments to be peeled. The layers are blended as they are peeled, in front-to-back order.</li>
+  <li>
+    Weighted Blended OIT is a fast approximation of the depth peeling result, in a single geometry pass. In this geometry pass, the fragments are blended into a Frame Buffer Object with 2 draw buffers.
+    In the first draw buffer (with format RGBA16F),
+    <ul>
+    <li>
+      <code>RGB</code> stores <code>Sum[FragColor.rgb * FragColor.a * Weight(FragDepth)]</code>
+    </li>
+    <li>
+      <code>Alpha</code> stores <code>Sum[FragColor.a * Weight(FragDepth)]</code>
+    </li>
+  </ul>
+    <p>In the second draw buffer (with format R8),</p>
+    <ul>
+      <li><code>R</code> stores <code>Product[1.0 - FragColor.a]</code></li>
+    </ul>
+  </li>
+</ul>
+
+
 </div>
 	</div>
 	
@@ -277,8 +297,16 @@
 		  <li class="odd">
 		  <!-- tbd file static refs will need to turn into an nvidia.com relative URL... -->
 		  <span class="subprojseeone">
-		  <a href="https://www.opengl.org/wiki/Compute_Shader">
-		  Khronos OpenGL Compute Shader wiki
+		  <a href="http://jcgt.org/published/0002/02/09/">
+		  [McGuire and Bavoil 2013] Morgan McGuire and Louis Bavoil. &#39;Weighted Blended Order-Independent Transparency&#39;. Journal of Computer Graphics Techniques (JCGT), vol. 2, no. 2, 122--141, 2013.
+		  </a>
+		  </span></li>
+		
+		  <li class="even">
+		  <!-- tbd file static refs will need to turn into an nvidia.com relative URL... -->
+		  <span class="subprojseeone">
+		  <a href="http://developer.download.nvidia.com/SDK/10/opengl/screenshots/samples/dual_depth_peeling.html">
+		  [Bavoil and Myers 2008] Louis Bavoil and Kevin Myers. &#39;Order Independent Transparency with Dual Depth Peeling&#39;. NVIDIA Whitepaper. 2008.
 		  </a>
 		  </span></li>
 		
