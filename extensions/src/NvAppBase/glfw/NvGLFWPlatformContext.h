@@ -35,7 +35,12 @@
 #define NV_GLFW_PLATFORM_CONTEXT_H
 #define GLEW_STATIC
 #include <GL/glew.h>
+#ifdef _WIN32
 #include <GL/wglew.h>
+#else
+#include <GL/glxew.h>
+#endif
+
 #include <GLFW/glfw3.h>
 
 #include <NvGamepad/NvGamepad.h>

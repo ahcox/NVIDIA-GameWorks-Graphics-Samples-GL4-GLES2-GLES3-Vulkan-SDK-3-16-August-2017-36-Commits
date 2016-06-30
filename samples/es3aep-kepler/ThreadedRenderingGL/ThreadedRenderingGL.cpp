@@ -85,7 +85,7 @@ extern uint32_t neighborSkip;
 // Global function to pass to each animation worker thread which will extract the
 // ThreadData from the argument passed in and use that to invoke the actual
 // animate function on the application instance
-#ifdef WIN32
+#ifdef _WIN32
 DWORD WINAPI animateJobFunctionThunk(VOID *arg)
 #else
 void* animateJobFunctionThunk(void *arg)
@@ -101,6 +101,8 @@ void ThreadedRenderingGL::animateJobFunction(uint32_t threadIndex)
 {
     NvThreadManager* threadManager = getThreadManagerInstance();
     NV_ASSERT(nullptr != threadManager);
+    ThreadData& me = m_threads[threadIndex];
+    me.m_frameID = 0;
 
     // Our m_running member gives us a mechanism to signal all worker threads
     // to quit when we need to shut them all down
@@ -111,8 +113,12 @@ void ThreadedRenderingGL::animateJobFunction(uint32_t threadIndex)
         m_frameStartLock->lockMutex();
         {
             // Sleep the thread until there is work to be done
-            m_frameStartCV->waitConditionVariable(
-                m_frameStartLock);
+            if (m_frameID == me.m_frameID)	{
+		m_frameStartCV->waitConditionVariable(
+			m_frameStartLock);
+            }
+
+            me.m_frameID = m_frameID;
 
             // See if we were told to stop running while we
             // were sleeping
@@ -163,7 +169,6 @@ void ThreadedRenderingGL::animateJobFunction(uint32_t threadIndex)
             // different (i.e. each school has a different amount of work to do during
             // its update).  In our fixed school size case, this is not an issue, so 
             // thread utilization should not be significantly impacted.
-            ThreadData& me = m_threads[threadIndex];
 
             schoolsDone = me.m_schoolCount;
             if (!m_animPaused || m_bForceSchoolUpdate)
@@ -335,7 +340,8 @@ ThreadedRenderingGL::ThreadedRenderingGL() :
     m_meanCPUMainCmd(0.0f),
     m_meanCPUMainWait(0.0f),
     m_meanCPUMainCopyVBO(0.0f),
-    m_meanGPUFrameMS(0.0f)
+    m_meanGPUFrameMS(0.0f),
+    m_frameID(0)
 {
 #if STRESS_TEST
     // Full complexity for the stress test
@@ -1833,6 +1839,7 @@ void ThreadedRenderingGL::draw(void)
         // ready for them to start updating schools
         m_frameStartLock->lockMutex();
         {
+            m_frameID++;
             m_frameStartCV->broadcastConditionVariable();
         }
         m_frameStartLock->unlockMutex();

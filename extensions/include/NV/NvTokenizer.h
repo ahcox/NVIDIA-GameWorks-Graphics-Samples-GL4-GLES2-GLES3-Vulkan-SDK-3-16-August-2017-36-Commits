@@ -39,6 +39,9 @@
 #include <string>
 #include <cstdlib>
 #include <NV/NvLogs.h>
+#ifdef LINUX
+#include <string.h>
+#endif
 
 /// \file
 /// Classes for tokenizing of input character streams.

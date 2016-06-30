@@ -39,8 +39,13 @@
 #include <fcntl.h>
 #include <stdio.h>
 
+#ifdef LINUX
+#include <string.h>
+#endif
+
 NvGamepad* NvGamepad::createDefaultGamePad() {
-	return new NvGamepadLinux;
+//	return new NvGamepadLinux;
+	return NULL;
 }
 
 char cJoyDevPath[64] = "/dev/input/js0"; // vs /eventX interface... tbd.

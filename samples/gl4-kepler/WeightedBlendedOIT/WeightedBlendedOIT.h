@@ -40,7 +40,8 @@
 #include "NvGLUtils/NvTimers.h"
 #include "NV/NvMath.h"
 
-class NvGLModel;
+class NvGLSLProgram;
+class NvModelGL;
 class NvStopWatch;
 class NvFramerateCounter;
 
@@ -81,7 +82,7 @@ protected:
     void DeleteDepthPeelingRenderTargets();
     void InitAccumulationRenderTargets();
     void DeleteAccumulationRenderTargets();
-    NvGLModel* LoadModel(const char *model_filename);
+    NvModelGL* LoadModel(const char *model_filename);
     void DrawModel(NvGLSLProgram* shader);
     void BuildShaders();
     void DestroyShaders();
@@ -90,7 +91,7 @@ protected:
     void RenderWeightedBlendedOIT();
     void RenderFullscreenQuad(NvGLSLProgram* shader);
 
-    NvGLModel *m_models[MODELS_COUNT];
+    NvModelGL *m_models[MODELS_COUNT];
     uint32_t m_modelID;
     GLuint m_vboId;
     GLuint m_eboId;

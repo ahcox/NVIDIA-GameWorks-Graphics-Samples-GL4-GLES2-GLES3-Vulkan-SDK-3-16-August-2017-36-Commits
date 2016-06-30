@@ -40,6 +40,10 @@
 #include "NvModel/NvSkeleton.h"
 #include "NvModelExtFile.h"
 
+#ifdef LINUX
+#include <stdio.h>
+#endif
+
 namespace Nv
 {
 	NvModelFileLoader* NvModelExt::ms_pLoader = NULL;

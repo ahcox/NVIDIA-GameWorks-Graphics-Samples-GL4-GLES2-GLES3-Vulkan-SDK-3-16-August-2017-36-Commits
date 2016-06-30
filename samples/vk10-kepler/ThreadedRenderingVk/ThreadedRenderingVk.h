@@ -43,7 +43,7 @@
 #include "NvVkUtil/NvSimpleUBO.h"
 #include "NvVkUtil/NvSafeCommandBuffer.h"
 #include <vector>
-#include "NvInstancedModelExtVk.h"
+#include "NvInstancedModelExtVK.h"
 #include "School.h"
 #include <cstdlib>
 #include <deque>
@@ -147,6 +147,7 @@ public:
 		uint32_t m_drawCallCount;
 		uint32_t m_baseSchoolIndex;
 		uint32_t m_schoolCount;
+                uint32_t m_frameID; 
 	};
 	void AnimateJobFunction(uint32_t threadIndex);
 	void UpdateSchool(uint32_t threadIndex, uint32_t schoolIndex,
@@ -228,7 +229,7 @@ private:
 	NvMutex* m_NeedsUpdateQueueLock;
 
 	NvMutex* m_DoneCountLock;
-	uint32_t m_doneCount;
+	volatile uint32_t m_doneCount;
 	NvConditionVariable* m_DoneCountCV;
 
     uint32_t m_requestedActiveThreads;
@@ -544,5 +545,6 @@ private:
     bool m_requestedDrawGL;
 	bool m_drawGL;
 	bool m_glInitialized;
+	volatile uint32_t m_frameID;
 };
 #endif // ThreadedRenderingVk_H_

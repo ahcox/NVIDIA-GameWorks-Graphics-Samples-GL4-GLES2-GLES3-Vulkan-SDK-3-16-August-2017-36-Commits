@@ -36,7 +36,7 @@
 	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|Tegra-Android'" Label="Configuration">
 		<ConfigurationType>StaticLibrary</ConfigurationType>
-		<PlatformToolset>v140</PlatformToolset>
+		<PlatformToolset>"arm-linux-androideabi-$(NDK_TOOLCHAIN_VERSION)"</PlatformToolset>
 		<FastDeploy>false</FastDeploy>
 		<AndroidArch>armv7-a</AndroidArch>
 		<AndroidStlType>gnustl_static</AndroidStlType>
@@ -46,7 +46,7 @@
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|Tegra-Android'" Label="Configuration">
 		<ConfigurationType>StaticLibrary</ConfigurationType>
-		<PlatformToolset>v140</PlatformToolset>
+		<PlatformToolset>"arm-linux-androideabi-$(NDK_TOOLCHAIN_VERSION)"</PlatformToolset>
 		<FastDeploy>false</FastDeploy>
 		<AndroidArch>armv7-a</AndroidArch>
 		<AndroidStlType>gnustl_static</AndroidStlType>
