@@ -34,6 +34,7 @@
 #ifndef ANDROID
 #include "NvGLFWContextVK.h"
 #include "NvVkRenderTargetImpls.h"
+#include <string.h>
 
 NvVkRenderTarget* NvGLFWContextVK::mainRenderTarget() {
 	return mSwapchainRenderTarget;

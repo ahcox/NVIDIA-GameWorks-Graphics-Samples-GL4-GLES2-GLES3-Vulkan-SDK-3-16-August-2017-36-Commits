@@ -1,11 +1,25 @@
 // glsl2spirv.cpp : Defines the entry point for the console application.
 //
 
+#ifdef _WIN32
 #include <Windows.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <tchar.h>
 #include <Shlwapi.h>
+#define NVCHAR wchar_t
+#define STRING_TAG "%ls"
+#else
+#include <string.h>
+#define NVCHAR char
+#define _strnicmp strncasecmp
+#define _snprintf_s snprintf
+#define INVALID_HANDLE_VALUE NULL
+#define HANDLE FILE*
+#define STRING_TAG "%s"
+#define MAX_PATH 1024
+#endif
+
+#include <stdlib.h>
+#include <stdio.h>
 #include "SimpleOpt.h"
 #include "../include/shaderc/shaderc.hpp"
 #include "vulkan/vulkan.h"
@@ -39,7 +53,8 @@ enum ECommandLineIDs
 	CMDLINE_OUTPUT_CPP
 };
 
-CSimpleOptW::SOption rgOptions[] =
+#ifdef _WIN32
+CSimpleOptW::SOption rgOptions[] = 
 {
 	{ CMDLN_HELP, L"-h", SO_NONE },
 	{ CMDLN_OUTFILE, L"-o", SO_REQ_SEP },
@@ -52,18 +67,36 @@ CSimpleOptW::SOption rgOptions[] =
 	{ CMDLINE_OUTPUT_CPP, L"-cpp", SO_REQ_SEP },
 	SO_END_OF_OPTIONS
 };
+#else
+CSimpleOptA::SOption rgOptions[] = 
+{
+	{ CMDLN_HELP, "-h", SO_NONE },
+	{ CMDLN_OUTFILE, "-o", SO_REQ_SEP },
+	{ CMDLINE_VS_INFILE, "-vs", SO_REQ_SEP },
+	{ CMDLINE_FS_INFILE, "-fs", SO_REQ_SEP },
+	{ CMDLINE_GS_INFILE, "-gs", SO_REQ_SEP },
+	{ CMDLINE_TCS_INFILE, "-tcs", SO_REQ_SEP },
+	{ CMDLINE_TES_INFILE, "-tes", SO_REQ_SEP },
+	{ CMDLINE_CS_INFILE, "-cs", SO_REQ_SEP },
+	{ CMDLINE_OUTPUT_CPP, "-cpp", SO_REQ_SEP },
+	SO_END_OF_OPTIONS
+};
+#endif
 
-void ConvertPathSlashes(wchar_t* str) {
+void ConvertPathSlashes(NVCHAR* str) {
+#ifdef _WIN32
 	while (*str) {
 		if (*str == '/')
 			*str = '\\';
 		str++;
 	}
+#endif
 }
 
-char* LoadFileToString(wchar_t* filename) {
+char* LoadFileToString(NVCHAR* filename) {
 	ConvertPathSlashes(filename);
 
+#ifdef _WIN32
 	HANDLE fp = CreateFileW(filename,
 		GENERIC_READ,
 		0,
@@ -108,43 +141,43 @@ char* LoadFileToString(wchar_t* filename) {
 	text[read] = '\0';
 
 	return text;
-}
+#else
+	FILE* fp = fopen(filename,"r");
 
-#if 0
-bool WriteResultToFile(wchar_t* filename, GLSLCoutput* out) {
-	ConvertPathSlashes(filename);
-	HANDLE fp = CreateFileW(filename,
-		GENERIC_WRITE,
-		0,
-		NULL,
-		CREATE_ALWAYS,
-		FILE_ATTRIBUTE_NORMAL,
-		NULL);
+        if (!fp) {
+		fprintf(stderr, "Fatal Error: could not open shader file %s\n", filename);
+		return NULL;
+	}
+	
+	fseek(fp, 0L, SEEK_END);
+	size_t filesize = ftell(fp);
+	fseek(fp, 0L, SEEK_SET);
 
-	if (fp == INVALID_HANDLE_VALUE) {
-		fprintf(stderr, "Fatal Error: could not open output file %ls\n", filename);
-		return false;
+	char* text = new char[filesize + 1];
+
+	if (!text) {
+		fprintf(stderr, "Fatal Error: could not allocate memory for shader file %s\n", filename);
+		return NULL;
 	}
 
-	DWORD written = 0;
-	if (!WriteFile(fp, out, out->size, &written, NULL)) {
-		fprintf(stderr, "Fatal Error: could not write output file %ls\n", filename);
-		return false;
+	size_t read = fread(text, 1, filesize, fp);
+	if (read < filesize) {
+		fprintf(stderr, "Fatal Error: could not read shader file %s\n", filename);
+		return NULL;
 	}
 
-	if (written != out->size) {
-		fprintf(stderr, "Fatal Error: could not write entire output (expected %d, wrote %d)\n",
-			out->size, written);
-		return false;
-	}
+	fclose(fp);
 
-	CloseHandle(fp);
+	if (read > filesize) read = filesize;
 
-	return true;
-}
+	text[filesize] = '\0';
+
+	return text;
 #endif
+}
 
-bool ParseCombinedFile(wchar_t* filename) {
+
+bool ParseCombinedFile(NVCHAR* filename) {
 	ConvertPathSlashes(filename);
 	char* fileText = LoadFileToString(filename);
 
@@ -215,7 +248,7 @@ std::vector<uint32_t> compile_file(const std::string& source_name,
 		source.c_str(), source.size(), kind, source_name.c_str(), options);
 
 	if (module.GetCompilationStatus() != shaderc_compilation_status_success) {
-		fprintf(stderr, "Shader compile error: %s\n", module.GetErrorMessage());
+		fprintf(stderr, "Shader compile error: %s\n", module.GetErrorMessage().c_str());
 		return std::vector<uint32_t>();
 	}
 
@@ -224,11 +257,13 @@ std::vector<uint32_t> compile_file(const std::string& source_name,
 }
 
 const int MAX_CHARS = 2048;
-HANDLE binaryFp = 0;
-wchar_t* binaryOutfileName = NULL;
+HANDLE binaryFp = INVALID_HANDLE_VALUE;
 
-int32_t openBinaryFile(wchar_t* outfile) {
+NVCHAR* binaryOutfileName = NULL;
+
+int32_t openBinaryFile(NVCHAR* outfile) {
 	ConvertPathSlashes(outfile);
+#ifdef _WIN32
 	binaryFp  = CreateFileW(outfile,
 		GENERIC_WRITE,
 		0,
@@ -236,11 +271,14 @@ int32_t openBinaryFile(wchar_t* outfile) {
 		CREATE_ALWAYS,
 		FILE_ATTRIBUTE_NORMAL,
 		NULL);
+#else
+	binaryFp  = fopen(outfile, "w");
+#endif
 
 	binaryOutfileName = outfile;
 
 	if (binaryFp == INVALID_HANDLE_VALUE) {
-		fprintf(stderr, "Fatal Error: could not open output file %ls\n", outfile);
+		fprintf(stderr, "Fatal Error: could not open output file " STRING_TAG "\n", outfile);
 		return -1;
 	}
 
@@ -248,14 +286,34 @@ int32_t openBinaryFile(wchar_t* outfile) {
 }
 
 void closeBinaryFile() {
+#ifdef _WIN32
 	CloseHandle(binaryFp);
+#else
+	fclose(binaryFp);
+#endif
 }
 
 
-int32_t writeBinary(uint32_t size, const uint8_t* data) {
+int32_t  WriteFileWrapper(HANDLE fp, const unsigned char* str, uint32_t length) {
+#ifdef _WIN32
 	DWORD written = 0;
-	if (!WriteFile(binaryFp, data, size, &written, NULL)) {
-		fprintf(stderr, "Fatal Error: could not write output file %ls\n", binaryOutfileName);
+	if (!WriteFile(fp, str, length, &written, NULL)) {
+		return 0;
+	}
+#else
+        int32_t written = fwrite(str, 1, length, fp);
+        if (written < 0) {
+                return 0;
+        }
+#endif
+    return (int32_t)written;
+}
+
+int32_t writeBinary(uint32_t size, const uint8_t* data) {
+	int32_t written = 0;	
+        written = WriteFileWrapper(binaryFp, data, size);
+	if (written <= 0) {
+		fprintf(stderr, "Fatal Error: could not write output file " STRING_TAG "\n", binaryOutfileName);
 		return -1;
 	}
 
@@ -268,18 +326,19 @@ int32_t writeBinary(uint32_t size, const uint8_t* data) {
 	return 0;
 }
 
-HANDLE hexHeaderFp = 0;
-HANDLE hexSourceFp = 0;
-wchar_t headerFilename[MAX_CHARS];
-wchar_t sourceFilename[MAX_CHARS];
+HANDLE hexHeaderFp = INVALID_HANDLE_VALUE;
+HANDLE hexSourceFp = INVALID_HANDLE_VALUE;
+NVCHAR headerFilename[MAX_CHARS];
+NVCHAR sourceFilename[MAX_CHARS];
 
-int32_t openHexfiles(wchar_t* filename, wchar_t* prefix, uint32_t totalSize) {
+int32_t openHexfiles(NVCHAR* filename, NVCHAR* prefix, uint32_t totalSize) {
 	ConvertPathSlashes(filename);
 
 	char mbPrefix[MAX_CHARS];
-	wcstombs_s(NULL, mbPrefix, prefix, MAX_CHARS);
-
 	char str[MAX_CHARS];
+
+#ifdef _WIN32
+	wcstombs_s(NULL, mbPrefix, prefix, MAX_CHARS);
 
 	wnsprintf(headerFilename, MAX_CHARS, L"%s.h", filename);
 	wnsprintf(sourceFilename, MAX_CHARS, L"%s.cpp", filename);
@@ -295,11 +354,6 @@ int32_t openHexfiles(wchar_t* filename, wchar_t* prefix, uint32_t totalSize) {
 		FILE_ATTRIBUTE_NORMAL,
 		NULL);
 
-	if (hexHeaderFp == INVALID_HANDLE_VALUE) {
-		fprintf(stderr, "Fatal Error: could not open output file %ls\n", headerFilename);
-		return -1;
-	}
-
 	hexSourceFp = CreateFileW(sourceFilename,
 		GENERIC_WRITE,
 		0,
@@ -307,45 +361,64 @@ int32_t openHexfiles(wchar_t* filename, wchar_t* prefix, uint32_t totalSize) {
 		CREATE_ALWAYS,
 		FILE_ATTRIBUTE_NORMAL,
 		NULL);
+#else
+	strcpy(mbPrefix, prefix);
 
-	if (hexSourceFp == INVALID_HANDLE_VALUE) {
-		fprintf(stderr, "Fatal Error: could not open output file %ls\n", sourceFilename);
+	sprintf(headerFilename, "%s.h", filename);
+	sprintf(sourceFilename, "%s.cpp", filename);
+
+	fprintf(stderr, "headerFilename %s\n", headerFilename);
+	fprintf(stderr, "sourceFilename %s\n", sourceFilename);
+
+	hexHeaderFp = fopen(headerFilename, "w");
+	hexSourceFp = fopen(sourceFilename, "w");
+#endif
+
+	if (hexHeaderFp == INVALID_HANDLE_VALUE) {
+		fprintf(stderr, "Fatal Error: could not open output file " STRING_TAG "\n", headerFilename);
 		return -1;
 	}
 
-	_snprintf_s(str, MAX_CHARS, "extern const int %sLength;\n", mbPrefix, totalSize);
+	if (hexSourceFp == INVALID_HANDLE_VALUE) {
+		fprintf(stderr, "Fatal Error: could not open output file " STRING_TAG "\n", sourceFilename);
+		return -1;
+	}
+
+	_snprintf_s(str, MAX_CHARS, "extern const int %sLength;\n", mbPrefix);
 	int length = strlen(str);
 
-	DWORD written = 0;
-	if (!WriteFile(hexHeaderFp, str, length, &written, NULL)) {
-		fprintf(stderr, "Fatal Error: could not write output file %ls\n", headerFilename);
+	if (!WriteFileWrapper(hexHeaderFp, (const unsigned char*)str, length)) {
+		fprintf(stderr, "Fatal Error: could not write output file " STRING_TAG "\n", headerFilename);
 		return -1;
 	}
 
 	_snprintf_s(str, MAX_CHARS, "extern const unsigned char %sData[];\n", mbPrefix);
 	length = strlen(str);
 
-	if (!WriteFile(hexHeaderFp, str, length, &written, NULL)) {
-		fprintf(stderr, "Fatal Error: could not write output file %ls\n", headerFilename);
+	if (!WriteFileWrapper(hexHeaderFp, (const unsigned char*)str, length)) {
+		fprintf(stderr, "Fatal Error: could not write output file " STRING_TAG "\n", headerFilename);
 		return -1;
 	}
 
+#ifdef _WIN32
 	CloseHandle(hexHeaderFp);
+#else
+	fclose(hexHeaderFp);
+#endif
 
 	_snprintf_s(str, MAX_CHARS, "const int %sLength = %d;\n", mbPrefix, totalSize);
 	length = strlen(str);
 
-	written = 0;
-	if (!WriteFile(hexSourceFp, str, length, &written, NULL)) {
-		fprintf(stderr, "Fatal Error: could not write output file %ls\n", sourceFilename);
+	if (!WriteFileWrapper(hexSourceFp, (const unsigned char*)str, length)) {
+		fprintf(stderr, "Fatal Error: could not write output file " STRING_TAG "\n", sourceFilename);
 		return -1;
 	}
 
 	_snprintf_s(str, MAX_CHARS, "const unsigned char %sData[] = {\n", mbPrefix);
 	length = strlen(str);
 
-	if (!WriteFile(hexSourceFp, str, length, &written, NULL)) {
-		fprintf(stderr, "Fatal Error: could not write output file %ls\n", sourceFilename);
+	if (!WriteFileWrapper(hexSourceFp, (const unsigned char*)str, length)) {
+		fprintf(stderr, "Fatal Error: could not write output file " STRING_TAG "\n", sourceFilename);
 		return -1;
 	}
 
@@ -363,9 +436,8 @@ int32_t writeHexcode(uint32_t size, const uint8_t* data) {
 			(unsigned int)data[4], (unsigned int)data[5], (unsigned int)data[6], (unsigned int)data[7]);
 		length = strlen(str);
 
-		DWORD written = 0;
-		if (!WriteFile(hexSourceFp, str, length, &written, NULL)) {
-			fprintf(stderr, "Fatal Error: could not write output file %ls\n", sourceFilename);
+		if (!WriteFileWrapper(hexSourceFp, (const unsigned char*)str, length)) {
+			fprintf(stderr, "Fatal Error: could not write output file " STRING_TAG "\n", sourceFilename);
 			return -1;
 		}
 
@@ -378,9 +450,8 @@ int32_t writeHexcode(uint32_t size, const uint8_t* data) {
 			(unsigned int)data[i]);
 		length = strlen(str);
 
-		DWORD written = 0;
-		if (!WriteFile(hexSourceFp, str, length, &written, NULL)) {
-			fprintf(stderr, "Fatal Error: could not write output file %ls\n", sourceFilename);
+		if (!WriteFileWrapper(hexSourceFp, (const unsigned char*)str, length)) {
+			fprintf(stderr, "Fatal Error: could not write output file " STRING_TAG "\n", sourceFilename);
 			return -1;
 		}
 
@@ -398,17 +469,21 @@ int32_t closeHexfiles() {
 	_snprintf_s(str, MAX_CHARS, "\n};\n");
 	length = strlen(str);
 
-	DWORD written = 0;
-	if (!WriteFile(hexSourceFp, str, length, &written, NULL)) {
-		fprintf(stderr, "Fatal Error: could not write output file %ls\n", sourceFilename);
+	if (!WriteFileWrapper(hexSourceFp, (const unsigned char*)str, length)) {
+		fprintf(stderr, "Fatal Error: could not write output file " STRING_TAG "\n", sourceFilename);
 		return -1;
 	}
 
+#ifdef _WIN32
 	CloseHandle(hexSourceFp);
+#else
+	fclose(hexSourceFp);
+#endif
+
 	return 0;
 }
 
-static void PrintUsage(const wchar_t *appName)
+static void PrintUsage(const NVCHAR *appName)
 {
 	fwprintf(stdout, L"Usage: %s -o fileName [Options] [Combined Shader File]\n", appName);
 	fwprintf(stdout, L"\n");
@@ -422,16 +497,24 @@ static void PrintUsage(const wchar_t *appName)
 	fwprintf(stdout, L"-cpp namePrefix    : Output in C-source using given name prefix\n");
 }
 
-int wmain(int argc, wchar_t* argv[])
+#ifdef _WIN32
+int wmain(int argc, NVCHAR* argv[])
+#else
+int main(int argc, NVCHAR* argv[])
+#endif
 {
 	const int MAX_STAGES = 6;
 
-	wchar_t* outfile = NULL;
-	wchar_t* writeCSource = NULL;
+	NVCHAR* outfile = NULL;
+	NVCHAR* writeCSource = NULL;
 
 	bool showHelp = false;
 
+#ifdef _WIN32
 	CSimpleOptW args(argc, argv, rgOptions);
+#else
+	CSimpleOptA args(argc, argv, rgOptions);
+#endif
 	args.SetFlags(SO_O_EXACT);
 
 	while (args.Next())
@@ -514,15 +597,22 @@ int wmain(int argc, wchar_t* argv[])
 			return -1;
 
 		char* path = new char[2 * MAX_PATH];
-		wchar_t wPath[MAX_PATH];
-		wPath[0] = 0;
+		NVCHAR* filenamePtr = NULL;
 
-		wchar_t* filenamePtr = NULL;
+#ifdef _WIN32
+		NVCHAR wPath[MAX_PATH];
+		wPath[0] = 0;
 		GetFullPathName(args.File(i), MAX_PATH, wPath, &filenamePtr);
 		// get rid of the filename...
 		if (filenamePtr)
 			*filenamePtr = 0;
 		wcstombs_s(NULL, path, 2 * MAX_PATH, wPath, MAX_PATH);
+#else
+		realpath(args.File(i), path);
+		// get rid of the filename...
+//		if (filenamePtr)
+//			*filenamePtr = 0;
+#endif
 		includePaths[i] = path;
 	}
 

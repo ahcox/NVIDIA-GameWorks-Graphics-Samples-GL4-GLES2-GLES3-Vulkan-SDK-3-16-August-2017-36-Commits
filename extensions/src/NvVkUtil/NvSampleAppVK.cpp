@@ -123,7 +123,7 @@ bool NvSampleAppVK::initialize(const NvPlatformInfo& platform, int32_t width, in
             useApiDump = true;
     }
 
-#ifdef WIN32
+#if defined(_WIN32) || defined(LINUX)
 	if (useLoaderDebug)
 	{
 		putenv("VK_LOADER_DEBUG=all");
@@ -139,7 +139,7 @@ bool NvSampleAppVK::initialize(const NvPlatformInfo& platform, int32_t width, in
 	if (forceWSI)
 		mUseWSI = true;
 
-#ifdef WIN32
+#if defined(_WIN32) || defined(LINUX)
 	NvGLConfiguration config(NvGLAPIVersionGL4(), 8, 8, 8, 8, 16, 0);
 
 	NvGLFWPlatformContext* glfwPlat = new NvGLFWPlatformContext;

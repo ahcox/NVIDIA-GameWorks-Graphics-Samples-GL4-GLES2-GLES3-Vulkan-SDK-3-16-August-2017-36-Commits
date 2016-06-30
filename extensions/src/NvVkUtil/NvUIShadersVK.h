@@ -36,7 +36,7 @@
 
 #include "NvUI/NvUI.h"
 #include "NV/NvMath.h"
-#include "NvVKUtil/NvVKUtil.h"
+#include "NvVkUtil/NvVkUtil.h"
 
 typedef struct
 {

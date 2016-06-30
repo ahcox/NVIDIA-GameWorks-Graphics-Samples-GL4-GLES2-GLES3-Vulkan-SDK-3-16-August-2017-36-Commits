@@ -37,6 +37,10 @@
 #include "NvFilePtr.h"
 #include <algorithm>
 
+#ifdef LINUX
+#include <string.h>
+#endif
+
 #ifdef _WIN32
 //fix non-standard naming
 #define strcasecmp _stricmp

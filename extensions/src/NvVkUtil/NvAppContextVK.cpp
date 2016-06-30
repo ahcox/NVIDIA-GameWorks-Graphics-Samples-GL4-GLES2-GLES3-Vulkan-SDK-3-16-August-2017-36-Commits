@@ -241,6 +241,8 @@ std::vector<std::string> requestedExtensions(bool instance, bool useDebugReport)
 	extensions.push_back("VK_KHR_android_surface");
 	extensions.push_back("VK_KHR_win32_surface");
 	extensions.push_back("VK_KHR_swapchain");
+	extensions.push_back("VK_KHR_xcb_surface");
+	extensions.push_back("VK_KHR_xlib_surface");
 
 #if VK_EXT_debug_report
     if (useDebugReport)

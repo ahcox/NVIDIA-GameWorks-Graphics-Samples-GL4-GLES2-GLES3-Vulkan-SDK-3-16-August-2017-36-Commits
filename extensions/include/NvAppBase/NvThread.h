@@ -36,7 +36,7 @@
 #define NV_THREAD_H
 
 #include <exception>
-#include "NvFoundation\NvPreprocessor.h"
+#include "NvFoundation/NvPreprocessor.h"
 
 /// \file NvThread.h
 /// Cross-platform threading wrapper API

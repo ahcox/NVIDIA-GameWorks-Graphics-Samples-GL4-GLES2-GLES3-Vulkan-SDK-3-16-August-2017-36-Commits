@@ -36,7 +36,7 @@
 	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|Tegra-Android'" Label="Configuration">
 		<ConfigurationType>Application</ConfigurationType>
-		<PlatformToolset>v140</PlatformToolset>
+		<PlatformToolset>"arm-linux-androideabi-$(NDK_TOOLCHAIN_VERSION)"</PlatformToolset>
 		<FastDeploy>false</FastDeploy>
 		<AndroidArch>armv7-a</AndroidArch>
 		<AndroidStlType>gnustl_static</AndroidStlType>
@@ -46,7 +46,7 @@
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|Tegra-Android'" Label="Configuration">
 		<ConfigurationType>Application</ConfigurationType>
-		<PlatformToolset>v140</PlatformToolset>
+		<PlatformToolset>"arm-linux-androideabi-$(NDK_TOOLCHAIN_VERSION)"</PlatformToolset>
 		<FastDeploy>false</FastDeploy>
 		<AndroidArch>armv7-a</AndroidArch>
 		<AndroidStlType>gnustl_static</AndroidStlType>
@@ -117,7 +117,7 @@
 			<AdditionalOptions> -Wl,--start-group -lc -lm -lgcc -lgnustl_static -lEGL -landroid -lm -lGLESv2 -lsupc++ -lgcc -lRegalW_static -Wl,--end-group</AdditionalOptions>
 			<AdditionalDependencies>gnustl_static;EGL;android;m;GLESv2;supc++;gcc;RegalW_static;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)libHelloVulkan.so</OutputFile>
-			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/Tegra-Android;./../../../extensions/lib/Tegra-Android;/sources/cxx-stl/gnu-libstdc++;/libs/armeabi-v7a;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/Tegra-Android;./../../../extensions/lib/Tegra-Android;/sources/cxx-stl/gnu-libstdc++;/libs/armeabi-v7a;./../../../extensions/externals/linux-arm;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/libHelloVulkan.so.pdb</ProgramDatabaseFile>
 			<SubSystem>Windows</SubSystem>
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
@@ -158,7 +158,7 @@
 			<AdditionalOptions> -Wl,--start-group -lc -lm -lgcc -lgnustl_static -lEGL -landroid -lm -lGLESv2 -lsupc++ -lgcc -lRegalW_static -Wl,--end-group</AdditionalOptions>
 			<AdditionalDependencies>gnustl_static;EGL;android;m;GLESv2;supc++;gcc;RegalW_static;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)libHelloVulkan.so</OutputFile>
-			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/Tegra-Android;./../../../extensions/lib/Tegra-Android;/sources/cxx-stl/gnu-libstdc++;/libs/armeabi-v7a;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/Tegra-Android;./../../../extensions/lib/Tegra-Android;/sources/cxx-stl/gnu-libstdc++;/libs/armeabi-v7a;./../../../extensions/externals/linux-arm;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/libHelloVulkan.so.pdb</ProgramDatabaseFile>
 			<SubSystem>Windows</SubSystem>
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
@@ -205,7 +205,7 @@
 			<AdditionalOptions>/DEBUG /MACHINE:x86 /LARGEADDRESSAWARE /NOLOGO /OPT:REF /OPT:ICF /INCREMENTAL:NO</AdditionalOptions>
 			<AdditionalDependencies>xinput9_1_0.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;vulkan-1.lib;glew32sd.lib;glfw3d.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)HelloVulkanD.exe</OutputFile>
-			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/vs2015x86;./../../../extensions/lib/vs2015x86;$(VK_SDK_PATH)/Bin32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/vs2015x86;./../../../extensions/lib/vs2015x86;./../../../extensions/externals/linux-arm;$(VK_SDK_PATH)/Bin32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/HelloVulkanD.exe.pdb</ProgramDatabaseFile>
 			<SubSystem>Windows</SubSystem>
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
@@ -245,7 +245,7 @@
 			<AdditionalOptions>/DEBUG /MACHINE:x86 /LARGEADDRESSAWARE /NOLOGO /OPT:REF /OPT:ICF /INCREMENTAL:NO</AdditionalOptions>
 			<AdditionalDependencies>xinput9_1_0.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;vulkan-1.lib;glew32s.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)HelloVulkan.exe</OutputFile>
-			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/vs2015x86;./../../../extensions/lib/vs2015x86;$(VK_SDK_PATH)/Bin32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/vs2015x86;./../../../extensions/lib/vs2015x86;./../../../extensions/externals/linux-arm;$(VK_SDK_PATH)/Bin32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/HelloVulkan.exe.pdb</ProgramDatabaseFile>
 			<SubSystem>Windows</SubSystem>
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
@@ -285,7 +285,7 @@
 			<AdditionalOptions>/DEBUG /MACHINE:x64 /LARGEADDRESSAWARE /NOLOGO /OPT:REF /OPT:ICF /INCREMENTAL:NO</AdditionalOptions>
 			<AdditionalDependencies>xinput9_1_0.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;vulkan-1.lib;glew32sd.lib;glfw3d.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)HelloVulkanD.exe</OutputFile>
-			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/vs2015x64;./../../../extensions/lib/vs2015x64;$(VK_SDK_PATH)/Bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/vs2015x64;./../../../extensions/lib/vs2015x64;./../../../extensions/externals/linux-arm;$(VK_SDK_PATH)/Bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/HelloVulkanD.exe.pdb</ProgramDatabaseFile>
 			<SubSystem>Windows</SubSystem>
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
@@ -324,7 +324,7 @@
 			<AdditionalOptions>/DEBUG /MACHINE:x64 /LARGEADDRESSAWARE /NOLOGO /OPT:REF /OPT:ICF /INCREMENTAL:NO</AdditionalOptions>
 			<AdditionalDependencies>xinput9_1_0.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;vulkan-1.lib;glew32s.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)HelloVulkan.exe</OutputFile>
-			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/vs2015x64;./../../../extensions/lib/vs2015x64;$(VK_SDK_PATH)/Bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/vs2015x64;./../../../extensions/lib/vs2015x64;./../../../extensions/externals/linux-arm;$(VK_SDK_PATH)/Bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/HelloVulkan.exe.pdb</ProgramDatabaseFile>
 			<SubSystem>Windows</SubSystem>
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>

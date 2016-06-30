@@ -38,7 +38,7 @@
 #include "NvModel/NvModelExt.h"
 #include "NvVkUtil/NvVkContext.h"
 #include "NvVkUtil/NvGPUTimerVK.h"
-#include "NvVkUtil/NvModelExtVk.h"
+#include "NvVkUtil/NvModelExtVK.h"
 #include "NvVkUtil/NvQuadVK.h"
 #include "NvUI/NvTweakBar.h"
 #include "NV/NvLogs.h"
@@ -78,7 +78,7 @@ extern uint32_t neighborOffset;
 extern uint32_t neighborSkip;
 
 
-#ifdef WIN32
+#ifdef _WIN32
 DWORD WINAPI AnimateJobFunctionThunk(VOID *arg)
 #else
 void* AnimateJobFunctionThunk(void *arg)
@@ -90,17 +90,22 @@ void* AnimateJobFunctionThunk(void *arg)
 	return 0;
 }
 
-
 void ThreadedRenderingVk::AnimateJobFunction(uint32_t threadIndex)
 {
 	NvThreadManager* threadManager = getThreadManagerInstance();
 	NV_ASSERT(nullptr != threadManager);
+			ThreadData& thread = m_Threads[threadIndex];
+        thread.m_frameID = 0;
 
 	while (m_running) {
 		m_FrameStartLock->lockMutex();
 		{
-			m_FrameStartCV->waitConditionVariable(
-				m_FrameStartLock);
+                        if (m_frameID == thread.m_frameID)	{
+				m_FrameStartCV->waitConditionVariable(
+					m_FrameStartLock);
+			}
+                        
+                                thread.m_frameID = m_frameID;
 
 			if (!m_running) {
 				m_FrameStartLock->unlockMutex();
@@ -110,6 +115,7 @@ void ThreadedRenderingVk::AnimateJobFunction(uint32_t threadIndex)
 				m_FrameStartLock->unlockMutex();
 				continue;
 			}
+
 		}
 		m_FrameStartLock->unlockMutex();
 		uint32_t schoolsDone = 0;
@@ -122,7 +128,6 @@ void ThreadedRenderingVk::AnimateJobFunction(uint32_t threadIndex)
 			ThreadData& me = m_Threads[threadIndex];
 
 			schoolsDone = me.m_schoolCount;
-			ThreadData& thread = m_Threads[threadIndex];
 			uint32_t schoolMax = me.m_baseSchoolIndex + schoolsDone;
 
 			if (m_drawGL) {
@@ -258,7 +263,8 @@ ThreadedRenderingVk::ThreadedRenderingVk() :
 	m_flushPerFrame(false),
     m_requestedDrawGL(false),
 	m_drawGL(false),
-	m_glInitialized(false)
+	m_glInitialized(false),
+    m_frameID(0)
 {
     ms_tankMax.x = ms_tankMax.z = (float)m_uiTankSize;
     ms_tankMin.x = ms_tankMin.z = -ms_tankMax.x;
@@ -926,6 +932,7 @@ void ThreadedRenderingVk::drawGL(NvAppContextGL* gl) {
 
 		m_FrameStartLock->lockMutex();
 		{
+                        m_frameID++;
 			m_FrameStartCV->broadcastConditionVariable();
 		}
 		m_FrameStartLock->unlockMutex();
@@ -2049,6 +2056,7 @@ void ThreadedRenderingVk::draw(void)
 
 		m_FrameStartLock->lockMutex();
 		{
+                        m_frameID++;
 			m_FrameStartCV->broadcastConditionVariable();
 		}
 		m_FrameStartLock->unlockMutex();

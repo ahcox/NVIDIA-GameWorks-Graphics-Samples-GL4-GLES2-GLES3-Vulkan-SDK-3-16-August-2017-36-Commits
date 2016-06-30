@@ -70,7 +70,6 @@ static NvTweakEnum<uint32_t> MODEL_OPTIONS[] =
 };
 
 WeightedBlendedOIT::WeightedBlendedOIT() :
-    NvSampleAppGL(platform, "Weighted Blended OIT"), 
     m_imageWidth(0),
     m_imageHeight(0),
     m_opacity(0.6f),
@@ -326,15 +325,13 @@ void WeightedBlendedOIT::DeleteAccumulationRenderTargets()
 }
 
 //--------------------------------------------------------------------------
-NvGLModel* WeightedBlendedOIT::LoadModel(const char *model_filename)
+NvModelGL* WeightedBlendedOIT::LoadModel(const char *model_filename)
 {
     // Load model data for scene geometry
     int32_t length;
     char *modelData = NvAssetLoaderRead(model_filename, length);
-    NvGLModel* model = new NvGLModel();
-    model->loadModelFromObjData(modelData);
-    model->rescaleModel(1.0f);
-    model->initBuffers();
+    NvModelGL* model = NvModelGL::CreateFromObj(
+        (uint8_t *)modelData, 1.0f, true, false);
 
     NvAssetLoaderFree(modelData);
 
@@ -609,7 +606,7 @@ void WeightedBlendedOIT::RenderWeightedBlendedOIT()
 void WeightedBlendedOIT::RenderFullscreenQuad(NvGLSLProgram* shader)
 {
     shader->setUniformMatrix4fv("uModelViewMatrix", m_fullscreenMVP._array);
-    NvDrawQuad(0);
+    NvDrawQuadGL(0);
 }
 
 

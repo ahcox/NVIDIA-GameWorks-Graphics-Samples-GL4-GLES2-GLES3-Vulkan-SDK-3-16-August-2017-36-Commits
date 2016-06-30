@@ -35,7 +35,11 @@
 #define NV_GLFW_CONTEXT_VK_H
 #define GLEW_STATIC
 #include <GL/glew.h>
+#ifdef _WIN32
 #include <GL/wglew.h>
+#else
+#include <GL/glxew.h>
+#endif
 
 #include "NvAppBase/gl/NvAppContextGL.h"
 #include <NV/NvLogs.h>
@@ -130,11 +134,19 @@ public:
 	}
 
     virtual void* getCurrentPlatformContext() { 
+#ifdef _WIN32
         return (void*)wglGetCurrentContext(); 
+#else
+        return (void*)glXGetCurrentContext(); 
+#endif
     }
 
     virtual void* getCurrentPlatformDisplay() { 
+#ifdef _WIN32
         return (void*)wglGetCurrentDC(); 
+#else
+        return (void*)glXGetCurrentDrawable(); 
+#endif
     }
 
 protected:

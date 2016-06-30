@@ -43,7 +43,7 @@ extern void NvUIUseGL();
 extern bool NvUIIsGL();
 extern void NvUIUseVK(NvVkContext* context);
 
-#ifdef _WIN32
+#ifndef ANDROID
 #include <GL/glew.h>
 #else
 #include <GLES/gl.h>

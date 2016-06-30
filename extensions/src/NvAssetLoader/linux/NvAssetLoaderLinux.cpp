@@ -144,7 +144,8 @@ NvAssetFilePtr NvAssetLoaderOpenFile(const char* name) {
 #ifdef DEBUG
             fprintf(stderr, "Trying to open %s\n", fullPath.c_str());
 #endif
-            if ((fopen_s(&fp, fullPath.c_str(), "rb") == 0) || (fp != NULL))
+            fp = fopen(fullPath.c_str(), "rb");
+            if (fp != NULL)
                 return (NvAssetFilePtr)fp;
         }
 

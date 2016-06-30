@@ -71,9 +71,21 @@
 		</ul></li>
 	</ul>		
 
-   <h3>Linux (Host or Target) Development for OpenGL or Vulkan:</h3>
+   <h3>Linux x64 (Host/Target) Development:</h3>
+   <ul>
+     <li>Ubuntu 14.04LTS (later versions, or other Distros, may work but are not officially supported)</li>
+     <li><a href="https://lunarg.com/vulkan-sdk/">LunarG Vulkan SDK</a>.  This is required to build and run any of the Vulkan samples.</li>
+     <li>NVIDIA GeForce Fermi-based (GTX 4xx) or better GPU</li>
+     <li>
+       Your system must have a display driver with full OpenGL support for your graphics card.  For GeForce cards, <a href="http://www.geforce.com/drivers">Download and install a recent NVIDIA Linux Display Driver</a> to ensure proper OpenGL support.  (The latest NVIDIA Linux x64 driver at time of this writing was the <a href="http://www.geforce.com/drivers/results/75821">Geforce 331.79 driver</a>, and there are matching <a href="http://us.download.nvidia.com/XFree86/Linux-x86_64/331.79/README/index.html">driver installation docs</a> should you need them).
+     </li>
+   </ul>
 
-     <p>This initial 3.0 release only supports Windows as the development host and Windows or Android as the target.  Resumed Linux and Linux4Tegra support is forthcoming.</p>
+   <h3>Linux ARM/Tegra (Host/Target) Development:</h3>
+   <ul>
+     <li>A Jetson Tegra X1, flashed with Ubuntu (Linux for Tegra) via <a href="https://developer.nvidia.com/embedded-computing">NVIDIA Jetpack</a></li>
+     <li>Keyboard, mouse and HDMI display connected to the Jetson system</li>
+   </ul>
 
  </div> <!--col-md-8-->
  <div class="col-md-4"></div>

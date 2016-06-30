@@ -38,8 +38,8 @@
 #include "NvImage/NvImage.h"
 #include "NV/NvLogs.h"
 
-#include "NvVKUtil/NvVKUtil.h"
-#include "NvVKUtil/NvSimpleUBO.h"
+#include "NvVkUtil/NvVkUtil.h"
+#include "NvVkUtil/NvSimpleUBO.h"
 #include "NvUIShadersVK.h"
 
 class NvVkContext;

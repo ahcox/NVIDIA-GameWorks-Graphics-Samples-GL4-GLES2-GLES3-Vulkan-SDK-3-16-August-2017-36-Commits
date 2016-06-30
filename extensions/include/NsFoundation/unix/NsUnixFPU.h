@@ -38,6 +38,9 @@
 #include <xmmintrin.h>
 #elif NV_ARM_NEON
 #include <arm_neon.h>
+#elif NV_LINUX
+#define _mm_setcsr(x) 
+#define _mm_getcsr(x) 0
 #endif
 
 NV_INLINE nvidia::shdfnd::SIMDGuard::SIMDGuard()

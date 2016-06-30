@@ -23,12 +23,6 @@
 		<ClCompile Include="..\..\src\NsFoundation\NsTempAllocator.cpp">
 			<Filter>src</Filter>
 		</ClCompile>
-		<ClCompile Include="..\..\src\NsFoundation\android\cpu-features.c">
-			<Filter>src</Filter>
-		</ClCompile>
-		<ClInclude Include="..\..\src\NsFoundation\android\cpu-features.h">
-			<Filter>src</Filter>
-		</ClInclude>
 		<ClCompile Include="..\..\src\NsFoundation\unix\NsUnixAtomic.cpp">
 			<Filter>src</Filter>
 		</ClCompile>

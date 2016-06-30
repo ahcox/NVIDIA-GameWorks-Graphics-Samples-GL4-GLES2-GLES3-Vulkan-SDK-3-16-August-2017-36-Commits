@@ -158,6 +158,7 @@ public:
         uint32_t m_drawCallCount;
         uint32_t m_baseSchoolIndex;
         uint32_t m_schoolCount;
+        uint32_t m_frameID; 
     };
 
     /// Worker function called by each animation thread to update 
@@ -610,5 +611,6 @@ private:
     };
 
     ThreadTimings m_threadTimings[MAX_ANIMATION_THREAD_COUNT];
+    volatile uint32_t m_frameID;
 };
 #endif // ThreadedRenderingGL_H_
