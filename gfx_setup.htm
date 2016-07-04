@@ -129,10 +129,10 @@
         <code>sudo apt-get update</code>(this is critical, or else the next line will do nothing)<br/>
     	<code>sudo apt-get install g++ xorg-dev libglu1-mesa-dev make</code>
      </li>
-     <li>If the vulkan loader is not pre-installed on the platform, it can be downloaded from the <a href="https://developer.nvidia.com/embedded/linux-tegra">NVIDIA Embedded Developer Site</a>. Also, the samples pack contains a pre-built loader.  It can be installed by adding the path: <code>{SAMPLES_ROOT}/extensions/externals/lib/linux-arm</code> ti <code>LD_LIBRARY_PATH</code> variable.</li>
-     <li>Open a terminal window to <code>{SAMPLES_ROOT}/samples/build/linux-arm</code>, depending on the host PC.</li>
+     <li>If the vulkan loader is not pre-installed on the platform, it can be downloaded from the <a href="https://developer.nvidia.com/embedded/linux-tegra">NVIDIA Embedded Developer Site</a>. Also, the samples pack contains a pre-built loader.  It can be installed by adding the path: <code>{SAMPLES_ROOT}/extensions/externals/lib/linux-aarch64</code> ti <code>LD_LIBRARY_PATH</code> variable.</li>
+     <li>Open a terminal window to <code>{SAMPLES_ROOT}/samples/build/linux-aarch64</code>, depending on the host PC.</li>
      <li>Run <code>make</code>.</li>
-     <li>The resulting apps will be placed in <code>{SAMPLES_ROOT}/samples/bin/linux-arm/</code></li>
+     <li>The resulting apps will be placed in <code>{SAMPLES_ROOT}/samples/bin/linux-aarch64/</code></li>
      <li>Individual samples may be built via <code>make build_[sample]_[debug, release]</code></li>
    </ol>
 	
