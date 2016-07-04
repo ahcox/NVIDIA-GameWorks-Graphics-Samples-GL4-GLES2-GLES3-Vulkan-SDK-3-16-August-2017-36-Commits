@@ -49,7 +49,7 @@ NvVkUtil_debug_hpaths    += ./../../externals/include
 NvVkUtil_debug_hpaths    += ./../../externals/include/GLFW
 NvVkUtil_debug_hpaths    += ./../../include/NvVkUtil
 NvVkUtil_debug_lpaths    := 
-NvVkUtil_debug_lpaths    += ./../../externals/linux-arm
+NvVkUtil_debug_lpaths    += ./../../externals/linux-aarch64
 NvVkUtil_debug_lpaths    += $(VK_SDK_PATH)/x86_64/lib
 NvVkUtil_debug_defines   := $(NvVkUtil_custom_defines)
 NvVkUtil_debug_defines   += LINUX=1
@@ -162,7 +162,7 @@ NvVkUtil_release_hpaths    += ./../../externals/include
 NvVkUtil_release_hpaths    += ./../../externals/include/GLFW
 NvVkUtil_release_hpaths    += ./../../include/NvVkUtil
 NvVkUtil_release_lpaths    := 
-NvVkUtil_release_lpaths    += ./../../externals/linux-arm
+NvVkUtil_release_lpaths    += ./../../externals/linux-aarch64
 NvVkUtil_release_lpaths    += $(VK_SDK_PATH)/x86_64/lib
 NvVkUtil_release_defines   := $(NvVkUtil_custom_defines)
 NvVkUtil_release_defines   += LINUX=1

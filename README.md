@@ -1,7 +1,7 @@
 NVIDIA GameWorks Graphics Samples
 ====================================================
 
-The GameWorks Graphics Samples pack is a resource for cross-platform Vulkan, OpenGL 4 (GL4) and OpenGL ES 2 and 3 (ES2 and ES3) development, targeting Android, Windows, Linux x86/x64 and Linux for Tegra.  It is an expansion and continuation of the longstanding OpenGL Graphics and Compute Samples, adding full support for and samples of the Vulkan 3D API.
+The GameWorks Graphics Samples pack is a resource for cross-platform Vulkan, OpenGL 4 (GL4) and OpenGL ES 2 and 3 (ES2 and ES3) development, targeting Android and Windows (and soon, will again support Linux x86/x64 and Linux for Tegra).  It is an expansion and continuation of the longstanding OpenGL Graphics and Compute Samples, adding full support for and samples of the Vulkan 3D API.
 
 The samples run on all supported target platforms from a single source base.
 
