@@ -418,19 +418,13 @@ void ThreadedRenderingGL::configurationCallback(NvGLConfiguration& config)
 {
     config.depthBits = 24;
     config.stencilBits = 0;
-    config.apiVer = NvGLAPIVersionES3_1();
-//    config.apiVer = NvGLAPIVersionGL4_4();
+    config.apiVer = NvGLAPIVersionGL4_4();
 }
 
 void ThreadedRenderingGL::initRendering(void)
 {
     // We require at least ES3 for our most basic functionality
     requireMinAPIVersion(NvGLAPIVersionES3());
-
-	if (!requireExtension("GL_ARB_gpu_shader_int64"))
-	{
-		return;
-	}
 
     // We need to provide the mesh rendering system in NvGLUtils with instanced rendering
     // methods, as it does not currently support features newer than GLES2.
