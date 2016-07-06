@@ -104,8 +104,8 @@ $(SkinningAppVk_debug_bin): $(SkinningAppVk_debug_obj) build_NsFoundation_debug 
 
 $(SkinningAppVk_debug_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl_o): $(SkinningAppVk_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl) 
 	@mkdir -p `dirname ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirvarm -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirvarm -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
 
 SkinningAppVk_debug_DEPDIR = $(dir $(@))/$(*F)
 $(SkinningAppVk_debug_cpp_o): $(SkinningAppVk_debug_objsdir)/%.o:
@@ -227,8 +227,8 @@ $(SkinningAppVk_release_bin): $(SkinningAppVk_release_obj) build_NsFoundation_re
 
 $(SkinningAppVk_release_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl_o): $(SkinningAppVk_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl) 
 	@mkdir -p `dirname ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirvarm -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirvarm -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
 
 SkinningAppVk_release_DEPDIR = $(dir $(@))/$(*F)
 $(SkinningAppVk_release_cpp_o): $(SkinningAppVk_release_objsdir)/%.o:

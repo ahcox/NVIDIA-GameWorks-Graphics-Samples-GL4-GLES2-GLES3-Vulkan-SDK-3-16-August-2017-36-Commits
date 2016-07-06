@@ -103,8 +103,8 @@ $(HelloVulkan_debug_bin): $(HelloVulkan_debug_obj) build_NsFoundation_debug buil
 
 $(HelloVulkan_debug_GLSLC_src_vk10-kepler_HelloVulkan_assets_src_shaders_simple_glsl_o): $(HelloVulkan_GLSLC_src_vk10-kepler_HelloVulkan_assets_src_shaders_simple_glsl) 
 	@mkdir -p `dirname ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirvarm -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirvarm -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
 
 HelloVulkan_debug_DEPDIR = $(dir $(@))/$(*F)
 $(HelloVulkan_debug_cpp_o): $(HelloVulkan_debug_objsdir)/%.o:
@@ -226,8 +226,8 @@ $(HelloVulkan_release_bin): $(HelloVulkan_release_obj) build_NsFoundation_releas
 
 $(HelloVulkan_release_GLSLC_src_vk10-kepler_HelloVulkan_assets_src_shaders_simple_glsl_o): $(HelloVulkan_GLSLC_src_vk10-kepler_HelloVulkan_assets_src_shaders_simple_glsl) 
 	@mkdir -p `dirname ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirvarm -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirvarm -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
 
 HelloVulkan_release_DEPDIR = $(dir $(@))/$(*F)
 $(HelloVulkan_release_cpp_o): $(HelloVulkan_release_objsdir)/%.o:
