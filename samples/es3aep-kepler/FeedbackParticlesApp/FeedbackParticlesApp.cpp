@@ -111,9 +111,6 @@ void FeedbackParticlesApp::draw(void)
     m_scene.update(getFrameDeltaTime());
     m_scene.draw();
 
-    if (mTweakBar)
-        mTweakBar->syncValues();
-
     if (m_countText)
         m_countText->SetValue(m_scene.getParticlesCount());
 }
