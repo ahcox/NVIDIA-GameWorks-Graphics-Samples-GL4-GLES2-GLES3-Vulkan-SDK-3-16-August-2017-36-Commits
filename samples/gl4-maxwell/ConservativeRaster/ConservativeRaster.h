@@ -58,6 +58,8 @@ protected:
     void drawGrid();
     void drawTriangle();
 
+	bool mBlending;
+	bool mTwoTriangles;
     bool mConservative;
     bool mFillRect;
     bool mEnableZoom;

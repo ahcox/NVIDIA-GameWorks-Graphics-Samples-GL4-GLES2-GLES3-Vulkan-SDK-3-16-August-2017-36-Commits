@@ -54,6 +54,8 @@
 #define GL_FILL_RECTANGLE_NV             0x933C
 
 ConservativeRaster::ConservativeRaster() :
+	mTwoTriangles(false),
+	mBlending(false),
     mConservative(true),
 	mFillRect(false),
     mEnableZoom(true),
@@ -86,6 +88,8 @@ void ConservativeRaster::initUI() {
     if (mTweakBar) {
         mTweakBar->addValue("Conservative rasterization", mConservative);
         mTweakBar->addValue("Fill bounding rectangle", mFillRect);
+		mTweakBar->addValue("Additive Blending", mBlending);
+		mTweakBar->addValue("Draw two triangles", mTwoTriangles);
         mTweakBar->addValue("Draw lines", mWireframe);
         mTweakBar->addValue("Draw grid", mEnableGrid);
         mTweakBar->addValue("Enable zoom", mEnableZoom);
@@ -162,10 +166,19 @@ void ConservativeRaster::draw(void)
         glEnable(GL_CONSERVATIVE_RASTERIZATION_NV);
     }
 
-    glColor3f(1.0f, 0.0f, 0.0f);
+    
+	if (mBlending) {
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_ONE, GL_ONE);
+	}
+
     drawTriangle();
 
+
     glDisable(GL_CONSERVATIVE_RASTERIZATION_NV);
+
+	glDisable(GL_BLEND);
+
 
 	if (mEnableZoom) {
 		glViewport(0, 0, (GLint)mScaledWidth, (GLint)mScaledHeight);
@@ -200,9 +213,17 @@ void ConservativeRaster::draw(void)
 void ConservativeRaster::drawTriangle()
 {
     glBegin(GL_TRIANGLES);
+		glColor3f(1, 0, 0);
         glVertex2f(-1.0f, -1.0f);
         glVertex2f(1.5f, -0.5f);
         glVertex2f(0.0f, 1.0f);
+
+		if (mTwoTriangles) {
+			glColor3f(0, 1, 0);
+			glVertex2f(-1.0f, -1.0f);
+			glVertex2f(-1.5f, 0.5f);
+			glVertex2f(0.0f, 1.0f);
+		}
     glEnd();
 }
 
