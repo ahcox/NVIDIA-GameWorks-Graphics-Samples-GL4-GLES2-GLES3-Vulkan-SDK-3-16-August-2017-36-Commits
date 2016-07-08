@@ -55,7 +55,7 @@
 	<h2>Installing and Building on Windows Host</h2>
 	<p>This section will walk you through the setup of the Vulkan and OpenGL samples on a Windows development PC, for Android and Windows build targets.</p>
 
-	<h3>Targeting Windows Host</h3>
+	<h3>Targeting Windows PC</h3>
 	<ol>
 		<li>Unzip the samples pack to a directory on the Windows Host PC.  We will call this directory <code>SAMPLES_ROOT</code>.</li>
 		<li>If you haven't already done so, download and install the <a href="https://lunarg.com/vulkan-sdk/">LunarG Vulkan SDK</a>.  Ensure that the installer has set <code>VK_SDK_PATH</code> to the path to the SDK, and restart any Visual Studio instances.</li>
@@ -67,7 +67,7 @@
 	<h3>Targeting Android Device</h3>
 	<ol>
 		<li>Unzip the samples pack to a directory on the Windows Host PC.  We will call this directory <code>SAMPLES_ROOT</code>.</li>
-		<li>If you haven't already done so, download and install the <a href="http://developer.nvidia.com/tadp">Tegra Android Development Pack</a> (TADP) for Windows.  Be sure to include NVIDIA Nsight Tegra, Visual Studio Edition as an installed component.</li>
+		<li>If you haven't already done so, download and install the <a href="https://developer.nvidia.com/codeworks-android">CodeWorks for Android</a> installer for Windows.  Be sure to include NVIDIA Nsight Tegra, Visual Studio Edition as an installed component.</li>
 		<li>Launch Visual Studio 2013 or 2015.</li>
 		<li>Open the all-samples project file: <code>{SAMPLES_ROOT}/samples/build/vs201[3,5]All/AllSamples.sln</code>.</li>
 		<li>Build the solution as release or debug.</li>
@@ -106,7 +106,7 @@
 		</li>
 	</ul>
 
-	<h2>Installing and Building on Linux Host</h2>
+	<h2>Installing and Building on/for Linux x86_64 Host/Target</h2>
 	<p>This section will walk you through the setup of the OpenGL and Vulkan samples on a Linux development PC.</p>
 	<ol>
 		<li>Install the Linux build/target pre-requisites by running:<br/>
@@ -118,6 +118,20 @@
 		<li>Open a terminal window to <code>{SAMPLES_ROOT}/samples/build/linux64</code>.</li>
 		<li>Run <code>make</code>.</li>
 		<li>The resulting apps will be placed in <code>{SAMPLES_ROOT}/samples/bin/linux64/</code>.  Note that as per the <a href="gl_prereq.htm">Prerequisites</a> guide, the system must have working OpenGL drivers for the samples to run.</li>
+	    <li>Individual samples may be built via <code>make build_[sample]_[debug, release]</code></li>
+    </ol>
+
+	<h2>Installing and Building on Linux x86_64 Host for Android Target</h2>
+	<p>This section will walk you through the setup of the OpenGL and Vulkan samples on a Linux development PC to run on an Android device.</p>
+	<ol>
+		<li>Install the Linux build/target pre-requisites by running:<br/>
+			<code>sudo apt-get install g++ xorg-dev libglu1-mesa-dev make</code><br />
+			Full <a href="https://developer.nvidia.com/codeworks-android">CodeWorks for Android</a> 1r4 for Linux x64 tools install.  Note that means that NDK r11/r12 are not yet supported.  CodeWorks 1r4 supports r10e.<br/>
+		</li>
+		<li>Pull the samples pack to a directory on the Linux Host PC.  We will call this directory <code>SAMPLES_ROOT</code>.</li>
+		<li>Open a terminal window to <code>{SAMPLES_ROOT}/samples/build/makeandroid</code>.</li>
+		<li>Run <code>make</code>.</li>
+		<li>The resulting apps will be placed in each sample's <code>{SAMPLES_ROOT}/samples/[sampletype]/[samplename]/bin/</code>.</li>
 	    <li>Individual samples may be built via <code>make build_[sample]_[debug, release]</code></li>
     </ol>
 
