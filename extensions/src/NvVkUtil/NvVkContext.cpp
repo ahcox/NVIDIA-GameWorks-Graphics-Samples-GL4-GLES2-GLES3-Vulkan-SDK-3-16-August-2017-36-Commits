@@ -434,6 +434,16 @@ VkFormat NvVkContext::pickOptimalFormat(uint32_t count, const VkFormat *formats,
 	return format;
 }
 
+bool NvVkContext::isExtensionSupported(const char * ext)
+{
+	return mCombinedExtensionNames.find(ext) != mCombinedExtensionNames.end();
+}
+
+bool NvVkContext::isLayerSupported(const char * layer)
+{
+	return mCombinedLayerNames.find(layer) != mCombinedLayerNames.end();
+}
+
 VkResult NvVkContext::allocMemAndBindBuffer(NvVkBuffer& buffer, VkFlags memProps)
 {
 	VkResult result;

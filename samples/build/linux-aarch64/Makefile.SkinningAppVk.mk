@@ -35,6 +35,7 @@ SkinningAppVk_debug_defines   += NV_LINUX
 SkinningAppVk_debug_defines   += GLEW_NO_GLU=1
 SkinningAppVk_debug_defines   += _DEBUG
 SkinningAppVk_debug_libraries := 
+SkinningAppVk_debug_libraries += NvVkUtilD
 SkinningAppVk_debug_libraries += NsFoundationD
 SkinningAppVk_debug_libraries += NvAppBaseD
 SkinningAppVk_debug_libraries += NvAssetLoaderD
@@ -44,7 +45,6 @@ SkinningAppVk_debug_libraries += NvGamepadD
 SkinningAppVk_debug_libraries += NvImageD
 SkinningAppVk_debug_libraries += NvUID
 SkinningAppVk_debug_libraries += HalfD
-SkinningAppVk_debug_libraries += NvVkUtilD
 SkinningAppVk_debug_libraries += glfw3
 SkinningAppVk_debug_libraries += vulkan
 SkinningAppVk_debug_libraries += NvAppBaseD
@@ -97,7 +97,7 @@ postbuild_SkinningAppVk_debug: mainbuild_SkinningAppVk_debug
 mainbuild_SkinningAppVk_debug: prebuild_SkinningAppVk_debug $(SkinningAppVk_debug_bin)
 prebuild_SkinningAppVk_debug:
 
-$(SkinningAppVk_debug_bin): $(SkinningAppVk_debug_obj) build_NsFoundation_debug build_NvAppBase_debug build_NvAssetLoader_debug build_NvModel_debug build_NvGLUtils_debug build_NvGamepad_debug build_NvImage_debug build_NvUI_debug build_Half_debug build_NvVkUtil_debug 
+$(SkinningAppVk_debug_bin): $(SkinningAppVk_debug_obj) build_NvVkUtil_debug build_NsFoundation_debug build_NvAppBase_debug build_NvAssetLoader_debug build_NvModel_debug build_NvGLUtils_debug build_NvGamepad_debug build_NvImage_debug build_NvUI_debug build_Half_debug 
 	mkdir -p `dirname ./../../bin/linux-aarch64/SkinningAppVkD`
 	$(CCLD) $(filter %.o, $(SkinningAppVk_debug_obj)) $(SkinningAppVk_debug_lflags) -o $(SkinningAppVk_debug_bin) 
 	$(ECHO) building $@ complete!
@@ -158,6 +158,7 @@ SkinningAppVk_release_defines   += NV_LINUX
 SkinningAppVk_release_defines   += GLEW_NO_GLU=1
 SkinningAppVk_release_defines   += NDEBUG
 SkinningAppVk_release_libraries := 
+SkinningAppVk_release_libraries += NvVkUtil
 SkinningAppVk_release_libraries += NsFoundation
 SkinningAppVk_release_libraries += NvAppBase
 SkinningAppVk_release_libraries += NvAssetLoader
@@ -167,7 +168,6 @@ SkinningAppVk_release_libraries += NvGamepad
 SkinningAppVk_release_libraries += NvImage
 SkinningAppVk_release_libraries += NvUI
 SkinningAppVk_release_libraries += Half
-SkinningAppVk_release_libraries += NvVkUtil
 SkinningAppVk_release_libraries += glfw3
 SkinningAppVk_release_libraries += vulkan
 SkinningAppVk_release_libraries += NvAppBase
@@ -220,7 +220,7 @@ postbuild_SkinningAppVk_release: mainbuild_SkinningAppVk_release
 mainbuild_SkinningAppVk_release: prebuild_SkinningAppVk_release $(SkinningAppVk_release_bin)
 prebuild_SkinningAppVk_release:
 
-$(SkinningAppVk_release_bin): $(SkinningAppVk_release_obj) build_NsFoundation_release build_NvAppBase_release build_NvAssetLoader_release build_NvModel_release build_NvGLUtils_release build_NvGamepad_release build_NvImage_release build_NvUI_release build_Half_release build_NvVkUtil_release 
+$(SkinningAppVk_release_bin): $(SkinningAppVk_release_obj) build_NvVkUtil_release build_NsFoundation_release build_NvAppBase_release build_NvAssetLoader_release build_NvModel_release build_NvGLUtils_release build_NvGamepad_release build_NvImage_release build_NvUI_release build_Half_release 
 	mkdir -p `dirname ./../../bin/linux-aarch64/SkinningAppVk`
 	$(CCLD) $(filter %.o, $(SkinningAppVk_release_obj)) $(SkinningAppVk_release_lflags) -o $(SkinningAppVk_release_bin) 
 	$(ECHO) building $@ complete!

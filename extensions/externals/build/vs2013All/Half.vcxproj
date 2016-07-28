@@ -106,7 +106,7 @@
 			<FloatingPointModel>Precise</FloatingPointModel>
 			<AdditionalOptions>-funwind-tables -O0 -g -ggdb -fno-omit-frame-pointer</AdditionalOptions>
 			<Optimization>Disabled</Optimization>
-			<AdditionalIncludeDirectories>./../../src/Half;./../../include;./../../../extensions/include;./../../../extensions/externals/include;./../../../extensions/include/NsFoundation;./../../../extensions/include/NvFoundation;/platforms/android-18/arch-arm/usr/include;/sources/cxx-stl/gnu-libstdc++;/include;/libs/armeabi-v7a/include;/include/backward;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>./../../src/Half;./../../include;./../../../extensions/include;./../../../extensions/externals/include;./../../../extensions/include/NsFoundation;./../../../extensions/include/NvFoundation;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 			<PreprocessorDefinitions>android;ANDROID;_LIB;NV_ANDROID;__STDC_LIMIT_MACROS;VK_NO_PROTOTYPES;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<WarningLevel>Level3</WarningLevel>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -116,7 +116,7 @@
 			<AdditionalOptions> -Wl,--start-group -lc -lm -lgcc -Wl,--end-group</AdditionalOptions>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)libHalfD.a</OutputFile>
-			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/Tegra-Android;./../../../extensions/lib/Tegra-Android;/sources/cxx-stl/gnu-libstdc++;/libs/armeabi-v7a;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/Tegra-Android;./../../../extensions/lib/Tegra-Android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/libHalfD.a.pdb</ProgramDatabaseFile>
 		</Lib>
 		<ResourceCompile>
@@ -139,7 +139,7 @@
 			<FloatingPointModel>Precise</FloatingPointModel>
 			<AdditionalOptions>-funwind-tables -O2 -fno-omit-frame-pointer</AdditionalOptions>
 			<Optimization>Disabled</Optimization>
-			<AdditionalIncludeDirectories>./../../src/Half;./../../include;./../../../extensions/include;./../../../extensions/externals/include;./../../../extensions/include/NsFoundation;./../../../extensions/include/NvFoundation;/platforms/android-18/arch-arm/usr/include;/sources/cxx-stl/gnu-libstdc++;/include;/libs/armeabi-v7a/include;/include/backward;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>./../../src/Half;./../../include;./../../../extensions/include;./../../../extensions/externals/include;./../../../extensions/include/NsFoundation;./../../../extensions/include/NvFoundation;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 			<PreprocessorDefinitions>android;ANDROID;_LIB;NV_ANDROID;__STDC_LIMIT_MACROS;VK_NO_PROTOTYPES;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<WarningLevel>Level3</WarningLevel>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -149,7 +149,7 @@
 			<AdditionalOptions> -Wl,--start-group -lc -lm -lgcc -Wl,--end-group</AdditionalOptions>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)libHalf.a</OutputFile>
-			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/Tegra-Android;./../../../extensions/lib/Tegra-Android;/sources/cxx-stl/gnu-libstdc++;/libs/armeabi-v7a;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/Tegra-Android;./../../../extensions/lib/Tegra-Android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/libHalf.a.pdb</ProgramDatabaseFile>
 		</Lib>
 		<ResourceCompile>

@@ -33,6 +33,7 @@ HelloVulkan_debug_defines   += LINUX=1
 HelloVulkan_debug_defines   += NV_LINUX
 HelloVulkan_debug_defines   += _DEBUG
 HelloVulkan_debug_libraries := 
+HelloVulkan_debug_libraries += NvVkUtilD
 HelloVulkan_debug_libraries += NsFoundationD
 HelloVulkan_debug_libraries += NvAppBaseD
 HelloVulkan_debug_libraries += NvAssetLoaderD
@@ -42,7 +43,6 @@ HelloVulkan_debug_libraries += NvGamepadD
 HelloVulkan_debug_libraries += NvImageD
 HelloVulkan_debug_libraries += NvUID
 HelloVulkan_debug_libraries += HalfD
-HelloVulkan_debug_libraries += NvVkUtilD
 HelloVulkan_debug_libraries += glfw3
 HelloVulkan_debug_libraries += GLEW
 HelloVulkan_debug_libraries += GL
@@ -90,15 +90,15 @@ postbuild_HelloVulkan_debug: mainbuild_HelloVulkan_debug
 mainbuild_HelloVulkan_debug: prebuild_HelloVulkan_debug $(HelloVulkan_debug_bin)
 prebuild_HelloVulkan_debug:
 
-$(HelloVulkan_debug_bin): $(HelloVulkan_debug_obj) build_NsFoundation_debug build_NvAppBase_debug build_NvAssetLoader_debug build_NvModel_debug build_NvGLUtils_debug build_NvGamepad_debug build_NvImage_debug build_NvUI_debug build_Half_debug build_NvVkUtil_debug 
+$(HelloVulkan_debug_bin): $(HelloVulkan_debug_obj) build_NvVkUtil_debug build_NsFoundation_debug build_NvAppBase_debug build_NvAssetLoader_debug build_NvModel_debug build_NvGLUtils_debug build_NvGamepad_debug build_NvImage_debug build_NvUI_debug build_Half_debug 
 	mkdir -p `dirname ./../../bin/linux64/HelloVulkanD`
 	$(CCLD) $(filter %.o, $(HelloVulkan_debug_obj)) $(HelloVulkan_debug_lflags) -o $(HelloVulkan_debug_bin) 
 	$(ECHO) building $@ complete!
 
 $(HelloVulkan_debug_GLSLC_src_vk10-kepler_HelloVulkan_assets_src_shaders_simple_glsl_o): $(HelloVulkan_GLSLC_src_vk10-kepler_HelloVulkan_assets_src_shaders_simple_glsl) 
 	@mkdir -p `dirname ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
 
 HelloVulkan_debug_DEPDIR = $(dir $(@))/$(*F)
 $(HelloVulkan_debug_cpp_o): $(HelloVulkan_debug_objsdir)/%.o:
@@ -150,6 +150,7 @@ HelloVulkan_release_defines   += LINUX=1
 HelloVulkan_release_defines   += NV_LINUX
 HelloVulkan_release_defines   += NDEBUG
 HelloVulkan_release_libraries := 
+HelloVulkan_release_libraries += NvVkUtil
 HelloVulkan_release_libraries += NsFoundation
 HelloVulkan_release_libraries += NvAppBase
 HelloVulkan_release_libraries += NvAssetLoader
@@ -159,7 +160,6 @@ HelloVulkan_release_libraries += NvGamepad
 HelloVulkan_release_libraries += NvImage
 HelloVulkan_release_libraries += NvUI
 HelloVulkan_release_libraries += Half
-HelloVulkan_release_libraries += NvVkUtil
 HelloVulkan_release_libraries += glfw3
 HelloVulkan_release_libraries += GLEW
 HelloVulkan_release_libraries += GL
@@ -207,15 +207,15 @@ postbuild_HelloVulkan_release: mainbuild_HelloVulkan_release
 mainbuild_HelloVulkan_release: prebuild_HelloVulkan_release $(HelloVulkan_release_bin)
 prebuild_HelloVulkan_release:
 
-$(HelloVulkan_release_bin): $(HelloVulkan_release_obj) build_NsFoundation_release build_NvAppBase_release build_NvAssetLoader_release build_NvModel_release build_NvGLUtils_release build_NvGamepad_release build_NvImage_release build_NvUI_release build_Half_release build_NvVkUtil_release 
+$(HelloVulkan_release_bin): $(HelloVulkan_release_obj) build_NvVkUtil_release build_NsFoundation_release build_NvAppBase_release build_NvAssetLoader_release build_NvModel_release build_NvGLUtils_release build_NvGamepad_release build_NvImage_release build_NvUI_release build_Half_release 
 	mkdir -p `dirname ./../../bin/linux64/HelloVulkan`
 	$(CCLD) $(filter %.o, $(HelloVulkan_release_obj)) $(HelloVulkan_release_lflags) -o $(HelloVulkan_release_bin) 
 	$(ECHO) building $@ complete!
 
 $(HelloVulkan_release_GLSLC_src_vk10-kepler_HelloVulkan_assets_src_shaders_simple_glsl_o): $(HelloVulkan_GLSLC_src_vk10-kepler_HelloVulkan_assets_src_shaders_simple_glsl) 
 	@mkdir -p `dirname ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
 
 HelloVulkan_release_DEPDIR = $(dir $(@))/$(*F)
 $(HelloVulkan_release_cpp_o): $(HelloVulkan_release_objsdir)/%.o:

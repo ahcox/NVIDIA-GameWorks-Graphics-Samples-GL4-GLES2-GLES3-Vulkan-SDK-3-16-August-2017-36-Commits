@@ -57,6 +57,8 @@
 // should be ignored.
 extern "C" {   _declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001; }
 
+static bool sUseStderr = false;
+
 void NVPlatformLog(const char* fmt, ...) {
  
     const int length = 1024;
@@ -67,6 +69,8 @@ void NVPlatformLog(const char* fmt, ...) {
     vsnprintf_s(buffer, length-1, fmt, ap);
     OutputDebugString(buffer);
     OutputDebugString("\n");
+	if (sUseStderr)
+		fprintf(stderr, "%s\n", buffer);
     va_end(ap);
 }
 
@@ -163,6 +167,12 @@ extern void NvReleaseSharedFoundation(void);
 // program entry
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+	// Redirect STDERR to the parent console if one exists
+	if (AttachConsole(ATTACH_PARENT_PROCESS)) {
+		sUseStderr = true;
+		freopen("CONOUT$", "w", stderr);
+	}
+
 	NvInitSharedFoundation();
 
     NvAssetLoaderInit(NULL);

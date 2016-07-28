@@ -103,23 +103,23 @@ $(NvVkUtil_debug_bin): $(NvVkUtil_debug_obj)
 
 $(NvVkUtil_debug_GLSLC_hex_extensions_src_NvVkUtil_src_shaders_font_glslc_o): $(NvVkUtil_GLSLC_hex_extensions_src_NvVkUtil_src_shaders_font_glslc) 
 	@mkdir -p `dirname ../../../extensions/src/NvVkUtil/src_shaders/../shaders/font.cpp`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv -cpp font -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/font ../../../extensions/src/NvVkUtil/src_shaders/font.glslc
-	../../../BuildTools/spir-v/bin/glsl2spirv -cpp font -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/font ../../../extensions/src/NvVkUtil/src_shaders/font.glslc
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -cpp font -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/font ../../../extensions/src/NvVkUtil/src_shaders/font.glslc
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -cpp font -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/font ../../../extensions/src/NvVkUtil/src_shaders/font.glslc
 
 $(NvVkUtil_debug_GLSLC_hex_extensions_src_NvVkUtil_src_shaders_fontOutline_glslc_o): $(NvVkUtil_GLSLC_hex_extensions_src_NvVkUtil_src_shaders_fontOutline_glslc) 
 	@mkdir -p `dirname ../../../extensions/src/NvVkUtil/src_shaders/../shaders/fontOutline.cpp`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv -cpp fontOutline -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/fontOutline ../../../extensions/src/NvVkUtil/src_shaders/fontOutline.glslc
-	../../../BuildTools/spir-v/bin/glsl2spirv -cpp fontOutline -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/fontOutline ../../../extensions/src/NvVkUtil/src_shaders/fontOutline.glslc
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -cpp fontOutline -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/fontOutline ../../../extensions/src/NvVkUtil/src_shaders/fontOutline.glslc
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -cpp fontOutline -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/fontOutline ../../../extensions/src/NvVkUtil/src_shaders/fontOutline.glslc
 
 $(NvVkUtil_debug_GLSLC_hex_extensions_src_NvVkUtil_src_shaders_graphic_glslc_o): $(NvVkUtil_GLSLC_hex_extensions_src_NvVkUtil_src_shaders_graphic_glslc) 
 	@mkdir -p `dirname ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphic.cpp`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv -cpp graphic -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphic ../../../extensions/src/NvVkUtil/src_shaders/graphic.glslc
-	../../../BuildTools/spir-v/bin/glsl2spirv -cpp graphic -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphic ../../../extensions/src/NvVkUtil/src_shaders/graphic.glslc
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -cpp graphic -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphic ../../../extensions/src/NvVkUtil/src_shaders/graphic.glslc
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -cpp graphic -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphic ../../../extensions/src/NvVkUtil/src_shaders/graphic.glslc
 
 $(NvVkUtil_debug_GLSLC_hex_extensions_src_NvVkUtil_src_shaders_graphicFrame_glslc_o): $(NvVkUtil_GLSLC_hex_extensions_src_NvVkUtil_src_shaders_graphicFrame_glslc) 
 	@mkdir -p `dirname ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphicFrame.cpp`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv -cpp graphicFrame -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphicFrame ../../../extensions/src/NvVkUtil/src_shaders/graphicFrame.glslc
-	../../../BuildTools/spir-v/bin/glsl2spirv -cpp graphicFrame -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphicFrame ../../../extensions/src/NvVkUtil/src_shaders/graphicFrame.glslc
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -cpp graphicFrame -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphicFrame ../../../extensions/src/NvVkUtil/src_shaders/graphicFrame.glslc
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -cpp graphicFrame -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphicFrame ../../../extensions/src/NvVkUtil/src_shaders/graphicFrame.glslc
 
 NvVkUtil_debug_DEPDIR = $(dir $(@))/$(*F)
 $(NvVkUtil_debug_cpp_o): $(NvVkUtil_debug_objsdir)/%.o:
@@ -215,23 +215,23 @@ $(NvVkUtil_release_bin): $(NvVkUtil_release_obj)
 
 $(NvVkUtil_release_GLSLC_hex_extensions_src_NvVkUtil_src_shaders_font_glslc_o): $(NvVkUtil_GLSLC_hex_extensions_src_NvVkUtil_src_shaders_font_glslc) 
 	@mkdir -p `dirname ../../../extensions/src/NvVkUtil/src_shaders/../shaders/font.cpp`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv -cpp font -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/font ../../../extensions/src/NvVkUtil/src_shaders/font.glslc
-	../../../BuildTools/spir-v/bin/glsl2spirv -cpp font -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/font ../../../extensions/src/NvVkUtil/src_shaders/font.glslc
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -cpp font -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/font ../../../extensions/src/NvVkUtil/src_shaders/font.glslc
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -cpp font -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/font ../../../extensions/src/NvVkUtil/src_shaders/font.glslc
 
 $(NvVkUtil_release_GLSLC_hex_extensions_src_NvVkUtil_src_shaders_fontOutline_glslc_o): $(NvVkUtil_GLSLC_hex_extensions_src_NvVkUtil_src_shaders_fontOutline_glslc) 
 	@mkdir -p `dirname ../../../extensions/src/NvVkUtil/src_shaders/../shaders/fontOutline.cpp`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv -cpp fontOutline -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/fontOutline ../../../extensions/src/NvVkUtil/src_shaders/fontOutline.glslc
-	../../../BuildTools/spir-v/bin/glsl2spirv -cpp fontOutline -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/fontOutline ../../../extensions/src/NvVkUtil/src_shaders/fontOutline.glslc
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -cpp fontOutline -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/fontOutline ../../../extensions/src/NvVkUtil/src_shaders/fontOutline.glslc
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -cpp fontOutline -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/fontOutline ../../../extensions/src/NvVkUtil/src_shaders/fontOutline.glslc
 
 $(NvVkUtil_release_GLSLC_hex_extensions_src_NvVkUtil_src_shaders_graphic_glslc_o): $(NvVkUtil_GLSLC_hex_extensions_src_NvVkUtil_src_shaders_graphic_glslc) 
 	@mkdir -p `dirname ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphic.cpp`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv -cpp graphic -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphic ../../../extensions/src/NvVkUtil/src_shaders/graphic.glslc
-	../../../BuildTools/spir-v/bin/glsl2spirv -cpp graphic -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphic ../../../extensions/src/NvVkUtil/src_shaders/graphic.glslc
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -cpp graphic -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphic ../../../extensions/src/NvVkUtil/src_shaders/graphic.glslc
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -cpp graphic -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphic ../../../extensions/src/NvVkUtil/src_shaders/graphic.glslc
 
 $(NvVkUtil_release_GLSLC_hex_extensions_src_NvVkUtil_src_shaders_graphicFrame_glslc_o): $(NvVkUtil_GLSLC_hex_extensions_src_NvVkUtil_src_shaders_graphicFrame_glslc) 
 	@mkdir -p `dirname ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphicFrame.cpp`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv -cpp graphicFrame -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphicFrame ../../../extensions/src/NvVkUtil/src_shaders/graphicFrame.glslc
-	../../../BuildTools/spir-v/bin/glsl2spirv -cpp graphicFrame -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphicFrame ../../../extensions/src/NvVkUtil/src_shaders/graphicFrame.glslc
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -cpp graphicFrame -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphicFrame ../../../extensions/src/NvVkUtil/src_shaders/graphicFrame.glslc
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -cpp graphicFrame -o ../../../extensions/src/NvVkUtil/src_shaders/../shaders/graphicFrame ../../../extensions/src/NvVkUtil/src_shaders/graphicFrame.glslc
 
 NvVkUtil_release_DEPDIR = $(dir $(@))/$(*F)
 $(NvVkUtil_release_cpp_o): $(NvVkUtil_release_objsdir)/%.o:

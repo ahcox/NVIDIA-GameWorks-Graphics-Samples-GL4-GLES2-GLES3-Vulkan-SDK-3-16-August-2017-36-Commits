@@ -107,6 +107,12 @@ virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr><td class="memItemLeft" nowrap align="right" valign="top">VkQueue&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_sample_app_v_k.html#c969da440b09c6e5e58c15e1b6768343">queue</a> ()</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Direct queue access.  <a href="#c969da440b09c6e5e58c15e1b6768343"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_sample_app_v_k.html#f0aab004dbace3322ec9111f4d16a055">isExtensionSupported</a> (const char *ext)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Extension support query.  <a href="#f0aab004dbace3322ec9111f4d16a055"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_sample_app_v_k.html#993a7897cd2c43d8bb57ab7183e3b86e">isLayerSupported</a> (const char *ext)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Layer support query.  <a href="#993a7897cd2c43d8bb57ab7183e3b86e"></a><br></td></tr>
 </table>
 <hr><a name="_details"></a><h2>Detailed Description</h2>
 Base class for VK sample apps. <hr><h2>Constructor &amp; Destructor Documentation</h2>
@@ -160,6 +166,29 @@ Direct device access.
 
 </div>
 </div><p>
+<a class="anchor" name="f0aab004dbace3322ec9111f4d16a055"></a><!-- doxytag: member="NvSampleAppVK::isExtensionSupported" ref="f0aab004dbace3322ec9111f4d16a055" args="(const char *ext)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool NvSampleAppVK::isExtensionSupported           </td>
+          <td>(</td>
+          <td class="paramtype">const char *&nbsp;</td>
+          <td class="paramname"> <em>ext</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Extension support query. 
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>true if the given string is found in the device and instance extension set for the context, false if not. </dd></dl>
+
+</div>
+</div><p>
 <a class="anchor" name="21c82baf8c0907db8a5d0fc87bc8870f"></a><!-- doxytag: member="NvSampleAppVK::isGLSupported" ref="21c82baf8c0907db8a5d0fc87bc8870f" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -179,6 +208,29 @@ Direct device access.
 Returns whether the HW supports GL in a VK app. 
 <p>
 Not valid until initRendering <dl class="return" compact><dt><b>Returns:</b></dt><dd>true if GL callbacks are supported, false if VK-only </dd></dl>
+
+</div>
+</div><p>
+<a class="anchor" name="993a7897cd2c43d8bb57ab7183e3b86e"></a><!-- doxytag: member="NvSampleAppVK::isLayerSupported" ref="993a7897cd2c43d8bb57ab7183e3b86e" args="(const char *ext)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool NvSampleAppVK::isLayerSupported           </td>
+          <td>(</td>
+          <td class="paramtype">const char *&nbsp;</td>
+          <td class="paramname"> <em>ext</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Layer support query. 
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>true if the given string is found in the device and instance layer set for the context, false if not. </dd></dl>
 
 </div>
 </div><p>
@@ -263,7 +315,7 @@ Return the VK helper context.
 	<div class="seperator"></div>
 	<div class="seperator"></div>
 	<address style="text-align: right;"><small>
-Generated on Mon Jul 4 10:52:12 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
+Generated on Thu Jul 28 10:35:52 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
 	<footer>
 		<div class="row">
 			<div class="text-center">&copy;2016 NVIDIA Corporation.</div>

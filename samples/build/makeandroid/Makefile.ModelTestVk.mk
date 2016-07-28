@@ -45,6 +45,7 @@ ModelTestVk_debug_defines   += GL_API_LEVEL_ES2
 ModelTestVk_debug_defines   += USE_REGAL=1
 ModelTestVk_debug_defines   += _DEBUG
 ModelTestVk_debug_libraries := 
+ModelTestVk_debug_libraries += NvVkUtilD
 ModelTestVk_debug_libraries += NsFoundationD
 ModelTestVk_debug_libraries += NvAppBaseD
 ModelTestVk_debug_libraries += NvAssetLoaderD
@@ -55,7 +56,6 @@ ModelTestVk_debug_libraries += NvImageD
 ModelTestVk_debug_libraries += NvUID
 ModelTestVk_debug_libraries += HalfD
 ModelTestVk_debug_libraries += NvEGLUtilD
-ModelTestVk_debug_libraries += NvVkUtilD
 ModelTestVk_debug_libraries += gnustl_static
 ModelTestVk_debug_libraries += EGL
 ModelTestVk_debug_libraries += android
@@ -83,8 +83,8 @@ ModelTestVk_debug_objsdir  = $(OBJS_DIR)/ModelTestVk_debug
 ModelTestVk_debug_cpp_o    = $(addprefix $(ModelTestVk_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cpp, %.cpp.o, $(ModelTestVk_cppfiles)))))
 ModelTestVk_debug_cc_o    = $(addprefix $(ModelTestVk_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cc, %.cc.o, $(ModelTestVk_ccfiles)))))
 ModelTestVk_debug_c_o      = $(addprefix $(ModelTestVk_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.c, %.c.o, $(ModelTestVk_cfiles)))))
-ModelTestVk_debug_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl_o += ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/base_model.nvs
-ModelTestVk_debug_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl_o += ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/cube_map.nvs
+ModelTestVk_debug_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl_o += ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\base_model.nvs
+ModelTestVk_debug_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl_o += ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\cube_map.nvs
 ModelTestVk_debug_obj      =  $(ModelTestVk_debug_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl_o) $(ModelTestVk_debug_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl_o) $(ModelTestVk_debug_cpp_o) $(ModelTestVk_debug_cc_o) $(ModelTestVk_debug_c_o) 
 ModelTestVk_debug_bin      := ./../../vk10-kepler/ModelTestVk/libs/armeabi-v7a/libModelTestVk.so
 
@@ -102,20 +102,20 @@ antbuild_ModelTestVk_debug: preantbuild_ModelTestVk_debug
 mainbuild_ModelTestVk_debug: prebuild_ModelTestVk_debug $(ModelTestVk_debug_bin)
 prebuild_ModelTestVk_debug:
 
-$(ModelTestVk_debug_bin): $(ModelTestVk_debug_obj) build_NsFoundation_debug build_NvAppBase_debug build_NvAssetLoader_debug build_NvModel_debug build_NvGLUtils_debug build_NvGamepad_debug build_NvImage_debug build_NvUI_debug build_Half_debug build_NvEGLUtil_debug build_NvVkUtil_debug 
+$(ModelTestVk_debug_bin): $(ModelTestVk_debug_obj) build_NvVkUtil_debug build_NsFoundation_debug build_NvAppBase_debug build_NvAssetLoader_debug build_NvModel_debug build_NvGLUtils_debug build_NvGamepad_debug build_NvImage_debug build_NvUI_debug build_Half_debug build_NvEGLUtil_debug 
 	mkdir -p `dirname ./../../vk10-kepler/ModelTestVk/libs/armeabi-v7a/libModelTestVk.so`
 	$(CXX) -shared $(filter %.o, $(ModelTestVk_debug_obj)) $(ModelTestVk_debug_lflags) -lc -o $@ 
 	$(ECHO) building $@ complete!
 
 $(ModelTestVk_debug_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl_o): $(ModelTestVk_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/base_model.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/base_model.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/base_model.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/base_model.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/base_model.glsl
+	@mkdir -p `dirname ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\base_model.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\base_model.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/base_model.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\base_model.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/base_model.glsl
 
 $(ModelTestVk_debug_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl_o): $(ModelTestVk_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/cube_map.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/cube_map.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/cube_map.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/cube_map.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/cube_map.glsl
+	@mkdir -p `dirname ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\cube_map.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\cube_map.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/cube_map.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\cube_map.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/cube_map.glsl
 
 ModelTestVk_debug_DEPDIR = $(dir $(@))/$(*F)
 $(ModelTestVk_debug_cpp_o): $(ModelTestVk_debug_objsdir)/%.o:
@@ -178,6 +178,7 @@ ModelTestVk_release_defines   += GL_API_LEVEL_ES2
 ModelTestVk_release_defines   += USE_REGAL=1
 ModelTestVk_release_defines   += NDEBUG
 ModelTestVk_release_libraries := 
+ModelTestVk_release_libraries += NvVkUtil
 ModelTestVk_release_libraries += NsFoundation
 ModelTestVk_release_libraries += NvAppBase
 ModelTestVk_release_libraries += NvAssetLoader
@@ -188,7 +189,6 @@ ModelTestVk_release_libraries += NvImage
 ModelTestVk_release_libraries += NvUI
 ModelTestVk_release_libraries += Half
 ModelTestVk_release_libraries += NvEGLUtil
-ModelTestVk_release_libraries += NvVkUtil
 ModelTestVk_release_libraries += gnustl_static
 ModelTestVk_release_libraries += EGL
 ModelTestVk_release_libraries += android
@@ -216,8 +216,8 @@ ModelTestVk_release_objsdir  = $(OBJS_DIR)/ModelTestVk_release
 ModelTestVk_release_cpp_o    = $(addprefix $(ModelTestVk_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cpp, %.cpp.o, $(ModelTestVk_cppfiles)))))
 ModelTestVk_release_cc_o    = $(addprefix $(ModelTestVk_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cc, %.cc.o, $(ModelTestVk_ccfiles)))))
 ModelTestVk_release_c_o      = $(addprefix $(ModelTestVk_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.c, %.c.o, $(ModelTestVk_cfiles)))))
-ModelTestVk_release_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl_o += ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/base_model.nvs
-ModelTestVk_release_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl_o += ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/cube_map.nvs
+ModelTestVk_release_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl_o += ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\base_model.nvs
+ModelTestVk_release_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl_o += ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\cube_map.nvs
 ModelTestVk_release_obj      =  $(ModelTestVk_release_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl_o) $(ModelTestVk_release_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl_o) $(ModelTestVk_release_cpp_o) $(ModelTestVk_release_cc_o) $(ModelTestVk_release_c_o) 
 ModelTestVk_release_bin      := ./../../vk10-kepler/ModelTestVk/libs/armeabi-v7a/libModelTestVk.so
 
@@ -235,20 +235,20 @@ antbuild_ModelTestVk_release: preantbuild_ModelTestVk_release
 mainbuild_ModelTestVk_release: prebuild_ModelTestVk_release $(ModelTestVk_release_bin)
 prebuild_ModelTestVk_release:
 
-$(ModelTestVk_release_bin): $(ModelTestVk_release_obj) build_NsFoundation_release build_NvAppBase_release build_NvAssetLoader_release build_NvModel_release build_NvGLUtils_release build_NvGamepad_release build_NvImage_release build_NvUI_release build_Half_release build_NvEGLUtil_release build_NvVkUtil_release 
+$(ModelTestVk_release_bin): $(ModelTestVk_release_obj) build_NvVkUtil_release build_NsFoundation_release build_NvAppBase_release build_NvAssetLoader_release build_NvModel_release build_NvGLUtils_release build_NvGamepad_release build_NvImage_release build_NvUI_release build_Half_release build_NvEGLUtil_release 
 	mkdir -p `dirname ./../../vk10-kepler/ModelTestVk/libs/armeabi-v7a/libModelTestVk.so`
 	$(CXX) -shared $(filter %.o, $(ModelTestVk_release_obj)) $(ModelTestVk_release_lflags) -lc -o $@ 
 	$(ECHO) building $@ complete!
 
 $(ModelTestVk_release_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl_o): $(ModelTestVk_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/base_model.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/base_model.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/base_model.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/base_model.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/base_model.glsl
+	@mkdir -p `dirname ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\base_model.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\base_model.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/base_model.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\base_model.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/base_model.glsl
 
 $(ModelTestVk_release_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl_o): $(ModelTestVk_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/cube_map.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/cube_map.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/cube_map.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/cube_map.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/cube_map.glsl
+	@mkdir -p `dirname ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\cube_map.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\cube_map.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/cube_map.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\cube_map.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/cube_map.glsl
 
 ModelTestVk_release_DEPDIR = $(dir $(@))/$(*F)
 $(ModelTestVk_release_cpp_o): $(ModelTestVk_release_objsdir)/%.o:

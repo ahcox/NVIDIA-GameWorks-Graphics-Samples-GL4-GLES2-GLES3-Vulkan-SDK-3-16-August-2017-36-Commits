@@ -106,7 +106,7 @@
 			<FloatingPointModel>Precise</FloatingPointModel>
 			<AdditionalOptions>-funwind-tables -O0 -g -ggdb -fno-omit-frame-pointer</AdditionalOptions>
 			<Optimization>Disabled</Optimization>
-			<AdditionalIncludeDirectories>./../../src/NvUI;./../../include;./../../externals/include;./../../include/NsFoundation;./../../include/NvFoundation;/platforms/android-18/arch-arm/usr/include;/sources/cxx-stl/gnu-libstdc++;/include;/libs/armeabi-v7a/include;/include/backward;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>./../../src/NvUI;./../../include;./../../externals/include;./../../include/NsFoundation;./../../include/NvFoundation;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 			<PreprocessorDefinitions>android;ANDROID;_LIB;NV_ANDROID;__STDC_LIMIT_MACROS;VK_NO_PROTOTYPES;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<WarningLevel>Level3</WarningLevel>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -116,7 +116,7 @@
 			<AdditionalOptions> -Wl,--start-group -lc -lm -lgcc -Wl,--end-group</AdditionalOptions>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)libNvUID.a</OutputFile>
-			<AdditionalLibraryDirectories>./../../externals/lib/Tegra-Android;./../../lib/Tegra-Android;/sources/cxx-stl/gnu-libstdc++;/libs/armeabi-v7a;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories>./../../externals/lib/Tegra-Android;./../../lib/Tegra-Android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/libNvUID.a.pdb</ProgramDatabaseFile>
 		</Lib>
 		<ResourceCompile>
@@ -139,7 +139,7 @@
 			<FloatingPointModel>Precise</FloatingPointModel>
 			<AdditionalOptions>-funwind-tables -O2 -fno-omit-frame-pointer</AdditionalOptions>
 			<Optimization>Disabled</Optimization>
-			<AdditionalIncludeDirectories>./../../src/NvUI;./../../include;./../../externals/include;./../../include/NsFoundation;./../../include/NvFoundation;/platforms/android-18/arch-arm/usr/include;/sources/cxx-stl/gnu-libstdc++;/include;/libs/armeabi-v7a/include;/include/backward;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>./../../src/NvUI;./../../include;./../../externals/include;./../../include/NsFoundation;./../../include/NvFoundation;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 			<PreprocessorDefinitions>android;ANDROID;_LIB;NV_ANDROID;__STDC_LIMIT_MACROS;VK_NO_PROTOTYPES;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<WarningLevel>Level3</WarningLevel>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -149,7 +149,7 @@
 			<AdditionalOptions> -Wl,--start-group -lc -lm -lgcc -Wl,--end-group</AdditionalOptions>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)libNvUI.a</OutputFile>
-			<AdditionalLibraryDirectories>./../../externals/lib/Tegra-Android;./../../lib/Tegra-Android;/sources/cxx-stl/gnu-libstdc++;/libs/armeabi-v7a;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories>./../../externals/lib/Tegra-Android;./../../lib/Tegra-Android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/libNvUI.a.pdb</ProgramDatabaseFile>
 		</Lib>
 		<ResourceCompile>

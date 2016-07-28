@@ -2,6 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloVulkan", "./HelloVulkan.vcxproj", "{653A045B-C44E-E82C-7AC8-91277540DB23}"
 	ProjectSection(ProjectDependencies) = postProject
+		{231F554F-94E0-EF7D-D462-E3C0EE6EE101} = {231F554F-94E0-EF7D-D462-E3C0EE6EE101}
 		{D845EF35-3B62-0D65-DB88-1589946D3F28} = {D845EF35-3B62-0D65-DB88-1589946D3F28}
 		{60297368-40D0-A29B-A2C0-714841945DE0} = {60297368-40D0-A29B-A2C0-714841945DE0}
 		{1B5408AA-9214-FCC0-3C5C-59B660C07A08} = {1B5408AA-9214-FCC0-3C5C-59B660C07A08}
@@ -12,7 +13,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloVulkan", "./HelloVulka
 		{6209A624-E0C4-3EB2-EEE2-E7B434B0E876} = {6209A624-E0C4-3EB2-EEE2-E7B434B0E876}
 		{7B07CE8A-72CE-1F32-5039-88C256EA7899} = {7B07CE8A-72CE-1F32-5039-88C256EA7899}
 		{3A25E336-B4DE-1D5C-7C22-DED8B46DBB84} = {3A25E336-B4DE-1D5C-7C22-DED8B46DBB84}
-		{231F554F-94E0-EF7D-D462-E3C0EE6EE101} = {231F554F-94E0-EF7D-D462-E3C0EE6EE101}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NsFoundation", "./../../../extensions/build/vs2013All/NsFoundation.vcxproj", "{D845EF35-3B62-0D65-DB88-1589946D3F28}"
@@ -51,10 +51,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NvUI", "./../../../extensio
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NvVkUtil", "./../../../extensions/build/vs2013All/NvVkUtil.vcxproj", "{231F554F-94E0-EF7D-D462-E3C0EE6EE101}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Half", "./../../../extensions/externals/build/vs2013All/Half.vcxproj", "{7B07CE8A-72CE-1F32-5039-88C256EA7899}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
@@ -68,6 +64,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "freetype", "./../../../exte
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "harfbuzz", "./../../../extensions/externals/build/vs2013All/harfbuzz.vcxproj", "{6C20DB90-DE20-DEF8-A218-18101451DE10}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NvVkUtil", "./../../../extensions/build/vs2013All/NvVkUtil.vcxproj", "{231F554F-94E0-EF7D-D462-E3C0EE6EE101}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
@@ -201,18 +201,6 @@ Global
 		{6209A624-E0C4-3EB2-EEE2-E7B434B0E876}.debug|x64.Build.0 = debug|x64
 		{6209A624-E0C4-3EB2-EEE2-E7B434B0E876}.release|x64.ActiveCfg = release|x64
 		{6209A624-E0C4-3EB2-EEE2-E7B434B0E876}.release|x64.Build.0 = release|x64
-		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.debug|Tegra-Android.ActiveCfg = debug|Tegra-Android
-		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.debug|Tegra-Android.Build.0 = debug|Tegra-Android
-		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.release|Tegra-Android.ActiveCfg = release|Tegra-Android
-		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.release|Tegra-Android.Build.0 = release|Tegra-Android
-		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.debug|Win32.ActiveCfg = debug|Win32
-		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.debug|Win32.Build.0 = debug|Win32
-		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.release|Win32.ActiveCfg = release|Win32
-		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.release|Win32.Build.0 = release|Win32
-		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.debug|x64.ActiveCfg = debug|x64
-		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.debug|x64.Build.0 = debug|x64
-		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.release|x64.ActiveCfg = release|x64
-		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.release|x64.Build.0 = release|x64
 		{7B07CE8A-72CE-1F32-5039-88C256EA7899}.debug|Tegra-Android.ActiveCfg = debug|Tegra-Android
 		{7B07CE8A-72CE-1F32-5039-88C256EA7899}.debug|Tegra-Android.Build.0 = debug|Tegra-Android
 		{7B07CE8A-72CE-1F32-5039-88C256EA7899}.release|Tegra-Android.ActiveCfg = release|Tegra-Android
@@ -261,6 +249,18 @@ Global
 		{6C20DB90-DE20-DEF8-A218-18101451DE10}.debug|x64.Build.0 = debug|x64
 		{6C20DB90-DE20-DEF8-A218-18101451DE10}.release|x64.ActiveCfg = release|x64
 		{6C20DB90-DE20-DEF8-A218-18101451DE10}.release|x64.Build.0 = release|x64
+		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.debug|Tegra-Android.ActiveCfg = debug|Tegra-Android
+		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.debug|Tegra-Android.Build.0 = debug|Tegra-Android
+		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.release|Tegra-Android.ActiveCfg = release|Tegra-Android
+		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.release|Tegra-Android.Build.0 = release|Tegra-Android
+		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.debug|Win32.ActiveCfg = debug|Win32
+		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.debug|Win32.Build.0 = debug|Win32
+		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.release|Win32.ActiveCfg = release|Win32
+		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.release|Win32.Build.0 = release|Win32
+		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.debug|x64.ActiveCfg = debug|x64
+		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.debug|x64.Build.0 = debug|x64
+		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.release|x64.ActiveCfg = release|x64
+		{231F554F-94E0-EF7D-D462-E3C0EE6EE101}.release|x64.Build.0 = release|x64
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

@@ -42,6 +42,7 @@
 #include <NV/NvGfxConfiguration.h>
 #include <NvVkUtil/NvVkUtil.h>
 #include <vector>
+#include <set>
 
 void checkVkResult(const char* file, int32_t line, VkResult result);
 #ifndef CHECK_VK_RESULT
@@ -388,6 +389,9 @@ public:
 	VkFormat pickOptimalFormat(uint32_t count, const VkFormat *formats, VkFlags properties);
 
 	VkShaderModule createShader(const std::string& shaderSource, VkShaderStageFlagBits inStage);
+	
+	bool isExtensionSupported(const char* ext);
+	bool isLayerSupported(const char* layer);
 
 protected:
 	enum {
@@ -432,6 +436,18 @@ protected:
 	NvVkStagingBuffer mStaging;
 
 	NvGPUTimerVK* m_frameTimer;
+	
+	// extension and layer queries
+	std::vector<VkExtensionProperties> mInstanceExtensionsProperties;
+	std::vector<VkLayerProperties> mInstanceLayerProperties;
+
+	std::vector<VkExtensionProperties> mPhysicalDeviceExtensionsProperties;
+	std::vector<VkLayerProperties> mPhysicalDeviceLayerProperties;
+
+	// merged instance and layer properties
+	std::set<std::string> mCombinedExtensionNames;
+	std::set<std::string> mCombinedLayerNames;
+
 
 #if VK_EXT_debug_report 
     PFN_vkCreateDebugReportCallbackEXT ext_vkCreateDebugReportCallbackEXT;

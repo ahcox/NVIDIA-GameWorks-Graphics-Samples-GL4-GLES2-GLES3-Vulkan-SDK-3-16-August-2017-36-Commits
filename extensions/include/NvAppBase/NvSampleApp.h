@@ -282,6 +282,8 @@ protected:
     bool mUseFBOPair;
     int32_t m_fboWidth;
     int32_t m_fboHeight;
+	bool mLogFPS;
+	float mTimeSinceFPSLog;
 };
 
 #endif

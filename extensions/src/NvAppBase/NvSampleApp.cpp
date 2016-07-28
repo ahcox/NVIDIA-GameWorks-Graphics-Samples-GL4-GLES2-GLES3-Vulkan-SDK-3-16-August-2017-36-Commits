@@ -70,6 +70,8 @@ NvSampleApp::NvSampleApp() :
     , m_fboWidth(0)
     , m_fboHeight(0)
 	, m_inputHandler(NULL)
+	, mLogFPS(false)
+	, mTimeSinceFPSLog(0.0f)
 {
     m_transformer = new NvInputTransformer;
     memset(mLastPadState, 0, sizeof(mLastPadState));
@@ -107,8 +109,10 @@ NvSampleApp::NvSampleApp() :
             std::stringstream(*iter) >> m_fboWidth;
             iter++;
             std::stringstream(*iter) >> m_fboHeight;
-        }
-
+		} else if (0 == (*iter).compare("-logfps")) {
+			mLogFPS = true;
+		}
+		
         iter++;
     }
 
@@ -792,12 +796,16 @@ void NvSampleApp::renderLoopRenderFrame() {
             mSumDrawTime = 0.0f;
         }
 
-        if (mFramerate->nextFrame()) {
-#if later
-            // for now, disabling console output of fps as we have on-screen.
-            // makes it easier to read USEFUL log output messages.
-            LOGI("fps: %.2f", mFramerate->getMeanFramerate());
-#endif
+		mFramerate->nextFrame();
+
+		if (mLogFPS) {
+			// wall time - not (possibly) simulated time
+			mTimeSinceFPSLog += mFrameTimer->getTime();
+
+			if (mTimeSinceFPSLog > 1.0f) {
+				LOGI("fps: %.2f", mFramerate->getMeanFramerate());
+				mTimeSinceFPSLog = 0.0f;
+			}
         }
     }
 

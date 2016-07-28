@@ -510,18 +510,23 @@ bool NvAppContextVK::initializeInstance(PFN_vkGetProcAddressNV getProc, const st
 #endif
     
 	// instance layers and extensions
-	const vector<VkLayerProperties> instanceLayerProperties = GetInstanceLayerProperties(
-		_vkEnumerateInstanceLayerProperties);
-	const vector<VkExtensionProperties> instanceExtentionsProperties = GetInstanceExtensionProperties(
-		_vkEnumerateInstanceExtensionProperties);
+	mInstanceLayerProperties = GetInstanceLayerProperties(_vkEnumerateInstanceLayerProperties);
+	mInstanceExtensionsProperties = GetInstanceExtensionProperties(_vkEnumerateInstanceExtensionProperties);
 
-	const vector<string> instanceLayersToEnable = filterLayers(instanceLayerProperties, requestedLayers(true, useValidation(), useApiDump()));
+	for (size_t i = 0; i < mInstanceExtensionsProperties.size(); ++i) {
+		mCombinedExtensionNames.insert(mInstanceExtensionsProperties[i].extensionName);
+	}
+	for (size_t i = 0; i < mInstanceLayerProperties.size(); ++i) {
+		mCombinedLayerNames.insert(mInstanceLayerProperties[i].layerName);
+	}
+
+	const vector<string> instanceLayersToEnable = filterLayers(mInstanceLayerProperties, requestedLayers(true, useValidation(), useApiDump()));
 
 	vector<const char*> instanceLayerNames;
 	for (size_t i = 0; i < instanceLayersToEnable.size(); ++i)
 		instanceLayerNames.push_back(instanceLayersToEnable[i].c_str());
 
-	const vector<string> instanceExtensionsToEnable = filterExtensions(instanceExtentionsProperties, requestedExtensions(true, useValidation() || useLoaderDebug()));
+	const vector<string> instanceExtensionsToEnable = filterExtensions(mInstanceExtensionsProperties, requestedExtensions(true, useValidation() || useLoaderDebug()));
 
 	vector<const char*> instanceExtensionNames;
 	for (size_t i = 0; i < instanceExtensionsToEnable.size(); ++i)
@@ -538,7 +543,7 @@ bool NvAppContextVK::initializeInstance(PFN_vkGetProcAddressNV getProc, const st
 	instanceCreateInfo.ppEnabledLayerNames = instanceLayerNames.data();
 
 
-	logLayersAndExtensions("instance", instanceExtentionsProperties, instanceExtensionsToEnable, instanceLayerProperties, instanceLayersToEnable, "VK_INSTANCE_LAYERS");
+	logLayersAndExtensions("instance", mInstanceExtensionsProperties, instanceExtensionsToEnable, mInstanceLayerProperties, instanceLayersToEnable, "VK_INSTANCE_LAYERS");
 	result = _vkCreateInstance(&instanceCreateInfo, NULL, &_instance);
 	if (result != VK_SUCCESS)
 		return false;
@@ -631,16 +636,24 @@ bool NvAppContextVK::initializeDevice(PFN_vkGetProcAddressNV getProc)
 
 
 	// physical device layers and extensions
-	const vector<VkLayerProperties> physicalDeviceLayerProperties = GetPhysicalDeviceLayerProperties(_physicalDevice);
-	const vector<VkExtensionProperties> physicalDeviceExtentionsProperties = GetPhysicalDeviceExtensionProperties(_physicalDevice);
+	mPhysicalDeviceLayerProperties = GetPhysicalDeviceLayerProperties(_physicalDevice);
+	mPhysicalDeviceExtensionsProperties = GetPhysicalDeviceExtensionProperties(_physicalDevice);
 
-	const vector<string> physicalDeviceLayersToEnable = filterLayers(physicalDeviceLayerProperties, requestedLayers(false, useValidation(), useApiDump()));
+	for (size_t i = 0; i < mPhysicalDeviceExtensionsProperties.size(); ++i) {
+		mCombinedExtensionNames.insert(mPhysicalDeviceExtensionsProperties[i].extensionName);
+	}
+	for (size_t i = 0; i < mPhysicalDeviceLayerProperties.size(); ++i) {
+		mCombinedLayerNames.insert(mPhysicalDeviceLayerProperties[i].layerName);
+	}
+
+
+	const vector<string> physicalDeviceLayersToEnable = filterLayers(mPhysicalDeviceLayerProperties, requestedLayers(false, useValidation(), useApiDump()));
 
 	vector<const char*> physicalDeviceLayerNames;
 	for (size_t i = 0; i < physicalDeviceLayersToEnable.size(); ++i)
 		physicalDeviceLayerNames.push_back(physicalDeviceLayersToEnable[i].c_str());
 
-	const vector<string> physicalDeviceExtensionsToEnable = filterExtensions(physicalDeviceExtentionsProperties, requestedExtensions(false, useValidation() || useLoaderDebug()));
+	const vector<string> physicalDeviceExtensionsToEnable = filterExtensions(mPhysicalDeviceExtensionsProperties, requestedExtensions(false, useValidation() || useLoaderDebug()));
 
 	vector<const char*> physicalDeviceExtensionNames;
 	for (size_t i = 0; i < physicalDeviceExtensionsToEnable.size(); ++i)
@@ -662,7 +675,7 @@ bool NvAppContextVK::initializeDevice(PFN_vkGetProcAddressNV getProc)
         deviceCreateInfo.pEnabledFeatures = &_physicalDeviceFeaturesEnabled;
     }
 
-    logLayersAndExtensions("device", physicalDeviceExtentionsProperties, physicalDeviceExtensionsToEnable, physicalDeviceLayerProperties, physicalDeviceLayersToEnable, "VK_DEVICE_LAYERS");
+    logLayersAndExtensions("device", mPhysicalDeviceExtensionsProperties, physicalDeviceExtensionsToEnable, mPhysicalDeviceLayerProperties, physicalDeviceLayersToEnable, "VK_DEVICE_LAYERS");
 
 	result = vkCreateDevice(_physicalDevice, &deviceCreateInfo, NULL, &_device);
 	if (result != VK_SUCCESS)

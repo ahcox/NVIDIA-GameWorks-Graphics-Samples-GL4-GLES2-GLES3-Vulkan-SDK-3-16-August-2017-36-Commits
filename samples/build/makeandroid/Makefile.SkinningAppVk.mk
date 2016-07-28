@@ -45,6 +45,7 @@ SkinningAppVk_debug_defines   += GL_API_LEVEL_ES2
 SkinningAppVk_debug_defines   += USE_REGAL=1
 SkinningAppVk_debug_defines   += _DEBUG
 SkinningAppVk_debug_libraries := 
+SkinningAppVk_debug_libraries += NvVkUtilD
 SkinningAppVk_debug_libraries += NsFoundationD
 SkinningAppVk_debug_libraries += NvAppBaseD
 SkinningAppVk_debug_libraries += NvAssetLoaderD
@@ -55,7 +56,6 @@ SkinningAppVk_debug_libraries += NvImageD
 SkinningAppVk_debug_libraries += NvUID
 SkinningAppVk_debug_libraries += HalfD
 SkinningAppVk_debug_libraries += NvEGLUtilD
-SkinningAppVk_debug_libraries += NvVkUtilD
 SkinningAppVk_debug_libraries += gnustl_static
 SkinningAppVk_debug_libraries += EGL
 SkinningAppVk_debug_libraries += android
@@ -83,7 +83,7 @@ SkinningAppVk_debug_objsdir  = $(OBJS_DIR)/SkinningAppVk_debug
 SkinningAppVk_debug_cpp_o    = $(addprefix $(SkinningAppVk_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cpp, %.cpp.o, $(SkinningAppVk_cppfiles)))))
 SkinningAppVk_debug_cc_o    = $(addprefix $(SkinningAppVk_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cc, %.cc.o, $(SkinningAppVk_ccfiles)))))
 SkinningAppVk_debug_c_o      = $(addprefix $(SkinningAppVk_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.c, %.c.o, $(SkinningAppVk_cfiles)))))
-SkinningAppVk_debug_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl_o += ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs
+SkinningAppVk_debug_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl_o += ../../vk10-kepler/SkinningAppVk/assets/src_shaders\..\shaders\skinning.nvs
 SkinningAppVk_debug_obj      =  $(SkinningAppVk_debug_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl_o) $(SkinningAppVk_debug_cpp_o) $(SkinningAppVk_debug_cc_o) $(SkinningAppVk_debug_c_o) 
 SkinningAppVk_debug_bin      := ./../../vk10-kepler/SkinningAppVk/libs/armeabi-v7a/libSkinningAppVk.so
 
@@ -101,15 +101,15 @@ antbuild_SkinningAppVk_debug: preantbuild_SkinningAppVk_debug
 mainbuild_SkinningAppVk_debug: prebuild_SkinningAppVk_debug $(SkinningAppVk_debug_bin)
 prebuild_SkinningAppVk_debug:
 
-$(SkinningAppVk_debug_bin): $(SkinningAppVk_debug_obj) build_NsFoundation_debug build_NvAppBase_debug build_NvAssetLoader_debug build_NvModel_debug build_NvGLUtils_debug build_NvGamepad_debug build_NvImage_debug build_NvUI_debug build_Half_debug build_NvEGLUtil_debug build_NvVkUtil_debug 
+$(SkinningAppVk_debug_bin): $(SkinningAppVk_debug_obj) build_NvVkUtil_debug build_NsFoundation_debug build_NvAppBase_debug build_NvAssetLoader_debug build_NvModel_debug build_NvGLUtils_debug build_NvGamepad_debug build_NvImage_debug build_NvUI_debug build_Half_debug build_NvEGLUtil_debug 
 	mkdir -p `dirname ./../../vk10-kepler/SkinningAppVk/libs/armeabi-v7a/libSkinningAppVk.so`
 	$(CXX) -shared $(filter %.o, $(SkinningAppVk_debug_obj)) $(SkinningAppVk_debug_lflags) -lc -o $@ 
 	$(ECHO) building $@ complete!
 
 $(SkinningAppVk_debug_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl_o): $(SkinningAppVk_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
+	@mkdir -p `dirname ../../vk10-kepler/SkinningAppVk/assets/src_shaders\..\shaders\skinning.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders\..\shaders\skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders\..\shaders\skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
 
 SkinningAppVk_debug_DEPDIR = $(dir $(@))/$(*F)
 $(SkinningAppVk_debug_cpp_o): $(SkinningAppVk_debug_objsdir)/%.o:
@@ -172,6 +172,7 @@ SkinningAppVk_release_defines   += GL_API_LEVEL_ES2
 SkinningAppVk_release_defines   += USE_REGAL=1
 SkinningAppVk_release_defines   += NDEBUG
 SkinningAppVk_release_libraries := 
+SkinningAppVk_release_libraries += NvVkUtil
 SkinningAppVk_release_libraries += NsFoundation
 SkinningAppVk_release_libraries += NvAppBase
 SkinningAppVk_release_libraries += NvAssetLoader
@@ -182,7 +183,6 @@ SkinningAppVk_release_libraries += NvImage
 SkinningAppVk_release_libraries += NvUI
 SkinningAppVk_release_libraries += Half
 SkinningAppVk_release_libraries += NvEGLUtil
-SkinningAppVk_release_libraries += NvVkUtil
 SkinningAppVk_release_libraries += gnustl_static
 SkinningAppVk_release_libraries += EGL
 SkinningAppVk_release_libraries += android
@@ -210,7 +210,7 @@ SkinningAppVk_release_objsdir  = $(OBJS_DIR)/SkinningAppVk_release
 SkinningAppVk_release_cpp_o    = $(addprefix $(SkinningAppVk_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cpp, %.cpp.o, $(SkinningAppVk_cppfiles)))))
 SkinningAppVk_release_cc_o    = $(addprefix $(SkinningAppVk_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cc, %.cc.o, $(SkinningAppVk_ccfiles)))))
 SkinningAppVk_release_c_o      = $(addprefix $(SkinningAppVk_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.c, %.c.o, $(SkinningAppVk_cfiles)))))
-SkinningAppVk_release_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl_o += ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs
+SkinningAppVk_release_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl_o += ../../vk10-kepler/SkinningAppVk/assets/src_shaders\..\shaders\skinning.nvs
 SkinningAppVk_release_obj      =  $(SkinningAppVk_release_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl_o) $(SkinningAppVk_release_cpp_o) $(SkinningAppVk_release_cc_o) $(SkinningAppVk_release_c_o) 
 SkinningAppVk_release_bin      := ./../../vk10-kepler/SkinningAppVk/libs/armeabi-v7a/libSkinningAppVk.so
 
@@ -228,15 +228,15 @@ antbuild_SkinningAppVk_release: preantbuild_SkinningAppVk_release
 mainbuild_SkinningAppVk_release: prebuild_SkinningAppVk_release $(SkinningAppVk_release_bin)
 prebuild_SkinningAppVk_release:
 
-$(SkinningAppVk_release_bin): $(SkinningAppVk_release_obj) build_NsFoundation_release build_NvAppBase_release build_NvAssetLoader_release build_NvModel_release build_NvGLUtils_release build_NvGamepad_release build_NvImage_release build_NvUI_release build_Half_release build_NvEGLUtil_release build_NvVkUtil_release 
+$(SkinningAppVk_release_bin): $(SkinningAppVk_release_obj) build_NvVkUtil_release build_NsFoundation_release build_NvAppBase_release build_NvAssetLoader_release build_NvModel_release build_NvGLUtils_release build_NvGamepad_release build_NvImage_release build_NvUI_release build_Half_release build_NvEGLUtil_release 
 	mkdir -p `dirname ./../../vk10-kepler/SkinningAppVk/libs/armeabi-v7a/libSkinningAppVk.so`
 	$(CXX) -shared $(filter %.o, $(SkinningAppVk_release_obj)) $(SkinningAppVk_release_lflags) -lc -o $@ 
 	$(ECHO) building $@ complete!
 
 $(SkinningAppVk_release_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl_o): $(SkinningAppVk_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
+	@mkdir -p `dirname ../../vk10-kepler/SkinningAppVk/assets/src_shaders\..\shaders\skinning.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders\..\shaders\skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders\..\shaders\skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
 
 SkinningAppVk_release_DEPDIR = $(dir $(@))/$(*F)
 $(SkinningAppVk_release_cpp_o): $(SkinningAppVk_release_objsdir)/%.o:

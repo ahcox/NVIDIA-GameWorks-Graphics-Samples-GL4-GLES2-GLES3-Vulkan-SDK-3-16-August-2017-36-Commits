@@ -114,9 +114,9 @@ void CubemapRendering::initRendering(void) {
     if (!requireMinAPIVersion(NvGLAPIVersionGL4()))
         return;
     
-    bool multiprojectionSupported = 
-        requireExtension("GL_NV_viewport_array2", false) && 
-        requireExtension("GL_NV_geometry_shader_passthrough", false);
+	bool multiprojectionSupported =
+		requireExtension("GL_NV_viewport_array2", false) &&
+		requireExtension("GL_NV_geometry_shader_passthrough", false);
     
     if(multiprojectionSupported)
     {

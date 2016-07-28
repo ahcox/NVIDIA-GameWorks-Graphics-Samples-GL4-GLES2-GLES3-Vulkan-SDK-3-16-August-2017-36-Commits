@@ -107,7 +107,7 @@
 			<FloatingPointModel>Precise</FloatingPointModel>
 			<AdditionalOptions>-funwind-tables -O0 -g -ggdb -fno-omit-frame-pointer</AdditionalOptions>
 			<Optimization>Disabled</Optimization>
-			<AdditionalIncludeDirectories>./../../nvpr/Tiger3DES;./../../../extensions/include;./../../../extensions/externals/include;./../../../extensions/include/NsFoundation;./../../../extensions/include/NvFoundation;/platforms/android-18/arch-arm/usr/include;/sources/cxx-stl/gnu-libstdc++;/include;/libs/armeabi-v7a/include;/include/backward;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>./../../nvpr/Tiger3DES;./../../../extensions/include;./../../../extensions/externals/include;./../../../extensions/include/NsFoundation;./../../../extensions/include/NvFoundation;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 			<PreprocessorDefinitions>android;ANDROID;_LIB;NV_ANDROID;__STDC_LIMIT_MACROS;VK_NO_PROTOTYPES;GL_API_LEVEL_ES2;USE_REGAL=1;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<WarningLevel>Level3</WarningLevel>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -117,7 +117,7 @@
 			<AdditionalOptions> -Wl,--start-group -lc -lm -lgcc -lgnustl_static -lEGL -landroid -lm -lGLESv2 -lsupc++ -lgcc -lRegalW_static -Wl,--end-group</AdditionalOptions>
 			<AdditionalDependencies>gnustl_static;EGL;android;m;GLESv2;supc++;gcc;RegalW_static;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)libTiger3DES.so</OutputFile>
-			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/Tegra-Android;./../../../extensions/lib/Tegra-Android;/sources/cxx-stl/gnu-libstdc++;/libs/armeabi-v7a;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/Tegra-Android;./../../../extensions/lib/Tegra-Android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/libTiger3DES.so.pdb</ProgramDatabaseFile>
 			<SubSystem>Windows</SubSystem>
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
@@ -148,7 +148,7 @@
 			<FloatingPointModel>Precise</FloatingPointModel>
 			<AdditionalOptions>-funwind-tables -O2 -fno-omit-frame-pointer</AdditionalOptions>
 			<Optimization>Disabled</Optimization>
-			<AdditionalIncludeDirectories>./../../nvpr/Tiger3DES;./../../../extensions/include;./../../../extensions/externals/include;./../../../extensions/include/NsFoundation;./../../../extensions/include/NvFoundation;/platforms/android-18/arch-arm/usr/include;/sources/cxx-stl/gnu-libstdc++;/include;/libs/armeabi-v7a/include;/include/backward;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>./../../nvpr/Tiger3DES;./../../../extensions/include;./../../../extensions/externals/include;./../../../extensions/include/NsFoundation;./../../../extensions/include/NvFoundation;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 			<PreprocessorDefinitions>android;ANDROID;_LIB;NV_ANDROID;__STDC_LIMIT_MACROS;VK_NO_PROTOTYPES;GL_API_LEVEL_ES2;USE_REGAL=1;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<WarningLevel>Level3</WarningLevel>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -158,7 +158,7 @@
 			<AdditionalOptions> -Wl,--start-group -lc -lm -lgcc -lgnustl_static -lEGL -landroid -lm -lGLESv2 -lsupc++ -lgcc -lRegalW_static -Wl,--end-group</AdditionalOptions>
 			<AdditionalDependencies>gnustl_static;EGL;android;m;GLESv2;supc++;gcc;RegalW_static;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)libTiger3DES.so</OutputFile>
-			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/Tegra-Android;./../../../extensions/lib/Tegra-Android;/sources/cxx-stl/gnu-libstdc++;/libs/armeabi-v7a;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/Tegra-Android;./../../../extensions/lib/Tegra-Android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/libTiger3DES.so.pdb</ProgramDatabaseFile>
 			<SubSystem>Windows</SubSystem>
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>

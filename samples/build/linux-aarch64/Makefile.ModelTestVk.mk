@@ -35,6 +35,7 @@ ModelTestVk_debug_defines   += NV_LINUX
 ModelTestVk_debug_defines   += GLEW_NO_GLU=1
 ModelTestVk_debug_defines   += _DEBUG
 ModelTestVk_debug_libraries := 
+ModelTestVk_debug_libraries += NvVkUtilD
 ModelTestVk_debug_libraries += NsFoundationD
 ModelTestVk_debug_libraries += NvAppBaseD
 ModelTestVk_debug_libraries += NvAssetLoaderD
@@ -44,7 +45,6 @@ ModelTestVk_debug_libraries += NvGamepadD
 ModelTestVk_debug_libraries += NvImageD
 ModelTestVk_debug_libraries += NvUID
 ModelTestVk_debug_libraries += HalfD
-ModelTestVk_debug_libraries += NvVkUtilD
 ModelTestVk_debug_libraries += glfw3
 ModelTestVk_debug_libraries += vulkan
 ModelTestVk_debug_libraries += NvAppBaseD
@@ -98,7 +98,7 @@ postbuild_ModelTestVk_debug: mainbuild_ModelTestVk_debug
 mainbuild_ModelTestVk_debug: prebuild_ModelTestVk_debug $(ModelTestVk_debug_bin)
 prebuild_ModelTestVk_debug:
 
-$(ModelTestVk_debug_bin): $(ModelTestVk_debug_obj) build_NsFoundation_debug build_NvAppBase_debug build_NvAssetLoader_debug build_NvModel_debug build_NvGLUtils_debug build_NvGamepad_debug build_NvImage_debug build_NvUI_debug build_Half_debug build_NvVkUtil_debug 
+$(ModelTestVk_debug_bin): $(ModelTestVk_debug_obj) build_NvVkUtil_debug build_NsFoundation_debug build_NvAppBase_debug build_NvAssetLoader_debug build_NvModel_debug build_NvGLUtils_debug build_NvGamepad_debug build_NvImage_debug build_NvUI_debug build_Half_debug 
 	mkdir -p `dirname ./../../bin/linux-aarch64/ModelTestVkD`
 	$(CCLD) $(filter %.o, $(ModelTestVk_debug_obj)) $(ModelTestVk_debug_lflags) -o $(ModelTestVk_debug_bin) 
 	$(ECHO) building $@ complete!
@@ -164,6 +164,7 @@ ModelTestVk_release_defines   += NV_LINUX
 ModelTestVk_release_defines   += GLEW_NO_GLU=1
 ModelTestVk_release_defines   += NDEBUG
 ModelTestVk_release_libraries := 
+ModelTestVk_release_libraries += NvVkUtil
 ModelTestVk_release_libraries += NsFoundation
 ModelTestVk_release_libraries += NvAppBase
 ModelTestVk_release_libraries += NvAssetLoader
@@ -173,7 +174,6 @@ ModelTestVk_release_libraries += NvGamepad
 ModelTestVk_release_libraries += NvImage
 ModelTestVk_release_libraries += NvUI
 ModelTestVk_release_libraries += Half
-ModelTestVk_release_libraries += NvVkUtil
 ModelTestVk_release_libraries += glfw3
 ModelTestVk_release_libraries += vulkan
 ModelTestVk_release_libraries += NvAppBase
@@ -227,7 +227,7 @@ postbuild_ModelTestVk_release: mainbuild_ModelTestVk_release
 mainbuild_ModelTestVk_release: prebuild_ModelTestVk_release $(ModelTestVk_release_bin)
 prebuild_ModelTestVk_release:
 
-$(ModelTestVk_release_bin): $(ModelTestVk_release_obj) build_NsFoundation_release build_NvAppBase_release build_NvAssetLoader_release build_NvModel_release build_NvGLUtils_release build_NvGamepad_release build_NvImage_release build_NvUI_release build_Half_release build_NvVkUtil_release 
+$(ModelTestVk_release_bin): $(ModelTestVk_release_obj) build_NvVkUtil_release build_NsFoundation_release build_NvAppBase_release build_NvAssetLoader_release build_NvModel_release build_NvGLUtils_release build_NvGamepad_release build_NvImage_release build_NvUI_release build_Half_release 
 	mkdir -p `dirname ./../../bin/linux-aarch64/ModelTestVk`
 	$(CCLD) $(filter %.o, $(ModelTestVk_release_obj)) $(ModelTestVk_release_lflags) -o $(ModelTestVk_release_bin) 
 	$(ECHO) building $@ complete!

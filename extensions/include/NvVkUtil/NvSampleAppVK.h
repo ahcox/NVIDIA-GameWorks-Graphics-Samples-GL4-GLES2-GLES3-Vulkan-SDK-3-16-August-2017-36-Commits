@@ -99,6 +99,17 @@ public:
 	/// \return the main rendering VkQueue
 	VkQueue queue() { return vk().queue(); }
 
+	/// Extension support query.
+	/// \return true if the given string is found in the device and instance extension set for the
+	/// context, false if not.
+	bool isExtensionSupported(const char* ext) { return vk().isExtensionSupported(ext); }
+
+	/// Layer support query.
+	/// \return true if the given string is found in the device and instance layer set for the
+	/// context, false if not.
+	bool isLayerSupported(const char* ext) { return vk().isLayerSupported(ext); }
+
+
 	/// \privatesection
 	virtual int32_t getUniqueTypeID();
 	static bool isType(NvAppBase* app);
