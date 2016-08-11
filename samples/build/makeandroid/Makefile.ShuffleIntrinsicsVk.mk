@@ -20,16 +20,16 @@ ShuffleIntrinsicsVk_debug_hpaths    += ./../../../extensions/include
 ShuffleIntrinsicsVk_debug_hpaths    += ./../../../extensions/externals/include
 ShuffleIntrinsicsVk_debug_hpaths    += ./../../../extensions/include/NsFoundation
 ShuffleIntrinsicsVk_debug_hpaths    += ./../../../extensions/include/NvFoundation
-ShuffleIntrinsicsVk_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/platforms/android-18/arch-arm/usr/include"
-ShuffleIntrinsicsVk_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include"
-ShuffleIntrinsicsVk_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a/include"
-ShuffleIntrinsicsVk_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include/backward"
+ShuffleIntrinsicsVk_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/platforms/android-18/arch-arm/usr/include
+ShuffleIntrinsicsVk_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include
+ShuffleIntrinsicsVk_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a/include
+ShuffleIntrinsicsVk_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include/backward
 ShuffleIntrinsicsVk_debug_hpaths    += ./../../../extensions/include/NvVkUtil/nosdk
 ShuffleIntrinsicsVk_debug_hpaths    += ./../../../extensions/include/NvVkUtil
 ShuffleIntrinsicsVk_debug_lpaths    := 
 ShuffleIntrinsicsVk_debug_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
 ShuffleIntrinsicsVk_debug_lpaths    += ./../../../extensions/lib/Tegra-Android
-ShuffleIntrinsicsVk_debug_lpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a"
+ShuffleIntrinsicsVk_debug_lpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a
 ShuffleIntrinsicsVk_debug_lpaths    += ./../../../extensions/externals/linux-aarch64
 ShuffleIntrinsicsVk_debug_lpaths    += ./../../../extensions/lib/Tegra-Android
 ShuffleIntrinsicsVk_debug_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
@@ -82,7 +82,7 @@ ShuffleIntrinsicsVk_debug_objsdir  = $(OBJS_DIR)/ShuffleIntrinsicsVk_debug
 ShuffleIntrinsicsVk_debug_cpp_o    = $(addprefix $(ShuffleIntrinsicsVk_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cpp, %.cpp.o, $(ShuffleIntrinsicsVk_cppfiles)))))
 ShuffleIntrinsicsVk_debug_cc_o    = $(addprefix $(ShuffleIntrinsicsVk_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cc, %.cc.o, $(ShuffleIntrinsicsVk_ccfiles)))))
 ShuffleIntrinsicsVk_debug_c_o      = $(addprefix $(ShuffleIntrinsicsVk_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.c, %.c.o, $(ShuffleIntrinsicsVk_cfiles)))))
-ShuffleIntrinsicsVk_debug_GLSLC_src_vk10-kepler_ShuffleIntrinsicsVk_assets_src_shaders_simple_glsl_o += ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders\..\shaders\simple.nvs
+ShuffleIntrinsicsVk_debug_GLSLC_src_vk10-kepler_ShuffleIntrinsicsVk_assets_src_shaders_simple_glsl_o += ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders/../shaders/simple.nvs
 ShuffleIntrinsicsVk_debug_obj      =  $(ShuffleIntrinsicsVk_debug_GLSLC_src_vk10-kepler_ShuffleIntrinsicsVk_assets_src_shaders_simple_glsl_o) $(ShuffleIntrinsicsVk_debug_cpp_o) $(ShuffleIntrinsicsVk_debug_cc_o) $(ShuffleIntrinsicsVk_debug_c_o) 
 ShuffleIntrinsicsVk_debug_bin      := ./../../vk10-kepler/ShuffleIntrinsicsVk/libs/armeabi-v7a/libShuffleIntrinsicsVk.so
 
@@ -106,9 +106,9 @@ $(ShuffleIntrinsicsVk_debug_bin): $(ShuffleIntrinsicsVk_debug_obj) build_NvVkUti
 	$(ECHO) building $@ complete!
 
 $(ShuffleIntrinsicsVk_debug_GLSLC_src_vk10-kepler_ShuffleIntrinsicsVk_assets_src_shaders_simple_glsl_o): $(ShuffleIntrinsicsVk_GLSLC_src_vk10-kepler_ShuffleIntrinsicsVk_assets_src_shaders_simple_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders\..\shaders\simple.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders\..\shaders\simple.nvs ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders/simple.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders\..\shaders\simple.nvs ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders/simple.glsl
+	@mkdir -p `dirname ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders/../shaders/simple.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders/simple.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders/simple.glsl
 
 ShuffleIntrinsicsVk_debug_DEPDIR = $(dir $(@))/$(*F)
 $(ShuffleIntrinsicsVk_debug_cpp_o): $(ShuffleIntrinsicsVk_debug_objsdir)/%.o:
@@ -147,16 +147,16 @@ ShuffleIntrinsicsVk_release_hpaths    += ./../../../extensions/include
 ShuffleIntrinsicsVk_release_hpaths    += ./../../../extensions/externals/include
 ShuffleIntrinsicsVk_release_hpaths    += ./../../../extensions/include/NsFoundation
 ShuffleIntrinsicsVk_release_hpaths    += ./../../../extensions/include/NvFoundation
-ShuffleIntrinsicsVk_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/platforms/android-18/arch-arm/usr/include"
-ShuffleIntrinsicsVk_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include"
-ShuffleIntrinsicsVk_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a/include"
-ShuffleIntrinsicsVk_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include/backward"
+ShuffleIntrinsicsVk_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/platforms/android-18/arch-arm/usr/include
+ShuffleIntrinsicsVk_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include
+ShuffleIntrinsicsVk_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a/include
+ShuffleIntrinsicsVk_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include/backward
 ShuffleIntrinsicsVk_release_hpaths    += ./../../../extensions/include/NvVkUtil/nosdk
 ShuffleIntrinsicsVk_release_hpaths    += ./../../../extensions/include/NvVkUtil
 ShuffleIntrinsicsVk_release_lpaths    := 
 ShuffleIntrinsicsVk_release_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
 ShuffleIntrinsicsVk_release_lpaths    += ./../../../extensions/lib/Tegra-Android
-ShuffleIntrinsicsVk_release_lpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a"
+ShuffleIntrinsicsVk_release_lpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a
 ShuffleIntrinsicsVk_release_lpaths    += ./../../../extensions/externals/linux-aarch64
 ShuffleIntrinsicsVk_release_lpaths    += ./../../../extensions/lib/Tegra-Android
 ShuffleIntrinsicsVk_release_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
@@ -209,7 +209,7 @@ ShuffleIntrinsicsVk_release_objsdir  = $(OBJS_DIR)/ShuffleIntrinsicsVk_release
 ShuffleIntrinsicsVk_release_cpp_o    = $(addprefix $(ShuffleIntrinsicsVk_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cpp, %.cpp.o, $(ShuffleIntrinsicsVk_cppfiles)))))
 ShuffleIntrinsicsVk_release_cc_o    = $(addprefix $(ShuffleIntrinsicsVk_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cc, %.cc.o, $(ShuffleIntrinsicsVk_ccfiles)))))
 ShuffleIntrinsicsVk_release_c_o      = $(addprefix $(ShuffleIntrinsicsVk_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.c, %.c.o, $(ShuffleIntrinsicsVk_cfiles)))))
-ShuffleIntrinsicsVk_release_GLSLC_src_vk10-kepler_ShuffleIntrinsicsVk_assets_src_shaders_simple_glsl_o += ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders\..\shaders\simple.nvs
+ShuffleIntrinsicsVk_release_GLSLC_src_vk10-kepler_ShuffleIntrinsicsVk_assets_src_shaders_simple_glsl_o += ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders/../shaders/simple.nvs
 ShuffleIntrinsicsVk_release_obj      =  $(ShuffleIntrinsicsVk_release_GLSLC_src_vk10-kepler_ShuffleIntrinsicsVk_assets_src_shaders_simple_glsl_o) $(ShuffleIntrinsicsVk_release_cpp_o) $(ShuffleIntrinsicsVk_release_cc_o) $(ShuffleIntrinsicsVk_release_c_o) 
 ShuffleIntrinsicsVk_release_bin      := ./../../vk10-kepler/ShuffleIntrinsicsVk/libs/armeabi-v7a/libShuffleIntrinsicsVk.so
 
@@ -233,9 +233,9 @@ $(ShuffleIntrinsicsVk_release_bin): $(ShuffleIntrinsicsVk_release_obj) build_NvV
 	$(ECHO) building $@ complete!
 
 $(ShuffleIntrinsicsVk_release_GLSLC_src_vk10-kepler_ShuffleIntrinsicsVk_assets_src_shaders_simple_glsl_o): $(ShuffleIntrinsicsVk_GLSLC_src_vk10-kepler_ShuffleIntrinsicsVk_assets_src_shaders_simple_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders\..\shaders\simple.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders\..\shaders\simple.nvs ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders/simple.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders\..\shaders\simple.nvs ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders/simple.glsl
+	@mkdir -p `dirname ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders/../shaders/simple.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders/simple.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/ShuffleIntrinsicsVk/assets/src_shaders/simple.glsl
 
 ShuffleIntrinsicsVk_release_DEPDIR = $(dir $(@))/$(*F)
 $(ShuffleIntrinsicsVk_release_cpp_o): $(ShuffleIntrinsicsVk_release_objsdir)/%.o:

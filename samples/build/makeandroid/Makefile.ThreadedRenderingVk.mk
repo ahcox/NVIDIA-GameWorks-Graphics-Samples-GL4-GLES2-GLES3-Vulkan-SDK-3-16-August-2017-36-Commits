@@ -27,16 +27,16 @@ ThreadedRenderingVk_debug_hpaths    += ./../../../extensions/include
 ThreadedRenderingVk_debug_hpaths    += ./../../../extensions/externals/include
 ThreadedRenderingVk_debug_hpaths    += ./../../../extensions/include/NsFoundation
 ThreadedRenderingVk_debug_hpaths    += ./../../../extensions/include/NvFoundation
-ThreadedRenderingVk_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/platforms/android-18/arch-arm/usr/include"
-ThreadedRenderingVk_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include"
-ThreadedRenderingVk_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a/include"
-ThreadedRenderingVk_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include/backward"
+ThreadedRenderingVk_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/platforms/android-18/arch-arm/usr/include
+ThreadedRenderingVk_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include
+ThreadedRenderingVk_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a/include
+ThreadedRenderingVk_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include/backward
 ThreadedRenderingVk_debug_hpaths    += ./../../../extensions/include/NvVkUtil/nosdk
 ThreadedRenderingVk_debug_hpaths    += ./../../../extensions/include/NvVkUtil
 ThreadedRenderingVk_debug_lpaths    := 
 ThreadedRenderingVk_debug_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
 ThreadedRenderingVk_debug_lpaths    += ./../../../extensions/lib/Tegra-Android
-ThreadedRenderingVk_debug_lpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a"
+ThreadedRenderingVk_debug_lpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a
 ThreadedRenderingVk_debug_lpaths    += ./../../../extensions/externals/linux-aarch64
 ThreadedRenderingVk_debug_lpaths    += ./../../../extensions/lib/Tegra-Android
 ThreadedRenderingVk_debug_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
@@ -89,9 +89,9 @@ ThreadedRenderingVk_debug_objsdir  = $(OBJS_DIR)/ThreadedRenderingVk_debug
 ThreadedRenderingVk_debug_cpp_o    = $(addprefix $(ThreadedRenderingVk_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cpp, %.cpp.o, $(ThreadedRenderingVk_cppfiles)))))
 ThreadedRenderingVk_debug_cc_o    = $(addprefix $(ThreadedRenderingVk_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cc, %.cc.o, $(ThreadedRenderingVk_ccfiles)))))
 ThreadedRenderingVk_debug_c_o      = $(addprefix $(ThreadedRenderingVk_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.c, %.c.o, $(ThreadedRenderingVk_cfiles)))))
-ThreadedRenderingVk_debug_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_groundplane_glsl_o += ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\groundplane.nvs
-ThreadedRenderingVk_debug_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_skyboxcolor_glsl_o += ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\skyboxcolor.nvs
-ThreadedRenderingVk_debug_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_staticfish_glsl_o += ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\staticfish.nvs
+ThreadedRenderingVk_debug_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_groundplane_glsl_o += ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/groundplane.nvs
+ThreadedRenderingVk_debug_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_skyboxcolor_glsl_o += ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/skyboxcolor.nvs
+ThreadedRenderingVk_debug_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_staticfish_glsl_o += ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/staticfish.nvs
 ThreadedRenderingVk_debug_obj      =  $(ThreadedRenderingVk_debug_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_groundplane_glsl_o) $(ThreadedRenderingVk_debug_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_skyboxcolor_glsl_o) $(ThreadedRenderingVk_debug_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_staticfish_glsl_o) $(ThreadedRenderingVk_debug_cpp_o) $(ThreadedRenderingVk_debug_cc_o) $(ThreadedRenderingVk_debug_c_o) 
 ThreadedRenderingVk_debug_bin      := ./../../vk10-kepler/ThreadedRenderingVk/libs/armeabi-v7a/libThreadedRenderingVk.so
 
@@ -115,19 +115,19 @@ $(ThreadedRenderingVk_debug_bin): $(ThreadedRenderingVk_debug_obj) build_NvVkUti
 	$(ECHO) building $@ complete!
 
 $(ThreadedRenderingVk_debug_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_groundplane_glsl_o): $(ThreadedRenderingVk_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_groundplane_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\groundplane.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\groundplane.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/groundplane.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\groundplane.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/groundplane.glsl
+	@mkdir -p `dirname ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/groundplane.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/groundplane.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/groundplane.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/groundplane.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/groundplane.glsl
 
 $(ThreadedRenderingVk_debug_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_skyboxcolor_glsl_o): $(ThreadedRenderingVk_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_skyboxcolor_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\skyboxcolor.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\skyboxcolor.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/skyboxcolor.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\skyboxcolor.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/skyboxcolor.glsl
+	@mkdir -p `dirname ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/skyboxcolor.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/skyboxcolor.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/skyboxcolor.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/skyboxcolor.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/skyboxcolor.glsl
 
 $(ThreadedRenderingVk_debug_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_staticfish_glsl_o): $(ThreadedRenderingVk_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_staticfish_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\staticfish.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\staticfish.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/staticfish.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\staticfish.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/staticfish.glsl
+	@mkdir -p `dirname ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/staticfish.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/staticfish.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/staticfish.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/staticfish.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/staticfish.glsl
 
 ThreadedRenderingVk_debug_DEPDIR = $(dir $(@))/$(*F)
 $(ThreadedRenderingVk_debug_cpp_o): $(ThreadedRenderingVk_debug_objsdir)/%.o:
@@ -166,16 +166,16 @@ ThreadedRenderingVk_release_hpaths    += ./../../../extensions/include
 ThreadedRenderingVk_release_hpaths    += ./../../../extensions/externals/include
 ThreadedRenderingVk_release_hpaths    += ./../../../extensions/include/NsFoundation
 ThreadedRenderingVk_release_hpaths    += ./../../../extensions/include/NvFoundation
-ThreadedRenderingVk_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/platforms/android-18/arch-arm/usr/include"
-ThreadedRenderingVk_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include"
-ThreadedRenderingVk_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a/include"
-ThreadedRenderingVk_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include/backward"
+ThreadedRenderingVk_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/platforms/android-18/arch-arm/usr/include
+ThreadedRenderingVk_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include
+ThreadedRenderingVk_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a/include
+ThreadedRenderingVk_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include/backward
 ThreadedRenderingVk_release_hpaths    += ./../../../extensions/include/NvVkUtil/nosdk
 ThreadedRenderingVk_release_hpaths    += ./../../../extensions/include/NvVkUtil
 ThreadedRenderingVk_release_lpaths    := 
 ThreadedRenderingVk_release_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
 ThreadedRenderingVk_release_lpaths    += ./../../../extensions/lib/Tegra-Android
-ThreadedRenderingVk_release_lpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a"
+ThreadedRenderingVk_release_lpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a
 ThreadedRenderingVk_release_lpaths    += ./../../../extensions/externals/linux-aarch64
 ThreadedRenderingVk_release_lpaths    += ./../../../extensions/lib/Tegra-Android
 ThreadedRenderingVk_release_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
@@ -228,9 +228,9 @@ ThreadedRenderingVk_release_objsdir  = $(OBJS_DIR)/ThreadedRenderingVk_release
 ThreadedRenderingVk_release_cpp_o    = $(addprefix $(ThreadedRenderingVk_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cpp, %.cpp.o, $(ThreadedRenderingVk_cppfiles)))))
 ThreadedRenderingVk_release_cc_o    = $(addprefix $(ThreadedRenderingVk_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cc, %.cc.o, $(ThreadedRenderingVk_ccfiles)))))
 ThreadedRenderingVk_release_c_o      = $(addprefix $(ThreadedRenderingVk_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.c, %.c.o, $(ThreadedRenderingVk_cfiles)))))
-ThreadedRenderingVk_release_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_groundplane_glsl_o += ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\groundplane.nvs
-ThreadedRenderingVk_release_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_skyboxcolor_glsl_o += ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\skyboxcolor.nvs
-ThreadedRenderingVk_release_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_staticfish_glsl_o += ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\staticfish.nvs
+ThreadedRenderingVk_release_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_groundplane_glsl_o += ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/groundplane.nvs
+ThreadedRenderingVk_release_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_skyboxcolor_glsl_o += ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/skyboxcolor.nvs
+ThreadedRenderingVk_release_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_staticfish_glsl_o += ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/staticfish.nvs
 ThreadedRenderingVk_release_obj      =  $(ThreadedRenderingVk_release_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_groundplane_glsl_o) $(ThreadedRenderingVk_release_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_skyboxcolor_glsl_o) $(ThreadedRenderingVk_release_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_staticfish_glsl_o) $(ThreadedRenderingVk_release_cpp_o) $(ThreadedRenderingVk_release_cc_o) $(ThreadedRenderingVk_release_c_o) 
 ThreadedRenderingVk_release_bin      := ./../../vk10-kepler/ThreadedRenderingVk/libs/armeabi-v7a/libThreadedRenderingVk.so
 
@@ -254,19 +254,19 @@ $(ThreadedRenderingVk_release_bin): $(ThreadedRenderingVk_release_obj) build_NvV
 	$(ECHO) building $@ complete!
 
 $(ThreadedRenderingVk_release_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_groundplane_glsl_o): $(ThreadedRenderingVk_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_groundplane_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\groundplane.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\groundplane.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/groundplane.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\groundplane.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/groundplane.glsl
+	@mkdir -p `dirname ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/groundplane.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/groundplane.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/groundplane.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/groundplane.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/groundplane.glsl
 
 $(ThreadedRenderingVk_release_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_skyboxcolor_glsl_o): $(ThreadedRenderingVk_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_skyboxcolor_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\skyboxcolor.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\skyboxcolor.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/skyboxcolor.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\skyboxcolor.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/skyboxcolor.glsl
+	@mkdir -p `dirname ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/skyboxcolor.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/skyboxcolor.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/skyboxcolor.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/skyboxcolor.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/skyboxcolor.glsl
 
 $(ThreadedRenderingVk_release_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_staticfish_glsl_o): $(ThreadedRenderingVk_GLSLC_src_vk10-kepler_ThreadedRenderingVk_assets_src_shaders_staticfish_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\staticfish.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\staticfish.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/staticfish.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders\..\shaders\staticfish.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/staticfish.glsl
+	@mkdir -p `dirname ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/staticfish.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/staticfish.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/staticfish.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/../shaders/staticfish.nvs ../../vk10-kepler/ThreadedRenderingVk/assets/src_shaders/staticfish.glsl
 
 ThreadedRenderingVk_release_DEPDIR = $(dir $(@))/$(*F)
 $(ThreadedRenderingVk_release_cpp_o): $(ThreadedRenderingVk_release_objsdir)/%.o:

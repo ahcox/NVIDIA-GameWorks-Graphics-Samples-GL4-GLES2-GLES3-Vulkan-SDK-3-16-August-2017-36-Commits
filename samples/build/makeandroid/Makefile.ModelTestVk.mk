@@ -21,16 +21,16 @@ ModelTestVk_debug_hpaths    += ./../../../extensions/include
 ModelTestVk_debug_hpaths    += ./../../../extensions/externals/include
 ModelTestVk_debug_hpaths    += ./../../../extensions/include/NsFoundation
 ModelTestVk_debug_hpaths    += ./../../../extensions/include/NvFoundation
-ModelTestVk_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/platforms/android-18/arch-arm/usr/include"
-ModelTestVk_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include"
-ModelTestVk_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a/include"
-ModelTestVk_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include/backward"
+ModelTestVk_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/platforms/android-18/arch-arm/usr/include
+ModelTestVk_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include
+ModelTestVk_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a/include
+ModelTestVk_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include/backward
 ModelTestVk_debug_hpaths    += ./../../../extensions/include/NvVkUtil/nosdk
 ModelTestVk_debug_hpaths    += ./../../../extensions/include/NvVkUtil
 ModelTestVk_debug_lpaths    := 
 ModelTestVk_debug_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
 ModelTestVk_debug_lpaths    += ./../../../extensions/lib/Tegra-Android
-ModelTestVk_debug_lpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a"
+ModelTestVk_debug_lpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a
 ModelTestVk_debug_lpaths    += ./../../../extensions/externals/linux-aarch64
 ModelTestVk_debug_lpaths    += ./../../../extensions/lib/Tegra-Android
 ModelTestVk_debug_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
@@ -83,8 +83,8 @@ ModelTestVk_debug_objsdir  = $(OBJS_DIR)/ModelTestVk_debug
 ModelTestVk_debug_cpp_o    = $(addprefix $(ModelTestVk_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cpp, %.cpp.o, $(ModelTestVk_cppfiles)))))
 ModelTestVk_debug_cc_o    = $(addprefix $(ModelTestVk_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cc, %.cc.o, $(ModelTestVk_ccfiles)))))
 ModelTestVk_debug_c_o      = $(addprefix $(ModelTestVk_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.c, %.c.o, $(ModelTestVk_cfiles)))))
-ModelTestVk_debug_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl_o += ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\base_model.nvs
-ModelTestVk_debug_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl_o += ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\cube_map.nvs
+ModelTestVk_debug_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl_o += ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/base_model.nvs
+ModelTestVk_debug_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl_o += ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/cube_map.nvs
 ModelTestVk_debug_obj      =  $(ModelTestVk_debug_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl_o) $(ModelTestVk_debug_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl_o) $(ModelTestVk_debug_cpp_o) $(ModelTestVk_debug_cc_o) $(ModelTestVk_debug_c_o) 
 ModelTestVk_debug_bin      := ./../../vk10-kepler/ModelTestVk/libs/armeabi-v7a/libModelTestVk.so
 
@@ -108,14 +108,14 @@ $(ModelTestVk_debug_bin): $(ModelTestVk_debug_obj) build_NvVkUtil_debug build_Ns
 	$(ECHO) building $@ complete!
 
 $(ModelTestVk_debug_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl_o): $(ModelTestVk_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\base_model.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\base_model.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/base_model.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\base_model.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/base_model.glsl
+	@mkdir -p `dirname ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/base_model.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/base_model.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/base_model.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/base_model.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/base_model.glsl
 
 $(ModelTestVk_debug_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl_o): $(ModelTestVk_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\cube_map.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\cube_map.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/cube_map.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\cube_map.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/cube_map.glsl
+	@mkdir -p `dirname ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/cube_map.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/cube_map.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/cube_map.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/cube_map.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/cube_map.glsl
 
 ModelTestVk_debug_DEPDIR = $(dir $(@))/$(*F)
 $(ModelTestVk_debug_cpp_o): $(ModelTestVk_debug_objsdir)/%.o:
@@ -154,16 +154,16 @@ ModelTestVk_release_hpaths    += ./../../../extensions/include
 ModelTestVk_release_hpaths    += ./../../../extensions/externals/include
 ModelTestVk_release_hpaths    += ./../../../extensions/include/NsFoundation
 ModelTestVk_release_hpaths    += ./../../../extensions/include/NvFoundation
-ModelTestVk_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/platforms/android-18/arch-arm/usr/include"
-ModelTestVk_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include"
-ModelTestVk_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a/include"
-ModelTestVk_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include/backward"
+ModelTestVk_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/platforms/android-18/arch-arm/usr/include
+ModelTestVk_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include
+ModelTestVk_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a/include
+ModelTestVk_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include/backward
 ModelTestVk_release_hpaths    += ./../../../extensions/include/NvVkUtil/nosdk
 ModelTestVk_release_hpaths    += ./../../../extensions/include/NvVkUtil
 ModelTestVk_release_lpaths    := 
 ModelTestVk_release_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
 ModelTestVk_release_lpaths    += ./../../../extensions/lib/Tegra-Android
-ModelTestVk_release_lpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a"
+ModelTestVk_release_lpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a
 ModelTestVk_release_lpaths    += ./../../../extensions/externals/linux-aarch64
 ModelTestVk_release_lpaths    += ./../../../extensions/lib/Tegra-Android
 ModelTestVk_release_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
@@ -216,8 +216,8 @@ ModelTestVk_release_objsdir  = $(OBJS_DIR)/ModelTestVk_release
 ModelTestVk_release_cpp_o    = $(addprefix $(ModelTestVk_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cpp, %.cpp.o, $(ModelTestVk_cppfiles)))))
 ModelTestVk_release_cc_o    = $(addprefix $(ModelTestVk_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cc, %.cc.o, $(ModelTestVk_ccfiles)))))
 ModelTestVk_release_c_o      = $(addprefix $(ModelTestVk_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.c, %.c.o, $(ModelTestVk_cfiles)))))
-ModelTestVk_release_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl_o += ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\base_model.nvs
-ModelTestVk_release_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl_o += ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\cube_map.nvs
+ModelTestVk_release_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl_o += ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/base_model.nvs
+ModelTestVk_release_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl_o += ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/cube_map.nvs
 ModelTestVk_release_obj      =  $(ModelTestVk_release_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl_o) $(ModelTestVk_release_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl_o) $(ModelTestVk_release_cpp_o) $(ModelTestVk_release_cc_o) $(ModelTestVk_release_c_o) 
 ModelTestVk_release_bin      := ./../../vk10-kepler/ModelTestVk/libs/armeabi-v7a/libModelTestVk.so
 
@@ -241,14 +241,14 @@ $(ModelTestVk_release_bin): $(ModelTestVk_release_obj) build_NvVkUtil_release bu
 	$(ECHO) building $@ complete!
 
 $(ModelTestVk_release_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl_o): $(ModelTestVk_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_base_model_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\base_model.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\base_model.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/base_model.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\base_model.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/base_model.glsl
+	@mkdir -p `dirname ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/base_model.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/base_model.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/base_model.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/base_model.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/base_model.glsl
 
 $(ModelTestVk_release_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl_o): $(ModelTestVk_GLSLC_src_vk10-kepler_ModelTestVk_assets_src_shaders_cube_map_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\cube_map.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\cube_map.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/cube_map.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders\..\shaders\cube_map.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/cube_map.glsl
+	@mkdir -p `dirname ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/cube_map.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/cube_map.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/cube_map.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/ModelTestVk/assets/src_shaders/../shaders/cube_map.nvs ../../vk10-kepler/ModelTestVk/assets/src_shaders/cube_map.glsl
 
 ModelTestVk_release_DEPDIR = $(dir $(@))/$(*F)
 $(ModelTestVk_release_cpp_o): $(ModelTestVk_release_objsdir)/%.o:

@@ -21,16 +21,16 @@ SkinningAppVk_debug_hpaths    += ./../../../extensions/include
 SkinningAppVk_debug_hpaths    += ./../../../extensions/externals/include
 SkinningAppVk_debug_hpaths    += ./../../../extensions/include/NsFoundation
 SkinningAppVk_debug_hpaths    += ./../../../extensions/include/NvFoundation
-SkinningAppVk_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/platforms/android-18/arch-arm/usr/include"
-SkinningAppVk_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include"
-SkinningAppVk_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a/include"
-SkinningAppVk_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include/backward"
+SkinningAppVk_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/platforms/android-18/arch-arm/usr/include
+SkinningAppVk_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include
+SkinningAppVk_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a/include
+SkinningAppVk_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include/backward
 SkinningAppVk_debug_hpaths    += ./../../../extensions/include/NvVkUtil/nosdk
 SkinningAppVk_debug_hpaths    += ./../../../extensions/include/NvVkUtil
 SkinningAppVk_debug_lpaths    := 
 SkinningAppVk_debug_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
 SkinningAppVk_debug_lpaths    += ./../../../extensions/lib/Tegra-Android
-SkinningAppVk_debug_lpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a"
+SkinningAppVk_debug_lpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a
 SkinningAppVk_debug_lpaths    += ./../../../extensions/externals/linux-aarch64
 SkinningAppVk_debug_lpaths    += ./../../../extensions/lib/Tegra-Android
 SkinningAppVk_debug_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
@@ -83,7 +83,7 @@ SkinningAppVk_debug_objsdir  = $(OBJS_DIR)/SkinningAppVk_debug
 SkinningAppVk_debug_cpp_o    = $(addprefix $(SkinningAppVk_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cpp, %.cpp.o, $(SkinningAppVk_cppfiles)))))
 SkinningAppVk_debug_cc_o    = $(addprefix $(SkinningAppVk_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cc, %.cc.o, $(SkinningAppVk_ccfiles)))))
 SkinningAppVk_debug_c_o      = $(addprefix $(SkinningAppVk_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.c, %.c.o, $(SkinningAppVk_cfiles)))))
-SkinningAppVk_debug_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl_o += ../../vk10-kepler/SkinningAppVk/assets/src_shaders\..\shaders\skinning.nvs
+SkinningAppVk_debug_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl_o += ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs
 SkinningAppVk_debug_obj      =  $(SkinningAppVk_debug_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl_o) $(SkinningAppVk_debug_cpp_o) $(SkinningAppVk_debug_cc_o) $(SkinningAppVk_debug_c_o) 
 SkinningAppVk_debug_bin      := ./../../vk10-kepler/SkinningAppVk/libs/armeabi-v7a/libSkinningAppVk.so
 
@@ -107,9 +107,9 @@ $(SkinningAppVk_debug_bin): $(SkinningAppVk_debug_obj) build_NvVkUtil_debug buil
 	$(ECHO) building $@ complete!
 
 $(SkinningAppVk_debug_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl_o): $(SkinningAppVk_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/SkinningAppVk/assets/src_shaders\..\shaders\skinning.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders\..\shaders\skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders\..\shaders\skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
+	@mkdir -p `dirname ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
 
 SkinningAppVk_debug_DEPDIR = $(dir $(@))/$(*F)
 $(SkinningAppVk_debug_cpp_o): $(SkinningAppVk_debug_objsdir)/%.o:
@@ -148,16 +148,16 @@ SkinningAppVk_release_hpaths    += ./../../../extensions/include
 SkinningAppVk_release_hpaths    += ./../../../extensions/externals/include
 SkinningAppVk_release_hpaths    += ./../../../extensions/include/NsFoundation
 SkinningAppVk_release_hpaths    += ./../../../extensions/include/NvFoundation
-SkinningAppVk_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/platforms/android-18/arch-arm/usr/include"
-SkinningAppVk_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include"
-SkinningAppVk_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a/include"
-SkinningAppVk_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include/backward"
+SkinningAppVk_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/platforms/android-18/arch-arm/usr/include
+SkinningAppVk_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include
+SkinningAppVk_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a/include
+SkinningAppVk_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include/backward
 SkinningAppVk_release_hpaths    += ./../../../extensions/include/NvVkUtil/nosdk
 SkinningAppVk_release_hpaths    += ./../../../extensions/include/NvVkUtil
 SkinningAppVk_release_lpaths    := 
 SkinningAppVk_release_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
 SkinningAppVk_release_lpaths    += ./../../../extensions/lib/Tegra-Android
-SkinningAppVk_release_lpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a"
+SkinningAppVk_release_lpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a
 SkinningAppVk_release_lpaths    += ./../../../extensions/externals/linux-aarch64
 SkinningAppVk_release_lpaths    += ./../../../extensions/lib/Tegra-Android
 SkinningAppVk_release_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
@@ -210,7 +210,7 @@ SkinningAppVk_release_objsdir  = $(OBJS_DIR)/SkinningAppVk_release
 SkinningAppVk_release_cpp_o    = $(addprefix $(SkinningAppVk_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cpp, %.cpp.o, $(SkinningAppVk_cppfiles)))))
 SkinningAppVk_release_cc_o    = $(addprefix $(SkinningAppVk_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cc, %.cc.o, $(SkinningAppVk_ccfiles)))))
 SkinningAppVk_release_c_o      = $(addprefix $(SkinningAppVk_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.c, %.c.o, $(SkinningAppVk_cfiles)))))
-SkinningAppVk_release_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl_o += ../../vk10-kepler/SkinningAppVk/assets/src_shaders\..\shaders\skinning.nvs
+SkinningAppVk_release_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl_o += ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs
 SkinningAppVk_release_obj      =  $(SkinningAppVk_release_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl_o) $(SkinningAppVk_release_cpp_o) $(SkinningAppVk_release_cc_o) $(SkinningAppVk_release_c_o) 
 SkinningAppVk_release_bin      := ./../../vk10-kepler/SkinningAppVk/libs/armeabi-v7a/libSkinningAppVk.so
 
@@ -234,9 +234,9 @@ $(SkinningAppVk_release_bin): $(SkinningAppVk_release_obj) build_NvVkUtil_releas
 	$(ECHO) building $@ complete!
 
 $(SkinningAppVk_release_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl_o): $(SkinningAppVk_GLSLC_src_vk10-kepler_SkinningAppVk_assets_src_shaders_skinning_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/SkinningAppVk/assets/src_shaders\..\shaders\skinning.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders\..\shaders\skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders\..\shaders\skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
+	@mkdir -p `dirname ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/SkinningAppVk/assets/src_shaders/../shaders/skinning.nvs ../../vk10-kepler/SkinningAppVk/assets/src_shaders/skinning.glsl
 
 SkinningAppVk_release_DEPDIR = $(dir $(@))/$(*F)
 $(SkinningAppVk_release_cpp_o): $(SkinningAppVk_release_objsdir)/%.o:

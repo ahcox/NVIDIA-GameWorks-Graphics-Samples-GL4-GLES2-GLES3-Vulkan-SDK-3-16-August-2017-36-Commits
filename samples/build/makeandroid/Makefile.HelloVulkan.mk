@@ -20,16 +20,16 @@ HelloVulkan_debug_hpaths    += ./../../../extensions/include
 HelloVulkan_debug_hpaths    += ./../../../extensions/externals/include
 HelloVulkan_debug_hpaths    += ./../../../extensions/include/NsFoundation
 HelloVulkan_debug_hpaths    += ./../../../extensions/include/NvFoundation
-HelloVulkan_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/platforms/android-18/arch-arm/usr/include"
-HelloVulkan_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include"
-HelloVulkan_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a/include"
-HelloVulkan_debug_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include/backward"
+HelloVulkan_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/platforms/android-18/arch-arm/usr/include
+HelloVulkan_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include
+HelloVulkan_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a/include
+HelloVulkan_debug_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include/backward
 HelloVulkan_debug_hpaths    += ./../../../extensions/include/NvVkUtil/nosdk
 HelloVulkan_debug_hpaths    += ./../../../extensions/include/NvVkUtil
 HelloVulkan_debug_lpaths    := 
 HelloVulkan_debug_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
 HelloVulkan_debug_lpaths    += ./../../../extensions/lib/Tegra-Android
-HelloVulkan_debug_lpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a"
+HelloVulkan_debug_lpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a
 HelloVulkan_debug_lpaths    += ./../../../extensions/externals/linux-aarch64
 HelloVulkan_debug_lpaths    += ./../../../extensions/lib/Tegra-Android
 HelloVulkan_debug_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
@@ -82,7 +82,7 @@ HelloVulkan_debug_objsdir  = $(OBJS_DIR)/HelloVulkan_debug
 HelloVulkan_debug_cpp_o    = $(addprefix $(HelloVulkan_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cpp, %.cpp.o, $(HelloVulkan_cppfiles)))))
 HelloVulkan_debug_cc_o    = $(addprefix $(HelloVulkan_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cc, %.cc.o, $(HelloVulkan_ccfiles)))))
 HelloVulkan_debug_c_o      = $(addprefix $(HelloVulkan_debug_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.c, %.c.o, $(HelloVulkan_cfiles)))))
-HelloVulkan_debug_GLSLC_src_vk10-kepler_HelloVulkan_assets_src_shaders_simple_glsl_o += ../../vk10-kepler/HelloVulkan/assets/src_shaders\..\shaders\simple.nvs
+HelloVulkan_debug_GLSLC_src_vk10-kepler_HelloVulkan_assets_src_shaders_simple_glsl_o += ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs
 HelloVulkan_debug_obj      =  $(HelloVulkan_debug_GLSLC_src_vk10-kepler_HelloVulkan_assets_src_shaders_simple_glsl_o) $(HelloVulkan_debug_cpp_o) $(HelloVulkan_debug_cc_o) $(HelloVulkan_debug_c_o) 
 HelloVulkan_debug_bin      := ./../../vk10-kepler/HelloVulkan/libs/armeabi-v7a/libHelloVulkan.so
 
@@ -106,9 +106,9 @@ $(HelloVulkan_debug_bin): $(HelloVulkan_debug_obj) build_NvVkUtil_debug build_Ns
 	$(ECHO) building $@ complete!
 
 $(HelloVulkan_debug_GLSLC_src_vk10-kepler_HelloVulkan_assets_src_shaders_simple_glsl_o): $(HelloVulkan_GLSLC_src_vk10-kepler_HelloVulkan_assets_src_shaders_simple_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/HelloVulkan/assets/src_shaders\..\shaders\simple.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/HelloVulkan/assets/src_shaders\..\shaders\simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/HelloVulkan/assets/src_shaders\..\shaders\simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
+	@mkdir -p `dirname ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
 
 HelloVulkan_debug_DEPDIR = $(dir $(@))/$(*F)
 $(HelloVulkan_debug_cpp_o): $(HelloVulkan_debug_objsdir)/%.o:
@@ -147,16 +147,16 @@ HelloVulkan_release_hpaths    += ./../../../extensions/include
 HelloVulkan_release_hpaths    += ./../../../extensions/externals/include
 HelloVulkan_release_hpaths    += ./../../../extensions/include/NsFoundation
 HelloVulkan_release_hpaths    += ./../../../extensions/include/NvFoundation
-HelloVulkan_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/platforms/android-18/arch-arm/usr/include"
-HelloVulkan_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include"
-HelloVulkan_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a/include"
-HelloVulkan_release_hpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/include/backward"
+HelloVulkan_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/platforms/android-18/arch-arm/usr/include
+HelloVulkan_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include
+HelloVulkan_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a/include
+HelloVulkan_release_hpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/include/backward
 HelloVulkan_release_hpaths    += ./../../../extensions/include/NvVkUtil/nosdk
 HelloVulkan_release_hpaths    += ./../../../extensions/include/NvVkUtil
 HelloVulkan_release_lpaths    := 
 HelloVulkan_release_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
 HelloVulkan_release_lpaths    += ./../../../extensions/lib/Tegra-Android
-HelloVulkan_release_lpaths    += $(NVPACK_ROOT)/$(NVPACK_NDK_VERSION)"/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a"
+HelloVulkan_release_lpaths    += $(if $(NVPACK_ROOT),$(NVPACK_ROOT),$(error the environment must define NVPACK_ROOT))/$(if $(NVPACK_NDK_VERSION),$(NVPACK_NDK_VERSION),android-ndk-r9d)/sources/cxx-stl/gnu-libstdc++/$(if $(NVPACK_NDK_TOOL_VERSION),$(NVPACK_NDK_TOOL_VERSION),4.8)/libs/armeabi-v7a
 HelloVulkan_release_lpaths    += ./../../../extensions/externals/linux-aarch64
 HelloVulkan_release_lpaths    += ./../../../extensions/lib/Tegra-Android
 HelloVulkan_release_lpaths    += ./../../../extensions/externals/lib/Tegra-Android
@@ -209,7 +209,7 @@ HelloVulkan_release_objsdir  = $(OBJS_DIR)/HelloVulkan_release
 HelloVulkan_release_cpp_o    = $(addprefix $(HelloVulkan_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cpp, %.cpp.o, $(HelloVulkan_cppfiles)))))
 HelloVulkan_release_cc_o    = $(addprefix $(HelloVulkan_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.cc, %.cc.o, $(HelloVulkan_ccfiles)))))
 HelloVulkan_release_c_o      = $(addprefix $(HelloVulkan_release_objsdir)/, $(subst ./, , $(subst ../, , $(patsubst %.c, %.c.o, $(HelloVulkan_cfiles)))))
-HelloVulkan_release_GLSLC_src_vk10-kepler_HelloVulkan_assets_src_shaders_simple_glsl_o += ../../vk10-kepler/HelloVulkan/assets/src_shaders\..\shaders\simple.nvs
+HelloVulkan_release_GLSLC_src_vk10-kepler_HelloVulkan_assets_src_shaders_simple_glsl_o += ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs
 HelloVulkan_release_obj      =  $(HelloVulkan_release_GLSLC_src_vk10-kepler_HelloVulkan_assets_src_shaders_simple_glsl_o) $(HelloVulkan_release_cpp_o) $(HelloVulkan_release_cc_o) $(HelloVulkan_release_c_o) 
 HelloVulkan_release_bin      := ./../../vk10-kepler/HelloVulkan/libs/armeabi-v7a/libHelloVulkan.so
 
@@ -233,9 +233,9 @@ $(HelloVulkan_release_bin): $(HelloVulkan_release_obj) build_NvVkUtil_release bu
 	$(ECHO) building $@ complete!
 
 $(HelloVulkan_release_GLSLC_src_vk10-kepler_HelloVulkan_assets_src_shaders_simple_glsl_o): $(HelloVulkan_GLSLC_src_vk10-kepler_HelloVulkan_assets_src_shaders_simple_glsl) 
-	@mkdir -p `dirname ../../vk10-kepler/HelloVulkan/assets/src_shaders\..\shaders\simple.nvs`
-	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/HelloVulkan/assets/src_shaders\..\shaders\simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
-	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/HelloVulkan/assets/src_shaders\..\shaders\simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
+	@mkdir -p `dirname ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs`
+	$(ECHO) ../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
+	../../../BuildTools/spir-v/bin/glsl2spirv.sh -o ../../vk10-kepler/HelloVulkan/assets/src_shaders/../shaders/simple.nvs ../../vk10-kepler/HelloVulkan/assets/src_shaders/simple.glsl
 
 HelloVulkan_release_DEPDIR = $(dir $(@))/$(*F)
 $(HelloVulkan_release_cpp_o): $(HelloVulkan_release_objsdir)/%.o:
