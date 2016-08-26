@@ -93,40 +93,58 @@
 <a name="l00053"></a>00053 
 <a name="l00054"></a><a class="code" href="class_nv_model_v_k.html#29c21d560455624a2fb85868bea19f24">00054</a>         nv::vec3f <a class="code" href="class_nv_model_v_k.html#29c21d560455624a2fb85868bea19f24" title="The computed center of the bounding box of the app.">m_center</a>; 
 <a name="l00055"></a>00055 
-<a name="l00056"></a>00056         nv::vec3f GetMinExt()
-<a name="l00057"></a>00057         {
+<a name="l00056"></a>00056         nv::vec3f GetMinExt()<span class="keyword"> const</span>
+<a name="l00057"></a>00057 <span class="keyword">        </span>{
 <a name="l00058"></a>00058                 <span class="keywordflow">return</span> m_minExtent;
 <a name="l00059"></a>00059         }
 <a name="l00060"></a>00060 
-<a name="l00061"></a>00061         nv::vec3f GetMaxExt()
-<a name="l00062"></a>00062         {
+<a name="l00061"></a>00061         nv::vec3f GetMaxExt()<span class="keyword"> const</span>
+<a name="l00062"></a>00062 <span class="keyword">        </span>{
 <a name="l00063"></a>00063                 <span class="keywordflow">return</span> m_maxExtent;
 <a name="l00064"></a>00064         }
 <a name="l00065"></a>00065 
-<a name="l00068"></a><a class="code" href="class_nv_model_v_k.html#a2fd98a1c217c632018d9dc2d2b20a57">00068</a>         VkPipelineVertexInputStateCreateInfo&amp; <a class="code" href="class_nv_model_v_k.html#a2fd98a1c217c632018d9dc2d2b20a57" title="Get the Vertex input state for creating a rendering pipeline object for this model...">getVIInfo</a>() { <span class="keywordflow">return</span> mVIStateInfo; }
-<a name="l00069"></a>00069 
-<a name="l00072"></a><a class="code" href="class_nv_model_v_k.html#5e5c3ac18ed28246e6af0ef5e82e7531">00072</a>         VkPipelineInputAssemblyStateCreateInfo&amp; <a class="code" href="class_nv_model_v_k.html#5e5c3ac18ed28246e6af0ef5e82e7531" title="Get the Input Assembly state for creating a rendering pipeline object for this model...">getIAInfo</a>() { <span class="keywordflow">return</span> mIAStateInfo; }
-<a name="l00073"></a>00073 
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067 
+<a name="l00070"></a><a class="code" href="class_nv_model_v_k.html#a2fd98a1c217c632018d9dc2d2b20a57">00070</a>         VkPipelineVertexInputStateCreateInfo&amp; <a class="code" href="class_nv_model_v_k.html#a2fd98a1c217c632018d9dc2d2b20a57" title="Get the Vertex input state for creating a rendering pipeline object for this model...">getVIInfo</a>() { <span class="keywordflow">return</span> mVIStateInfo; }
+<a name="l00071"></a>00071 
+<a name="l00074"></a><a class="code" href="class_nv_model_v_k.html#5e5c3ac18ed28246e6af0ef5e82e7531">00074</a>         VkPipelineInputAssemblyStateCreateInfo&amp; <a class="code" href="class_nv_model_v_k.html#5e5c3ac18ed28246e6af0ef5e82e7531" title="Get the Input Assembly state for creating a rendering pipeline object for this model...">getIAInfo</a>() { <span class="keywordflow">return</span> mIAStateInfo; }
 <a name="l00075"></a>00075 
-<a name="l00076"></a>00076 <span class="keyword">private</span>:
-<a name="l00077"></a>00077         <a class="code" href="class_nv_model_v_k.html" title="Drawable geometric model using VK vertex buffers.">NvModelVK</a>();
-<a name="l00078"></a>00078         <span class="keywordtype">void</span> initBuffers(<a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>&amp; vk);
-<a name="l00079"></a>00079 
-<a name="l00080"></a>00080         <a class="code" href="class_nv_model.html" title="Non-rendering geometry model.">NvModel</a> *model;
-<a name="l00081"></a>00081         nv::vec3f m_minExtent, m_maxExtent, m_radius;
-<a name="l00082"></a>00082         uint32_t mIndexCount;
-<a name="l00083"></a>00083 
-<a name="l00084"></a>00084         <a class="code" href="struct_nv_vk_buffer.html" title="A wrapper for a VkBuffer and its memory.">NvVkBuffer</a> mVBO;
-<a name="l00085"></a>00085         <a class="code" href="struct_nv_vk_buffer.html" title="A wrapper for a VkBuffer and its memory.">NvVkBuffer</a> mIBO;
-<a name="l00086"></a>00086 
-<a name="l00087"></a>00087         VkVertexInputBindingDescription mVertexBindings;
-<a name="l00088"></a>00088         VkVertexInputAttributeDescription mAttributes[4];
-<a name="l00089"></a>00089         VkPipelineVertexInputStateCreateInfo mVIStateInfo;
-<a name="l00090"></a>00090         VkPipelineInputAssemblyStateCreateInfo mIAStateInfo;
-<a name="l00091"></a>00091 };
+<a name="l00077"></a>00077 
+<a name="l00078"></a><a class="code" href="class_nv_model_v_k.html#bb8d16dcc34f069504d849b6a3288aa7">00078</a>         VkIndexType <a class="code" href="class_nv_model_v_k.html#bb8d16dcc34f069504d849b6a3288aa7" title="useful when doing custom rendering">getIndexType</a>()<span class="keyword"> const</span>
+<a name="l00079"></a>00079 <span class="keyword">        </span>{
+<a name="l00080"></a>00080                 <span class="keywordflow">return</span> VK_INDEX_TYPE_UINT32;
+<a name="l00081"></a>00081         }
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083         <span class="keyword">const</span> <a class="code" href="struct_nv_vk_buffer.html" title="A wrapper for a VkBuffer and its memory.">NvVkBuffer</a>&amp; VBO()<span class="keyword"> const</span>
+<a name="l00084"></a>00084 <span class="keyword">        </span>{
+<a name="l00085"></a>00085                 <span class="keywordflow">return</span> mVBO;
+<a name="l00086"></a>00086         }
+<a name="l00087"></a>00087 
+<a name="l00088"></a>00088         <span class="keyword">const</span> <a class="code" href="struct_nv_vk_buffer.html" title="A wrapper for a VkBuffer and its memory.">NvVkBuffer</a>&amp; IBO()<span class="keyword"> const</span>
+<a name="l00089"></a>00089 <span class="keyword">        </span>{
+<a name="l00090"></a>00090                 <span class="keywordflow">return</span> mIBO;
+<a name="l00091"></a>00091         }
 <a name="l00092"></a>00092 
-<a name="l00093"></a>00093 
-<a name="l00094"></a>00094 <span class="preprocessor">#endif </span><span class="comment">/* NVMODELVK_H_ */</span>
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095 <span class="keyword">private</span>:
+<a name="l00096"></a>00096         <a class="code" href="class_nv_model_v_k.html" title="Drawable geometric model using VK vertex buffers.">NvModelVK</a>();
+<a name="l00097"></a>00097         <span class="keywordtype">void</span> initBuffers(<a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>&amp; vk);
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099         <a class="code" href="class_nv_model.html" title="Non-rendering geometry model.">NvModel</a> *model;
+<a name="l00100"></a>00100         nv::vec3f m_minExtent, m_maxExtent, m_radius;
+<a name="l00101"></a>00101         uint32_t mIndexCount;
+<a name="l00102"></a>00102 
+<a name="l00103"></a>00103         <a class="code" href="struct_nv_vk_buffer.html" title="A wrapper for a VkBuffer and its memory.">NvVkBuffer</a> mVBO;
+<a name="l00104"></a>00104         <a class="code" href="struct_nv_vk_buffer.html" title="A wrapper for a VkBuffer and its memory.">NvVkBuffer</a> mIBO;
+<a name="l00105"></a>00105 
+<a name="l00106"></a>00106         VkVertexInputBindingDescription mVertexBindings;
+<a name="l00107"></a>00107         VkVertexInputAttributeDescription mAttributes[4];
+<a name="l00108"></a>00108         VkPipelineVertexInputStateCreateInfo mVIStateInfo;
+<a name="l00109"></a>00109         VkPipelineInputAssemblyStateCreateInfo mIAStateInfo;
+<a name="l00110"></a>00110 };
+<a name="l00111"></a>00111 
+<a name="l00112"></a>00112 
+<a name="l00113"></a>00113 <span class="preprocessor">#endif </span><span class="comment">/* NVMODELVK_H_ */</span>
 </pre></div></div>
 </div> <!--content-->
 <!-- footer block-->
@@ -134,7 +152,7 @@
 	<div class="seperator"></div>
 	<div class="seperator"></div>
 	<address style="text-align: right;"><small>
-Generated on Thu Jul 28 10:35:50 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
+Generated on Thu Aug 25 12:48:26 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
 	<footer>
 		<div class="row">
 			<div class="text-center">&copy;2016 NVIDIA Corporation.</div>

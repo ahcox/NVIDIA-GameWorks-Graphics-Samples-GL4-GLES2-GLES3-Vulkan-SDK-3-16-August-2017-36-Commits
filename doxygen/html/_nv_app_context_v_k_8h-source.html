@@ -93,28 +93,29 @@
 <a name="l00043"></a>00043         <span class="keywordtype">bool</span> initializeInstance(PFN_vkGetProcAddressNV getProc, <span class="keyword">const</span> std::string&amp; appTitle);
 <a name="l00044"></a>00044         <span class="keywordtype">bool</span> initializeDevice(PFN_vkGetProcAddressNV getProc);
 <a name="l00045"></a>00045 
-<a name="l00047"></a>00047         <a class="code" href="class_nv_app_context_v_k.html" title="Vulkan app Context.">NvAppContextVK</a>(<a class="code" href="struct_nv_platform_info.html" title="Basic, combined platform info.">NvPlatformInfo</a> info) 
+<a name="l00047"></a>00047         <a class="code" href="class_nv_app_context_v_k.html" title="Vulkan app Context.">NvAppContextVK</a>(<span class="keyword">const</span> <a class="code" href="struct_nv_v_k_configuration.html" title="VK config representation.">NvVKConfiguration</a>&amp; config, <a class="code" href="struct_nv_platform_info.html" title="Basic, combined platform info.">NvPlatformInfo</a> info) 
 <a name="l00048"></a>00048         : NvAppContext(info)
-<a name="l00049"></a>00049         , m_use_validation(false)
-<a name="l00050"></a>00050         , m_use_loader_debug(false)
-<a name="l00051"></a>00051         , m_use_api_dump(false)
-<a name="l00052"></a>00052                 , m_cbFormat(VK_FORMAT_UNDEFINED)
-<a name="l00053"></a>00053                 , m_dsFormat(VK_FORMAT_UNDEFINED)
-<a name="l00054"></a>00054 
-<a name="l00055"></a>00055      { }
-<a name="l00056"></a>00056 
-<a name="l00057"></a>00057         VkFormat m_cbFormat;
-<a name="l00058"></a>00058         VkFormat m_dsFormat;
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060 <span class="keyword">private</span>:
-<a name="l00061"></a>00061 
-<a name="l00062"></a>00062     <span class="keywordtype">bool</span> m_use_validation;
-<a name="l00063"></a>00063     <span class="keywordtype">bool</span> m_use_loader_debug;
-<a name="l00064"></a>00064     <span class="keywordtype">bool</span> m_use_api_dump;
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066 };
-<a name="l00067"></a>00067 
-<a name="l00068"></a>00068 <span class="preprocessor">#endif</span>
+<a name="l00049"></a>00049                 , <a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>(config)
+<a name="l00050"></a>00050         , m_use_validation(false)
+<a name="l00051"></a>00051         , m_use_loader_debug(false)
+<a name="l00052"></a>00052         , m_use_api_dump(false)
+<a name="l00053"></a>00053                 , m_cbFormat(VK_FORMAT_UNDEFINED)
+<a name="l00054"></a>00054                 , m_dsFormat(VK_FORMAT_UNDEFINED)
+<a name="l00055"></a>00055 
+<a name="l00056"></a>00056      { }
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058         VkFormat m_cbFormat;
+<a name="l00059"></a>00059         VkFormat m_dsFormat;
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061 <span class="keyword">private</span>:
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063     <span class="keywordtype">bool</span> m_use_validation;
+<a name="l00064"></a>00064     <span class="keywordtype">bool</span> m_use_loader_debug;
+<a name="l00065"></a>00065     <span class="keywordtype">bool</span> m_use_api_dump;
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067 };
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div> <!--content-->
 <!-- footer block-->
@@ -122,7 +123,7 @@
 	<div class="seperator"></div>
 	<div class="seperator"></div>
 	<address style="text-align: right;"><small>
-Generated on Thu Jul 28 10:35:50 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
+Generated on Thu Aug 25 12:48:26 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
 	<footer>
 		<div class="row">
 			<div class="text-center">&copy;2016 NVIDIA Corporation.</div>

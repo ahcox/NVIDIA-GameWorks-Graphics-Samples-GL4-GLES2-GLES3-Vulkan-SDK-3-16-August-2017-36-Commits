@@ -87,11 +87,11 @@
 void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_model_v_k.html#4111b7b88c5eb9b1b2cf321e0259e660">computeCenter</a> ()</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Updates the center point of the model. <br></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="1752fd827c66b72ad2623386ef7af404"></a><!-- doxytag: member="NvModelVK::GetMinExt" ref="1752fd827c66b72ad2623386ef7af404" args="()" -->
-nv::vec3f&nbsp;</td><td class="memItemRight" valign="bottom"><b>GetMinExt</b> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="e6227e1db940a857f2a6142f09050b61"></a><!-- doxytag: member="NvModelVK::GetMinExt" ref="e6227e1db940a857f2a6142f09050b61" args="() const " -->
+nv::vec3f&nbsp;</td><td class="memItemRight" valign="bottom"><b>GetMinExt</b> () const </td></tr>
 
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="5256d132042f21fa951f81a9191f5a40"></a><!-- doxytag: member="NvModelVK::GetMaxExt" ref="5256d132042f21fa951f81a9191f5a40" args="()" -->
-nv::vec3f&nbsp;</td><td class="memItemRight" valign="bottom"><b>GetMaxExt</b> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="f5dce9538f0695bdb82dc5263f8ffff6"></a><!-- doxytag: member="NvModelVK::GetMaxExt" ref="f5dce9538f0695bdb82dc5263f8ffff6" args="() const " -->
+nv::vec3f&nbsp;</td><td class="memItemRight" valign="bottom"><b>GetMaxExt</b> () const </td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">VkPipelineVertexInputStateCreateInfo &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_model_v_k.html#a2fd98a1c217c632018d9dc2d2b20a57">getVIInfo</a> ()</td></tr>
 
@@ -99,6 +99,16 @@ nv::vec3f&nbsp;</td><td class="memItemRight" valign="bottom"><b>GetMaxExt</b> ()
 <tr><td class="memItemLeft" nowrap align="right" valign="top">VkPipelineInputAssemblyStateCreateInfo &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_model_v_k.html#5e5c3ac18ed28246e6af0ef5e82e7531">getIAInfo</a> ()</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get the Input Assembly state for creating a rendering pipeline object for this model.  <a href="#5e5c3ac18ed28246e6af0ef5e82e7531"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="bb8d16dcc34f069504d849b6a3288aa7"></a><!-- doxytag: member="NvModelVK::getIndexType" ref="bb8d16dcc34f069504d849b6a3288aa7" args="() const " -->
+VkIndexType&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_model_v_k.html#bb8d16dcc34f069504d849b6a3288aa7">getIndexType</a> () const </td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">useful when doing custom rendering <br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="b20f2107bcd23cb5d940cc2debada1b9"></a><!-- doxytag: member="NvModelVK::VBO" ref="b20f2107bcd23cb5d940cc2debada1b9" args="() const " -->
+const <a class="el" href="struct_nv_vk_buffer.html">NvVkBuffer</a> &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><b>VBO</b> () const </td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="cb0e14c79be360309cc8d8f7ec2ee1e0"></a><!-- doxytag: member="NvModelVK::IBO" ref="cb0e14c79be360309cc8d8f7ec2ee1e0" args="() const " -->
+const <a class="el" href="struct_nv_vk_buffer.html">NvVkBuffer</a> &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><b>IBO</b> () const </td></tr>
+
 <tr><td colspan="2"><br><h2>Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">static <a class="el" href="class_nv_model_v_k.html">NvModelVK</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_model_v_k.html#5feb8fa9dc2907110fe9faa44e1f4f3b">CreateFromObj</a> (<a class="el" href="class_nv_vk_context.html">NvVkContext</a> &amp;vk, uint8_t *data, float scale, bool computeNormals=false, bool computeTangents=false)</td></tr>
 
@@ -337,7 +347,7 @@ Get the Vertex input state for creating a rendering pipeline object for this mod
 	<div class="seperator"></div>
 	<div class="seperator"></div>
 	<address style="text-align: right;"><small>
-Generated on Thu Jul 28 10:35:52 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
+Generated on Thu Aug 25 12:48:27 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
 	<footer>
 		<div class="row">
 			<div class="text-center">&copy;2016 NVIDIA Corporation.</div>

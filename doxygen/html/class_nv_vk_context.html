@@ -83,6 +83,8 @@ Inheritance diagram for NvVkContext:</div>
 <a href="class_nv_vk_context-members.html">List of all members.</a><table border="0" cellpadding="0" cellspacing="0">
 <tr><td></td></tr>
 <tr><td colspan="2"><br><h2>Classes</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><b>DebugMarkerScope</b></td></tr>
+
 <tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><b>FrameInfo</b></td></tr>
 
 <tr><td colspan="2"><br><h2>Public Types</h2></td></tr>
@@ -92,12 +94,15 @@ Inheritance diagram for NvVkContext:</div>
  }</td></tr>
 
 <tr><td colspan="2"><br><h2>Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="ecdf429145515ba49ccba93bea1c95da"></a><!-- doxytag: member="NvVkContext::NvVkContext" ref="ecdf429145515ba49ccba93bea1c95da" args="(const NvVKConfiguration &amp;config)" -->
+&nbsp;</td><td class="memItemRight" valign="bottom"><b>NvVkContext</b> (const <a class="el" href="struct_nv_v_k_configuration.html">NvVKConfiguration</a> &amp;config)</td></tr>
+
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="230f4efe931fc0cd9769a205f83c1277"></a><!-- doxytag: member="NvVkContext::instance" ref="230f4efe931fc0cd9769a205f83c1277" args="()" -->
 VkInstance&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_vk_context.html#230f4efe931fc0cd9769a205f83c1277">instance</a> ()</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">VkInstance access. <br></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="d362b9aea78898744e9c843ff8bcc6b1"></a><!-- doxytag: member="NvVkContext::device" ref="d362b9aea78898744e9c843ff8bcc6b1" args="()" -->
-VkDevice&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_vk_context.html#d362b9aea78898744e9c843ff8bcc6b1">device</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="6b0a497652e8af6e1c283fbe8d01b3a4"></a><!-- doxytag: member="NvVkContext::device" ref="6b0a497652e8af6e1c283fbe8d01b3a4" args="() const " -->
+VkDevice&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_vk_context.html#6b0a497652e8af6e1c283fbe8d01b3a4">device</a> () const </td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Device access. <br></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="f63502cc8e6bca40458fb884af74f3ed"></a><!-- doxytag: member="NvVkContext::queue" ref="f63502cc8e6bca40458fb884af74f3ed" args="()" -->
@@ -124,6 +129,10 @@ VkPhysicalDeviceLimits &amp;&nbsp;</td><td class="memItemRight" valign="bottom">
 VkPhysicalDeviceProperties &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_vk_context.html#ab6063b8a64fc36e6481b26c3aa41e35">physicalDeviceProperties</a> ()</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">VkPhysicalDeviceProperties access. <br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="1549e467c19cb5fc6343b7cbd6a760c4"></a><!-- doxytag: member="NvVkContext::physicalDeviceFeatures" ref="1549e467c19cb5fc6343b7cbd6a760c4" args="()" -->
+VkPhysicalDeviceFeatures &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_vk_context.html#1549e467c19cb5fc6343b7cbd6a760c4">physicalDeviceFeatures</a> ()</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">VkPhysicalDeviceFeatures access. <br></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="305d727eb7d08eff8818b4a3eb828473"></a><!-- doxytag: member="NvVkContext::physicalDeviceMemoryProperties" ref="305d727eb7d08eff8818b4a3eb828473" args="()" -->
 VkPhysicalDeviceMemoryProperties &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_vk_context.html#305d727eb7d08eff8818b4a3eb828473">physicalDeviceMemoryProperties</a> ()</td></tr>
 
@@ -153,13 +162,13 @@ VkResult&nbsp;</td><td class="memItemRight" valign="bottom"><b>createAndFillBuff
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_vk_context.html#4d84f39afce6f3a64cbef298c3a35d7b">uploadTexture</a> (const <a class="el" href="class_nv_image.html">NvImage</a> *image, <a class="el" href="struct_nv_vk_texture.html">NvVkTexture</a> &amp;tex)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Creates a texture from an in-memory <a class="el" href="class_nv_image.html" title="Image loading, representation and handling Support loading of images from DDS files...">NvImage</a>.  <a href="#4d84f39afce6f3a64cbef298c3a35d7b"></a><br></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="8ba2dc5fd993663ca76c607882c5d550"></a><!-- doxytag: member="NvVkContext::createShadersFromSourceFile" ref="8ba2dc5fd993663ca76c607882c5d550" args="(const std::string &amp;sourceText, VkPipelineShaderStageCreateInfo *shaders, uint32_t maxShaders)" -->
-uint32_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_vk_context.html#8ba2dc5fd993663ca76c607882c5d550">createShadersFromSourceFile</a> (const std::string &amp;sourceText, VkPipelineShaderStageCreateInfo *shaders, uint32_t maxShaders)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="aa4a726ed0a2bca58ede51a8abf54ab9"></a><!-- doxytag: member="NvVkContext::createShadersFromSourceString" ref="aa4a726ed0a2bca58ede51a8abf54ab9" args="(const std::string &amp;sourceText, VkPipelineShaderStageCreateInfo *shaders, uint32_t maxShaders)" -->
+uint32_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_vk_context.html#aa4a726ed0a2bca58ede51a8abf54ab9">createShadersFromSourceString</a> (const std::string &amp;sourceText, VkPipelineShaderStageCreateInfo *shaders, uint32_t maxShaders)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Deprecated: Only supported on platforms/drivers that can accept GLSL directly. <br></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">uint32_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_vk_context.html#17c601d538a22c676fa4b9fa6ba638de">createShadersFromBinaryFile</a> (uint32_t *data, uint32_t leng, VkPipelineShaderStageCreateInfo *shaders, uint32_t maxShaders)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint32_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_vk_context.html#103041a0c9ee379bc953ce459e224d7d">createShadersFromBinaryBlob</a> (uint32_t *data, uint32_t leng, VkPipelineShaderStageCreateInfo *shaders, uint32_t maxShaders)</td></tr>
 
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Load SPIR-V shaders from binary file data (generated from the glsl2spirv tool).  <a href="#17c601d538a22c676fa4b9fa6ba638de"></a><br></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Load SPIR-V shaders from binary file data (generated from the glsl2spirv tool).  <a href="#103041a0c9ee379bc953ce459e224d7d"></a><br></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="4907497e9a68183130fbea9a390d1f42"></a><!-- doxytag: member="NvVkContext::transitionImageLayout" ref="4907497e9a68183130fbea9a390d1f42" args="(VkImage &amp;image, VkImageAspectFlags aspect, VkImageLayout oldLayout, VkImageLayout newLayout, VkAccessFlagBits inSrcAccessmask=VK_ACCESS_COLOR_ATTACHMENT_READ_BIT, VkAccessFlagBits inDstAccessmask=VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT)" -->
 VkResult&nbsp;</td><td class="memItemRight" valign="bottom"><b>transitionImageLayout</b> (VkImage &amp;image, VkImageAspectFlags aspect, VkImageLayout oldLayout, VkImageLayout newLayout, VkAccessFlagBits inSrcAccessmask=VK_ACCESS_COLOR_ATTACHMENT_READ_BIT, VkAccessFlagBits inDstAccessmask=VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT)</td></tr>
 
@@ -285,15 +294,21 @@ std::set&lt; std::string &gt;&nbsp;</td><td class="memItemRight" valign="bottom"
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="9c9a40e7d6ff851e0309df87eb9d9bca"></a><!-- doxytag: member="NvVkContext::mCombinedLayerNames" ref="9c9a40e7d6ff851e0309df87eb9d9bca" args="" -->
 std::set&lt; std::string &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><b>mCombinedLayerNames</b></td></tr>
 
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="48b233486195bc1623013140f53595d9"></a><!-- doxytag: member="NvVkContext::mConfiguration" ref="48b233486195bc1623013140f53595d9" args="" -->
+<a class="el" href="struct_nv_v_k_configuration.html">NvVKConfiguration</a>&nbsp;</td><td class="memItemRight" valign="bottom"><b>mConfiguration</b></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="645e95060d9322b9d073ac3c26ceb092"></a><!-- doxytag: member="NvVkContext::mSupportsDebugMarkers" ref="645e95060d9322b9d073ac3c26ceb092" args="" -->
+bool&nbsp;</td><td class="memItemRight" valign="bottom"><b>mSupportsDebugMarkers</b></td></tr>
+
 </table>
 <hr><a name="_details"></a><h2>Detailed Description</h2>
 A wrapper for most major Vulkan objects used by an application. <hr><h2>Member Function Documentation</h2>
-<a class="anchor" name="17c601d538a22c676fa4b9fa6ba638de"></a><!-- doxytag: member="NvVkContext::createShadersFromBinaryFile" ref="17c601d538a22c676fa4b9fa6ba638de" args="(uint32_t *data, uint32_t leng, VkPipelineShaderStageCreateInfo *shaders, uint32_t maxShaders)" -->
+<a class="anchor" name="103041a0c9ee379bc953ce459e224d7d"></a><!-- doxytag: member="NvVkContext::createShadersFromBinaryBlob" ref="103041a0c9ee379bc953ce459e224d7d" args="(uint32_t *data, uint32_t leng, VkPipelineShaderStageCreateInfo *shaders, uint32_t maxShaders)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t NvVkContext::createShadersFromBinaryFile           </td>
+          <td class="memname">uint32_t NvVkContext::createShadersFromBinaryBlob           </td>
           <td>(</td>
           <td class="paramtype">uint32_t *&nbsp;</td>
           <td class="paramname"> <em>data</em>, </td>
@@ -469,7 +484,7 @@ Creates a texture from an asset-based DDS file.
 	<div class="seperator"></div>
 	<div class="seperator"></div>
 	<address style="text-align: right;"><small>
-Generated on Thu Jul 28 10:35:52 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
+Generated on Thu Aug 25 12:48:27 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
 	<footer>
 		<div class="row">
 			<div class="text-center">&copy;2016 NVIDIA Corporation.</div>
