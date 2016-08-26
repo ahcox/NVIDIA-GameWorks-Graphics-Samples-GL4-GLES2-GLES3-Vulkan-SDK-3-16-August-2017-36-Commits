@@ -72,7 +72,9 @@ void ComputeParticles::configurationCallback(NvGLConfiguration& config)
 }
 
 void ComputeParticles::initRendering(void) { 
-    // OpenGL 4.3 is the minimum for compute shaders
+	NV_APP_BASE_SHARED_INIT();
+
+	// OpenGL 4.3 is the minimum for compute shaders
     if (!requireMinAPIVersion(NvGLAPIVersionES3_1()))
         return;
 

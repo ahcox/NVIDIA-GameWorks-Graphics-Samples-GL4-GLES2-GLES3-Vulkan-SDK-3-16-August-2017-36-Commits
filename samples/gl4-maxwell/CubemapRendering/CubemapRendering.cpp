@@ -111,7 +111,9 @@ void CubemapRendering::configurationCallback(NvGLConfiguration& config) {
 }
 
 void CubemapRendering::initRendering(void) {
-    if (!requireMinAPIVersion(NvGLAPIVersionGL4()))
+	NV_APP_BASE_SHARED_INIT();
+
+	if (!requireMinAPIVersion(NvGLAPIVersionGL4()))
         return;
     
 	bool multiprojectionSupported =

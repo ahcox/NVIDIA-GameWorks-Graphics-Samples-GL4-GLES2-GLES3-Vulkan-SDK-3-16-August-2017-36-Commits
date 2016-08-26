@@ -162,7 +162,7 @@
 		<OutDir>./../../lib/vs2013x86\</OutDir>
 		<IntDir>./intermediate/NvModel/vs2013x86/release\</IntDir>
 		<TargetExt>.lib</TargetExt>
-		<TargetName>libNvModelD</TargetName>
+		<TargetName>NvModelD</TargetName>
 		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
 		<CodeAnalysisRules />
 		<CodeAnalysisRuleAssemblies />
@@ -186,9 +186,9 @@
 		</ClCompile>
 		<Lib>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-			<OutputFile>$(OutDir)libNvModelD.lib</OutputFile>
+			<OutputFile>$(OutDir)NvModelD.lib</OutputFile>
 			<AdditionalLibraryDirectories>./../../externals/lib/vs2013x86;./../../lib/vs2013x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-			<ProgramDatabaseFile>$(OutDir)/libNvModelD.lib.pdb</ProgramDatabaseFile>
+			<ProgramDatabaseFile>$(OutDir)/NvModelD.lib.pdb</ProgramDatabaseFile>
 			<TargetMachine>MachineX86</TargetMachine>
 		</Lib>
 		<ResourceCompile>
@@ -239,7 +239,7 @@
 		<OutDir>./../../lib/vs2013x64\</OutDir>
 		<IntDir>./intermediate/NvModel/vs2013x64/release\</IntDir>
 		<TargetExt>.lib</TargetExt>
-		<TargetName>libNvModelD</TargetName>
+		<TargetName>NvModelD</TargetName>
 		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
 		<CodeAnalysisRules />
 		<CodeAnalysisRuleAssemblies />
@@ -262,9 +262,9 @@
 		</ClCompile>
 		<Lib>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-			<OutputFile>$(OutDir)libNvModelD.lib</OutputFile>
+			<OutputFile>$(OutDir)NvModelD.lib</OutputFile>
 			<AdditionalLibraryDirectories>./../../externals/lib/vs2013x64;./../../lib/vs2013x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-			<ProgramDatabaseFile>$(OutDir)/libNvModelD.lib.pdb</ProgramDatabaseFile>
+			<ProgramDatabaseFile>$(OutDir)/NvModelD.lib.pdb</ProgramDatabaseFile>
 			<TargetMachine>MachineX64</TargetMachine>
 		</Lib>
 		<ResourceCompile>

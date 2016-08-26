@@ -36,6 +36,7 @@ Basic_debug_defines   += _LIB
 Basic_debug_defines   += NV_ANDROID
 Basic_debug_defines   += __STDC_LIMIT_MACROS
 Basic_debug_defines   += VK_NO_PROTOTYPES
+Basic_debug_defines   += GW_APP_NAME=\"Basic\"
 Basic_debug_defines   += GL_API_LEVEL_ES2
 Basic_debug_defines   += _DEBUG
 Basic_debug_libraries := 
@@ -151,6 +152,7 @@ Basic_release_defines   += _LIB
 Basic_release_defines   += NV_ANDROID
 Basic_release_defines   += __STDC_LIMIT_MACROS
 Basic_release_defines   += VK_NO_PROTOTYPES
+Basic_release_defines   += GW_APP_NAME=\"Basic\"
 Basic_release_defines   += GL_API_LEVEL_ES2
 Basic_release_defines   += NDEBUG
 Basic_release_libraries := 

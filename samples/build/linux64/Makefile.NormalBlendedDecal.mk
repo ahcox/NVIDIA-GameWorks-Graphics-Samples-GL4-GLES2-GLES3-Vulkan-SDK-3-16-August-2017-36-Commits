@@ -26,6 +26,7 @@ NormalBlendedDecal_debug_lpaths    += ./../../../extensions/externals/lib/linux6
 NormalBlendedDecal_debug_defines   := $(NormalBlendedDecal_custom_defines)
 NormalBlendedDecal_debug_defines   += LINUX=1
 NormalBlendedDecal_debug_defines   += NV_LINUX
+NormalBlendedDecal_debug_defines   += GW_APP_NAME=\"NormalBlendedDecal\"
 NormalBlendedDecal_debug_defines   += _DEBUG
 NormalBlendedDecal_debug_libraries := 
 NormalBlendedDecal_debug_libraries += NsFoundationD
@@ -131,6 +132,7 @@ NormalBlendedDecal_release_lpaths    += ./../../../extensions/externals/lib/linu
 NormalBlendedDecal_release_defines   := $(NormalBlendedDecal_custom_defines)
 NormalBlendedDecal_release_defines   += LINUX=1
 NormalBlendedDecal_release_defines   += NV_LINUX
+NormalBlendedDecal_release_defines   += GW_APP_NAME=\"NormalBlendedDecal\"
 NormalBlendedDecal_release_defines   += NDEBUG
 NormalBlendedDecal_release_libraries := 
 NormalBlendedDecal_release_libraries += NsFoundation

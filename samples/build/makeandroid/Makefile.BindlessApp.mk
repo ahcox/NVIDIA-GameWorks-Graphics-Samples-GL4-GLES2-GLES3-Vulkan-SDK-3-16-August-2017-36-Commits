@@ -37,6 +37,7 @@ BindlessApp_debug_defines   += _LIB
 BindlessApp_debug_defines   += NV_ANDROID
 BindlessApp_debug_defines   += __STDC_LIMIT_MACROS
 BindlessApp_debug_defines   += VK_NO_PROTOTYPES
+BindlessApp_debug_defines   += GW_APP_NAME=\"BindlessApp\"
 BindlessApp_debug_defines   += GL_API_LEVEL_ES2
 BindlessApp_debug_defines   += USE_REGAL=1
 BindlessApp_debug_defines   += _DEBUG
@@ -154,6 +155,7 @@ BindlessApp_release_defines   += _LIB
 BindlessApp_release_defines   += NV_ANDROID
 BindlessApp_release_defines   += __STDC_LIMIT_MACROS
 BindlessApp_release_defines   += VK_NO_PROTOTYPES
+BindlessApp_release_defines   += GW_APP_NAME=\"BindlessApp\"
 BindlessApp_release_defines   += GL_API_LEVEL_ES2
 BindlessApp_release_defines   += USE_REGAL=1
 BindlessApp_release_defines   += NDEBUG

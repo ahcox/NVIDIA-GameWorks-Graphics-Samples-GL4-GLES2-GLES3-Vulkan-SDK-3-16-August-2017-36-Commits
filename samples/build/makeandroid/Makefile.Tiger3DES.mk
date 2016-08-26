@@ -42,6 +42,7 @@ Tiger3DES_debug_defines   += _LIB
 Tiger3DES_debug_defines   += NV_ANDROID
 Tiger3DES_debug_defines   += __STDC_LIMIT_MACROS
 Tiger3DES_debug_defines   += VK_NO_PROTOTYPES
+Tiger3DES_debug_defines   += GW_APP_NAME=\"Tiger3DES\"
 Tiger3DES_debug_defines   += GL_API_LEVEL_ES2
 Tiger3DES_debug_defines   += USE_REGAL=1
 Tiger3DES_debug_defines   += _DEBUG
@@ -160,6 +161,7 @@ Tiger3DES_release_defines   += _LIB
 Tiger3DES_release_defines   += NV_ANDROID
 Tiger3DES_release_defines   += __STDC_LIMIT_MACROS
 Tiger3DES_release_defines   += VK_NO_PROTOTYPES
+Tiger3DES_release_defines   += GW_APP_NAME=\"Tiger3DES\"
 Tiger3DES_release_defines   += GL_API_LEVEL_ES2
 Tiger3DES_release_defines   += USE_REGAL=1
 Tiger3DES_release_defines   += NDEBUG

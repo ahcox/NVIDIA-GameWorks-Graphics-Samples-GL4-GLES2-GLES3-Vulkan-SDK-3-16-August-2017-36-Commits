@@ -39,6 +39,7 @@ TextWheelES_debug_defines   += _LIB
 TextWheelES_debug_defines   += NV_ANDROID
 TextWheelES_debug_defines   += __STDC_LIMIT_MACROS
 TextWheelES_debug_defines   += VK_NO_PROTOTYPES
+TextWheelES_debug_defines   += GW_APP_NAME=\"TextWheelES\"
 TextWheelES_debug_defines   += GL_API_LEVEL_ES2
 TextWheelES_debug_defines   += USE_REGAL=1
 TextWheelES_debug_defines   += _DEBUG
@@ -157,6 +158,7 @@ TextWheelES_release_defines   += _LIB
 TextWheelES_release_defines   += NV_ANDROID
 TextWheelES_release_defines   += __STDC_LIMIT_MACROS
 TextWheelES_release_defines   += VK_NO_PROTOTYPES
+TextWheelES_release_defines   += GW_APP_NAME=\"TextWheelES\"
 TextWheelES_release_defines   += GL_API_LEVEL_ES2
 TextWheelES_release_defines   += USE_REGAL=1
 TextWheelES_release_defines   += NDEBUG

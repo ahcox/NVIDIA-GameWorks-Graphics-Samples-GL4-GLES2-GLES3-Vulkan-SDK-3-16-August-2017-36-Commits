@@ -52,7 +52,12 @@ void checkVkResult(const char* file, int32_t line, VkResult result);
 /// VK config representation.
 struct NvVKConfiguration : public NvGfxConfiguration {
 	NvVKConfiguration(const NvGfxConfiguration& gfx) :
-		NvGfxConfiguration(gfx) {}
+		NvGfxConfiguration(gfx)
+		, mainTargetUsageFlags(VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT)
+		, mainDepthStencilUsageFlags(VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT)
+		, featuresToEnable(requiredFeaturesToEnable())
+		{
+		}
 
 	/// Inline all-elements constructor.
 	/// \param[in] r the red color depth in bits
@@ -65,7 +70,34 @@ struct NvVKConfiguration : public NvGfxConfiguration {
 	NvVKConfiguration(uint32_t r = 8, uint32_t g = 8,
 		uint32_t b = 8, uint32_t a = 8,
 		uint32_t d = 24, uint32_t s = 0, uint32_t msaa = 0) :
-		NvGfxConfiguration(r, g, b, a, d, s, msaa) {}
+		NvGfxConfiguration(r, g, b, a, d, s, msaa) 
+		, mainTargetUsageFlags(VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT)
+		, mainDepthStencilUsageFlags(VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT)
+		, featuresToEnable (requiredFeaturesToEnable())
+	{}
+	
+	/// Usage flags for the main color render target default is VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT
+	VkImageUsageFlags mainTargetUsageFlags;
+	/// Usage flags for the main depth stencil render target default is VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT
+	VkImageUsageFlags mainDepthStencilUsageFlags;
+
+
+	/// Additional extensions to enable during instance and device create time
+	std::vector<std::string> extensionsToEnable;
+	/// Additional layers to enable during instance create time (device layers are deprecated)
+	std::vector<std::string> layersToEnable;
+
+	/// Features to enable during device create time 
+	VkPhysicalDeviceFeatures	featuresToEnable;
+	
+	/// Features required by the framework which are enabled by default
+	static VkPhysicalDeviceFeatures requiredFeaturesToEnable()
+	{
+		VkPhysicalDeviceFeatures result = { 0 };
+		result.shaderClipDistance = VK_TRUE;
+		result.shaderCullDistance = VK_TRUE;
+		return result;
+	}
 };
 
 class NvImage;
@@ -212,20 +244,22 @@ protected:
 /// A wrapper for most major Vulkan objects used by an application
 class NvVkContext {
 public:
-	NvVkContext() :
+	NvVkContext(const NvVKConfiguration& config) :
+		mConfiguration(config),
 		_instance(NULL),
 		_physicalDevice(NULL),
 		_device(NULL),
 		_queue(NULL),
 		_queueFamilyIndex(0),
-		_queueIndex(0)
+		_queueIndex(0),
+		mSupportsDebugMarkers(false)
 	{ }
 
 	/// VkInstance access
 	VkInstance instance() { return _instance; }
 
 	/// Device access
-	VkDevice device() { return _device; }
+	VkDevice device() const { return _device; }
 
 	/// Queue access
 	VkQueue queue() { return _queue; }
@@ -246,8 +280,12 @@ public:
 	/// VkPhysicalDeviceProperties access
 	VkPhysicalDeviceProperties& physicalDeviceProperties() { return _physicalDeviceProperties; }
 
+	/// VkPhysicalDeviceFeatures access
+	VkPhysicalDeviceFeatures& physicalDeviceFeatures() { return _physicalDeviceFeatures; }
+
 	/// VkPhysicalDeviceMemoryProperties access
 	VkPhysicalDeviceMemoryProperties& physicalDeviceMemoryProperties() { return _physicalDeviceMemoryProperties; }
+
 
 	/// Get the on-screen (or main) render target
 	virtual NvVkRenderTarget* mainRenderTarget() = 0;
@@ -277,7 +315,7 @@ public:
 	bool uploadTexture(const NvImage* image, NvVkTexture& tex);
 
 	/// Deprecated: Only supported on platforms/drivers that can accept GLSL directly
-	uint32_t createShadersFromSourceFile(const std::string& sourceText, VkPipelineShaderStageCreateInfo* shaders, uint32_t maxShaders);
+	uint32_t createShadersFromSourceString(const std::string& sourceText, VkPipelineShaderStageCreateInfo* shaders, uint32_t maxShaders);
 
 	/// Load SPIR-V shaders from binary file data (generated from the glsl2spirv tool)
 	/// \param[in] data the binary data with multiple shaders
@@ -286,7 +324,7 @@ public:
 	/// Array must be at least as large as the number of shader stages in the file
 	/// \param[in] maxShaders the number of shader structs in the array
 	/// \return the number of shader stages loaded, or zero on failure.
-	uint32_t createShadersFromBinaryFile(uint32_t* data, uint32_t leng, VkPipelineShaderStageCreateInfo* shaders, uint32_t maxShaders);
+	uint32_t createShadersFromBinaryBlob(uint32_t* data, uint32_t leng, VkPipelineShaderStageCreateInfo* shaders, uint32_t maxShaders);
 
 	VkResult transitionImageLayout(VkImage& image, VkImageAspectFlags aspect,
 		VkImageLayout oldLayout, VkImageLayout newLayout, VkAccessFlagBits inSrcAccessmask = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT,
@@ -393,6 +431,106 @@ public:
 	bool isExtensionSupported(const char* ext);
 	bool isLayerSupported(const char* layer);
 
+	const NvVKConfiguration& configuration() const { return mConfiguration; }
+
+#if defined (VK_EXT_debug_marker)
+
+	void debugMarkerBegin(VkCommandBuffer cmd, const char* name) const {
+		if (mSupportsDebugMarkers)	{
+			VkDebugMarkerMarkerInfoEXT markerInfo = { VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT };
+
+			markerInfo.pMarkerName = name;
+
+			ext_vkCmdDebugMarkerBeginEXT(cmd, &markerInfo);
+		}
+	}
+
+	void debugMarkerEnd(VkCommandBuffer cmd) const {
+		if (mSupportsDebugMarkers)	{
+			ext_vkCmdDebugMarkerEndEXT(cmd);
+		}
+	}
+	
+	void debugMarkerInsert(VkCommandBuffer cmd, const char* name) const {
+		if (mSupportsDebugMarkers) {
+			VkDebugMarkerMarkerInfoEXT markerInfo = { VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT };
+
+			markerInfo.pMarkerName = name;
+
+			ext_vkCmdDebugMarkerInsertEXT(cmd, &markerInfo);
+		}
+	}
+
+	void debugLabelImpl(uint64_t object, VkDebugReportObjectTypeEXT type, const char* name) const {
+		if (mSupportsDebugMarkers)	{
+			VkDebugMarkerObjectNameInfoEXT nameInfo = { VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT };
+			nameInfo.object = object;
+			nameInfo.objectType = type;
+			nameInfo.pObjectName = name;
+
+			ext_vkDebugMarkerSetObjectNameEXT(device(), &nameInfo);
+		}
+	}
+
+#else
+	void debugMarkerBegin(VkCommandBuffer cmd, const char* name) const {}
+	void debugMarkerEnd(VkCommandBuffer cmd) const {}
+	void debugMarkerInsert(VkCommandBuffer cmd, const char* name) const {}
+	void debugLabelImpl(uint64_t object, VkDebugReportObjectTypeEXT type, const char* name) const { }
+#endif 
+	// on 32-bit system Vk handles all are typedefed to uint64_t so we need different function names to avoid collisions :(
+#define NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(t,e) void debugLabel##t(Vk##t handle, const std::string& label) const { debugLabelImpl(uint64_t(handle),  VK_DEBUG_REPORT_OBJECT_TYPE_##e##_EXT, label.c_str()); }
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Instance, INSTANCE)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(PhysicalDevice, PHYSICAL_DEVICE)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Device, DEVICE)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Queue, QUEUE)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Semaphore, SEMAPHORE)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(CommandBuffer, COMMAND_BUFFER)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Fence, FENCE)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(DeviceMemory, DEVICE_MEMORY)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Buffer, BUFFER)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Image, IMAGE)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Event, EVENT)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(QueryPool, QUERY_POOL)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(BufferView, BUFFER_VIEW)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(ImageView, IMAGE_VIEW)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(ShaderModule, SHADER_MODULE)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(PipelineCache, PIPELINE_CACHE)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(PipelineLayout, PIPELINE_LAYOUT)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(RenderPass, RENDER_PASS)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Pipeline, PIPELINE)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(DescriptorSetLayout, DESCRIPTOR_SET_LAYOUT)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Sampler, SAMPLER)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(DescriptorPool, DESCRIPTOR_POOL)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(DescriptorSet, DESCRIPTOR_SET)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Framebuffer, FRAMEBUFFER)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(CommandPool, COMMAND_POOL)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(SurfaceKHR, SURFACE_KHR)
+	NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(SwapchainKHR, SWAPCHAIN_KHR)
+#undef NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION
+
+	struct DebugMarkerScope
+	{
+		DebugMarkerScope(const NvVkContext& context, VkCommandBuffer cmd, const char* name )
+			: _context(context)
+			, _cmd(cmd)
+		{
+			_context.debugMarkerBegin(_cmd, name);
+		}
+
+		~DebugMarkerScope()
+		{
+			_context.debugMarkerEnd(_cmd);
+
+		}
+
+		const NvVkContext& _context;
+		VkCommandBuffer _cmd;
+	};
+
+private:
+
+
 protected:
 	enum {
 		MAX_BUFFERED_FRAMES = 2
@@ -448,11 +586,25 @@ protected:
 	std::set<std::string> mCombinedExtensionNames;
 	std::set<std::string> mCombinedLayerNames;
 
+	NvVKConfiguration mConfiguration;
 
-#if VK_EXT_debug_report 
+
+#if defined(VK_EXT_debug_report )
     PFN_vkCreateDebugReportCallbackEXT ext_vkCreateDebugReportCallbackEXT;
     PFN_vkDestroyDebugReportCallbackEXT ext_vkDestroyDebugReportCallbackEXT;
     VkDebugReportCallbackEXT msg_callback;
+#endif
+
+
+	bool mSupportsDebugMarkers;
+#if defined (VK_EXT_debug_marker)
+
+	PFN_vkDebugMarkerSetObjectTagEXT  ext_vkDebugMarkerSetObjectTagEXT;
+	PFN_vkDebugMarkerSetObjectNameEXT ext_vkDebugMarkerSetObjectNameEXT;
+	PFN_vkCmdDebugMarkerBeginEXT      ext_vkCmdDebugMarkerBeginEXT;
+	PFN_vkCmdDebugMarkerEndEXT        ext_vkCmdDebugMarkerEndEXT;
+	PFN_vkCmdDebugMarkerInsertEXT     ext_vkCmdDebugMarkerInsertEXT;
+
 #endif
 };
 

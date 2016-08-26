@@ -36,6 +36,7 @@ CubemapRendering_debug_defines   += _LIB
 CubemapRendering_debug_defines   += NV_ANDROID
 CubemapRendering_debug_defines   += __STDC_LIMIT_MACROS
 CubemapRendering_debug_defines   += VK_NO_PROTOTYPES
+CubemapRendering_debug_defines   += GW_APP_NAME=\"CubemapRendering\"
 CubemapRendering_debug_defines   += GL_API_LEVEL_ES2
 CubemapRendering_debug_defines   += USE_REGAL=1
 CubemapRendering_debug_defines   += _DEBUG
@@ -154,6 +155,7 @@ CubemapRendering_release_defines   += _LIB
 CubemapRendering_release_defines   += NV_ANDROID
 CubemapRendering_release_defines   += __STDC_LIMIT_MACROS
 CubemapRendering_release_defines   += VK_NO_PROTOTYPES
+CubemapRendering_release_defines   += GW_APP_NAME=\"CubemapRendering\"
 CubemapRendering_release_defines   += GL_API_LEVEL_ES2
 CubemapRendering_release_defines   += USE_REGAL=1
 CubemapRendering_release_defines   += NDEBUG

@@ -26,6 +26,7 @@ Bloom_debug_lpaths    += ./../../../extensions/externals/lib/linux64
 Bloom_debug_defines   := $(Bloom_custom_defines)
 Bloom_debug_defines   += LINUX=1
 Bloom_debug_defines   += NV_LINUX
+Bloom_debug_defines   += GW_APP_NAME=\"Bloom\"
 Bloom_debug_defines   += _DEBUG
 Bloom_debug_libraries := 
 Bloom_debug_libraries += NsFoundationD
@@ -131,6 +132,7 @@ Bloom_release_lpaths    += ./../../../extensions/externals/lib/linux64
 Bloom_release_defines   := $(Bloom_custom_defines)
 Bloom_release_defines   += LINUX=1
 Bloom_release_defines   += NV_LINUX
+Bloom_release_defines   += GW_APP_NAME=\"Bloom\"
 Bloom_release_defines   += NDEBUG
 Bloom_release_libraries := 
 Bloom_release_libraries += NsFoundation

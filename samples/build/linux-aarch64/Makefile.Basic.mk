@@ -27,6 +27,7 @@ Basic_debug_defines   := $(Basic_custom_defines)
 Basic_debug_defines   += LINUX=1
 Basic_debug_defines   += NV_LINUX
 Basic_debug_defines   += GLEW_NO_GLU=1
+Basic_debug_defines   += GW_APP_NAME=\"Basic\"
 Basic_debug_defines   += _DEBUG
 Basic_debug_libraries := 
 Basic_debug_libraries += NsFoundationD
@@ -138,6 +139,7 @@ Basic_release_defines   := $(Basic_custom_defines)
 Basic_release_defines   += LINUX=1
 Basic_release_defines   += NV_LINUX
 Basic_release_defines   += GLEW_NO_GLU=1
+Basic_release_defines   += GW_APP_NAME=\"Basic\"
 Basic_release_defines   += NDEBUG
 Basic_release_libraries := 
 Basic_release_libraries += NsFoundation

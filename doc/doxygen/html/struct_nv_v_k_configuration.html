@@ -88,6 +88,32 @@ Inheritance diagram for NvVKConfiguration:</div>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nv_v_k_configuration.html#c37fe147dd31dc2c643652ef20dadc3c">NvVKConfiguration</a> (uint32_t r=8, uint32_t g=8, uint32_t b=8, uint32_t a=8, uint32_t d=24, uint32_t s=0, uint32_t msaa=0)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Inline all-elements constructor.  <a href="#c37fe147dd31dc2c643652ef20dadc3c"></a><br></td></tr>
+<tr><td colspan="2"><br><h2>Static Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="1fc57b5b4ef7cf9ba1730f7540d328f9"></a><!-- doxytag: member="NvVKConfiguration::requiredFeaturesToEnable" ref="1fc57b5b4ef7cf9ba1730f7540d328f9" args="()" -->
+static VkPhysicalDeviceFeatures&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nv_v_k_configuration.html#1fc57b5b4ef7cf9ba1730f7540d328f9">requiredFeaturesToEnable</a> ()</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Features required by the framework which are enabled by default. <br></td></tr>
+<tr><td colspan="2"><br><h2>Public Attributes</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="2d5ca2cc0e5ff961ddee04f2e7187a0f"></a><!-- doxytag: member="NvVKConfiguration::mainTargetUsageFlags" ref="2d5ca2cc0e5ff961ddee04f2e7187a0f" args="" -->
+VkImageUsageFlags&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nv_v_k_configuration.html#2d5ca2cc0e5ff961ddee04f2e7187a0f">mainTargetUsageFlags</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Usage flags for the main color render target default is VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT. <br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="c946de8cc6e09f2e6d3b26537bd4a3ed"></a><!-- doxytag: member="NvVKConfiguration::mainDepthStencilUsageFlags" ref="c946de8cc6e09f2e6d3b26537bd4a3ed" args="" -->
+VkImageUsageFlags&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nv_v_k_configuration.html#c946de8cc6e09f2e6d3b26537bd4a3ed">mainDepthStencilUsageFlags</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Usage flags for the main depth stencil render target default is VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT. <br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="427048fabd6e7018e9db321039010f2c"></a><!-- doxytag: member="NvVKConfiguration::extensionsToEnable" ref="427048fabd6e7018e9db321039010f2c" args="" -->
+std::vector&lt; std::string &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nv_v_k_configuration.html#427048fabd6e7018e9db321039010f2c">extensionsToEnable</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Additional extensions to enable during instance and device create time. <br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="ac90cb84b5b61c2e7c5d46a67809e063"></a><!-- doxytag: member="NvVKConfiguration::layersToEnable" ref="ac90cb84b5b61c2e7c5d46a67809e063" args="" -->
+std::vector&lt; std::string &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nv_v_k_configuration.html#ac90cb84b5b61c2e7c5d46a67809e063">layersToEnable</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Additional layers to enable during instance create time (device layers are deprecated). <br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="fdec11e5638f46b11f0c80c5962e4075"></a><!-- doxytag: member="NvVKConfiguration::featuresToEnable" ref="fdec11e5638f46b11f0c80c5962e4075" args="" -->
+VkPhysicalDeviceFeatures&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nv_v_k_configuration.html#fdec11e5638f46b11f0c80c5962e4075">featuresToEnable</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Features to enable during device create time. <br></td></tr>
 </table>
 <hr><a name="_details"></a><h2>Detailed Description</h2>
 VK config representation. <hr><h2>Constructor &amp; Destructor Documentation</h2>
@@ -172,7 +198,7 @@ Inline all-elements constructor.
 	<div class="seperator"></div>
 	<div class="seperator"></div>
 	<address style="text-align: right;"><small>
-Generated on Thu Jul 28 10:35:52 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
+Generated on Thu Aug 25 12:48:27 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
 	<footer>
 		<div class="row">
 			<div class="text-center">&copy;2016 NVIDIA Corporation.</div>

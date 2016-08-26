@@ -38,6 +38,7 @@ CursiveES_debug_defines   += _LIB
 CursiveES_debug_defines   += NV_ANDROID
 CursiveES_debug_defines   += __STDC_LIMIT_MACROS
 CursiveES_debug_defines   += VK_NO_PROTOTYPES
+CursiveES_debug_defines   += GW_APP_NAME=\"CursiveES\"
 CursiveES_debug_defines   += GL_API_LEVEL_ES2
 CursiveES_debug_defines   += USE_REGAL=1
 CursiveES_debug_defines   += _DEBUG
@@ -156,6 +157,7 @@ CursiveES_release_defines   += _LIB
 CursiveES_release_defines   += NV_ANDROID
 CursiveES_release_defines   += __STDC_LIMIT_MACROS
 CursiveES_release_defines   += VK_NO_PROTOTYPES
+CursiveES_release_defines   += GW_APP_NAME=\"CursiveES\"
 CursiveES_release_defines   += GL_API_LEVEL_ES2
 CursiveES_release_defines   += USE_REGAL=1
 CursiveES_release_defines   += NDEBUG

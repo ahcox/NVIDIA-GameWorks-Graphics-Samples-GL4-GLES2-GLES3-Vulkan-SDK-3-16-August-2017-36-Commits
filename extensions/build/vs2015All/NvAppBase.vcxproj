@@ -162,7 +162,7 @@
 		<OutDir>./../../lib/vs2015x86\</OutDir>
 		<IntDir>./intermediate/NvAppBase/vs2015x86/release\</IntDir>
 		<TargetExt>.lib</TargetExt>
-		<TargetName>libNvAppBaseD</TargetName>
+		<TargetName>NvAppBaseD</TargetName>
 		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
 		<CodeAnalysisRules />
 		<CodeAnalysisRuleAssemblies />
@@ -186,9 +186,9 @@
 		</ClCompile>
 		<Lib>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-			<OutputFile>$(OutDir)libNvAppBaseD.lib</OutputFile>
+			<OutputFile>$(OutDir)NvAppBaseD.lib</OutputFile>
 			<AdditionalLibraryDirectories>./../../externals/lib/vs2015x86;./../../lib/vs2015x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-			<ProgramDatabaseFile>$(OutDir)/libNvAppBaseD.lib.pdb</ProgramDatabaseFile>
+			<ProgramDatabaseFile>$(OutDir)/NvAppBaseD.lib.pdb</ProgramDatabaseFile>
 			<TargetMachine>MachineX86</TargetMachine>
 		</Lib>
 		<ResourceCompile>
@@ -239,7 +239,7 @@
 		<OutDir>./../../lib/vs2015x64\</OutDir>
 		<IntDir>./intermediate/NvAppBase/vs2015x64/release\</IntDir>
 		<TargetExt>.lib</TargetExt>
-		<TargetName>libNvAppBaseD</TargetName>
+		<TargetName>NvAppBaseD</TargetName>
 		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
 		<CodeAnalysisRules />
 		<CodeAnalysisRuleAssemblies />
@@ -262,9 +262,9 @@
 		</ClCompile>
 		<Lib>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-			<OutputFile>$(OutDir)libNvAppBaseD.lib</OutputFile>
+			<OutputFile>$(OutDir)NvAppBaseD.lib</OutputFile>
 			<AdditionalLibraryDirectories>./../../externals/lib/vs2015x64;./../../lib/vs2015x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-			<ProgramDatabaseFile>$(OutDir)/libNvAppBaseD.lib.pdb</ProgramDatabaseFile>
+			<ProgramDatabaseFile>$(OutDir)/NvAppBaseD.lib.pdb</ProgramDatabaseFile>
 			<TargetMachine>MachineX64</TargetMachine>
 		</Lib>
 		<ResourceCompile>

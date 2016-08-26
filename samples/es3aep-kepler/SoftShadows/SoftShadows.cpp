@@ -268,7 +268,9 @@ void SoftShadows::configurationCallback(NvGLConfiguration& config)
 ////////////////////////////////////////////////////////////////////////////////
 void SoftShadows::initRendering()
 {
-    NvAssetLoaderAddSearchPath("es3aep-kepler/SoftShadows");
+	NV_APP_BASE_SHARED_INIT();
+
+	NvAssetLoaderAddSearchPath("es3aep-kepler/SoftShadows");
     bool isGL = getGLContext()->getConfiguration().apiVer.api == NvGLAPI::GL;
 
     // Require GL for now.

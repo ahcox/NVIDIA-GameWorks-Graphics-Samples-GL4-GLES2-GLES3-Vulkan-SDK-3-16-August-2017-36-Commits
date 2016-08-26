@@ -26,6 +26,7 @@ InstancedTessellation_debug_lpaths    += ./../../../extensions/externals/lib/lin
 InstancedTessellation_debug_defines   := $(InstancedTessellation_custom_defines)
 InstancedTessellation_debug_defines   += LINUX=1
 InstancedTessellation_debug_defines   += NV_LINUX
+InstancedTessellation_debug_defines   += GW_APP_NAME=\"InstancedTessellation\"
 InstancedTessellation_debug_defines   += _DEBUG
 InstancedTessellation_debug_libraries := 
 InstancedTessellation_debug_libraries += NsFoundationD
@@ -131,6 +132,7 @@ InstancedTessellation_release_lpaths    += ./../../../extensions/externals/lib/l
 InstancedTessellation_release_defines   := $(InstancedTessellation_custom_defines)
 InstancedTessellation_release_defines   += LINUX=1
 InstancedTessellation_release_defines   += NV_LINUX
+InstancedTessellation_release_defines   += GW_APP_NAME=\"InstancedTessellation\"
 InstancedTessellation_release_defines   += NDEBUG
 InstancedTessellation_release_libraries := 
 InstancedTessellation_release_libraries += NsFoundation

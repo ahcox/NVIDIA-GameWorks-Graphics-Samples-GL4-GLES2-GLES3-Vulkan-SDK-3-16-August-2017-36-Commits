@@ -284,7 +284,9 @@ bool MotionBlur::handleGamepadChanged(uint32_t changedPadFlags)
 }
 
 void MotionBlur::initRendering(void) {
-    // This sample requires at least OpenGL ES 2.0
+	NV_APP_BASE_SHARED_INIT();
+
+	// This sample requires at least OpenGL ES 2.0
     if (!requireMinAPIVersion(NvGLAPIVersionES2())) 
         return;
 

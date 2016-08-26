@@ -36,6 +36,7 @@ DeferredShadingMSAA_debug_defines   += _LIB
 DeferredShadingMSAA_debug_defines   += NV_ANDROID
 DeferredShadingMSAA_debug_defines   += __STDC_LIMIT_MACROS
 DeferredShadingMSAA_debug_defines   += VK_NO_PROTOTYPES
+DeferredShadingMSAA_debug_defines   += GW_APP_NAME=\"DeferredShadingMSAA\"
 DeferredShadingMSAA_debug_defines   += GL_API_LEVEL_ES2
 DeferredShadingMSAA_debug_defines   += USE_REGAL=1
 DeferredShadingMSAA_debug_defines   += _DEBUG
@@ -153,6 +154,7 @@ DeferredShadingMSAA_release_defines   += _LIB
 DeferredShadingMSAA_release_defines   += NV_ANDROID
 DeferredShadingMSAA_release_defines   += __STDC_LIMIT_MACROS
 DeferredShadingMSAA_release_defines   += VK_NO_PROTOTYPES
+DeferredShadingMSAA_release_defines   += GW_APP_NAME=\"DeferredShadingMSAA\"
 DeferredShadingMSAA_release_defines   += GL_API_LEVEL_ES2
 DeferredShadingMSAA_release_defines   += USE_REGAL=1
 DeferredShadingMSAA_release_defines   += NDEBUG

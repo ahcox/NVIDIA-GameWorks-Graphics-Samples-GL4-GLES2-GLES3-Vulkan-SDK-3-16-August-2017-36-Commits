@@ -41,6 +41,7 @@ SkinningAppVk_debug_defines   += _LIB
 SkinningAppVk_debug_defines   += NV_ANDROID
 SkinningAppVk_debug_defines   += __STDC_LIMIT_MACROS
 SkinningAppVk_debug_defines   += VK_NO_PROTOTYPES
+SkinningAppVk_debug_defines   += GW_APP_NAME=\"SkinningAppVk\"
 SkinningAppVk_debug_defines   += GL_API_LEVEL_ES2
 SkinningAppVk_debug_defines   += USE_REGAL=1
 SkinningAppVk_debug_defines   += _DEBUG
@@ -168,6 +169,7 @@ SkinningAppVk_release_defines   += _LIB
 SkinningAppVk_release_defines   += NV_ANDROID
 SkinningAppVk_release_defines   += __STDC_LIMIT_MACROS
 SkinningAppVk_release_defines   += VK_NO_PROTOTYPES
+SkinningAppVk_release_defines   += GW_APP_NAME=\"SkinningAppVk\"
 SkinningAppVk_release_defines   += GL_API_LEVEL_ES2
 SkinningAppVk_release_defines   += USE_REGAL=1
 SkinningAppVk_release_defines   += NDEBUG

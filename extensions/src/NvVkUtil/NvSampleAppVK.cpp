@@ -95,6 +95,9 @@ void NvSampleAppVK::platformInitUI(void) {
 }
 
 bool NvSampleAppVK::initialize(const NvPlatformInfo& platform, int32_t width, int32_t height) {
+	NvVKConfiguration vkConfig;
+	configurationCallback(vkConfig);
+
 	const std::vector<std::string>& cmd = getCommandLine();
 	std::vector<std::string>::const_iterator iter = cmd.begin();
 
@@ -108,7 +111,7 @@ bool NvSampleAppVK::initialize(const NvPlatformInfo& platform, int32_t width, in
 		if (*iter == "-wsi") {
 			forceWSI = true;
 			mUseWSI = true;
-		} 
+		}
 		else if (*iter == "-vkongl")
 			mUseWSI = false;
 		else if (*iter == "-vkonglui") {
@@ -116,11 +119,11 @@ bool NvSampleAppVK::initialize(const NvPlatformInfo& platform, int32_t width, in
 			mUseGLUI = true;
 		}
 		else if (*iter == "-validation")
-            useValidation = true;
-        else if (*iter == "-loaderdebug")
-            useLoaderDebug = true;
-        else if (*iter == "-apidump")
-            useApiDump = true;
+			useValidation = true;
+		else if (*iter == "-loaderdebug")
+			useLoaderDebug = true;
+		else if (*iter == "-apidump")
+			useApiDump = true;
     }
 
 #if defined(_WIN32) || defined(LINUX)
@@ -140,7 +143,7 @@ bool NvSampleAppVK::initialize(const NvPlatformInfo& platform, int32_t width, in
 		mUseWSI = true;
 
 #if defined(_WIN32) || defined(LINUX)
-	NvGLConfiguration config(NvGLAPIVersionGL4(), 8, 8, 8, 8, 16, 0);
+	NvGLConfiguration glConfig(NvGLAPIVersionGL4(), 8, 8, 8, 8, 16, 0);
 
 	NvGLFWPlatformContext* glfwPlat = new NvGLFWPlatformContext;
 
@@ -149,7 +152,7 @@ bool NvSampleAppVK::initialize(const NvPlatformInfo& platform, int32_t width, in
 	mContext = NULL;
 
 	if (!mUseWSI) {
-		NvGLFWContextGL* context = new NvGLFWContextGL(config, NvPlatformCategory::PLAT_DESKTOP,
+		NvGLFWContextGL* context = new NvGLFWContextGL(glConfig, NvPlatformCategory::PLAT_DESKTOP,
 			NvPlatformOS::OS_WINDOWS);
 
 		glfwPlat->createWindow(width, height);
@@ -158,10 +161,10 @@ bool NvSampleAppVK::initialize(const NvPlatformInfo& platform, int32_t width, in
 
 		if (strstr((const char*)glGetString(GL_EXTENSIONS), "GL_NV_draw_vulkan_image")) {
 			context->setWindow(window);
-			context->setConfiguration(config);
+			context->setConfiguration(glConfig);
 
 			// Hack - we should use a factory so we can switch to WSI
-			mWrapperContext = new NvAppWrapperContextVK(context, getAppTitle(), platform, mUseGLUI);
+			mWrapperContext = new NvAppWrapperContextVK(context, vkConfig, getAppTitle(), platform, mUseGLUI);
 			mWrapperContext->useApiDump(useApiDump);
 			mWrapperContext->useLoaderDebug(useLoaderDebug);
 			mWrapperContext->useValidation(useValidation);
@@ -194,7 +197,7 @@ bool NvSampleAppVK::initialize(const NvPlatformInfo& platform, int32_t width, in
 	}
 
 	if (!mContext) {
-		NvGLFWContextVK* context = new NvGLFWContextVK(NvPlatformCategory::PLAT_DESKTOP, NvPlatformOS::OS_WINDOWS);
+		NvGLFWContextVK* context = new NvGLFWContextVK(vkConfig, NvPlatformCategory::PLAT_DESKTOP, NvPlatformOS::OS_WINDOWS);
         
         context->useApiDump(useApiDump);
         context->useLoaderDebug(useLoaderDebug);
@@ -216,7 +219,7 @@ bool NvSampleAppVK::initialize(const NvPlatformInfo& platform, int32_t width, in
 
 	if (mUseWSI) {
 		NvAndVkWinUtil* win = NvAndVkWinUtil::create();
-		NvAppContextAndVK* context = new NvAppContextAndVK(win, NvPlatformInfo(NvPlatformCategory::PLAT_MOBILE, NvPlatformOS::OS_ANDROID));
+		NvAppContextAndVK* context = new NvAppContextAndVK(vkConfig, win, NvPlatformInfo(NvPlatformCategory::PLAT_MOBILE, NvPlatformOS::OS_ANDROID));
 
 		if (!context->initialize()) {
 			success = false;
@@ -236,7 +239,7 @@ bool NvSampleAppVK::initialize(const NvPlatformInfo& platform, int32_t width, in
 			mContext = context;
 
 			// Hack - we should use a factory so we can switch to WSI
-			mWrapperContext = new NvAppWrapperContextVK(context, getAppTitle(), platform, mUseGLUI);
+			mWrapperContext = new NvAppWrapperContextVK(context, vkConfig, getAppTitle(), platform, mUseGLUI);
 			mWrapperContext->bindContext();
 			mContext = mWrapperContext;
 			mGLSupported = true;

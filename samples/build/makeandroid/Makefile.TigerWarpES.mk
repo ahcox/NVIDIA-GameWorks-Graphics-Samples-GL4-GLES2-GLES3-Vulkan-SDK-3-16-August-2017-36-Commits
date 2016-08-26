@@ -38,6 +38,7 @@ TigerWarpES_debug_defines   += _LIB
 TigerWarpES_debug_defines   += NV_ANDROID
 TigerWarpES_debug_defines   += __STDC_LIMIT_MACROS
 TigerWarpES_debug_defines   += VK_NO_PROTOTYPES
+TigerWarpES_debug_defines   += GW_APP_NAME=\"TigerWarpES\"
 TigerWarpES_debug_defines   += GL_API_LEVEL_ES2
 TigerWarpES_debug_defines   += USE_REGAL=1
 TigerWarpES_debug_defines   += _DEBUG
@@ -156,6 +157,7 @@ TigerWarpES_release_defines   += _LIB
 TigerWarpES_release_defines   += NV_ANDROID
 TigerWarpES_release_defines   += __STDC_LIMIT_MACROS
 TigerWarpES_release_defines   += VK_NO_PROTOTYPES
+TigerWarpES_release_defines   += GW_APP_NAME=\"TigerWarpES\"
 TigerWarpES_release_defines   += GL_API_LEVEL_ES2
 TigerWarpES_release_defines   += USE_REGAL=1
 TigerWarpES_release_defines   += NDEBUG

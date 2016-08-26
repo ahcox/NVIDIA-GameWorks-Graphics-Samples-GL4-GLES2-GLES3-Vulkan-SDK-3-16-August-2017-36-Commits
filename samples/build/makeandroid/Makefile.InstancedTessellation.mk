@@ -36,6 +36,7 @@ InstancedTessellation_debug_defines   += _LIB
 InstancedTessellation_debug_defines   += NV_ANDROID
 InstancedTessellation_debug_defines   += __STDC_LIMIT_MACROS
 InstancedTessellation_debug_defines   += VK_NO_PROTOTYPES
+InstancedTessellation_debug_defines   += GW_APP_NAME=\"InstancedTessellation\"
 InstancedTessellation_debug_defines   += GL_API_LEVEL_ES2
 InstancedTessellation_debug_defines   += _DEBUG
 InstancedTessellation_debug_libraries := 
@@ -151,6 +152,7 @@ InstancedTessellation_release_defines   += _LIB
 InstancedTessellation_release_defines   += NV_ANDROID
 InstancedTessellation_release_defines   += __STDC_LIMIT_MACROS
 InstancedTessellation_release_defines   += VK_NO_PROTOTYPES
+InstancedTessellation_release_defines   += GW_APP_NAME=\"InstancedTessellation\"
 InstancedTessellation_release_defines   += GL_API_LEVEL_ES2
 InstancedTessellation_release_defines   += NDEBUG
 InstancedTessellation_release_libraries := 

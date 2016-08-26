@@ -378,17 +378,17 @@ int32_t NvBFTextRenderVK::StaticInit() {
 	VkPipelineShaderStageCreateInfo stages[2];
 	uint32_t stageCount = 0;
 #if USE_SOURCE_SHADERS
-	stageCount = vk.createShadersFromSourceFile(s_fontShader, stages, 2);
+	stageCount = vk.createShadersFromSourceString(s_fontShader, stages, 2);
 #else
-	stageCount = vk.createShadersFromBinaryFile((uint32_t*)fontData, fontLength, stages, 2);
+	stageCount = vk.createShadersFromBinaryBlob((uint32_t*)fontData, fontLength, stages, 2);
 #endif
 
 	InitPipeline(stageCount, stages, &ms_pipelineText);
 
 #if USE_SOURCE_SHADERS
-	stageCount = vk.createShadersFromSourceFile(s_fontOutlineShader, stages, 2);
+	stageCount = vk.createShadersFromSourceString(s_fontOutlineShader, stages, 2);
 #else
-	stageCount = vk.createShadersFromBinaryFile((uint32_t*)fontOutlineData, fontOutlineLength, stages, 2);
+	stageCount = vk.createShadersFromBinaryBlob((uint32_t*)fontOutlineData, fontOutlineLength, stages, 2);
 #endif
 
 	InitPipeline(stageCount, stages, &ms_pipelineOutline);
@@ -437,6 +437,7 @@ void NvBFTextRenderVK::InitPipeline(uint32_t shaderCount,
 	rsStateInfo.polygonMode = VK_POLYGON_MODE_FILL;
 	rsStateInfo.cullMode = VK_CULL_MODE_NONE;
 	rsStateInfo.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
+	rsStateInfo.lineWidth = 1.0f;
 
 	VkPipelineDepthStencilStateCreateInfo noDepth;
 	noDepth = { VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO };
@@ -467,7 +468,7 @@ void NvBFTextRenderVK::InitPipeline(uint32_t shaderCount,
 	dynStateInfo.pDynamicStates = dynStates;
 
 	VkPipelineColorBlendAttachmentState colorStateBlend = { VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO };
-	colorStateBlend.colorWriteMask = ~0;
+	colorStateBlend.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
 	colorStateBlend.blendEnable = VK_TRUE;
 	colorStateBlend.alphaBlendOp = VK_BLEND_OP_ADD;
 	colorStateBlend.colorBlendOp = VK_BLEND_OP_ADD;

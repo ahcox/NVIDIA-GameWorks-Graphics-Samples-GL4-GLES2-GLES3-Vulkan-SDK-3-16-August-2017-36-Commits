@@ -32,6 +32,7 @@ ShapedTextES_debug_lpaths    += ./../../../extensions/lib/linux64
 ShapedTextES_debug_defines   := $(ShapedTextES_custom_defines)
 ShapedTextES_debug_defines   += LINUX=1
 ShapedTextES_debug_defines   += NV_LINUX
+ShapedTextES_debug_defines   += GW_APP_NAME=\"ShapedTextES\"
 ShapedTextES_debug_defines   += _DEBUG
 ShapedTextES_debug_libraries := 
 ShapedTextES_debug_libraries += cg4cppD
@@ -143,6 +144,7 @@ ShapedTextES_release_lpaths    += ./../../../extensions/lib/linux64
 ShapedTextES_release_defines   := $(ShapedTextES_custom_defines)
 ShapedTextES_release_defines   += LINUX=1
 ShapedTextES_release_defines   += NV_LINUX
+ShapedTextES_release_defines   += GW_APP_NAME=\"ShapedTextES\"
 ShapedTextES_release_defines   += NDEBUG
 ShapedTextES_release_libraries := 
 ShapedTextES_release_libraries += cg4cpp

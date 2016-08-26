@@ -97,7 +97,9 @@ void ConservativeRaster::initUI() {
 }
 
 void ConservativeRaster::initRendering(void) {
-    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);    
+	NV_APP_BASE_SHARED_INIT();
+
+	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glDisable(GL_DEPTH_TEST);
 
     NvAssetLoaderAddSearchPath("gl4-maxwell/ConservativeRaster");

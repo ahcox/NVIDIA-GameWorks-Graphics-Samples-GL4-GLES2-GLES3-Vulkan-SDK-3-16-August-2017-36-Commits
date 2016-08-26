@@ -91,7 +91,9 @@ void InstancingApp::configurationCallback(NvGLConfiguration& config)
 }
 
 void InstancingApp::initRendering(void) {
-    m_transformer->setTranslationVec(isMobilePlatform() 
+	NV_APP_BASE_SHARED_INIT();
+
+	m_transformer->setTranslationVec(isMobilePlatform()
         ? nv::vec3f(0.0f, 0.0f, -40.0f) : nv::vec3f(-20.0f, 0.0f, -100.0f));
 
     if( requireMinAPIVersion(NvGLAPIVersionES3(), false) ) {

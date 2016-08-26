@@ -42,6 +42,7 @@ ComputeWaterSimulation_debug_defines   += _LIB
 ComputeWaterSimulation_debug_defines   += NV_ANDROID
 ComputeWaterSimulation_debug_defines   += __STDC_LIMIT_MACROS
 ComputeWaterSimulation_debug_defines   += VK_NO_PROTOTYPES
+ComputeWaterSimulation_debug_defines   += GW_APP_NAME=\"ComputeWaterSimulation\"
 ComputeWaterSimulation_debug_defines   += GL_API_LEVEL_ES3_1_AEP
 ComputeWaterSimulation_debug_defines   += USE_REGAL=1
 ComputeWaterSimulation_debug_defines   += _DEBUG
@@ -160,6 +161,7 @@ ComputeWaterSimulation_release_defines   += _LIB
 ComputeWaterSimulation_release_defines   += NV_ANDROID
 ComputeWaterSimulation_release_defines   += __STDC_LIMIT_MACROS
 ComputeWaterSimulation_release_defines   += VK_NO_PROTOTYPES
+ComputeWaterSimulation_release_defines   += GW_APP_NAME=\"ComputeWaterSimulation\"
 ComputeWaterSimulation_release_defines   += GL_API_LEVEL_ES3_1_AEP
 ComputeWaterSimulation_release_defines   += USE_REGAL=1
 ComputeWaterSimulation_release_defines   += NDEBUG

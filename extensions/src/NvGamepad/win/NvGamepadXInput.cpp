@@ -32,116 +32,131 @@
 //
 //----------------------------------------------------------------------------------
 #include "NvGamepadXInput.h"
-#include <Windows.h>
-#include <xinput.h>
 #include <math.h>
+
+HMODULE NvGamepadXInput::msXInputDLL = NULL;
+XInputGetStatePtr NvGamepadXInput::msXInputGetState = NULL;
 
 NvGamepad* NvGamepad::createDefaultGamePad() {
 	return new NvGamepadXInput;
 }
 
 NvGamepadXInput::NvGamepadXInput() {
-    mStates = new State[MAX_GAMEPADS];
-    mXStates = new XINPUT_STATE[MAX_GAMEPADS];
+	mStates = new State[MAX_GAMEPADS];
+	mXStates = new XINPUT_STATE[MAX_GAMEPADS];
 
-    memset(mStates, 0, MAX_GAMEPADS * sizeof(State));
-    memset(mXStates, 0, MAX_GAMEPADS * sizeof(mXStates));
+	memset(mStates, 0, MAX_GAMEPADS * sizeof(State));
+	memset(mXStates, 0, MAX_GAMEPADS * sizeof(mXStates));
 
-    int32_t i;
-    for (i = 0; i < MAX_GAMEPADS; i++) {
-        XInputGetState(i, mXStates+i);
-        updateFromXState(mStates[i], mXStates[i]);
-    }
+	msXInputDLL = LoadLibrary("xinput9_1_0.dll");
+	if (msXInputDLL)
+		msXInputGetState = (XInputGetStatePtr)GetProcAddress(msXInputDLL, "XInputGetState");
+	else
+		msXInputGetState = NULL;
+
+	int32_t i;
+	for (i = 0; i < MAX_GAMEPADS; i++) {
+		if (msXInputGetState)
+			msXInputGetState(i, mXStates + i);
+		updateFromXState(mStates[i], mXStates[i]);
+	}
 }
 
 NvGamepadXInput::~NvGamepadXInput() {
-    delete[] mStates;
-    delete[] mXStates;
+	delete[] mStates;
+	delete[] mXStates;
 }
 
 bool NvGamepadXInput::getState(int32_t padID, State& state) {
-    if (ERROR_SUCCESS != XInputGetState(padID, mXStates+padID))
-        return false;
+	if (!msXInputGetState)
+		return false;
 
-    if (mXStates[padID].dwPacketNumber != mStates[padID].mTimestamp)
-        updateFromXState(mStates[padID], mXStates[padID]);
+	if (ERROR_SUCCESS != msXInputGetState(padID, mXStates + padID))
+		return false;
 
-    state = mStates[padID];
+	if (mXStates[padID].dwPacketNumber != mStates[padID].mTimestamp)
+		updateFromXState(mStates[padID], mXStates[padID]);
 
-    return true;
+	state = mStates[padID];
+
+	return true;
 }
 
 uint32_t NvGamepadXInput::pollGamepads() {
-    int32_t changedMask = 0;
-    int32_t i;
-    for (i = 0; i < MAX_GAMEPADS; i++) {
-        uint32_t timestamp = mXStates[i].dwPacketNumber;
-        if (ERROR_SUCCESS == XInputGetState(i, mXStates+i)) {
-            if (timestamp != mStates[i].mTimestamp)
-                changedMask |= (1<<i);
-        }
-    }
+	int32_t changedMask = 0;
+	int32_t i;
 
-    return changedMask;
+	if (!msXInputGetState)
+		return 0;
+
+	for (i = 0; i < MAX_GAMEPADS; i++) {
+		uint32_t timestamp = mXStates[i].dwPacketNumber;
+		if (ERROR_SUCCESS == msXInputGetState(i, mXStates + i)) {
+			if (timestamp != mStates[i].mTimestamp)
+				changedMask |= (1 << i);
+		}
+	}
+
+	return changedMask;
 }
 
 void NvGamepadXInput::setMaxGamepadCount(int32_t max) {
-    /* */
+	/* */
 }
 
 int32_t NvGamepadXInput::getMaxGamepadCount() {
-    return MAX_GAMEPADS;
+	return MAX_GAMEPADS;
 }
 
 void NvGamepadXInput::updateFromXState(State& dest, const XINPUT_STATE& src) {
-    float lx = src.Gamepad.sThumbLX;
-    float ly = src.Gamepad.sThumbLY;
-    float lMag = sqrtf(lx*lx + ly*ly);
+	float lx = src.Gamepad.sThumbLX;
+	float ly = src.Gamepad.sThumbLY;
+	float lMag = sqrtf(lx*lx + ly*ly);
 
-    if (lMag > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE ) {
-        lx /= lMag;
-        ly /= lMag;
+	if (lMag > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) {
+		lx /= lMag;
+		ly /= lMag;
 
-        lMag = (lMag - XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)/ float(32767 - XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE);
+		lMag = (lMag - XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) / float(32767 - XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE);
 
-        lx *= lMag;
-        ly *= lMag;
-    }
-    else {
-        lx = ly = 0.0f;
-    }
+		lx *= lMag;
+		ly *= lMag;
+	}
+	else {
+		lx = ly = 0.0f;
+	}
 
-    float rx = src.Gamepad.sThumbRX;
-    float ry = src.Gamepad.sThumbRY;
-    float rMag = sqrtf(rx*rx + ry*ry);
+	float rx = src.Gamepad.sThumbRX;
+	float ry = src.Gamepad.sThumbRY;
+	float rMag = sqrtf(rx*rx + ry*ry);
 
-    if (rMag > XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE ) {
-        rx /= rMag;
-        ry /= rMag;
+	if (rMag > XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE) {
+		rx /= rMag;
+		ry /= rMag;
 
-        rMag = (rMag - XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE)/ float(32767 - XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE);
+		rMag = (rMag - XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE) / float(32767 - XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE);
 
-        rx *= rMag;
-        ry *= rMag;
-    }
-    else {
-        rx = ry = 0.0f;
-    }
+		rx *= rMag;
+		ry *= rMag;
+	}
+	else {
+		rx = ry = 0.0f;
+	}
 
-    float lt = 0.0f;
-    if ( src.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD )
-        lt = float(src.Gamepad.bLeftTrigger - XINPUT_GAMEPAD_TRIGGER_THRESHOLD) / (255 -XINPUT_GAMEPAD_TRIGGER_THRESHOLD);
+	float lt = 0.0f;
+	if (src.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
+		lt = float(src.Gamepad.bLeftTrigger - XINPUT_GAMEPAD_TRIGGER_THRESHOLD) / (255 - XINPUT_GAMEPAD_TRIGGER_THRESHOLD);
 
-    float rt = 0.0f;
-    if ( src.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD )
-        rt = float(src.Gamepad.bRightTrigger - XINPUT_GAMEPAD_TRIGGER_THRESHOLD) / (255 -XINPUT_GAMEPAD_TRIGGER_THRESHOLD);
+	float rt = 0.0f;
+	if (src.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
+		rt = float(src.Gamepad.bRightTrigger - XINPUT_GAMEPAD_TRIGGER_THRESHOLD) / (255 - XINPUT_GAMEPAD_TRIGGER_THRESHOLD);
 
-    dest.mTimestamp = src.dwPacketNumber;
-    dest.mButtons = src.Gamepad.wButtons;
-    dest.mThumbLX = lx;
-    dest.mThumbLY = -ly; // flip to match Android
-    dest.mThumbRX = rx;
-    dest.mThumbRY = -ry; // flip to match Android
-    dest.mLeftTrigger = lt;
-    dest.mRightTrigger = rt;
+	dest.mTimestamp = src.dwPacketNumber;
+	dest.mButtons = src.Gamepad.wButtons;
+	dest.mThumbLX = lx;
+	dest.mThumbLY = -ly; // flip to match Android
+	dest.mThumbRX = rx;
+	dest.mThumbRY = -ry; // flip to match Android
+	dest.mLeftTrigger = lt;
+	dest.mRightTrigger = rt;
 }

@@ -320,7 +320,9 @@ void BindlessApp::updatePerMeshUniforms(float t)
 //
 ////////////////////////////////////////////////////////////////////////////////
 void BindlessApp::initRendering(void) {
-    // Check extensions; exit on failure
+	NV_APP_BASE_SHARED_INIT();
+
+	// Check extensions; exit on failure
     if(!requireExtension("GL_NV_vertex_buffer_unified_memory")) return;
     if(!requireExtension("GL_NV_shader_buffer_load")) return;
     if(!requireExtension("GL_EXT_direct_state_access")) return;

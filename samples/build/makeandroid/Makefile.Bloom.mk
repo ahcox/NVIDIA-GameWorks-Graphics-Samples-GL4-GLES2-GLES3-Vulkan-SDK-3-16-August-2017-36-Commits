@@ -36,6 +36,7 @@ Bloom_debug_defines   += _LIB
 Bloom_debug_defines   += NV_ANDROID
 Bloom_debug_defines   += __STDC_LIMIT_MACROS
 Bloom_debug_defines   += VK_NO_PROTOTYPES
+Bloom_debug_defines   += GW_APP_NAME=\"Bloom\"
 Bloom_debug_defines   += GL_API_LEVEL_ES2
 Bloom_debug_defines   += _DEBUG
 Bloom_debug_libraries := 
@@ -151,6 +152,7 @@ Bloom_release_defines   += _LIB
 Bloom_release_defines   += NV_ANDROID
 Bloom_release_defines   += __STDC_LIMIT_MACROS
 Bloom_release_defines   += VK_NO_PROTOTYPES
+Bloom_release_defines   += GW_APP_NAME=\"Bloom\"
 Bloom_release_defines   += GL_API_LEVEL_ES2
 Bloom_release_defines   += NDEBUG
 Bloom_release_libraries := 

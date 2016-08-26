@@ -192,7 +192,9 @@ NvUIEventResponse NormalBlendedDecal::handleReaction(const NvUIReaction& react)
 
 void NormalBlendedDecal::initRendering(void)
 {
-    if (!requireMinAPIVersion(NvGLAPIVersionGL4_3()))
+	NV_APP_BASE_SHARED_INIT();
+
+	if (!requireMinAPIVersion(NvGLAPIVersionGL4_3()))
         return;
 
     //if (!requireExtension("GL_NV_fragment_shader_interlock"))

@@ -68,6 +68,8 @@ void SkinningAppVk::configurationCallback(NvVKConfiguration& config)
 }
 
 void SkinningAppVk::initRendering(void) {
+	NV_APP_BASE_SHARED_INIT();
+
 	setGLDrawCallbacks(this);
 	VkResult result = VK_ERROR_INITIALIZATION_FAILED;
 
@@ -103,10 +105,11 @@ void SkinningAppVk::initRendering(void) {
 	rsStateInfo.polygonMode = VK_POLYGON_MODE_FILL;
 	rsStateInfo.cullMode = VK_CULL_MODE_BACK_BIT;
 	rsStateInfo.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
+	rsStateInfo.lineWidth = 1.0f;
 
 	VkPipelineColorBlendAttachmentState attachments[1] = {};
 	attachments[0].blendEnable = VK_FALSE;
-	attachments[0].colorWriteMask = ~0;
+	attachments[0].colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
 
 	VkPipelineColorBlendStateCreateInfo cbStateInfo = { VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO };
 	cbStateInfo.logicOpEnable = VK_FALSE;
@@ -145,13 +148,13 @@ void SkinningAppVk::initRendering(void) {
 	VkPipelineShaderStageCreateInfo shaderStages[2];
 	uint32_t shaderCount = 0;
 #ifdef SOURCE_SHADERS
-	shaderCount = vk().createShadersFromSourceFile(
+	shaderCount = vk().createShadersFromSourceString(
 		NvAssetLoadTextFile("src_shaders/skinning.glsl"), shaderStages, 2);
 #else
 	{
 		int32_t length;
 		char* data = NvAssetLoaderRead("shaders/skinning.nvs", length);
-		shaderCount = vk().createShadersFromBinaryFile((uint32_t*)data,
+		shaderCount = vk().createShadersFromBinaryBlob((uint32_t*)data,
 			length, shaderStages, 2);
 	}
 #endif

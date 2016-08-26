@@ -41,6 +41,7 @@ ModelTestVk_debug_defines   += _LIB
 ModelTestVk_debug_defines   += NV_ANDROID
 ModelTestVk_debug_defines   += __STDC_LIMIT_MACROS
 ModelTestVk_debug_defines   += VK_NO_PROTOTYPES
+ModelTestVk_debug_defines   += GW_APP_NAME=\"ModelTestVk\"
 ModelTestVk_debug_defines   += GL_API_LEVEL_ES2
 ModelTestVk_debug_defines   += USE_REGAL=1
 ModelTestVk_debug_defines   += _DEBUG
@@ -174,6 +175,7 @@ ModelTestVk_release_defines   += _LIB
 ModelTestVk_release_defines   += NV_ANDROID
 ModelTestVk_release_defines   += __STDC_LIMIT_MACROS
 ModelTestVk_release_defines   += VK_NO_PROTOTYPES
+ModelTestVk_release_defines   += GW_APP_NAME=\"ModelTestVk\"
 ModelTestVk_release_defines   += GL_API_LEVEL_ES2
 ModelTestVk_release_defines   += USE_REGAL=1
 ModelTestVk_release_defines   += NDEBUG

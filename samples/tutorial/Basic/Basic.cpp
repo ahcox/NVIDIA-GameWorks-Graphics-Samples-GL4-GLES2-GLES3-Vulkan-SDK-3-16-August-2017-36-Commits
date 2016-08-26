@@ -61,7 +61,9 @@ void Basic::configurationCallback(NvGLConfiguration& config)
 }
 
 void Basic::initRendering(void) {
-    NvAssetLoaderAddSearchPath("tutorial/Basic");
+	NV_APP_BASE_SHARED_INIT();
+
+	NvAssetLoaderAddSearchPath("tutorial/Basic");
 
     mProgram = NvGLSLProgram::createFromFiles("shaders/plain.vert", "shaders/plain.frag");
 

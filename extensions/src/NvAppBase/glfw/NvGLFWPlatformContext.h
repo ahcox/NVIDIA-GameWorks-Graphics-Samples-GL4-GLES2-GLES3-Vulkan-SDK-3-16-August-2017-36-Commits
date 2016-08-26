@@ -48,7 +48,7 @@
 // this needs to be global so inputcallbacksglfw can access...
 extern NvInputCallbacks* sCallbacks;
 extern void setInputCallbacksGLFW(GLFWwindow *window);
-
+#define NV_SAMPLE_WINDOW_TITLE_PREFIX "NVIDIA GameWorks Graphics Sample - "
 class NvGLFWPlatformContext : public NvPlatformContext {
 public:
 	NvGLFWPlatformContext() :
@@ -75,8 +75,24 @@ public:
 		delete mGamepad; 
 	}
 
-	void createWindow(uint32_t width, uint32_t height) { 
-		mWindow = glfwCreateWindow(width, height, "Windows SDK Application", NULL, NULL);
+	void createWindow(uint32_t width, uint32_t height, bool fullscreen = false) {
+		GLFWmonitor* monitor = NULL;
+		if (fullscreen) {
+			const GLFWvidmode* mode;
+
+			monitor = glfwGetPrimaryMonitor();
+			mode = glfwGetVideoMode(monitor);
+
+			glfwWindowHint(GLFW_RED_BITS, mode->redBits);
+			glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
+			glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
+			glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
+
+			width = mode->width;
+			height = mode->height;
+		}
+
+		mWindow = glfwCreateWindow(width, height, NV_SAMPLE_WINDOW_TITLE_PREFIX, monitor, NULL);
 		if (!mWindow)
 		{
 //			LOGE("Failed to open GLFW window\n");
@@ -108,7 +124,14 @@ public:
 	virtual bool shouldRender();
 	virtual bool hasWindowResized();
 	virtual NvGamepad* getGamepad() { return mGamepad; }
-	virtual void setAppTitle(const char* title) { if (mWindow) glfwSetWindowTitle(mWindow, title); }
+
+	virtual void setAppTitle(const char* title) {
+		if (mWindow) {
+			std::string windowTitle(NV_SAMPLE_WINDOW_TITLE_PREFIX);
+			windowTitle += title;
+			glfwSetWindowTitle(mWindow, windowTitle.c_str());
+		}
+	}
 
 	virtual NvRedrawMode::Enum getRedrawMode() { return mRenderOnDemand ? NvRedrawMode::ON_DEMAND : NvRedrawMode::UNBOUNDED; }
 	virtual void setRedrawMode(NvRedrawMode::Enum mode) {

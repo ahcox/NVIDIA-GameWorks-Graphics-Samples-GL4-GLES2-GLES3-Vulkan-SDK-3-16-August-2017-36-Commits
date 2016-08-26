@@ -43,6 +43,7 @@ ThreadedRenderingGL_debug_defines   := $(ThreadedRenderingGL_custom_defines)
 ThreadedRenderingGL_debug_defines   += LINUX=1
 ThreadedRenderingGL_debug_defines   += NV_LINUX
 ThreadedRenderingGL_debug_defines   += GLEW_NO_GLU=1
+ThreadedRenderingGL_debug_defines   += GW_APP_NAME=\"ThreadedRenderingGL\"
 ThreadedRenderingGL_debug_defines   += _DEBUG
 ThreadedRenderingGL_debug_libraries := 
 ThreadedRenderingGL_debug_libraries += NsFoundationD
@@ -154,6 +155,7 @@ ThreadedRenderingGL_release_defines   := $(ThreadedRenderingGL_custom_defines)
 ThreadedRenderingGL_release_defines   += LINUX=1
 ThreadedRenderingGL_release_defines   += NV_LINUX
 ThreadedRenderingGL_release_defines   += GLEW_NO_GLU=1
+ThreadedRenderingGL_release_defines   += GW_APP_NAME=\"ThreadedRenderingGL\"
 ThreadedRenderingGL_release_defines   += NDEBUG
 ThreadedRenderingGL_release_libraries := 
 ThreadedRenderingGL_release_libraries += NsFoundation

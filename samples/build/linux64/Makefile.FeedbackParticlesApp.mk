@@ -30,6 +30,7 @@ FeedbackParticlesApp_debug_lpaths    += ./../../../extensions/externals/lib/linu
 FeedbackParticlesApp_debug_defines   := $(FeedbackParticlesApp_custom_defines)
 FeedbackParticlesApp_debug_defines   += LINUX=1
 FeedbackParticlesApp_debug_defines   += NV_LINUX
+FeedbackParticlesApp_debug_defines   += GW_APP_NAME=\"FeedbackParticlesApp\"
 FeedbackParticlesApp_debug_defines   += _DEBUG
 FeedbackParticlesApp_debug_libraries := 
 FeedbackParticlesApp_debug_libraries += NsFoundationD
@@ -135,6 +136,7 @@ FeedbackParticlesApp_release_lpaths    += ./../../../extensions/externals/lib/li
 FeedbackParticlesApp_release_defines   := $(FeedbackParticlesApp_custom_defines)
 FeedbackParticlesApp_release_defines   += LINUX=1
 FeedbackParticlesApp_release_defines   += NV_LINUX
+FeedbackParticlesApp_release_defines   += GW_APP_NAME=\"FeedbackParticlesApp\"
 FeedbackParticlesApp_release_defines   += NDEBUG
 FeedbackParticlesApp_release_libraries := 
 FeedbackParticlesApp_release_libraries += NsFoundation

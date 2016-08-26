@@ -32,6 +32,9 @@
 //
 //----------------------------------------------------------------------------------
 #include "ThreadedRenderingVk.h"
+#include "NvInstancedModelExtGL.h"
+#include "NvInstancedModelExtVK.h"
+
 #include "NvAppBase/NvFramerateCounter.h"
 #include "NvAppBase/NvInputHandler_CameraFly.h"
 #include "NvAssetLoader/NvAssetLoader.h"
@@ -70,27 +73,23 @@
 
 #define SCHOOL_COUNT 50 // one of each fish model
 
-// Static section for thread data structures
-
-uint32_t s_threadMask = 0;
-
 extern uint32_t neighborOffset;
 extern uint32_t neighborSkip;
 
 
 #ifdef _WIN32
-DWORD WINAPI AnimateJobFunctionThunk(VOID *arg)
+DWORD WINAPI ThreadJobFunctionThunk(VOID *arg)
 #else
-void* AnimateJobFunctionThunk(void *arg)
+void* ThreadJobFunctionThunk(void *arg)
 #endif
 {
 	ThreadedRenderingVk::ThreadData* data = (ThreadedRenderingVk::ThreadData*)arg;
-	data->m_app->AnimateJobFunction(data->m_index);
+	data->m_app->ThreadJobFunction(data->m_index);
 
 	return 0;
 }
 
-void ThreadedRenderingVk::AnimateJobFunction(uint32_t threadIndex)
+void ThreadedRenderingVk::ThreadJobFunction(uint32_t threadIndex)
 {
 	NvThreadManager* threadManager = getThreadManagerInstance();
 	NV_ASSERT(nullptr != threadManager);
@@ -117,13 +116,13 @@ void ThreadedRenderingVk::AnimateJobFunction(uint32_t threadIndex)
 			}
 
 		}
+
 		m_FrameStartLock->unlockMutex();
 		uint32_t schoolsDone = 0;
 
 		{
 			VkResult result;
 			CPU_TIMER_SCOPE(CPU_TIMER_THREAD_BASE_TOTAL + threadIndex);
-			s_threadMask |= 1 << threadIndex;
 
 			ThreadData& me = m_Threads[threadIndex];
 
@@ -178,18 +177,6 @@ void ThreadedRenderingVk::AnimateJobFunction(uint32_t threadIndex)
 }
 
 // The sample has a dropdown menu in the TweakBar that allows the user to
-// select a specific stage or pass of the algorithm for visualization.
-// These are the options in that menu (for more details, please see the
-// sample documentation)
-static NvTweakEnum<uint32_t> RENDER_OPTIONS[] =
-{
-	{ "Color only", ThreadedRenderingVk::RENDER_COLOR },
-	{ "Depth only", ThreadedRenderingVk::RENDER_DEPTH },
-	{ "Gather (final result)", ThreadedRenderingVk::RENDER_FINAL }
-};
-
-
-// The sample has a dropdown menu in the TweakBar that allows the user to
 // reset the schools of fish and the camera to their starting position and
 // state. These are the options in that menu 
 static NvTweakEnum<uint32_t> RESET_OPTIONS[] =
@@ -220,13 +207,9 @@ nv::vec3f ThreadedRenderingVk::ms_tankMin(-30.0f, 5.0f, -30.0f);
 nv::vec3f ThreadedRenderingVk::ms_tankMax(30.0f, 25.0f, 30.0f);
 
 ThreadedRenderingVk::ThreadedRenderingVk() :
-	m_bFollowingSchool(false),
-	m_FBOCreated(false),
-    m_bUseFixedSchools(false),
 	m_activeSchools(0),
     m_causticTiling(0.1f),
     m_causticSpeed(0.3f),
-	m_renderMode(RENDER_FINAL),
 	m_uiResetMode(RESET_RANDOM),
 	m_queueMutexPtr(nullptr),
 	m_startingCameraPitchYaw(0.0f, 0.0f),
@@ -242,7 +225,7 @@ ThreadedRenderingVk::ThreadedRenderingVk() :
     m_uiTankSize(30),
     m_bTankSizeChanged(false),
 	m_uiThreadCount(0), 
-    m_requestedActiveThreads(MAX_ANIMATION_THREAD_COUNT),
+    m_requestedActiveThreads(MAX_THREAD_COUNT),
     m_activeThreads(0),
     m_requestedThreadedRendering(true),
 	m_threadedRendering(true),
@@ -300,7 +283,7 @@ ThreadedRenderingVk::ThreadedRenderingVk() :
 
 	bool m_running = true;
 
-	for (uint32_t i = 0; i < MAX_ANIMATION_THREAD_COUNT; i++)
+	for (uint32_t i = 0; i < MAX_THREAD_COUNT; i++)
 	{
 		m_Threads[i].m_thread = NULL;
 		m_Threads[i].m_app = this;
@@ -318,7 +301,6 @@ ThreadedRenderingVk::ThreadedRenderingVk() :
 
 	{
 		const std::vector<std::string>& cmd = getCommandLine();
-		std::vector<std::string>::const_iterator iter = cmd.begin();
 		for (std::vector<std::string>::const_iterator iter = cmd.begin(); iter != cmd.end(); ++iter)
 		{
 			if (*iter == "-idle")
@@ -327,7 +309,12 @@ ThreadedRenderingVk::ThreadedRenderingVk() :
 				m_glSupported = false;
 			else if (*iter == "-schools") {
 				iter++;
+				if (iter == cmd.end()) {
+					break;
+				}
+				else {
 				m_initSchools = atoi(iter->c_str());
+			}
 			}
 		}
 	}
@@ -341,11 +328,6 @@ ThreadedRenderingVk::ThreadedRenderingVk() :
 ThreadedRenderingVk::~ThreadedRenderingVk()
 {
 	LOGI("ThreadedRenderingVk: destroyed\n");
-	if (getAppContext() && device())
-	    vkDeviceWaitIdle(device());
-
-	CleanThreads();
-	CleanRendering();
 }
 
 // Inherited methods
@@ -353,6 +335,8 @@ ThreadedRenderingModelLoader loader;
 
 void ThreadedRenderingVk::initRendering(void)
 {
+	NV_APP_BASE_SHARED_INIT();
+
 	for (int32_t i = 0; i < CPU_TIMER_COUNT; ++i)
 	{
 		m_CPUTimers[i].init();
@@ -380,13 +364,13 @@ void ThreadedRenderingVk::initRendering(void)
 	VkPipelineShaderStageCreateInfo fishShaderStages[2];
 	uint32_t shaderCount = 0;
 #ifdef SOURCE_SHADERS
-	shaderCount = vk().createShadersFromSourceFile(
+	shaderCount = vk().createShadersFromSourceString(
 		NvAssetLoadTextFile("src_shaders/staticfish.glsl"), fishShaderStages, 2);
 #else
 	{
 		int32_t length;
 		char* data = NvAssetLoaderRead("shaders/staticfish.nvs", length);
-		shaderCount = vk().createShadersFromBinaryFile((uint32_t*)data,
+		shaderCount = vk().createShadersFromBinaryBlob((uint32_t*)data,
 			length, fishShaderStages, 2);
 	}
 #endif
@@ -400,13 +384,13 @@ void ThreadedRenderingVk::initRendering(void)
 
 	VkPipelineShaderStageCreateInfo skyShaderStages[2];
 #ifdef SOURCE_SHADERS
-	shaderCount = vk().createShadersFromSourceFile(
+	shaderCount = vk().createShadersFromSourceString(
 		NvAssetLoadTextFile("src_shaders/skyboxcolor.glsl"), skyShaderStages, 2);
 #else
 	{
 		int32_t length;
 		char* data = NvAssetLoaderRead("shaders/skyboxcolor.nvs", length);
-		shaderCount = vk().createShadersFromBinaryFile((uint32_t*)data,
+		shaderCount = vk().createShadersFromBinaryBlob((uint32_t*)data,
 			length, skyShaderStages, 2);
 	}
 #endif
@@ -420,13 +404,13 @@ void ThreadedRenderingVk::initRendering(void)
 
 	VkPipelineShaderStageCreateInfo groundShaderStages[2];
 #ifdef SOURCE_SHADERS
-	shaderCount = vk().createShadersFromSourceFile(
+	shaderCount = vk().createShadersFromSourceString(
 		NvAssetLoadTextFile("src_shaders/groundplane.glsl"), groundShaderStages, 2);
 #else
 	{
 		int32_t length;
 		char* data = NvAssetLoaderRead("shaders/groundplane.nvs", length);
-		shaderCount = vk().createShadersFromBinaryFile((uint32_t*)data,
+		shaderCount = vk().createShadersFromBinaryBlob((uint32_t*)data,
 			length, groundShaderStages, 2);
 	}
 #endif
@@ -518,7 +502,7 @@ void ThreadedRenderingVk::initRendering(void)
 	depthTestNoWrite.maxDepthBounds = 1.0f;
 
 	VkPipelineColorBlendAttachmentState colorStateBlend = { VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO };
-	colorStateBlend.colorWriteMask = ~0;
+	colorStateBlend.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
 	colorStateBlend.blendEnable = VK_TRUE;
 	colorStateBlend.alphaBlendOp = VK_BLEND_OP_ADD;
 	colorStateBlend.colorBlendOp = VK_BLEND_OP_ADD;
@@ -537,7 +521,7 @@ void ThreadedRenderingVk::initRendering(void)
 	colorInfoBlend.blendConstants[3] = 1.0f;
 
 	VkPipelineColorBlendAttachmentState colorStateNoBlend = { VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO };
-	colorStateNoBlend.colorWriteMask = ~0;
+	colorStateNoBlend.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
 	colorStateNoBlend.blendEnable = VK_FALSE;
 
 	VkPipelineColorBlendStateCreateInfo colorInfoNoBlend = { VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO };
@@ -736,6 +720,17 @@ void ThreadedRenderingVk::initRendering(void)
 	}
 }
 
+void ThreadedRenderingVk::shutdownRendering(void) {
+	if (getAppContext() && device())
+		vkDeviceWaitIdle(device());
+
+	CleanThreads();
+	CleanRendering();
+
+	delete m_pInputHandler;
+}
+
+
 void ThreadedRenderingVk::initGLResources(NvAppContextGL* gl) {
 
 	NvGPUTimer::globalInit(*gl);
@@ -852,7 +847,6 @@ void ThreadedRenderingVk::drawGL(NvAppContextGL* gl) {
     }
 
 	neighborOffset = (neighborOffset + 1) % (6 - neighborSkip);
-	s_threadMask = 0;
 
     if (m_bTankSizeChanged)
     {
@@ -905,7 +899,7 @@ void ThreadedRenderingVk::drawGL(NvAppContextGL* gl) {
 	{
 		CPU_TIMER_SCOPE(CPU_TIMER_MAIN_WAIT);
 
-		for (uint32_t i = 0; i < MAX_ANIMATION_THREAD_COUNT; i++) {
+		for (uint32_t i = 0; i < MAX_THREAD_COUNT; i++) {
 			ThreadData& thread = m_Threads[i];
 			thread.m_cmdBufferOpen = false;
 			thread.m_drawCallCount = 0;
@@ -1019,10 +1013,11 @@ void ThreadedRenderingVk::InitPipeline(uint32_t shaderCount,
 	rsStateInfo.polygonMode = VK_POLYGON_MODE_FILL;
 	rsStateInfo.cullMode = VK_CULL_MODE_NONE;
 	rsStateInfo.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
+	rsStateInfo.lineWidth = 1.0f;
 
 	VkPipelineColorBlendAttachmentState attachments[1] = {};
 	attachments[0].blendEnable = VK_FALSE;
-	attachments[0].colorWriteMask = ~0;
+	attachments[0].colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
 
 	VkPipelineColorBlendStateCreateInfo cbStateInfo = { VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO };
 	cbStateInfo.logicOpEnable = VK_FALSE;
@@ -1229,11 +1224,11 @@ void ThreadedRenderingVk::UpdateSchoolTankSizes()
     m_bTankSizeChanged = false;
 }
 
-uint32_t ThreadedRenderingVk::SetAnimationThreadNum(uint32_t numThreads)
+uint32_t ThreadedRenderingVk::SetThreadNum(uint32_t numThreads)
 {
-	if (MAX_ANIMATION_THREAD_COUNT < numThreads)
+	if (MAX_THREAD_COUNT < numThreads)
 	{
-		numThreads = MAX_ANIMATION_THREAD_COUNT;
+		numThreads = MAX_THREAD_COUNT;
 	}
     m_requestedActiveThreads = numThreads;
     /*
@@ -1270,11 +1265,10 @@ void ThreadedRenderingVk::initUI(void)
 
 		NvTweakVarBase* var;
 		mTweakBar->addLabel("Fish Settings", true);
-		mTweakBar->addValue("Number of Schools", m_uiSchoolCount, MAX_ANIMATION_THREAD_COUNT, m_maxSchools, 10, UIACTION_SCHOOLCOUNT);
+		mTweakBar->addValue("Number of Schools", m_uiSchoolCount, MAX_THREAD_COUNT, m_maxSchools, 10, UIACTION_SCHOOLCOUNT);
 		mTweakBar->addValue("Fish per School", m_uiInstanceCount, 1, MAX_INSTANCE_COUNT, 1, UIACTION_INSTCOUNT);
         mTweakBar->addValue("Max Roam Distance", m_uiTankSize, 1, 60, 1, UIACTION_TANKSIZE);
 
-		mTweakBar->addPadding();
 		mTweakBar->addLabel("Rendering Settings", true);
 		if (isGLSupported() && m_glSupported) {
 			var = mTweakBar->addValue("Draw using GLES3 AEP", m_requestedDrawGL, UIACTION_DRAWGL);
@@ -1282,11 +1276,10 @@ void ThreadedRenderingVk::initUI(void)
 		}
         var = mTweakBar->addValue("Threaded Rendering", m_requestedThreadedRendering, 0, &m_pThreadedRenderingButton);
 		addTweakKeyBind(var, NvKey::K_T);
-		mTweakBar->addValue("Number of Worker Threads", m_uiThreadCount, 1, MAX_ANIMATION_THREAD_COUNT, 1, UIACTION_ANIMTHREADCOUNT);
+		mTweakBar->addValue("Number of Worker Threads", m_uiThreadCount, 1, MAX_THREAD_COUNT, 1, UIACTION_THREADCOUNT);
 		mTweakBar->addValue("Batch Size (Fish per Draw Call)", m_uiBatchSize, 1, MAX_INSTANCE_COUNT, 1, UIACTION_BATCHSIZE,
 			&m_pBatchSlider, &m_pBatchVar);
 
-		mTweakBar->addPadding();
 		mTweakBar->addLabel("Animation Settings", true);
 		var = mTweakBar->addValue("Pause Animation", m_animPaused);
 		addTweakKeyBind(var, NvKey::K_P);
@@ -1301,12 +1294,9 @@ void ThreadedRenderingVk::initUI(void)
         addTweakButtonBind(m_pFishFireworksVar, NvGamepad::BUTTON_Y);
         m_pFishplosionVar = mTweakBar->addButton("Fishsplosion", UIACTION_RESET_FISHPLOSION);
 
-		mTweakBar->addPadding();
-		// mTweakBar->addLabel("On-screen Stats", true);
         m_pStatsModeVar = mTweakBar->addButton("Cycle Stats", UIACTION_STATSTOGGLE);
         addTweakKeyBind(m_pStatsModeVar, NvKey::K_C, NvKey::K_C);
         addTweakButtonBind(m_pStatsModeVar, NvGamepad::BUTTON_LEFT_SHOULDER, NvGamepad::BUTTON_LEFT_SHOULDER);
-		// m_pStatsModeVar = mTweakBar->addMenu("On-screen Stats", m_statsMode, STATSMODE_OPTIONS, STATS_COUNT, UIACTION_STATSTOGGLE);
 
 		m_uiSchoolInfoId = 0;
 		SchoolDesc& desc = m_schoolDescs[m_uiSchoolInfoId];
@@ -1619,9 +1609,9 @@ NvUIEventResponse ThreadedRenderingVk::handleReaction(const NvUIReaction &react)
 		bStateModified = true;
 		break;
 	}
-	case UIACTION_ANIMTHREADCOUNT:
+	case UIACTION_THREADCOUNT:
 	{
-		m_uiThreadCount = SetAnimationThreadNum(react.ival);
+		m_uiThreadCount = SetThreadNum(react.ival);
 		bStateModified = true;
 		break;
 	}
@@ -1667,7 +1657,7 @@ NvUIEventResponse ThreadedRenderingVk::handleReaction(const NvUIReaction &react)
         break;
 	}
     case UIACTION_DRAWGL:
-    {
+	{
         m_pThreadedRenderingButton->SetVisibility(react.ival ? false : true);
         // Update the GLES/Vulkan logos to reflect the current state
         if (nullptr != m_logoGLES)
@@ -1889,8 +1879,6 @@ void ThreadedRenderingVk::draw(void)
 
 	neighborOffset = (neighborOffset + 1) % (6 - neighborSkip);
 
-	s_threadMask = 0;
-
     if (m_bTankSizeChanged)
     {
         UpdateSchoolTankSizes();
@@ -1934,18 +1922,7 @@ void ThreadedRenderingVk::draw(void)
 	m_lightingUBO->m_causticOffset = m_currentTime * m_causticSpeed;
     m_lightingUBO->m_causticTiling = m_causticTiling;
     m_lightingUBO.Update();
-#if 0	
-	if (!m_animPaused)
-	{
-		// Update schools
-		uint32_t schoolIndex = 0;
-		for (; schoolIndex < m_activeSchools; ++schoolIndex)
-		{
-			School* pSchool = m_schools[schoolIndex];
-			pSchool->Update(getClampedFrameTime(), &m_schoolStateMgr);
-		}
-	}
-#endif	
+
 	// Render the requested content (from dropdown menu in TweakBar UI)
 
 
@@ -2029,7 +2006,7 @@ void ThreadedRenderingVk::draw(void)
 	{
 		CPU_TIMER_SCOPE(CPU_TIMER_MAIN_WAIT);
 
-		for (uint32_t i = 0; i < MAX_ANIMATION_THREAD_COUNT; i++) {
+		for (uint32_t i = 0; i < MAX_THREAD_COUNT; i++) {
 			ThreadData& thread = m_Threads[i];
 			thread.m_cmdBufferOpen = false;
 			thread.m_drawCallCount = 0;
@@ -2087,7 +2064,7 @@ void ThreadedRenderingVk::draw(void)
 			// round robin through the available buffers, so they are all used
 			// over a few frames; this tries to match the idea that the threading
 			// code will also hit all of these buffers when enabled
-			int bufIndex = (m_frameLogicalClock % MAX_ANIMATION_THREAD_COUNT) + 1;
+			int bufIndex = (m_frameLogicalClock % MAX_THREAD_COUNT) + 1;
 			VkCommandBuffer secCmd = m_subCommandBuffers[bufIndex];
 
 			uint32_t schoolIndex = 0;
@@ -2153,7 +2130,7 @@ void ThreadedRenderingVk::InitThreads(void)
 
 	m_subCommandBuffers.Initialize(&vk(), m_queueMutexPtr, false);
 
-	for (intptr_t i = 0; i < MAX_ANIMATION_THREAD_COUNT; i++)
+	for (intptr_t i = 0; i < MAX_THREAD_COUNT; i++)
 	{
 		ThreadData& thread = m_Threads[i];
 		if (thread.m_thread != NULL)
@@ -2161,7 +2138,7 @@ void ThreadedRenderingVk::InitThreads(void)
 
 		void* threadIndex = reinterpret_cast<void*>(i);
 		m_Threads[i].m_thread =
-			threadManager->createThread(AnimateJobFunctionThunk, &thread,
+			threadManager->createThread(ThreadJobFunctionThunk, &thread,
 										&(m_ThreadStacks[i]),
 										THREAD_STACK_SIZE,
 										NvThread::DefaultThreadPriority);
@@ -2171,7 +2148,7 @@ void ThreadedRenderingVk::InitThreads(void)
 		thread.m_thread->startThread();
 	}
 
-	m_uiThreadCount = SetAnimationThreadNum(MAX_ANIMATION_THREAD_COUNT);
+	m_uiThreadCount = SetThreadNum(MAX_THREAD_COUNT);
 }
 
 void ThreadedRenderingVk::CleanThreads(void)
@@ -2185,7 +2162,7 @@ void ThreadedRenderingVk::CleanThreads(void)
 	if (m_FrameStartCV)
 		m_FrameStartCV->broadcastConditionVariable();
 
-	for (uint32_t i = 0; i < MAX_ANIMATION_THREAD_COUNT; i++)
+	for (uint32_t i = 0; i < MAX_THREAD_COUNT; i++)
 	{
 		if (m_Threads[i].m_thread != NULL)
 		{
@@ -2352,6 +2329,8 @@ void ThreadedRenderingVk::UpdateSchool(uint32_t threadIndex,
 		CPU_TIMER_SCOPE(CPU_TIMER_THREAD_BASE_ANIMATE + threadIndex);
 		pSchool->Animate(getClampedFrameTime(), &m_schoolStateMgr, m_avoidance);
 	}
+
+	if (!m_drawGL) 
 	{
 		CPU_TIMER_SCOPE(CPU_TIMER_THREAD_BASE_UPDATE + threadIndex);
 		pSchool->Update();

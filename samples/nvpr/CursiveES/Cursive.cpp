@@ -190,6 +190,8 @@ void Cursive::setLength(float percent)
 }
 
 void Cursive::initRendering() {
+	NV_APP_BASE_SHARED_INIT();
+
 	if (isTestMode())
 		animating = false;
 

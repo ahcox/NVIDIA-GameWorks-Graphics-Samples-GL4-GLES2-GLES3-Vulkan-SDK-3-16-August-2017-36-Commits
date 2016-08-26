@@ -26,6 +26,7 @@ CubemapRendering_debug_lpaths    += ./../../../extensions/externals/lib/linux64
 CubemapRendering_debug_defines   := $(CubemapRendering_custom_defines)
 CubemapRendering_debug_defines   += LINUX=1
 CubemapRendering_debug_defines   += NV_LINUX
+CubemapRendering_debug_defines   += GW_APP_NAME=\"CubemapRendering\"
 CubemapRendering_debug_defines   += _DEBUG
 CubemapRendering_debug_libraries := 
 CubemapRendering_debug_libraries += NsFoundationD
@@ -132,6 +133,7 @@ CubemapRendering_release_lpaths    += ./../../../extensions/externals/lib/linux6
 CubemapRendering_release_defines   := $(CubemapRendering_custom_defines)
 CubemapRendering_release_defines   += LINUX=1
 CubemapRendering_release_defines   += NV_LINUX
+CubemapRendering_release_defines   += GW_APP_NAME=\"CubemapRendering\"
 CubemapRendering_release_defines   += NDEBUG
 CubemapRendering_release_libraries := 
 CubemapRendering_release_libraries += NsFoundation

@@ -89,9 +89,9 @@ void NvGraphicShaderVK::Load()
 	NvVkContext& vk = *NvUIVKctx().mVk;
 	uint32_t stageCount = 0;
 #if USE_SOURCE_SHADERS
-	stageCount = vk.createShadersFromSourceFile(s_graphicShader, mStages, MAX_STAGES);
+	stageCount = vk.createShadersFromSourceString(s_graphicShader, mStages, MAX_STAGES);
 #else
-	stageCount = vk.createShadersFromBinaryFile((uint32_t*)graphicData, graphicLength, mStages, MAX_STAGES);
+	stageCount = vk.createShadersFromBinaryBlob((uint32_t*)graphicData, graphicLength, mStages, MAX_STAGES);
 #endif
 }
 
@@ -158,9 +158,9 @@ void NvGraphicFrameShaderVK::Load()
 	NvVkContext& vk = *NvUIVKctx().mVk;
 	uint32_t stageCount = 0;
 #if USE_SOURCE_SHADERS
-	mStageCount = vk.createShadersFromSourceFile(s_frameShader, mStages, MAX_STAGES);
+	mStageCount = vk.createShadersFromSourceString(s_frameShader, mStages, MAX_STAGES);
 #else
-	mStageCount = vk.createShadersFromBinaryFile((uint32_t*)graphicFrameData, graphicFrameLength, mStages, MAX_STAGES);
+	mStageCount = vk.createShadersFromBinaryBlob((uint32_t*)graphicFrameData, graphicFrameLength, mStages, MAX_STAGES);
 #endif
 }
 

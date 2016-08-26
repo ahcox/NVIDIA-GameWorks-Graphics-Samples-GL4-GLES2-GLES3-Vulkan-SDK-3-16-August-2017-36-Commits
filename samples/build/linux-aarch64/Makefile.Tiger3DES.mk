@@ -33,6 +33,7 @@ Tiger3DES_debug_defines   := $(Tiger3DES_custom_defines)
 Tiger3DES_debug_defines   += LINUX=1
 Tiger3DES_debug_defines   += NV_LINUX
 Tiger3DES_debug_defines   += GLEW_NO_GLU=1
+Tiger3DES_debug_defines   += GW_APP_NAME=\"Tiger3DES\"
 Tiger3DES_debug_defines   += _DEBUG
 Tiger3DES_debug_libraries := 
 Tiger3DES_debug_libraries += cg4cppD
@@ -145,6 +146,7 @@ Tiger3DES_release_defines   := $(Tiger3DES_custom_defines)
 Tiger3DES_release_defines   += LINUX=1
 Tiger3DES_release_defines   += NV_LINUX
 Tiger3DES_release_defines   += GLEW_NO_GLU=1
+Tiger3DES_release_defines   += GW_APP_NAME=\"Tiger3DES\"
 Tiger3DES_release_defines   += NDEBUG
 Tiger3DES_release_libraries := 
 Tiger3DES_release_libraries += cg4cpp

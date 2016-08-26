@@ -26,6 +26,7 @@ InstancingApp_debug_lpaths    += ./../../../extensions/externals/lib/linux64
 InstancingApp_debug_defines   := $(InstancingApp_custom_defines)
 InstancingApp_debug_defines   += LINUX=1
 InstancingApp_debug_defines   += NV_LINUX
+InstancingApp_debug_defines   += GW_APP_NAME=\"InstancingApp\"
 InstancingApp_debug_defines   += _DEBUG
 InstancingApp_debug_libraries := 
 InstancingApp_debug_libraries += NsFoundationD
@@ -131,6 +132,7 @@ InstancingApp_release_lpaths    += ./../../../extensions/externals/lib/linux64
 InstancingApp_release_defines   := $(InstancingApp_custom_defines)
 InstancingApp_release_defines   += LINUX=1
 InstancingApp_release_defines   += NV_LINUX
+InstancingApp_release_defines   += GW_APP_NAME=\"InstancingApp\"
 InstancingApp_release_defines   += NDEBUG
 InstancingApp_release_libraries := 
 InstancingApp_release_libraries += NsFoundation

@@ -26,6 +26,7 @@ PathRenderingBasic_debug_lpaths    += ./../../../extensions/externals/lib/linux6
 PathRenderingBasic_debug_defines   := $(PathRenderingBasic_custom_defines)
 PathRenderingBasic_debug_defines   += LINUX=1
 PathRenderingBasic_debug_defines   += NV_LINUX
+PathRenderingBasic_debug_defines   += GW_APP_NAME=\"PathRenderingBasic\"
 PathRenderingBasic_debug_defines   += _DEBUG
 PathRenderingBasic_debug_libraries := 
 PathRenderingBasic_debug_libraries += NsFoundationD
@@ -131,6 +132,7 @@ PathRenderingBasic_release_lpaths    += ./../../../extensions/externals/lib/linu
 PathRenderingBasic_release_defines   := $(PathRenderingBasic_custom_defines)
 PathRenderingBasic_release_defines   += LINUX=1
 PathRenderingBasic_release_defines   += NV_LINUX
+PathRenderingBasic_release_defines   += GW_APP_NAME=\"PathRenderingBasic\"
 PathRenderingBasic_release_defines   += NDEBUG
 PathRenderingBasic_release_libraries := 
 PathRenderingBasic_release_libraries += NsFoundation

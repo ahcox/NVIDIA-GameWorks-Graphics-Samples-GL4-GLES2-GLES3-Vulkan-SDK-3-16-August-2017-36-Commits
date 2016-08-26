@@ -37,6 +37,7 @@ ComputeBasicGLSL_debug_defines   += _LIB
 ComputeBasicGLSL_debug_defines   += NV_ANDROID
 ComputeBasicGLSL_debug_defines   += __STDC_LIMIT_MACROS
 ComputeBasicGLSL_debug_defines   += VK_NO_PROTOTYPES
+ComputeBasicGLSL_debug_defines   += GW_APP_NAME=\"ComputeBasicGLSL\"
 ComputeBasicGLSL_debug_defines   += GL_API_LEVEL_ES3_1_AEP
 ComputeBasicGLSL_debug_defines   += _DEBUG
 ComputeBasicGLSL_debug_libraries := 
@@ -153,6 +154,7 @@ ComputeBasicGLSL_release_defines   += _LIB
 ComputeBasicGLSL_release_defines   += NV_ANDROID
 ComputeBasicGLSL_release_defines   += __STDC_LIMIT_MACROS
 ComputeBasicGLSL_release_defines   += VK_NO_PROTOTYPES
+ComputeBasicGLSL_release_defines   += GW_APP_NAME=\"ComputeBasicGLSL\"
 ComputeBasicGLSL_release_defines   += GL_API_LEVEL_ES3_1_AEP
 ComputeBasicGLSL_release_defines   += NDEBUG
 ComputeBasicGLSL_release_libraries := 

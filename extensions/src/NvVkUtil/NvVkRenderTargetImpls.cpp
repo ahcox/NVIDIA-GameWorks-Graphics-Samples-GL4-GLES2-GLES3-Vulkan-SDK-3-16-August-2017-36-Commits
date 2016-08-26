@@ -68,6 +68,7 @@ bool NvVkRenderTarget::initialize(VkImageLayout layout) {
 	VkAttachmentReference colorRefs[1] = { { 0, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL } };
 	subPass.colorAttachmentCount = ARRAY_SIZE(colorRefs);
 	subPass.pColorAttachments = colorRefs;
+	subPass.flags = 0;
 
 	VkAttachmentReference depthRefs[1] = { { 1, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL } };
 
@@ -319,7 +320,7 @@ bool NvVkMultibufferedRenderTarget::resize(int32_t& w, int32_t& h) {
 		swapchain.imageColorSpace = match->colorSpace;
 		swapchain.imageExtent.width = swapchainExtent.width;
 		swapchain.imageExtent.height = swapchainExtent.height;
-		swapchain.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
+		swapchain.imageUsage = vk().configuration().mainTargetUsageFlags;
 		swapchain.preTransform = (VkSurfaceTransformFlagBitsKHR)preTransform;
 		swapchain.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
 		swapchain.imageArrayLayers = 1;
@@ -375,7 +376,7 @@ bool NvVkMultibufferedRenderTarget::resize(int32_t& w, int32_t& h) {
 			cbImageInfo.arrayLayers = 1;
 			cbImageInfo.samples = VK_SAMPLE_COUNT_1_BIT;
 			cbImageInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
-			cbImageInfo.usage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
+			cbImageInfo.usage = vk().configuration().mainTargetUsageFlags;
 			cbImageInfo.flags = 0;
 
 			NvVkImage image;
@@ -402,7 +403,7 @@ bool NvVkMultibufferedRenderTarget::resize(int32_t& w, int32_t& h) {
 	dsImageInfo.arrayLayers = 1;
 	dsImageInfo.samples = VK_SAMPLE_COUNT_1_BIT;
 	dsImageInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
-	dsImageInfo.usage = VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT;
+	dsImageInfo.usage = vk().configuration().mainDepthStencilUsageFlags;
 	dsImageInfo.flags = 0;
 	dsImageInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 

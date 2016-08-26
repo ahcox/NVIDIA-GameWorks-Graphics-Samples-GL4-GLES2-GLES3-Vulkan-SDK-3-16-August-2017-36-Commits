@@ -224,7 +224,9 @@ void SkinningApp::computeBones(float t, float* bones)
 //
 ////////////////////////////////////////////////////////////////////////////////
 void SkinningApp::initRendering(void) {
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);    
+	NV_APP_BASE_SHARED_INIT();
+
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     NvAssetLoaderAddSearchPath("es2-aurora/SkinningApp");
 

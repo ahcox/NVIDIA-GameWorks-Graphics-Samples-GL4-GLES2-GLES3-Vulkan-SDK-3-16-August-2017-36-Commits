@@ -133,7 +133,7 @@ void SoftShadowsRenderer::configurationCallback(NvGLConfiguration& config)
 ////////////////////////////////////////////////////////////////////////////////
 void SoftShadowsRenderer::initRendering()
 {
-    GLint depthBits;
+	GLint depthBits;
     glGetIntegerv(GL_DEPTH_BITS, &depthBits);
     LOGI("depth bits = %d\n", depthBits);
 

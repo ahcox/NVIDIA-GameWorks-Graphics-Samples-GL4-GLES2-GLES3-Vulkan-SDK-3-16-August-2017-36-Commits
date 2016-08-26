@@ -58,7 +58,7 @@
 	<h3>Targeting Windows PC</h3>
 	<ol>
 		<li>Unzip the samples pack to a directory on the Windows Host PC.  We will call this directory <code>SAMPLES_ROOT</code>.</li>
-		<li>If you haven't already done so, download and install the <a href="https://lunarg.com/vulkan-sdk/">LunarG Vulkan SDK</a>.  Ensure that the installer has set <code>VK_SDK_PATH</code> to the path to the SDK, and restart any Visual Studio instances.</li>
+		<li>If you haven't already done so, download and install the <a href="https://lunarg.com/vulkan-sdk/">LunarG Vulkan SDK</a>.  Ensure that the installer has set <code>VK_SDK_PATH</code> to the path to the SDK, and restart any Visual Studio instances. See the <a href="gfx_prereq.htm">Prerequisites</a> guide for recommended min SDK version.</li>
 		<li>Launch Visual Studio 2013 or 2015.</li>
 		<li>Open the all-samples project file: <code>{SAMPLES_ROOT}/samples/build/vs201[3,5]All/AllSamples.sln</code>.</li>
 		<li>Build the solution as release or debug.</li>
@@ -112,12 +112,21 @@
 		<li>Install the Linux build/target pre-requisites by running:<br/>
 			<code>sudo apt-get install g++ xorg-dev libglu1-mesa-dev make</code>
 		</li>
-        <li>Ensure that the environment variable <code>VK_SDK_PATH</code> is exported and points to the LunarG SDK root.</li>
+		<li>If using Ubuntu 12.04 LTS, building the Vulkan samples requires g++ 4.8:<br/>
+			<code>sudo apt-get install python-software-properties</code><br />
+			<code>sudo add-apt-repository ppa:ubuntu-toolchain-r/test</code><br />
+			<code>sudo apt-get update</code><br />
+			<code>sudo apt-get install gcc-4.8</code><br />
+			<code>sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50</code><br />
+			<code>sudo apt-get install g++-4.8</code><br />
+			<code>sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 50</code><br />
+		</li>
+        <li>Ensure that the environment variable <code>VK_SDK_PATH</code> is exported and points to the LunarG SDK root. See the <a href="gfx_prereq.htm">Prerequisites</a> guide for recommended min SDK version.</li>
         <li>Ensure that the <code>LD_LIBRARY_PATH</code> variable includes the LunarG SDK's loader path: <code>$VK_SDK_PATH/x86_64/lib</code>.</li>
 		<li>Pull the samples pack to a directory on the Linux Host PC.  We will call this directory <code>SAMPLES_ROOT</code>.</li>
 		<li>Open a terminal window to <code>{SAMPLES_ROOT}/samples/build/linux64</code>.</li>
 		<li>Run <code>make</code>.</li>
-		<li>The resulting apps will be placed in <code>{SAMPLES_ROOT}/samples/bin/linux64/</code>.  Note that as per the <a href="gl_prereq.htm">Prerequisites</a> guide, the system must have working OpenGL drivers for the samples to run.</li>
+		<li>The resulting apps will be placed in <code>{SAMPLES_ROOT}/samples/bin/linux64/</code>.  Note that as per the <a href="gfx_prereq.htm">Prerequisites</a> guide, the system must have working OpenGL drivers for the samples to run.</li>
 	    <li>Individual samples may be built via <code>make build_[sample]_[debug, release]</code></li>
     </ol>
 
@@ -127,6 +136,15 @@
 		<li>Install the Linux build/target pre-requisites by running:<br/>
 			<code>sudo apt-get install g++ xorg-dev libglu1-mesa-dev make</code><br />
 			Full <a href="https://developer.nvidia.com/codeworks-android">CodeWorks for Android</a> 1r4 for Linux x64 tools install.  Note that means that NDK r11/r12 are not yet supported.  CodeWorks 1r4 supports r10e.<br/>
+		</li>
+		<li>If using Ubuntu 12.04 LTS, building the Vulkan samples requires g++ 4.8:<br/>
+			<code>sudo apt-get install python-software-properties</code><br />
+			<code>sudo add-apt-repository ppa:ubuntu-toolchain-r/test</code><br />
+			<code>sudo apt-get update</code><br />
+			<code>sudo apt-get install gcc-4.8</code><br />
+			<code>sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50</code><br />
+			<code>sudo apt-get install g++-4.8</code><br />
+			<code>sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 50</code><br />
 		</li>
 		<li>Pull the samples pack to a directory on the Linux Host PC.  We will call this directory <code>SAMPLES_ROOT</code>.</li>
 		<li>Open a terminal window to <code>{SAMPLES_ROOT}/samples/build/makeandroid</code>.</li>

@@ -423,7 +423,9 @@ void ThreadedRenderingGL::configurationCallback(NvGLConfiguration& config)
 
 void ThreadedRenderingGL::initRendering(void)
 {
-    // We require at least ES3 for our most basic functionality
+	NV_APP_BASE_SHARED_INIT();
+
+	// We require at least ES3 for our most basic functionality
     requireMinAPIVersion(NvGLAPIVersionES3());
 
     // We need to provide the mesh rendering system in NvGLUtils with instanced rendering
@@ -950,10 +952,10 @@ void ThreadedRenderingGL::initUI(void)
 
         mTweakBar->addPadding();
         mTweakBar->addLabel("Rendering Settings", true);
-        mTweakBar->addValue("Batch Size (Fish per Draw Call)", m_uiBatchSize, 1, MAX_INSTANCE_COUNT, 1, UIACTION_BATCHSIZE,
-            &m_pBatchSlider, &m_pBatchVar);
         mTweakBar->addValue("Number of Worker Threads", m_uiThreadCount, 1, MAX_ANIMATION_THREAD_COUNT, 1, UIACTION_ANIMTHREADCOUNT);
-        mTweakBar->addMenu("Mode", m_uiRenderingTechnique, &(RENDER_TECHNIQUES[0]), 
+		mTweakBar->addValue("Batch Size (Fish per Draw Call)", m_uiBatchSize, 1, MAX_INSTANCE_COUNT, 1, UIACTION_BATCHSIZE,
+			&m_pBatchSlider, &m_pBatchVar);
+		mTweakBar->addMenu("Mode", m_uiRenderingTechnique, &(RENDER_TECHNIQUES[0]),
             m_bAZDOAvailable?TECHNIQUE_COUNT : TECHNIQUE_GLAZDO_POOLED,
             UIACTION_RENDERINGTECHNIQUE);
 

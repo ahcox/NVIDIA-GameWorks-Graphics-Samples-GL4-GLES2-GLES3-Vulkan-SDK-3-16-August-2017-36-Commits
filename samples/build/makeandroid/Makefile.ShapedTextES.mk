@@ -42,6 +42,7 @@ ShapedTextES_debug_defines   += _LIB
 ShapedTextES_debug_defines   += NV_ANDROID
 ShapedTextES_debug_defines   += __STDC_LIMIT_MACROS
 ShapedTextES_debug_defines   += VK_NO_PROTOTYPES
+ShapedTextES_debug_defines   += GW_APP_NAME=\"ShapedTextES\"
 ShapedTextES_debug_defines   += GL_API_LEVEL_ES2
 ShapedTextES_debug_defines   += USE_REGAL=1
 ShapedTextES_debug_defines   += _DEBUG
@@ -165,6 +166,7 @@ ShapedTextES_release_defines   += _LIB
 ShapedTextES_release_defines   += NV_ANDROID
 ShapedTextES_release_defines   += __STDC_LIMIT_MACROS
 ShapedTextES_release_defines   += VK_NO_PROTOTYPES
+ShapedTextES_release_defines   += GW_APP_NAME=\"ShapedTextES\"
 ShapedTextES_release_defines   += GL_API_LEVEL_ES2
 ShapedTextES_release_defines   += USE_REGAL=1
 ShapedTextES_release_defines   += NDEBUG

@@ -27,6 +27,7 @@ MultiDrawIndirect_debug_defines   := $(MultiDrawIndirect_custom_defines)
 MultiDrawIndirect_debug_defines   += LINUX=1
 MultiDrawIndirect_debug_defines   += NV_LINUX
 MultiDrawIndirect_debug_defines   += GLEW_NO_GLU=1
+MultiDrawIndirect_debug_defines   += GW_APP_NAME=\"MultiDrawIndirect\"
 MultiDrawIndirect_debug_defines   += _DEBUG
 MultiDrawIndirect_debug_libraries := 
 MultiDrawIndirect_debug_libraries += NsFoundationD
@@ -138,6 +139,7 @@ MultiDrawIndirect_release_defines   := $(MultiDrawIndirect_custom_defines)
 MultiDrawIndirect_release_defines   += LINUX=1
 MultiDrawIndirect_release_defines   += NV_LINUX
 MultiDrawIndirect_release_defines   += GLEW_NO_GLU=1
+MultiDrawIndirect_release_defines   += GW_APP_NAME=\"MultiDrawIndirect\"
 MultiDrawIndirect_release_defines   += NDEBUG
 MultiDrawIndirect_release_libraries := 
 MultiDrawIndirect_release_libraries += NsFoundation

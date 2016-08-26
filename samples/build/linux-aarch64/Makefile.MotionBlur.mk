@@ -27,6 +27,7 @@ MotionBlur_debug_defines   := $(MotionBlur_custom_defines)
 MotionBlur_debug_defines   += LINUX=1
 MotionBlur_debug_defines   += NV_LINUX
 MotionBlur_debug_defines   += GLEW_NO_GLU=1
+MotionBlur_debug_defines   += GW_APP_NAME=\"MotionBlur\"
 MotionBlur_debug_defines   += _DEBUG
 MotionBlur_debug_libraries := 
 MotionBlur_debug_libraries += NsFoundationD
@@ -138,6 +139,7 @@ MotionBlur_release_defines   := $(MotionBlur_custom_defines)
 MotionBlur_release_defines   += LINUX=1
 MotionBlur_release_defines   += NV_LINUX
 MotionBlur_release_defines   += GLEW_NO_GLU=1
+MotionBlur_release_defines   += GW_APP_NAME=\"MotionBlur\"
 MotionBlur_release_defines   += NDEBUG
 MotionBlur_release_libraries := 
 MotionBlur_release_libraries += NsFoundation

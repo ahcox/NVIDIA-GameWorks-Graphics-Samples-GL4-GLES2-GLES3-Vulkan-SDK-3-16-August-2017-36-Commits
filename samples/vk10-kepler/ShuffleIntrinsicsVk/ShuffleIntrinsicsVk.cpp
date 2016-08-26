@@ -49,7 +49,7 @@ ShuffleIntrinsicsVk::ShuffleIntrinsicsVk()
 	, mVertexBuffer()
 	, mIndexBuffer()
 	, mCurrentPipeline(0)
-	, mSupportsWarpVoteShuffle(true)
+	, mSupportsWarpVoteShuffle(false)
 {
     m_transformer->setTranslationVec(nv::vec3f(0.0f, 0.0f, -2.2f));
     m_transformer->setRotationVec(nv::vec3f(NV_PI*0.35f, 0.0f, 0.0f));
@@ -67,18 +67,26 @@ void ShuffleIntrinsicsVk::configurationCallback(NvVKConfiguration& config)
 { 
     config.depthBits = 24; 
     config.stencilBits = 0; 
+
+#if defined (VK_NV_glsl_shader)
+	config.extensionsToEnable.push_back(VK_NV_GLSL_SHADER_EXTENSION_NAME);
+#endif
 }
 
 VkPipelineLayout pipelineLayout;
 
 void ShuffleIntrinsicsVk::initRendering(void) {
+	NV_APP_BASE_SHARED_INIT();
+
 	VkResult result = VK_ERROR_INITIALIZATION_FAILED;
 
 
 	NvAssetLoaderAddSearchPath("vk10-kepler/ShuffleIntrinsicsVk");
-
-	mSupportsWarpVoteShuffle = isExtensionSupported("VK_NV_glsl_shader");
-
+#if defined (VK_NV_glsl_shader)
+	mSupportsWarpVoteShuffle = isExtensionSupported(VK_NV_GLSL_SHADER_EXTENSION_NAME);
+#else
+	mSupportsWarpVoteShuffle = false;
+#endif
 	if (!mSupportsWarpVoteShuffle) {
 		showDialog("NVIDIA GPU intrinsics Not Supported", "NVIDIA shader intrinsics extensions not supported\n"
 			"You will not be able to use the warp vote and warp shuffle\n"
@@ -186,10 +194,11 @@ void ShuffleIntrinsicsVk::initRendering(void) {
 		rsStateInfo.polygonMode = VK_POLYGON_MODE_FILL;
 		rsStateInfo.cullMode = VK_CULL_MODE_NONE;
 		rsStateInfo.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
+		rsStateInfo.lineWidth = 1.0f;
 
 		VkPipelineColorBlendAttachmentState attachments[1] = {};
 		attachments[0].blendEnable = VK_FALSE;
-		attachments[0].colorWriteMask = ~0;
+		attachments[0].colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
 
 		VkPipelineColorBlendStateCreateInfo cbStateInfo = { VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO };
 		cbStateInfo.logicOpEnable = VK_FALSE;
@@ -220,13 +229,13 @@ void ShuffleIntrinsicsVk::initRendering(void) {
 		uint32_t shaderCount = 0;
 		if (mSupportsWarpVoteShuffle) 
 		{
-			shaderCount = vk().createShadersFromSourceFile(NvAssetLoadTextFile("src_shaders/simple.glsl"), shaderStages, 2);
+			shaderCount = vk().createShadersFromSourceString(NvAssetLoadTextFile("src_shaders/simple.glsl"), shaderStages, 2);
 		}
 		else
 		{
 			int32_t length;
 			char* data = NvAssetLoaderRead("shaders/simple.nvs", length);
-			shaderCount = vk().createShadersFromBinaryFile((uint32_t*)data,	length, shaderStages, 2);
+			shaderCount = vk().createShadersFromBinaryBlob((uint32_t*)data,	length, shaderStages, 2);
 		}
 
 
@@ -427,15 +436,17 @@ void ShuffleIntrinsicsVk::draw(void)
 	renderPassBeginInfo.renderArea.extent.width = m_width;
 	renderPassBeginInfo.renderArea.extent.height = m_height;
 
-	VkClearValue clearValues[1];
+	VkClearValue clearValues[2];
 	clearValues[0].color.float32[0] = 0.66f;
 	clearValues[0].color.float32[1] = 0.33f;
 	clearValues[0].color.float32[2] = 0.44f;
 	clearValues[0].color.float32[3] = 1.0f;
+	clearValues[1].depthStencil.depth = 1.0f;
+	clearValues[1].depthStencil.stencil = 0;
 
 
 	renderPassBeginInfo.pClearValues = clearValues;
-	renderPassBeginInfo.clearValueCount = 1;
+	renderPassBeginInfo.clearValueCount = 2;
 
 	vkCmdBeginRenderPass(cmd, &renderPassBeginInfo, VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS);
 

@@ -280,7 +280,9 @@ void TextWheel::initUI()
 
 void TextWheel::initRendering()
 {
-    if(!requireExtension("GL_NV_path_rendering")) return;
+	NV_APP_BASE_SHARED_INIT();
+
+	if(!requireExtension("GL_NV_path_rendering")) return;
     if (!es_context && !requireExtension("GL_EXT_direct_state_access")) return;
 
     hasFramebufferSRGB = getGLContext()->isExtensionSupported("GL_EXT_framebuffer_sRGB");

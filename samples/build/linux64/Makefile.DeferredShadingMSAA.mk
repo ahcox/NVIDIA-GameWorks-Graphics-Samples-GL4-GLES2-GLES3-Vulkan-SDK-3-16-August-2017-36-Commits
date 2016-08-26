@@ -26,6 +26,7 @@ DeferredShadingMSAA_debug_lpaths    += ./../../../extensions/externals/lib/linux
 DeferredShadingMSAA_debug_defines   := $(DeferredShadingMSAA_custom_defines)
 DeferredShadingMSAA_debug_defines   += LINUX=1
 DeferredShadingMSAA_debug_defines   += NV_LINUX
+DeferredShadingMSAA_debug_defines   += GW_APP_NAME=\"DeferredShadingMSAA\"
 DeferredShadingMSAA_debug_defines   += _DEBUG
 DeferredShadingMSAA_debug_libraries := 
 DeferredShadingMSAA_debug_libraries += NsFoundationD
@@ -131,6 +132,7 @@ DeferredShadingMSAA_release_lpaths    += ./../../../extensions/externals/lib/lin
 DeferredShadingMSAA_release_defines   := $(DeferredShadingMSAA_custom_defines)
 DeferredShadingMSAA_release_defines   += LINUX=1
 DeferredShadingMSAA_release_defines   += NV_LINUX
+DeferredShadingMSAA_release_defines   += GW_APP_NAME=\"DeferredShadingMSAA\"
 DeferredShadingMSAA_release_defines   += NDEBUG
 DeferredShadingMSAA_release_libraries := 
 DeferredShadingMSAA_release_libraries += NsFoundation

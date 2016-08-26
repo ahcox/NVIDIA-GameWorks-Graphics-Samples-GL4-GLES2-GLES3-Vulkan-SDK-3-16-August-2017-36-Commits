@@ -575,6 +575,8 @@ void Tiger3D::initProgram()
 
 void Tiger3D::initRendering()
 {
+	NV_APP_BASE_SHARED_INIT();
+
 	if (!isTestMode())
 		getPlatformContext()->setRedrawMode(NvRedrawMode::ON_DEMAND);
 

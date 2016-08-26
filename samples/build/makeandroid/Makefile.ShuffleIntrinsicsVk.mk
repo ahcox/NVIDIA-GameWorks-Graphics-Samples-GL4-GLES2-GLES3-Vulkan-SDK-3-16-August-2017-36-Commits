@@ -40,6 +40,7 @@ ShuffleIntrinsicsVk_debug_defines   += _LIB
 ShuffleIntrinsicsVk_debug_defines   += NV_ANDROID
 ShuffleIntrinsicsVk_debug_defines   += __STDC_LIMIT_MACROS
 ShuffleIntrinsicsVk_debug_defines   += VK_NO_PROTOTYPES
+ShuffleIntrinsicsVk_debug_defines   += GW_APP_NAME=\"ShuffleIntrinsicsVk\"
 ShuffleIntrinsicsVk_debug_defines   += GL_API_LEVEL_ES2
 ShuffleIntrinsicsVk_debug_defines   += USE_REGAL=1
 ShuffleIntrinsicsVk_debug_defines   += _DEBUG
@@ -167,6 +168,7 @@ ShuffleIntrinsicsVk_release_defines   += _LIB
 ShuffleIntrinsicsVk_release_defines   += NV_ANDROID
 ShuffleIntrinsicsVk_release_defines   += __STDC_LIMIT_MACROS
 ShuffleIntrinsicsVk_release_defines   += VK_NO_PROTOTYPES
+ShuffleIntrinsicsVk_release_defines   += GW_APP_NAME=\"ShuffleIntrinsicsVk\"
 ShuffleIntrinsicsVk_release_defines   += GL_API_LEVEL_ES2
 ShuffleIntrinsicsVk_release_defines   += USE_REGAL=1
 ShuffleIntrinsicsVk_release_defines   += NDEBUG

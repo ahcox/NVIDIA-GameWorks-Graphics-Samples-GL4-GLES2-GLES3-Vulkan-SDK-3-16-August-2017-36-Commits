@@ -331,6 +331,8 @@ namespace basiccmdlist
 
 	void Sample::initRendering()
 	{
+		NV_APP_BASE_SHARED_INIT();
+
 		if (!requireExtension("GL_ARB_bindless_texture"))
 		{
 			LOGI("This sample requires ARB_bindless_texture");

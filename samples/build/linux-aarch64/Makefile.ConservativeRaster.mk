@@ -27,6 +27,7 @@ ConservativeRaster_debug_defines   := $(ConservativeRaster_custom_defines)
 ConservativeRaster_debug_defines   += LINUX=1
 ConservativeRaster_debug_defines   += NV_LINUX
 ConservativeRaster_debug_defines   += GLEW_NO_GLU=1
+ConservativeRaster_debug_defines   += GW_APP_NAME=\"ConservativeRaster\"
 ConservativeRaster_debug_defines   += _DEBUG
 ConservativeRaster_debug_libraries := 
 ConservativeRaster_debug_libraries += NsFoundationD
@@ -138,6 +139,7 @@ ConservativeRaster_release_defines   := $(ConservativeRaster_custom_defines)
 ConservativeRaster_release_defines   += LINUX=1
 ConservativeRaster_release_defines   += NV_LINUX
 ConservativeRaster_release_defines   += GLEW_NO_GLU=1
+ConservativeRaster_release_defines   += GW_APP_NAME=\"ConservativeRaster\"
 ConservativeRaster_release_defines   += NDEBUG
 ConservativeRaster_release_libraries := 
 ConservativeRaster_release_libraries += NsFoundation

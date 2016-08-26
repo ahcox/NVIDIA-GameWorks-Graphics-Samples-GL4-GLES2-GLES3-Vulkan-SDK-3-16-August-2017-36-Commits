@@ -162,7 +162,7 @@
 		<OutDir>./../../lib/vs2013x86\</OutDir>
 		<IntDir>./intermediate/NvAssetLoader/vs2013x86/release\</IntDir>
 		<TargetExt>.lib</TargetExt>
-		<TargetName>libNvAssetLoaderD</TargetName>
+		<TargetName>NvAssetLoaderD</TargetName>
 		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
 		<CodeAnalysisRules />
 		<CodeAnalysisRuleAssemblies />
@@ -186,9 +186,9 @@
 		</ClCompile>
 		<Lib>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-			<OutputFile>$(OutDir)libNvAssetLoaderD.lib</OutputFile>
+			<OutputFile>$(OutDir)NvAssetLoaderD.lib</OutputFile>
 			<AdditionalLibraryDirectories>./../../externals/lib/vs2013x86;./../../lib/vs2013x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-			<ProgramDatabaseFile>$(OutDir)/libNvAssetLoaderD.lib.pdb</ProgramDatabaseFile>
+			<ProgramDatabaseFile>$(OutDir)/NvAssetLoaderD.lib.pdb</ProgramDatabaseFile>
 			<TargetMachine>MachineX86</TargetMachine>
 		</Lib>
 		<ResourceCompile>
@@ -239,7 +239,7 @@
 		<OutDir>./../../lib/vs2013x64\</OutDir>
 		<IntDir>./intermediate/NvAssetLoader/vs2013x64/release\</IntDir>
 		<TargetExt>.lib</TargetExt>
-		<TargetName>libNvAssetLoaderD</TargetName>
+		<TargetName>NvAssetLoaderD</TargetName>
 		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
 		<CodeAnalysisRules />
 		<CodeAnalysisRuleAssemblies />
@@ -262,9 +262,9 @@
 		</ClCompile>
 		<Lib>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-			<OutputFile>$(OutDir)libNvAssetLoaderD.lib</OutputFile>
+			<OutputFile>$(OutDir)NvAssetLoaderD.lib</OutputFile>
 			<AdditionalLibraryDirectories>./../../externals/lib/vs2013x64;./../../lib/vs2013x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-			<ProgramDatabaseFile>$(OutDir)/libNvAssetLoaderD.lib.pdb</ProgramDatabaseFile>
+			<ProgramDatabaseFile>$(OutDir)/NvAssetLoaderD.lib.pdb</ProgramDatabaseFile>
 			<TargetMachine>MachineX64</TargetMachine>
 		</Lib>
 		<ResourceCompile>

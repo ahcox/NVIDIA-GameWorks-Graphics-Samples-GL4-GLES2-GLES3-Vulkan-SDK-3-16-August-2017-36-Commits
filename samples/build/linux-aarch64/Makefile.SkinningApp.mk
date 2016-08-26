@@ -28,6 +28,7 @@ SkinningApp_debug_defines   := $(SkinningApp_custom_defines)
 SkinningApp_debug_defines   += LINUX=1
 SkinningApp_debug_defines   += NV_LINUX
 SkinningApp_debug_defines   += GLEW_NO_GLU=1
+SkinningApp_debug_defines   += GW_APP_NAME=\"SkinningApp\"
 SkinningApp_debug_defines   += _DEBUG
 SkinningApp_debug_libraries := 
 SkinningApp_debug_libraries += NsFoundationD
@@ -139,6 +140,7 @@ SkinningApp_release_defines   := $(SkinningApp_custom_defines)
 SkinningApp_release_defines   += LINUX=1
 SkinningApp_release_defines   += NV_LINUX
 SkinningApp_release_defines   += GLEW_NO_GLU=1
+SkinningApp_release_defines   += GW_APP_NAME=\"SkinningApp\"
 SkinningApp_release_defines   += NDEBUG
 SkinningApp_release_libraries := 
 SkinningApp_release_libraries += NsFoundation

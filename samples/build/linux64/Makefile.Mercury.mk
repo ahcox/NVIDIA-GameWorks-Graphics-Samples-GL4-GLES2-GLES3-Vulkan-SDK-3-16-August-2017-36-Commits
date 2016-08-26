@@ -29,6 +29,7 @@ Mercury_debug_lpaths    += ./../../../extensions/externals/lib/linux64
 Mercury_debug_defines   := $(Mercury_custom_defines)
 Mercury_debug_defines   += LINUX=1
 Mercury_debug_defines   += NV_LINUX
+Mercury_debug_defines   += GW_APP_NAME=\"Mercury\"
 Mercury_debug_defines   += _DEBUG
 Mercury_debug_libraries := 
 Mercury_debug_libraries += NsFoundationD
@@ -134,6 +135,7 @@ Mercury_release_lpaths    += ./../../../extensions/externals/lib/linux64
 Mercury_release_defines   := $(Mercury_custom_defines)
 Mercury_release_defines   += LINUX=1
 Mercury_release_defines   += NV_LINUX
+Mercury_release_defines   += GW_APP_NAME=\"Mercury\"
 Mercury_release_defines   += NDEBUG
 Mercury_release_libraries := 
 Mercury_release_libraries += NsFoundation

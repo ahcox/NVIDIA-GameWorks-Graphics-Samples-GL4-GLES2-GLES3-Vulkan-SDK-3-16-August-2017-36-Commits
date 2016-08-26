@@ -67,7 +67,6 @@ public:
     /// The rendering context is not bound until the entry into initRendering
     /// \param[in] platform the platform context representing the system, normally
     /// passed in from the #NvAppFactory
-    /// \param[in] appTitle the null-terminated string title of the application
     NvSampleApp();
 
     /// Destructor
@@ -285,5 +284,11 @@ protected:
 	bool mLogFPS;
 	float mTimeSinceFPSLog;
 };
+
+// GW_APP_NAME defined in project/makefile
+#define NV_APP_BASE_SHARED_INIT() \
+{ \
+	setAppTitle(GW_APP_NAME); \
+}
 
 #endif

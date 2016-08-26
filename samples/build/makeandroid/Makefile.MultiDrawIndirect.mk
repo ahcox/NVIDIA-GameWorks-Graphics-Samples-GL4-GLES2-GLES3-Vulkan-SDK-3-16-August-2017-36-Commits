@@ -36,6 +36,7 @@ MultiDrawIndirect_debug_defines   += _LIB
 MultiDrawIndirect_debug_defines   += NV_ANDROID
 MultiDrawIndirect_debug_defines   += __STDC_LIMIT_MACROS
 MultiDrawIndirect_debug_defines   += VK_NO_PROTOTYPES
+MultiDrawIndirect_debug_defines   += GW_APP_NAME=\"MultiDrawIndirect\"
 MultiDrawIndirect_debug_defines   += GL_API_LEVEL_ES2
 MultiDrawIndirect_debug_defines   += USE_REGAL=1
 MultiDrawIndirect_debug_defines   += _DEBUG
@@ -153,6 +154,7 @@ MultiDrawIndirect_release_defines   += _LIB
 MultiDrawIndirect_release_defines   += NV_ANDROID
 MultiDrawIndirect_release_defines   += __STDC_LIMIT_MACROS
 MultiDrawIndirect_release_defines   += VK_NO_PROTOTYPES
+MultiDrawIndirect_release_defines   += GW_APP_NAME=\"MultiDrawIndirect\"
 MultiDrawIndirect_release_defines   += GL_API_LEVEL_ES2
 MultiDrawIndirect_release_defines   += USE_REGAL=1
 MultiDrawIndirect_release_defines   += NDEBUG

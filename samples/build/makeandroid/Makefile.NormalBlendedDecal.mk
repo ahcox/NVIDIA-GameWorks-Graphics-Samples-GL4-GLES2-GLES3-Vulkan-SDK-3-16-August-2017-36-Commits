@@ -36,6 +36,7 @@ NormalBlendedDecal_debug_defines   += _LIB
 NormalBlendedDecal_debug_defines   += NV_ANDROID
 NormalBlendedDecal_debug_defines   += __STDC_LIMIT_MACROS
 NormalBlendedDecal_debug_defines   += VK_NO_PROTOTYPES
+NormalBlendedDecal_debug_defines   += GW_APP_NAME=\"NormalBlendedDecal\"
 NormalBlendedDecal_debug_defines   += GL_API_LEVEL_ES2
 NormalBlendedDecal_debug_defines   += USE_REGAL=1
 NormalBlendedDecal_debug_defines   += _DEBUG
@@ -153,6 +154,7 @@ NormalBlendedDecal_release_defines   += _LIB
 NormalBlendedDecal_release_defines   += NV_ANDROID
 NormalBlendedDecal_release_defines   += __STDC_LIMIT_MACROS
 NormalBlendedDecal_release_defines   += VK_NO_PROTOTYPES
+NormalBlendedDecal_release_defines   += GW_APP_NAME=\"NormalBlendedDecal\"
 NormalBlendedDecal_release_defines   += GL_API_LEVEL_ES2
 NormalBlendedDecal_release_defines   += USE_REGAL=1
 NormalBlendedDecal_release_defines   += NDEBUG

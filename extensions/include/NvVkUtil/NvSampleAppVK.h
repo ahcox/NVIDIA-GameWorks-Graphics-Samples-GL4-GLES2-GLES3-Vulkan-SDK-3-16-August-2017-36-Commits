@@ -115,7 +115,7 @@ public:
 	static bool isType(NvAppBase* app);
 
 	virtual bool initialize(const NvPlatformInfo& platform, int32_t width, int32_t height);
-	void configurationCallback(NvVKConfiguration& config) {}
+	virtual void configurationCallback(NvVKConfiguration& config) {}
 
 protected:
     /// \privatesection

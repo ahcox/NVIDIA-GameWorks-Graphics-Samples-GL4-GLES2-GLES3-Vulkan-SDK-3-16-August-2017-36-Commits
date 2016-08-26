@@ -43,7 +43,7 @@ class NvAndVkWinUtil;
 ///  Context wrapper (VK on top of Android).
 class NvAppContextAndVK : public NvAppNativeContextVK {
 public:
-	NvAppContextAndVK(NvAndVkWinUtil* win, NvPlatformInfo info);
+	NvAppContextAndVK(NvVKConfiguration config, NvAndVkWinUtil* win, NvPlatformInfo info);
 
 	virtual bool initialize();
 

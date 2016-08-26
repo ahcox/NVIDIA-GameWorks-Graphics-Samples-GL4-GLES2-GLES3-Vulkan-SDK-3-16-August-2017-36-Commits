@@ -28,6 +28,7 @@ TerrainTessellation_debug_lpaths    += ./../../../extensions/externals/lib/linux
 TerrainTessellation_debug_defines   := $(TerrainTessellation_custom_defines)
 TerrainTessellation_debug_defines   += LINUX=1
 TerrainTessellation_debug_defines   += NV_LINUX
+TerrainTessellation_debug_defines   += GW_APP_NAME=\"TerrainTessellation\"
 TerrainTessellation_debug_defines   += _DEBUG
 TerrainTessellation_debug_libraries := 
 TerrainTessellation_debug_libraries += NsFoundationD
@@ -134,6 +135,7 @@ TerrainTessellation_release_lpaths    += ./../../../extensions/externals/lib/lin
 TerrainTessellation_release_defines   := $(TerrainTessellation_custom_defines)
 TerrainTessellation_release_defines   += LINUX=1
 TerrainTessellation_release_defines   += NV_LINUX
+TerrainTessellation_release_defines   += GW_APP_NAME=\"TerrainTessellation\"
 TerrainTessellation_release_defines   += NDEBUG
 TerrainTessellation_release_libraries := 
 TerrainTessellation_release_libraries += NsFoundation

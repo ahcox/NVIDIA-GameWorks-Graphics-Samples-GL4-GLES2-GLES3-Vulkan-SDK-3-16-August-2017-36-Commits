@@ -30,6 +30,7 @@ NvCommandList_debug_defines   := $(NvCommandList_custom_defines)
 NvCommandList_debug_defines   += LINUX=1
 NvCommandList_debug_defines   += NV_LINUX
 NvCommandList_debug_defines   += GLEW_NO_GLU=1
+NvCommandList_debug_defines   += GW_APP_NAME=\"NvCommandList\"
 NvCommandList_debug_defines   += _DEBUG
 NvCommandList_debug_libraries := 
 NvCommandList_debug_libraries += NsFoundationD
@@ -142,6 +143,7 @@ NvCommandList_release_defines   := $(NvCommandList_custom_defines)
 NvCommandList_release_defines   += LINUX=1
 NvCommandList_release_defines   += NV_LINUX
 NvCommandList_release_defines   += GLEW_NO_GLU=1
+NvCommandList_release_defines   += GW_APP_NAME=\"NvCommandList\"
 NvCommandList_release_defines   += NDEBUG
 NvCommandList_release_libraries := 
 NvCommandList_release_libraries += NsFoundation

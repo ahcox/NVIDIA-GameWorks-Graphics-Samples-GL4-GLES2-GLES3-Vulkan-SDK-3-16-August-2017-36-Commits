@@ -493,6 +493,8 @@ bool TigerWarp::handlePointerInput(NvInputDeviceType::Enum device,
 
 void TigerWarp::initRendering()
 {
+	NV_APP_BASE_SHARED_INIT();
+
 	if (!isTestMode())
 		getPlatformContext()->setRedrawMode(NvRedrawMode::ON_DEMAND);
 

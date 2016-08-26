@@ -38,6 +38,7 @@ CascadedShadowMapping_debug_defines   += _LIB
 CascadedShadowMapping_debug_defines   += NV_ANDROID
 CascadedShadowMapping_debug_defines   += __STDC_LIMIT_MACROS
 CascadedShadowMapping_debug_defines   += VK_NO_PROTOTYPES
+CascadedShadowMapping_debug_defines   += GW_APP_NAME=\"CascadedShadowMapping\"
 CascadedShadowMapping_debug_defines   += GL_API_LEVEL_ES2
 CascadedShadowMapping_debug_defines   += USE_REGAL=1
 CascadedShadowMapping_debug_defines   += _DEBUG
@@ -156,6 +157,7 @@ CascadedShadowMapping_release_defines   += _LIB
 CascadedShadowMapping_release_defines   += NV_ANDROID
 CascadedShadowMapping_release_defines   += __STDC_LIMIT_MACROS
 CascadedShadowMapping_release_defines   += VK_NO_PROTOTYPES
+CascadedShadowMapping_release_defines   += GW_APP_NAME=\"CascadedShadowMapping\"
 CascadedShadowMapping_release_defines   += GL_API_LEVEL_ES2
 CascadedShadowMapping_release_defines   += USE_REGAL=1
 CascadedShadowMapping_release_defines   += NDEBUG

@@ -312,7 +312,9 @@ void TerrainTessellation::initTerrainFbo()
 }
 
 void TerrainTessellation::initRendering(void) {
-    bool isGL = getGLContext()->getConfiguration().apiVer.api == NvGLAPI::GL;
+	NV_APP_BASE_SHARED_INIT();
+
+	bool isGL = getGLContext()->getConfiguration().apiVer.api == NvGLAPI::GL;
 
     if(!(requireMinAPIVersion(NvGLAPIVersionES3_1(), false) &&
          requireExtension("GL_ANDROID_extension_pack_es31a", false)) &&

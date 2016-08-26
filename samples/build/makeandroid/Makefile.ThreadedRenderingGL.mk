@@ -52,6 +52,7 @@ ThreadedRenderingGL_debug_defines   += _LIB
 ThreadedRenderingGL_debug_defines   += NV_ANDROID
 ThreadedRenderingGL_debug_defines   += __STDC_LIMIT_MACROS
 ThreadedRenderingGL_debug_defines   += VK_NO_PROTOTYPES
+ThreadedRenderingGL_debug_defines   += GW_APP_NAME=\"ThreadedRenderingGL\"
 ThreadedRenderingGL_debug_defines   += GL_API_LEVEL_GL4
 ThreadedRenderingGL_debug_defines   += USE_REGAL=1
 ThreadedRenderingGL_debug_defines   += _DEBUG
@@ -169,6 +170,7 @@ ThreadedRenderingGL_release_defines   += _LIB
 ThreadedRenderingGL_release_defines   += NV_ANDROID
 ThreadedRenderingGL_release_defines   += __STDC_LIMIT_MACROS
 ThreadedRenderingGL_release_defines   += VK_NO_PROTOTYPES
+ThreadedRenderingGL_release_defines   += GW_APP_NAME=\"ThreadedRenderingGL\"
 ThreadedRenderingGL_release_defines   += GL_API_LEVEL_GL4
 ThreadedRenderingGL_release_defines   += USE_REGAL=1
 ThreadedRenderingGL_release_defines   += NDEBUG

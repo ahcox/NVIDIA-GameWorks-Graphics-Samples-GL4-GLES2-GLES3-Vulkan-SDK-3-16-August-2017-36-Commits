@@ -40,6 +40,7 @@ HelloVulkan_debug_defines   += _LIB
 HelloVulkan_debug_defines   += NV_ANDROID
 HelloVulkan_debug_defines   += __STDC_LIMIT_MACROS
 HelloVulkan_debug_defines   += VK_NO_PROTOTYPES
+HelloVulkan_debug_defines   += GW_APP_NAME=\"HelloVulkan\"
 HelloVulkan_debug_defines   += GL_API_LEVEL_ES2
 HelloVulkan_debug_defines   += USE_REGAL=1
 HelloVulkan_debug_defines   += _DEBUG
@@ -167,6 +168,7 @@ HelloVulkan_release_defines   += _LIB
 HelloVulkan_release_defines   += NV_ANDROID
 HelloVulkan_release_defines   += __STDC_LIMIT_MACROS
 HelloVulkan_release_defines   += VK_NO_PROTOTYPES
+HelloVulkan_release_defines   += GW_APP_NAME=\"HelloVulkan\"
 HelloVulkan_release_defines   += GL_API_LEVEL_ES2
 HelloVulkan_release_defines   += USE_REGAL=1
 HelloVulkan_release_defines   += NDEBUG

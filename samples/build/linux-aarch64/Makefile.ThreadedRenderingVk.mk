@@ -39,6 +39,7 @@ ThreadedRenderingVk_debug_defines   := $(ThreadedRenderingVk_custom_defines)
 ThreadedRenderingVk_debug_defines   += LINUX=1
 ThreadedRenderingVk_debug_defines   += NV_LINUX
 ThreadedRenderingVk_debug_defines   += GLEW_NO_GLU=1
+ThreadedRenderingVk_debug_defines   += GW_APP_NAME=\"ThreadedRenderingVk\"
 ThreadedRenderingVk_debug_defines   += _DEBUG
 ThreadedRenderingVk_debug_libraries := 
 ThreadedRenderingVk_debug_libraries += NvVkUtilD
@@ -174,6 +175,7 @@ ThreadedRenderingVk_release_defines   := $(ThreadedRenderingVk_custom_defines)
 ThreadedRenderingVk_release_defines   += LINUX=1
 ThreadedRenderingVk_release_defines   += NV_LINUX
 ThreadedRenderingVk_release_defines   += GLEW_NO_GLU=1
+ThreadedRenderingVk_release_defines   += GW_APP_NAME=\"ThreadedRenderingVk\"
 ThreadedRenderingVk_release_defines   += NDEBUG
 ThreadedRenderingVk_release_libraries := 
 ThreadedRenderingVk_release_libraries += NvVkUtil

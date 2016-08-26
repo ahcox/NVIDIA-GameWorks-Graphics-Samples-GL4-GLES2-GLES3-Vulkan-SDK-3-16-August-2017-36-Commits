@@ -170,7 +170,9 @@ void PathSampleApp::reshape(int32_t width, int32_t height)
 }
 
 void PathSampleApp::initRendering(void) {
-    if (!requireExtension("GL_NV_path_rendering")) return;
+	NV_APP_BASE_SHARED_INIT();
+
+	if (!requireExtension("GL_NV_path_rendering")) return;
     LOGI("Has path rendering!");
 
     CHECK_GL_ERROR();

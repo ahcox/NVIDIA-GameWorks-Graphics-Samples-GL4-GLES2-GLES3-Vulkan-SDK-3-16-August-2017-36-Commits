@@ -128,7 +128,9 @@ void WeightedBlendedOIT::initUI()
 
 void WeightedBlendedOIT::initRendering(void)
 {
-    NvAssetLoaderAddSearchPath("gl4-kepler/WeightedBlendedOIT");
+	NV_APP_BASE_SHARED_INIT();
+
+	NvAssetLoaderAddSearchPath("gl4-kepler/WeightedBlendedOIT");
 
     if(!requireMinAPIVersion(NvGLAPIVersionGL4_4(), true))
         return;

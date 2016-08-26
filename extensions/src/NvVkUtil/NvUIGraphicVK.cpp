@@ -267,7 +267,7 @@ void NvUIGraphicRenderBaseVK::InitPipeline(uint32_t shaderCount,
 	rsStateInfo.polygonMode = VK_POLYGON_MODE_FILL;
 	rsStateInfo.cullMode = VK_CULL_MODE_NONE;
 	rsStateInfo.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
-
+	rsStateInfo.lineWidth = 1.0f;
 	VkPipelineDepthStencilStateCreateInfo noDepth;
 	noDepth = { VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO };
 	noDepth.depthTestEnable = VK_FALSE;
@@ -394,7 +394,7 @@ bool NvUIGraphicRenderVK::StaticInit()
 		ms_shader.Load();
 
 		VkPipelineColorBlendAttachmentState colorStateBlend = { VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO };
-		colorStateBlend.colorWriteMask = ~0;
+		colorStateBlend.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
 		colorStateBlend.blendEnable = VK_TRUE;
 		colorStateBlend.alphaBlendOp = VK_BLEND_OP_ADD;
 		colorStateBlend.colorBlendOp = VK_BLEND_OP_ADD;
@@ -437,10 +437,6 @@ bool NvUIGraphicRenderVK::StaticCleanup()
 	return true;
 }
 
-
-static float frand() {
-	return rand() / (float)RAND_MAX;
-}
 
 //======================================================================
 //======================================================================

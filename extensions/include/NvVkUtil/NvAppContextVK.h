@@ -76,8 +76,9 @@ protected:
 	bool initializeDevice(PFN_vkGetProcAddressNV getProc);
 
     /// \privatesection
-	NvAppContextVK(NvPlatformInfo info) 
+	NvAppContextVK(const NvVKConfiguration& config, NvPlatformInfo info) 
         : NvAppContext(info)
+		, NvVkContext(config)
         , m_use_validation(false)
         , m_use_loader_debug(false)
         , m_use_api_dump(false)

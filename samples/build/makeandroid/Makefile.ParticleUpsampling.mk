@@ -41,6 +41,7 @@ ParticleUpsampling_debug_defines   += _LIB
 ParticleUpsampling_debug_defines   += NV_ANDROID
 ParticleUpsampling_debug_defines   += __STDC_LIMIT_MACROS
 ParticleUpsampling_debug_defines   += VK_NO_PROTOTYPES
+ParticleUpsampling_debug_defines   += GW_APP_NAME=\"ParticleUpsampling\"
 ParticleUpsampling_debug_defines   += GL_API_LEVEL_ES2
 ParticleUpsampling_debug_defines   += USE_REGAL=1
 ParticleUpsampling_debug_defines   += _DEBUG
@@ -158,6 +159,7 @@ ParticleUpsampling_release_defines   += _LIB
 ParticleUpsampling_release_defines   += NV_ANDROID
 ParticleUpsampling_release_defines   += __STDC_LIMIT_MACROS
 ParticleUpsampling_release_defines   += VK_NO_PROTOTYPES
+ParticleUpsampling_release_defines   += GW_APP_NAME=\"ParticleUpsampling\"
 ParticleUpsampling_release_defines   += GL_API_LEVEL_ES2
 ParticleUpsampling_release_defines   += USE_REGAL=1
 ParticleUpsampling_release_defines   += NDEBUG

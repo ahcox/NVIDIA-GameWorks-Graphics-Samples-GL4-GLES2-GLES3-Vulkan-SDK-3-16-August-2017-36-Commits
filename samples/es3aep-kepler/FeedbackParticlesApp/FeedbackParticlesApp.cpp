@@ -78,7 +78,9 @@ void FeedbackParticlesApp::configurationCallback(NvGLConfiguration& config)
 //
 void FeedbackParticlesApp::initRendering(void) 
 {
-    if (!requireMinAPIVersion(NvGLAPIVersionGL4())) 
+	NV_APP_BASE_SHARED_INIT();
+
+	if (!requireMinAPIVersion(NvGLAPIVersionGL4()))
         return;
 
     m_transformer->setTranslationVec(nv::vec3f(0.0f,0.0f,-3.0f));

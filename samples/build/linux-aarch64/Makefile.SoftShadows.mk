@@ -31,6 +31,7 @@ SoftShadows_debug_defines   := $(SoftShadows_custom_defines)
 SoftShadows_debug_defines   += LINUX=1
 SoftShadows_debug_defines   += NV_LINUX
 SoftShadows_debug_defines   += GLEW_NO_GLU=1
+SoftShadows_debug_defines   += GW_APP_NAME=\"SoftShadows\"
 SoftShadows_debug_defines   += _DEBUG
 SoftShadows_debug_libraries := 
 SoftShadows_debug_libraries += NsFoundationD
@@ -142,6 +143,7 @@ SoftShadows_release_defines   := $(SoftShadows_custom_defines)
 SoftShadows_release_defines   += LINUX=1
 SoftShadows_release_defines   += NV_LINUX
 SoftShadows_release_defines   += GLEW_NO_GLU=1
+SoftShadows_release_defines   += GW_APP_NAME=\"SoftShadows\"
 SoftShadows_release_defines   += NDEBUG
 SoftShadows_release_libraries := 
 SoftShadows_release_libraries += NsFoundation

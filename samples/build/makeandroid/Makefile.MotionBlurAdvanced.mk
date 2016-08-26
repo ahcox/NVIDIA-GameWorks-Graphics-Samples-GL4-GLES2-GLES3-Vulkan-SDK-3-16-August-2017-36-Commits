@@ -36,6 +36,7 @@ MotionBlurAdvanced_debug_defines   += _LIB
 MotionBlurAdvanced_debug_defines   += NV_ANDROID
 MotionBlurAdvanced_debug_defines   += __STDC_LIMIT_MACROS
 MotionBlurAdvanced_debug_defines   += VK_NO_PROTOTYPES
+MotionBlurAdvanced_debug_defines   += GW_APP_NAME=\"MotionBlurAdvanced\"
 MotionBlurAdvanced_debug_defines   += GL_API_LEVEL_ES3_1_AEP
 MotionBlurAdvanced_debug_defines   += _DEBUG
 MotionBlurAdvanced_debug_libraries := 
@@ -151,6 +152,7 @@ MotionBlurAdvanced_release_defines   += _LIB
 MotionBlurAdvanced_release_defines   += NV_ANDROID
 MotionBlurAdvanced_release_defines   += __STDC_LIMIT_MACROS
 MotionBlurAdvanced_release_defines   += VK_NO_PROTOTYPES
+MotionBlurAdvanced_release_defines   += GW_APP_NAME=\"MotionBlurAdvanced\"
 MotionBlurAdvanced_release_defines   += GL_API_LEVEL_ES3_1_AEP
 MotionBlurAdvanced_release_defines   += NDEBUG
 MotionBlurAdvanced_release_libraries := 

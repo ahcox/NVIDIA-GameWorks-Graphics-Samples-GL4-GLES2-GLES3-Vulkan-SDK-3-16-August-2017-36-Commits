@@ -32,6 +32,7 @@ ModelTestVk_debug_lpaths    += ./../../../extensions/externals/lib/linux64
 ModelTestVk_debug_defines   := $(ModelTestVk_custom_defines)
 ModelTestVk_debug_defines   += LINUX=1
 ModelTestVk_debug_defines   += NV_LINUX
+ModelTestVk_debug_defines   += GW_APP_NAME=\"ModelTestVk\"
 ModelTestVk_debug_defines   += _DEBUG
 ModelTestVk_debug_libraries := 
 ModelTestVk_debug_libraries += NvVkUtilD
@@ -155,6 +156,7 @@ ModelTestVk_release_lpaths    += ./../../../extensions/externals/lib/linux64
 ModelTestVk_release_defines   := $(ModelTestVk_custom_defines)
 ModelTestVk_release_defines   += LINUX=1
 ModelTestVk_release_defines   += NV_LINUX
+ModelTestVk_release_defines   += GW_APP_NAME=\"ModelTestVk\"
 ModelTestVk_release_defines   += NDEBUG
 ModelTestVk_release_libraries := 
 ModelTestVk_release_libraries += NvVkUtil

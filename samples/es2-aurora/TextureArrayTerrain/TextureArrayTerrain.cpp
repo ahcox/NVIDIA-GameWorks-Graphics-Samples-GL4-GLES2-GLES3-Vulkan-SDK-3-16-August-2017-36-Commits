@@ -151,7 +151,9 @@ void TextureArrayTerrain::initUI(void) {
 }
 
 void TextureArrayTerrain::initRendering(void) {
-    // We need at least _one_ of these two extensions
+	NV_APP_BASE_SHARED_INIT();
+
+	// We need at least _one_ of these two extensions
     const NvGLAPIVersion& api = getGLContext()->getConfiguration().apiVer;
     if (!requireExtension("GL_NV_texture_array", false) &&
         !requireExtension("GL_EXT_texture_array", false) &&

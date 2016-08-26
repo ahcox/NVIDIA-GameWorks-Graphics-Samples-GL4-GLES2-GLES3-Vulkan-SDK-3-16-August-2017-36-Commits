@@ -116,7 +116,9 @@ GLint ComputeWaterSimulation::createShaderPipelineProgram(GLuint target, const c
 }
 
 void ComputeWaterSimulation::initRendering(void) {
-    // OpenGL 4.3 is the minimum for compute shaders
+	NV_APP_BASE_SHARED_INIT();
+
+	// OpenGL 4.3 is the minimum for compute shaders
     if (!requireMinAPIVersion(NvGLAPIVersionGL4_3()))
         return;
 

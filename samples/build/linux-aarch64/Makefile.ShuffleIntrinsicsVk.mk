@@ -32,6 +32,7 @@ ShuffleIntrinsicsVk_debug_defines   := $(ShuffleIntrinsicsVk_custom_defines)
 ShuffleIntrinsicsVk_debug_defines   += LINUX=1
 ShuffleIntrinsicsVk_debug_defines   += NV_LINUX
 ShuffleIntrinsicsVk_debug_defines   += GLEW_NO_GLU=1
+ShuffleIntrinsicsVk_debug_defines   += GW_APP_NAME=\"ShuffleIntrinsicsVk\"
 ShuffleIntrinsicsVk_debug_defines   += _DEBUG
 ShuffleIntrinsicsVk_debug_libraries := 
 ShuffleIntrinsicsVk_debug_libraries += NvVkUtilD
@@ -155,6 +156,7 @@ ShuffleIntrinsicsVk_release_defines   := $(ShuffleIntrinsicsVk_custom_defines)
 ShuffleIntrinsicsVk_release_defines   += LINUX=1
 ShuffleIntrinsicsVk_release_defines   += NV_LINUX
 ShuffleIntrinsicsVk_release_defines   += GLEW_NO_GLU=1
+ShuffleIntrinsicsVk_release_defines   += GW_APP_NAME=\"ShuffleIntrinsicsVk\"
 ShuffleIntrinsicsVk_release_defines   += NDEBUG
 ShuffleIntrinsicsVk_release_libraries := 
 ShuffleIntrinsicsVk_release_libraries += NvVkUtil

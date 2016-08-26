@@ -184,7 +184,7 @@ void NvModelVK::Draw(VkCommandBuffer& cmd) {
 	// Bind the vertex and index buffers
 	VkDeviceSize offsets[] = { 0 };
 	vkCmdBindVertexBuffers(cmd, 0, 1, &mVBO(), offsets);
-	vkCmdBindIndexBuffer(cmd, mIBO(), 0, VK_INDEX_TYPE_UINT32);
+	vkCmdBindIndexBuffer(cmd, mIBO(), 0, getIndexType());
 
 	// Draw the triangle
 	vkCmdDrawIndexed(cmd, mIndexCount, 1, 0, 0, 0);

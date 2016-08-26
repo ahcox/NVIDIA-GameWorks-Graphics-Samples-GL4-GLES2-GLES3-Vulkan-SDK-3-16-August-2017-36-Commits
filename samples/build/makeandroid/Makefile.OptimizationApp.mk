@@ -44,6 +44,7 @@ OptimizationApp_debug_defines   += _LIB
 OptimizationApp_debug_defines   += NV_ANDROID
 OptimizationApp_debug_defines   += __STDC_LIMIT_MACROS
 OptimizationApp_debug_defines   += VK_NO_PROTOTYPES
+OptimizationApp_debug_defines   += GW_APP_NAME=\"OptimizationApp\"
 OptimizationApp_debug_defines   += GL_API_LEVEL_ES2
 OptimizationApp_debug_defines   += _DEBUG
 OptimizationApp_debug_libraries := 
@@ -159,6 +160,7 @@ OptimizationApp_release_defines   += _LIB
 OptimizationApp_release_defines   += NV_ANDROID
 OptimizationApp_release_defines   += __STDC_LIMIT_MACROS
 OptimizationApp_release_defines   += VK_NO_PROTOTYPES
+OptimizationApp_release_defines   += GW_APP_NAME=\"OptimizationApp\"
 OptimizationApp_release_defines   += GL_API_LEVEL_ES2
 OptimizationApp_release_defines   += NDEBUG
 OptimizationApp_release_libraries := 

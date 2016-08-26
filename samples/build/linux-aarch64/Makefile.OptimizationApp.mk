@@ -35,6 +35,7 @@ OptimizationApp_debug_defines   := $(OptimizationApp_custom_defines)
 OptimizationApp_debug_defines   += LINUX=1
 OptimizationApp_debug_defines   += NV_LINUX
 OptimizationApp_debug_defines   += GLEW_NO_GLU=1
+OptimizationApp_debug_defines   += GW_APP_NAME=\"OptimizationApp\"
 OptimizationApp_debug_defines   += _DEBUG
 OptimizationApp_debug_libraries := 
 OptimizationApp_debug_libraries += NsFoundationD
@@ -146,6 +147,7 @@ OptimizationApp_release_defines   := $(OptimizationApp_custom_defines)
 OptimizationApp_release_defines   += LINUX=1
 OptimizationApp_release_defines   += NV_LINUX
 OptimizationApp_release_defines   += GLEW_NO_GLU=1
+OptimizationApp_release_defines   += GW_APP_NAME=\"OptimizationApp\"
 OptimizationApp_release_defines   += NDEBUG
 OptimizationApp_release_libraries := 
 OptimizationApp_release_libraries += NsFoundation

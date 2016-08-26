@@ -27,6 +27,7 @@ MotionBlurAdvanced_debug_defines   := $(MotionBlurAdvanced_custom_defines)
 MotionBlurAdvanced_debug_defines   += LINUX=1
 MotionBlurAdvanced_debug_defines   += NV_LINUX
 MotionBlurAdvanced_debug_defines   += GLEW_NO_GLU=1
+MotionBlurAdvanced_debug_defines   += GW_APP_NAME=\"MotionBlurAdvanced\"
 MotionBlurAdvanced_debug_defines   += _DEBUG
 MotionBlurAdvanced_debug_libraries := 
 MotionBlurAdvanced_debug_libraries += NsFoundationD
@@ -138,6 +139,7 @@ MotionBlurAdvanced_release_defines   := $(MotionBlurAdvanced_custom_defines)
 MotionBlurAdvanced_release_defines   += LINUX=1
 MotionBlurAdvanced_release_defines   += NV_LINUX
 MotionBlurAdvanced_release_defines   += GLEW_NO_GLU=1
+MotionBlurAdvanced_release_defines   += GW_APP_NAME=\"MotionBlurAdvanced\"
 MotionBlurAdvanced_release_defines   += NDEBUG
 MotionBlurAdvanced_release_libraries := 
 MotionBlurAdvanced_release_libraries += NsFoundation

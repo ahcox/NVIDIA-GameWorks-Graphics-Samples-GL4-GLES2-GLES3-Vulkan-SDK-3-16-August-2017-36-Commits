@@ -34,6 +34,7 @@ HDR_debug_defines   := $(HDR_custom_defines)
 HDR_debug_defines   += LINUX=1
 HDR_debug_defines   += NV_LINUX
 HDR_debug_defines   += GLEW_NO_GLU=1
+HDR_debug_defines   += GW_APP_NAME=\"HDR\"
 HDR_debug_defines   += _DEBUG
 HDR_debug_libraries := 
 HDR_debug_libraries += NsFoundationD
@@ -145,6 +146,7 @@ HDR_release_defines   := $(HDR_custom_defines)
 HDR_release_defines   += LINUX=1
 HDR_release_defines   += NV_LINUX
 HDR_release_defines   += GLEW_NO_GLU=1
+HDR_release_defines   += GW_APP_NAME=\"HDR\"
 HDR_release_defines   += NDEBUG
 HDR_release_libraries := 
 HDR_release_libraries += NsFoundation

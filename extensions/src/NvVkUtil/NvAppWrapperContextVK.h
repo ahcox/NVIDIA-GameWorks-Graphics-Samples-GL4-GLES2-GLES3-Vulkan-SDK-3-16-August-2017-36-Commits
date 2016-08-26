@@ -45,7 +45,7 @@ class NvGLDrawCallbacks;
 ///  Context wrapper (VK on top of OpenGL).
 class NvAppWrapperContextVK : public NvAppContextVK {
 public:
-	NvAppWrapperContextVK(NvAppContextGL* glContext, const std::string& appTitle, NvPlatformInfo info, bool useGLUI = false);
+	NvAppWrapperContextVK(NvAppContextGL* glContext, NvVKConfiguration config, const std::string& appTitle, NvPlatformInfo info, bool useGLUI = false);
 
 	virtual void contextInitRendering();
 

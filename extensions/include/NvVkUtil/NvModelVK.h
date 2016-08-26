@@ -85,15 +85,17 @@ public:
 
 	nv::vec3f m_center; ///< The computed center of the bounding box of the app
 
-	nv::vec3f GetMinExt()
+	nv::vec3f GetMinExt() const
 	{
 		return m_minExtent;
 	}
 
-	nv::vec3f GetMaxExt()
+	nv::vec3f GetMaxExt() const
 	{
 		return m_maxExtent;
 	}
+
+
 
 	/// Get the Vertex input state for creating a rendering pipeline object for this model
 	/// \return the VIStateInfo for this model
@@ -102,6 +104,23 @@ public:
 	/// Get the Input Assembly state for creating a rendering pipeline object for this model
 	/// \return the IAStateInfo for this model
 	VkPipelineInputAssemblyStateCreateInfo& getIAInfo() { return mIAStateInfo; }
+
+	/// useful when doing custom rendering
+
+	VkIndexType getIndexType() const
+	{
+		return VK_INDEX_TYPE_UINT32;
+	}
+
+	const NvVkBuffer& VBO() const
+	{
+		return mVBO;
+	}
+
+	const NvVkBuffer& IBO() const
+	{
+		return mIBO;
+	}
 
 	/// \privatesection
 

@@ -73,7 +73,9 @@ void ComputeBasicGLSL::initUI(void)
 
 void ComputeBasicGLSL::initRendering(void) 
 {
-    NvAssetLoaderAddSearchPath("es3aep-kepler/ComputeBasicGLSL");
+	NV_APP_BASE_SHARED_INIT();
+
+	NvAssetLoaderAddSearchPath("es3aep-kepler/ComputeBasicGLSL");
 
     if (!requireMinAPIVersion(NvGLAPIVersionES3_1()))
         return;

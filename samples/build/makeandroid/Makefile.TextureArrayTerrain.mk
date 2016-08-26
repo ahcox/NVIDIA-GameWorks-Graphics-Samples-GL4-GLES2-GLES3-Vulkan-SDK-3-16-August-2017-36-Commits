@@ -40,6 +40,7 @@ TextureArrayTerrain_debug_defines   += _LIB
 TextureArrayTerrain_debug_defines   += NV_ANDROID
 TextureArrayTerrain_debug_defines   += __STDC_LIMIT_MACROS
 TextureArrayTerrain_debug_defines   += VK_NO_PROTOTYPES
+TextureArrayTerrain_debug_defines   += GW_APP_NAME=\"TextureArrayTerrain\"
 TextureArrayTerrain_debug_defines   += GL_API_LEVEL_ES2
 TextureArrayTerrain_debug_defines   += _DEBUG
 TextureArrayTerrain_debug_libraries := 
@@ -155,6 +156,7 @@ TextureArrayTerrain_release_defines   += _LIB
 TextureArrayTerrain_release_defines   += NV_ANDROID
 TextureArrayTerrain_release_defines   += __STDC_LIMIT_MACROS
 TextureArrayTerrain_release_defines   += VK_NO_PROTOTYPES
+TextureArrayTerrain_release_defines   += GW_APP_NAME=\"TextureArrayTerrain\"
 TextureArrayTerrain_release_defines   += GL_API_LEVEL_ES2
 TextureArrayTerrain_release_defines   += NDEBUG
 TextureArrayTerrain_release_libraries := 

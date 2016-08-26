@@ -74,6 +74,8 @@ void HelloVulkan::configurationCallback(NvVKConfiguration& config)
 VkPipelineLayout pipelineLayout;
 
 void HelloVulkan::initRendering(void) {
+	NV_APP_BASE_SHARED_INIT();
+
 	VkResult result = VK_ERROR_INITIALIZATION_FAILED;
 
     NvAssetLoaderAddSearchPath("vk10-kepler/HelloVulkan");
@@ -164,10 +166,11 @@ void HelloVulkan::initRendering(void) {
 	rsStateInfo.polygonMode = VK_POLYGON_MODE_FILL;
     rsStateInfo.cullMode = VK_CULL_MODE_NONE;
 	rsStateInfo.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
+	rsStateInfo.lineWidth = 1.0f;
 
     VkPipelineColorBlendAttachmentState attachments[1] = {};
     attachments[0].blendEnable = VK_FALSE;
-	attachments[0].colorWriteMask = ~0;
+	attachments[0].colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
 
     VkPipelineColorBlendStateCreateInfo cbStateInfo = { VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO };
     cbStateInfo.logicOpEnable = VK_FALSE;
@@ -197,13 +200,13 @@ void HelloVulkan::initRendering(void) {
     VkPipelineShaderStageCreateInfo shaderStages[2];
 	uint32_t shaderCount = 0;
 #ifdef SOURCE_SHADERS
-	shaderCount = vk().createShadersFromSourceFile(
+	shaderCount = vk().createShadersFromSourceString(
 		NvAssetLoadTextFile("src_shaders/simple.glsl"), shaderStages, 2);
 #else
 	{
 		int32_t length;
 		char* data = NvAssetLoaderRead("shaders/simple.nvs", length);
-		shaderCount = vk().createShadersFromBinaryFile((uint32_t*)data,
+		shaderCount = vk().createShadersFromBinaryBlob((uint32_t*)data,
 			length, shaderStages, 2);
 	}
 #endif
@@ -368,15 +371,18 @@ void HelloVulkan::draw(void)
 	renderPassBeginInfo.renderArea.extent.width = m_width;
 	renderPassBeginInfo.renderArea.extent.height = m_height;
 
-	VkClearValue clearValues[1];
+	VkClearValue clearValues[2];
 	clearValues[0].color.float32[0] = 0.66f;
 	clearValues[0].color.float32[1] = 0.33f;
 	clearValues[0].color.float32[2] = 0.44f;
 	clearValues[0].color.float32[3] = 1.0f;
 
+	clearValues[1].depthStencil.depth = 1.0f;
+	clearValues[1].depthStencil.stencil = 0;
+
 
 	renderPassBeginInfo.pClearValues = clearValues;
-	renderPassBeginInfo.clearValueCount = 1;
+	renderPassBeginInfo.clearValueCount = 2;
 
 	vkCmdBeginRenderPass(cmd, &renderPassBeginInfo, VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS);
 

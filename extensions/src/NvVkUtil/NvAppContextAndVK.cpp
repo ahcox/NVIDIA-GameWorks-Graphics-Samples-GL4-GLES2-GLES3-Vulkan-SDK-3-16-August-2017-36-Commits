@@ -41,8 +41,8 @@
 
 #define ARRAY_SIZE(a) ( sizeof(a) / sizeof( (a)[0] ))
 
-NvAppContextAndVK::NvAppContextAndVK(NvAndVkWinUtil* win, NvPlatformInfo info) :
-NvAppNativeContextVK("Android VK App", info)
+NvAppContextAndVK::NvAppContextAndVK(NvVKConfiguration config, NvAndVkWinUtil* win, NvPlatformInfo info) :
+NvAppNativeContextVK(config, "Android VK App", info)
 , mWin(win)
 {
 }

@@ -181,6 +181,8 @@ bool FXAA::genRenderTexture()
 }
 
 void FXAA::initRendering(void) {
+	NV_APP_BASE_SHARED_INIT();
+
 	m_aspectRatio = 1.0;
     NvAssetLoaderAddSearchPath("es3-kepler/FXAA");
      

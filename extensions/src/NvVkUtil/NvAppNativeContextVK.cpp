@@ -46,8 +46,8 @@
 #define ARRAY_SIZE(a) ( sizeof(a) / sizeof( (a)[0] ))
 
 
-NvAppNativeContextVK::NvAppNativeContextVK(const std::string& appTitle, NvPlatformInfo info) :
-NvAppContextVK(info)
+NvAppNativeContextVK::NvAppNativeContextVK(NvVKConfiguration config, const std::string& appTitle, NvPlatformInfo info) :
+NvAppContextVK(config, info)
 , mCurrentWidth(0)
 , mCurrentHeight(0)
 , mAppTitle(appTitle)

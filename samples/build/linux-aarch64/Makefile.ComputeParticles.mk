@@ -30,6 +30,7 @@ ComputeParticles_debug_defines   := $(ComputeParticles_custom_defines)
 ComputeParticles_debug_defines   += LINUX=1
 ComputeParticles_debug_defines   += NV_LINUX
 ComputeParticles_debug_defines   += GLEW_NO_GLU=1
+ComputeParticles_debug_defines   += GW_APP_NAME=\"ComputeParticles\"
 ComputeParticles_debug_defines   += _DEBUG
 ComputeParticles_debug_libraries := 
 ComputeParticles_debug_libraries += NsFoundationD
@@ -142,6 +143,7 @@ ComputeParticles_release_defines   := $(ComputeParticles_custom_defines)
 ComputeParticles_release_defines   += LINUX=1
 ComputeParticles_release_defines   += NV_LINUX
 ComputeParticles_release_defines   += GLEW_NO_GLU=1
+ComputeParticles_release_defines   += GW_APP_NAME=\"ComputeParticles\"
 ComputeParticles_release_defines   += NDEBUG
 ComputeParticles_release_libraries := 
 ComputeParticles_release_libraries += NsFoundation

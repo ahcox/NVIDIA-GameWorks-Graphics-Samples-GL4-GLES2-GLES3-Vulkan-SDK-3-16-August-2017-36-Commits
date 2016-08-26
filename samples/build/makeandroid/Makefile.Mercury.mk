@@ -39,6 +39,7 @@ Mercury_debug_defines   += _LIB
 Mercury_debug_defines   += NV_ANDROID
 Mercury_debug_defines   += __STDC_LIMIT_MACROS
 Mercury_debug_defines   += VK_NO_PROTOTYPES
+Mercury_debug_defines   += GW_APP_NAME=\"Mercury\"
 Mercury_debug_defines   += GL_API_LEVEL_ES3_1_AEP
 Mercury_debug_defines   += _DEBUG
 Mercury_debug_libraries := 
@@ -154,6 +155,7 @@ Mercury_release_defines   += _LIB
 Mercury_release_defines   += NV_ANDROID
 Mercury_release_defines   += __STDC_LIMIT_MACROS
 Mercury_release_defines   += VK_NO_PROTOTYPES
+Mercury_release_defines   += GW_APP_NAME=\"Mercury\"
 Mercury_release_defines   += GL_API_LEVEL_ES3_1_AEP
 Mercury_release_defines   += NDEBUG
 Mercury_release_libraries := 

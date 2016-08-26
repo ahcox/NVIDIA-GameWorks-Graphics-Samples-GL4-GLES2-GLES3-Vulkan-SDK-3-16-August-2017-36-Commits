@@ -53,8 +53,8 @@ class NvVkMultibufferedRenderTarget;
 
 class NvGLFWContextVK : public NvAppNativeContextVK {
 public:
-	NvGLFWContextVK(const NvPlatformCategory::Enum plat, const NvPlatformOS::Enum os) :
-		NvAppNativeContextVK("App", NvPlatformInfo(plat, os))
+	NvGLFWContextVK(NvVKConfiguration config, const NvPlatformCategory::Enum plat, const NvPlatformOS::Enum os) :
+		NvAppNativeContextVK(config, "App", NvPlatformInfo(plat, os))
 	{
 		mUseFBOPair = false;
 		mFBOWidth = 0;

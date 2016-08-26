@@ -38,6 +38,7 @@ TerrainTessellation_debug_defines   += _LIB
 TerrainTessellation_debug_defines   += NV_ANDROID
 TerrainTessellation_debug_defines   += __STDC_LIMIT_MACROS
 TerrainTessellation_debug_defines   += VK_NO_PROTOTYPES
+TerrainTessellation_debug_defines   += GW_APP_NAME=\"TerrainTessellation\"
 TerrainTessellation_debug_defines   += GL_API_LEVEL_ES3_1_AEP
 TerrainTessellation_debug_defines   += _DEBUG
 TerrainTessellation_debug_libraries := 
@@ -154,6 +155,7 @@ TerrainTessellation_release_defines   += _LIB
 TerrainTessellation_release_defines   += NV_ANDROID
 TerrainTessellation_release_defines   += __STDC_LIMIT_MACROS
 TerrainTessellation_release_defines   += VK_NO_PROTOTYPES
+TerrainTessellation_release_defines   += GW_APP_NAME=\"TerrainTessellation\"
 TerrainTessellation_release_defines   += GL_API_LEVEL_ES3_1_AEP
 TerrainTessellation_release_defines   += NDEBUG
 TerrainTessellation_release_libraries := 

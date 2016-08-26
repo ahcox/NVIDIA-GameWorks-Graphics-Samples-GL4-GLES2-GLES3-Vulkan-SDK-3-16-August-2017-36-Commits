@@ -32,6 +32,7 @@ ComputeWaterSimulation_debug_lpaths    += ./../../../extensions/externals/lib/li
 ComputeWaterSimulation_debug_defines   := $(ComputeWaterSimulation_custom_defines)
 ComputeWaterSimulation_debug_defines   += LINUX=1
 ComputeWaterSimulation_debug_defines   += NV_LINUX
+ComputeWaterSimulation_debug_defines   += GW_APP_NAME=\"ComputeWaterSimulation\"
 ComputeWaterSimulation_debug_defines   += _DEBUG
 ComputeWaterSimulation_debug_libraries := 
 ComputeWaterSimulation_debug_libraries += NsFoundationD
@@ -138,6 +139,7 @@ ComputeWaterSimulation_release_lpaths    += ./../../../extensions/externals/lib/
 ComputeWaterSimulation_release_defines   := $(ComputeWaterSimulation_custom_defines)
 ComputeWaterSimulation_release_defines   += LINUX=1
 ComputeWaterSimulation_release_defines   += NV_LINUX
+ComputeWaterSimulation_release_defines   += GW_APP_NAME=\"ComputeWaterSimulation\"
 ComputeWaterSimulation_release_defines   += NDEBUG
 ComputeWaterSimulation_release_libraries := 
 ComputeWaterSimulation_release_libraries += NsFoundation

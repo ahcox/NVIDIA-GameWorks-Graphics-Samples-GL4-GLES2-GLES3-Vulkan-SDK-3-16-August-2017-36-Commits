@@ -75,7 +75,9 @@ void CascadedShadowMapping::configurationCallback(NvGLConfiguration& config)
 }
 
 void CascadedShadowMapping::initRendering(void) {
-    printGLString("Version", GL_VERSION);
+	NV_APP_BASE_SHARED_INIT();
+
+	printGLString("Version", GL_VERSION);
     printGLString("Vendor", GL_VENDOR);
     printGLString("Renderer", GL_RENDERER);
     printGLString("Extensions", GL_EXTENSIONS);

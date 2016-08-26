@@ -36,6 +36,7 @@ BlendedAA_debug_defines   += _LIB
 BlendedAA_debug_defines   += NV_ANDROID
 BlendedAA_debug_defines   += __STDC_LIMIT_MACROS
 BlendedAA_debug_defines   += VK_NO_PROTOTYPES
+BlendedAA_debug_defines   += GW_APP_NAME=\"BlendedAA\"
 BlendedAA_debug_defines   += GL_API_LEVEL_ES2
 BlendedAA_debug_defines   += USE_REGAL=1
 BlendedAA_debug_defines   += _DEBUG
@@ -153,6 +154,7 @@ BlendedAA_release_defines   += _LIB
 BlendedAA_release_defines   += NV_ANDROID
 BlendedAA_release_defines   += __STDC_LIMIT_MACROS
 BlendedAA_release_defines   += VK_NO_PROTOTYPES
+BlendedAA_release_defines   += GW_APP_NAME=\"BlendedAA\"
 BlendedAA_release_defines   += GL_API_LEVEL_ES2
 BlendedAA_release_defines   += USE_REGAL=1
 BlendedAA_release_defines   += NDEBUG

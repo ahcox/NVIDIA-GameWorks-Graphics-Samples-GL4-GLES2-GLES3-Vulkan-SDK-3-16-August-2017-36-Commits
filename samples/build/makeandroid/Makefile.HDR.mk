@@ -43,6 +43,7 @@ HDR_debug_defines   += _LIB
 HDR_debug_defines   += NV_ANDROID
 HDR_debug_defines   += __STDC_LIMIT_MACROS
 HDR_debug_defines   += VK_NO_PROTOTYPES
+HDR_debug_defines   += GW_APP_NAME=\"HDR\"
 HDR_debug_defines   += GL_API_LEVEL_ES3_1_AEP
 HDR_debug_defines   += _DEBUG
 HDR_debug_libraries := 
@@ -158,6 +159,7 @@ HDR_release_defines   += _LIB
 HDR_release_defines   += NV_ANDROID
 HDR_release_defines   += __STDC_LIMIT_MACROS
 HDR_release_defines   += VK_NO_PROTOTYPES
+HDR_release_defines   += GW_APP_NAME=\"HDR\"
 HDR_release_defines   += GL_API_LEVEL_ES3_1_AEP
 HDR_release_defines   += NDEBUG
 HDR_release_libraries := 

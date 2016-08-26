@@ -32,6 +32,7 @@ SkinningAppVk_debug_lpaths    += ./../../../extensions/externals/lib/linux64
 SkinningAppVk_debug_defines   := $(SkinningAppVk_custom_defines)
 SkinningAppVk_debug_defines   += LINUX=1
 SkinningAppVk_debug_defines   += NV_LINUX
+SkinningAppVk_debug_defines   += GW_APP_NAME=\"SkinningAppVk\"
 SkinningAppVk_debug_defines   += _DEBUG
 SkinningAppVk_debug_libraries := 
 SkinningAppVk_debug_libraries += NvVkUtilD
@@ -149,6 +150,7 @@ SkinningAppVk_release_lpaths    += ./../../../extensions/externals/lib/linux64
 SkinningAppVk_release_defines   := $(SkinningAppVk_custom_defines)
 SkinningAppVk_release_defines   += LINUX=1
 SkinningAppVk_release_defines   += NV_LINUX
+SkinningAppVk_release_defines   += GW_APP_NAME=\"SkinningAppVk\"
 SkinningAppVk_release_defines   += NDEBUG
 SkinningAppVk_release_libraries := 
 SkinningAppVk_release_libraries += NvVkUtil

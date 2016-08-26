@@ -31,6 +31,7 @@ TextureArrayTerrain_debug_defines   := $(TextureArrayTerrain_custom_defines)
 TextureArrayTerrain_debug_defines   += LINUX=1
 TextureArrayTerrain_debug_defines   += NV_LINUX
 TextureArrayTerrain_debug_defines   += GLEW_NO_GLU=1
+TextureArrayTerrain_debug_defines   += GW_APP_NAME=\"TextureArrayTerrain\"
 TextureArrayTerrain_debug_defines   += _DEBUG
 TextureArrayTerrain_debug_libraries := 
 TextureArrayTerrain_debug_libraries += NsFoundationD
@@ -142,6 +143,7 @@ TextureArrayTerrain_release_defines   := $(TextureArrayTerrain_custom_defines)
 TextureArrayTerrain_release_defines   += LINUX=1
 TextureArrayTerrain_release_defines   += NV_LINUX
 TextureArrayTerrain_release_defines   += GLEW_NO_GLU=1
+TextureArrayTerrain_release_defines   += GW_APP_NAME=\"TextureArrayTerrain\"
 TextureArrayTerrain_release_defines   += NDEBUG
 TextureArrayTerrain_release_libraries := 
 TextureArrayTerrain_release_libraries += NsFoundation

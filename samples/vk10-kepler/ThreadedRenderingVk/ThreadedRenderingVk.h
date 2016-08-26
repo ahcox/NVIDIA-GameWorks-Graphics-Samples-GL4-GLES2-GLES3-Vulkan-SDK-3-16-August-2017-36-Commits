@@ -37,20 +37,18 @@
 
 #include "NV/NvMath.h"
 #include "NvAppBase/NvCPUTimer.h"
-#include "NvUI/NvBitFont.h"
-
-#include "NvGamepad/NvGamepad.h"
-#include "NvVkUtil/NvSimpleUBO.h"
-#include "NvVkUtil/NvSafeCommandBuffer.h"
-#include <vector>
-#include "NvInstancedModelExtVK.h"
-#include "School.h"
-#include <cstdlib>
-#include <deque>
-#include "SchoolStateManager.h"
 
 #include "NvGLUtils/NvTimers.h"
-#include "NvInstancedModelExtGL.h"
+
+#include "NvVkUtil/NvSimpleUBO.h"
+#include "NvVkUtil/NvSafeCommandBuffer.h"
+
+#include "School.h"
+#include "SchoolStateManager.h"
+
+#include <vector>
+#include <cstdlib>
+#include <deque>
 
 #define CPU_TIMER_SCOPE(TIMER_ID) NvCPUTimerScope cpuTimer(&m_CPUTimers[TIMER_ID])
 #define GPU_TIMER_SCOPE() NvGPUTimerScope gpuTimer(&m_GPUTimer)
@@ -67,12 +65,13 @@ public:
 
 	// Inherited methods
 	virtual void initRendering(void);
+	virtual void shutdownRendering(void);
 	virtual void initUI(void);
 	virtual void reshape(int32_t width, int32_t height);
 	virtual void draw(void);
 
 	enum {
-		MAX_ANIMATION_THREAD_COUNT = 8,
+		MAX_THREAD_COUNT = 8,
 		THREAD_STACK_SIZE = 8192U
 	};
 
@@ -82,23 +81,14 @@ public:
 		CPU_TIMER_MAIN_WAIT,
         CPU_TIMER_MAIN_COPYVBO,
 		CPU_TIMER_THREAD_BASE_CMD_BUILD,
-		CPU_TIMER_THREAD_MAX_CMD_BUILD = CPU_TIMER_THREAD_BASE_CMD_BUILD + MAX_ANIMATION_THREAD_COUNT,
+		CPU_TIMER_THREAD_MAX_CMD_BUILD = CPU_TIMER_THREAD_BASE_CMD_BUILD + MAX_THREAD_COUNT,
 		CPU_TIMER_THREAD_BASE_ANIMATE,
-		CPU_TIMER_THREAD_MAX_ANIMATE = CPU_TIMER_THREAD_BASE_ANIMATE + MAX_ANIMATION_THREAD_COUNT,
+		CPU_TIMER_THREAD_MAX_ANIMATE = CPU_TIMER_THREAD_BASE_ANIMATE + MAX_THREAD_COUNT,
 		CPU_TIMER_THREAD_BASE_UPDATE,
-		CPU_TIMER_THREAD_MAX_UPDATE = CPU_TIMER_THREAD_BASE_UPDATE + MAX_ANIMATION_THREAD_COUNT,
+		CPU_TIMER_THREAD_MAX_UPDATE = CPU_TIMER_THREAD_BASE_UPDATE + MAX_THREAD_COUNT,
 		CPU_TIMER_THREAD_BASE_TOTAL,
-		CPU_TIMER_THREAD_MAX_TOTAL = CPU_TIMER_THREAD_BASE_TOTAL + MAX_ANIMATION_THREAD_COUNT,
+		CPU_TIMER_THREAD_MAX_TOTAL = CPU_TIMER_THREAD_BASE_TOTAL + MAX_THREAD_COUNT,
 		CPU_TIMER_COUNT
-	};
-
-
-	enum
-	{
-		RENDER_COLOR = 0,
-		RENDER_DEPTH,
-		RENDER_FINAL,
-		RENDER_COUNT
 	};
 
 	enum
@@ -143,13 +133,14 @@ public:
 		NvThread* m_thread;
 		ThreadedRenderingVk* m_app;
 		uint32_t m_index;
-		bool m_cmdBufferOpen;
 		uint32_t m_drawCallCount;
 		uint32_t m_baseSchoolIndex;
 		uint32_t m_schoolCount;
-                uint32_t m_frameID; 
+        uint32_t m_frameID; 
+		bool m_cmdBufferOpen;
 	};
-	void AnimateJobFunction(uint32_t threadIndex);
+
+	void ThreadJobFunction(uint32_t threadIndex);
 	void UpdateSchool(uint32_t threadIndex, uint32_t schoolIndex,
 		School* pSchool);
 
@@ -160,11 +151,8 @@ public:
 private:
 	// Additional rendering setup methods
 	void CleanRendering(void);
-	bool LoadAllShadersFromSource();
-	bool LoadAllShaderBinaries();
 	void InitializeSamplers();
 	void InitializeSchoolDescriptions(uint32_t numSchools);
-	void InitializeSchools();
 	void InitPipeline(uint32_t shaderCount,
 		VkPipelineShaderStageCreateInfo* shaderStages,
 		VkPipelineVertexInputStateCreateInfo* pVertexInputState,
@@ -191,12 +179,6 @@ private:
 	void DrawSkyboxColorDepthGL();
 	void DrawGroundPlaneGL();
 
-	// Per frame render call that uses existing command buffers, but uses
-	// updated UBOs where necessary
-	void RenderScene(VkCommandBuffer& cmd);
-
-	void RenderSceneGL();
-
 	// Thread handling methods
 	void InitThreads(void);
 	void CleanThreads(void);
@@ -204,18 +186,14 @@ private:
 	// Methods to affect the current settings of the app
 	uint32_t SetNumSchools(uint32_t numSchools);
     void UpdateSchoolTankSizes();
-    uint32_t SetAnimationThreadNum(uint32_t numThreads);
+    uint32_t SetThreadNum(uint32_t numThreads);
 
     void UpdateStats();
-   
 	void BuildSimpleStatsString(char* buffer, int32_t size);
     void BuildFullStatsString(char* buffer, int32_t size);
 
-	NVTHREAD_STACK_ALIGN char m_ThreadStacks[MAX_ANIMATION_THREAD_COUNT][THREAD_STACK_SIZE];
-	bool m_bFollowingSchool;
-
-	ThreadData m_Threads[MAX_ANIMATION_THREAD_COUNT];
-
+	NVTHREAD_STACK_ALIGN char m_ThreadStacks[MAX_THREAD_COUNT][THREAD_STACK_SIZE];
+	ThreadData m_Threads[MAX_THREAD_COUNT];
 	struct ThreadJob
 	{
 		School* school;
@@ -240,13 +218,6 @@ private:
 	bool m_running;
 
 	NvInputHandler_CameraFly* m_pInputHandler;
-	// Member fields that hold FBO and texture handles
-	bool m_FBOCreated;
-
-    // Flag to allow schools to be created with same parameters
-    // except for model.  Setting this to false will use the "schoolInfo" 
-    // array to initialize schools.
-    bool m_bUseFixedSchools;
 
 	// Member fields that hold shader objects
 	NvGLSLProgram* m_shader_GroundPlane;
@@ -430,11 +401,7 @@ private:
     float m_causticTiling;
     float m_causticSpeed;
 
-	NvSafeCommandBuffer<3, MAX_ANIMATION_THREAD_COUNT+1> m_subCommandBuffers;
-
-	// Other state-related member fields
-	// (some of them are referenced and controlled by the TweakBar UI)
-	uint32_t m_renderMode;
+	NvSafeCommandBuffer<3, MAX_THREAD_COUNT+1> m_subCommandBuffers;
 
 	// Reset mode is the current setting for the Reset dropdown.
 	// See the RESET_* enum for values
@@ -447,6 +414,8 @@ private:
 	bool m_avoidance;
     float m_currentTime;
 	uint32_t m_frameLogicalClock;
+
+	bool m_disableRendering;
 
 	// UI trackers
 	bool m_bUIDirty;
@@ -469,7 +438,7 @@ private:
 		, UIACTION_CAMERAFOLLOWSCHOOL   
 		, UIACTION_RESET_FISHPLOSION	
 		, UIACTION_RESET_FISHFIREWORKS	
-		, UIACTION_ANIMTHREADCOUNT		
+		, UIACTION_THREADCOUNT		
 		, UIACTION_INSTCOUNT		
 		, UIACTION_BATCHSIZE
 		, UIACTION_STATSTOGGLE
@@ -537,7 +506,7 @@ private:
         float tot;
     };
 
-    ThreadTimings m_threadTimings[MAX_ANIMATION_THREAD_COUNT];
+    ThreadTimings m_threadTimings[MAX_THREAD_COUNT];
 
 	bool m_flushPerFrame;
 
@@ -545,6 +514,7 @@ private:
     bool m_requestedDrawGL;
 	bool m_drawGL;
 	bool m_glInitialized;
+
 	volatile uint32_t m_frameID;
 };
 #endif // ThreadedRenderingVk_H_

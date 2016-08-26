@@ -103,7 +103,9 @@ void OptimizationApp::initUI(void) {
 }
 
 void OptimizationApp::initRendering(void) {
-    glClearColor(0.0f, 0.0f, 1.0f, 1.0f);    
+	NV_APP_BASE_SHARED_INIT();
+
+	glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
 
     NvAssetLoaderAddSearchPath("es2-aurora/OptimizationApp");
 

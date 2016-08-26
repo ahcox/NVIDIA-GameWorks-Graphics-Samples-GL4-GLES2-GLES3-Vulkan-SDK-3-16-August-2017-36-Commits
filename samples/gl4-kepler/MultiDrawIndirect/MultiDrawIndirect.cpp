@@ -336,7 +336,9 @@ void MultiDrawIndirect::CleanRendering(void)
 
 void MultiDrawIndirect::initRendering(void)
 {
-    bool MultidrawAvailable;
+	NV_APP_BASE_SHARED_INIT();
+
+	bool MultidrawAvailable;
 
     m_GPUTimer.init();
     m_CPUTimer.init();

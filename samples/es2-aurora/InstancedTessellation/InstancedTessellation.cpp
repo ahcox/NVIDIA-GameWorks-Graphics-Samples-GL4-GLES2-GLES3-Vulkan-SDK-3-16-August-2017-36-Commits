@@ -607,7 +607,9 @@ bool InstancedTessellation::initPerModelTessellationInstancingData( NvModelGL* m
 }
 
 void InstancedTessellation::initRendering(void) {
-   if( requireMinAPIVersion(NvGLAPIVersionES3(), false) ) {
+	NV_APP_BASE_SHARED_INIT();
+
+	if( requireMinAPIVersion(NvGLAPIVersionES3(), false) ) {
          m_hwInstancing = true;
          glDrawElementsInstancedInternal = (PFNDrawElementsInstanced)getGLContext()->getGLProcAddress("glDrawElementsInstanced");
          glVertexAttribDivisorInternal = (PFNVertexAttribDivisor)getGLContext()->getGLProcAddress("glVertexAttribDivisor");

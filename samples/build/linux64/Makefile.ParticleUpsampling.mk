@@ -31,6 +31,7 @@ ParticleUpsampling_debug_lpaths    += ./../../../extensions/externals/lib/linux6
 ParticleUpsampling_debug_defines   := $(ParticleUpsampling_custom_defines)
 ParticleUpsampling_debug_defines   += LINUX=1
 ParticleUpsampling_debug_defines   += NV_LINUX
+ParticleUpsampling_debug_defines   += GW_APP_NAME=\"ParticleUpsampling\"
 ParticleUpsampling_debug_defines   += _DEBUG
 ParticleUpsampling_debug_libraries := 
 ParticleUpsampling_debug_libraries += NsFoundationD
@@ -136,6 +137,7 @@ ParticleUpsampling_release_lpaths    += ./../../../extensions/externals/lib/linu
 ParticleUpsampling_release_defines   := $(ParticleUpsampling_custom_defines)
 ParticleUpsampling_release_defines   += LINUX=1
 ParticleUpsampling_release_defines   += NV_LINUX
+ParticleUpsampling_release_defines   += GW_APP_NAME=\"ParticleUpsampling\"
 ParticleUpsampling_release_defines   += NDEBUG
 ParticleUpsampling_release_libraries := 
 ParticleUpsampling_release_libraries += NsFoundation

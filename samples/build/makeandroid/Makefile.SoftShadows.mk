@@ -40,6 +40,7 @@ SoftShadows_debug_defines   += _LIB
 SoftShadows_debug_defines   += NV_ANDROID
 SoftShadows_debug_defines   += __STDC_LIMIT_MACROS
 SoftShadows_debug_defines   += VK_NO_PROTOTYPES
+SoftShadows_debug_defines   += GW_APP_NAME=\"SoftShadows\"
 SoftShadows_debug_defines   += GL_API_LEVEL_ES3_1_AEP
 SoftShadows_debug_defines   += _DEBUG
 SoftShadows_debug_libraries := 
@@ -155,6 +156,7 @@ SoftShadows_release_defines   += _LIB
 SoftShadows_release_defines   += NV_ANDROID
 SoftShadows_release_defines   += __STDC_LIMIT_MACROS
 SoftShadows_release_defines   += VK_NO_PROTOTYPES
+SoftShadows_release_defines   += GW_APP_NAME=\"SoftShadows\"
 SoftShadows_release_defines   += GL_API_LEVEL_ES3_1_AEP
 SoftShadows_release_defines   += NDEBUG
 SoftShadows_release_libraries := 

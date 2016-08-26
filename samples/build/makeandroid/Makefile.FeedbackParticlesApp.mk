@@ -40,6 +40,7 @@ FeedbackParticlesApp_debug_defines   += _LIB
 FeedbackParticlesApp_debug_defines   += NV_ANDROID
 FeedbackParticlesApp_debug_defines   += __STDC_LIMIT_MACROS
 FeedbackParticlesApp_debug_defines   += VK_NO_PROTOTYPES
+FeedbackParticlesApp_debug_defines   += GW_APP_NAME=\"FeedbackParticlesApp\"
 FeedbackParticlesApp_debug_defines   += GL_API_LEVEL_ES3_1_AEP
 FeedbackParticlesApp_debug_defines   += USE_REGAL=1
 FeedbackParticlesApp_debug_defines   += _DEBUG
@@ -157,6 +158,7 @@ FeedbackParticlesApp_release_defines   += _LIB
 FeedbackParticlesApp_release_defines   += NV_ANDROID
 FeedbackParticlesApp_release_defines   += __STDC_LIMIT_MACROS
 FeedbackParticlesApp_release_defines   += VK_NO_PROTOTYPES
+FeedbackParticlesApp_release_defines   += GW_APP_NAME=\"FeedbackParticlesApp\"
 FeedbackParticlesApp_release_defines   += GL_API_LEVEL_ES3_1_AEP
 FeedbackParticlesApp_release_defines   += USE_REGAL=1
 FeedbackParticlesApp_release_defines   += NDEBUG

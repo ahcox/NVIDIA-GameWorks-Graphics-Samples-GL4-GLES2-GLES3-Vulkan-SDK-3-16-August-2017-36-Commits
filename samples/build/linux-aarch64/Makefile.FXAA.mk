@@ -28,6 +28,7 @@ FXAA_debug_defines   := $(FXAA_custom_defines)
 FXAA_debug_defines   += LINUX=1
 FXAA_debug_defines   += NV_LINUX
 FXAA_debug_defines   += GLEW_NO_GLU=1
+FXAA_debug_defines   += GW_APP_NAME=\"FXAA\"
 FXAA_debug_defines   += _DEBUG
 FXAA_debug_libraries := 
 FXAA_debug_libraries += NsFoundationD
@@ -140,6 +141,7 @@ FXAA_release_defines   := $(FXAA_custom_defines)
 FXAA_release_defines   += LINUX=1
 FXAA_release_defines   += NV_LINUX
 FXAA_release_defines   += GLEW_NO_GLU=1
+FXAA_release_defines   += GW_APP_NAME=\"FXAA\"
 FXAA_release_defines   += NDEBUG
 FXAA_release_libraries := 
 FXAA_release_libraries += NsFoundation

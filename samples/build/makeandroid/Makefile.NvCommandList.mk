@@ -39,6 +39,7 @@ NvCommandList_debug_defines   += _LIB
 NvCommandList_debug_defines   += NV_ANDROID
 NvCommandList_debug_defines   += __STDC_LIMIT_MACROS
 NvCommandList_debug_defines   += VK_NO_PROTOTYPES
+NvCommandList_debug_defines   += GW_APP_NAME=\"NvCommandList\"
 NvCommandList_debug_defines   += GL_API_LEVEL_ES2
 NvCommandList_debug_defines   += USE_REGAL=1
 NvCommandList_debug_defines   += _DEBUG
@@ -157,6 +158,7 @@ NvCommandList_release_defines   += _LIB
 NvCommandList_release_defines   += NV_ANDROID
 NvCommandList_release_defines   += __STDC_LIMIT_MACROS
 NvCommandList_release_defines   += VK_NO_PROTOTYPES
+NvCommandList_release_defines   += GW_APP_NAME=\"NvCommandList\"
 NvCommandList_release_defines   += GL_API_LEVEL_ES2
 NvCommandList_release_defines   += USE_REGAL=1
 NvCommandList_release_defines   += NDEBUG

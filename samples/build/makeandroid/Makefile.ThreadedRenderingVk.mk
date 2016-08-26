@@ -47,6 +47,7 @@ ThreadedRenderingVk_debug_defines   += _LIB
 ThreadedRenderingVk_debug_defines   += NV_ANDROID
 ThreadedRenderingVk_debug_defines   += __STDC_LIMIT_MACROS
 ThreadedRenderingVk_debug_defines   += VK_NO_PROTOTYPES
+ThreadedRenderingVk_debug_defines   += GW_APP_NAME=\"ThreadedRenderingVk\"
 ThreadedRenderingVk_debug_defines   += GL_API_LEVEL_ES2
 ThreadedRenderingVk_debug_defines   += USE_REGAL=1
 ThreadedRenderingVk_debug_defines   += _DEBUG
@@ -186,6 +187,7 @@ ThreadedRenderingVk_release_defines   += _LIB
 ThreadedRenderingVk_release_defines   += NV_ANDROID
 ThreadedRenderingVk_release_defines   += __STDC_LIMIT_MACROS
 ThreadedRenderingVk_release_defines   += VK_NO_PROTOTYPES
+ThreadedRenderingVk_release_defines   += GW_APP_NAME=\"ThreadedRenderingVk\"
 ThreadedRenderingVk_release_defines   += GL_API_LEVEL_ES2
 ThreadedRenderingVk_release_defines   += USE_REGAL=1
 ThreadedRenderingVk_release_defines   += NDEBUG

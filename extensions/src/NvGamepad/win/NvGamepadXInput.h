@@ -31,17 +31,18 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 //----------------------------------------------------------------------------------
-
 #ifndef NV_GAMEPAD_XINPUT_H
 #define NV_GAMEPAD_XINPUT_H
 
 #include <NvSimpleTypes.h>
 #include <NvGamepad/NvGamepad.h>
+#include <Windows.h>
+#include <xinput.h>
 
 /// \file
 /// XINPUT (Win32) implementation of cross-platform gamepad support
 
-typedef struct _XINPUT_STATE XINPUT_STATE;
+typedef DWORD(WINAPI *XInputGetStatePtr)(DWORD dwUserIndex, XINPUT_STATE* pState);
 
 /// Class representing the XINPUT (Win32) implementation of gamepads.
 /// Class implementing gamepad support for the XINPUT (Win32) platform.  This
@@ -53,24 +54,26 @@ typedef struct _XINPUT_STATE XINPUT_STATE;
 /// gamepad state.
 class NvGamepadXInput : public NvGamepad {
 public:
-    NvGamepadXInput();
-    virtual ~NvGamepadXInput();
-    virtual bool getState(int32_t padID, State& state); // false if no pad connected at ID
+	NvGamepadXInput();
+	virtual ~NvGamepadXInput();
+	virtual bool getState(int32_t padID, State& state); // false if no pad connected at ID
 
-    /// Calls the XINPUT polling functions to update the state of all gamepads.
-    /// Used by the app framework or main loop to update the state of all gamepads
-    /// Updates the internal representation of the state of all attached gamepads
-    /// \return a mask of the changed gamepads.  Bits 0-(MAX_GAMEPADS-1) will be 1 if the
-    /// gamepad of that index (1<<index) has changed.
+														/// Calls the XINPUT polling functions to update the state of all gamepads.
+														/// Used by the app framework or main loop to update the state of all gamepads
+														/// Updates the internal representation of the state of all attached gamepads
+														/// \return a mask of the changed gamepads.  Bits 0-(MAX_GAMEPADS-1) will be 1 if the
+														/// gamepad of that index (1<<index) has changed.
 	virtual uint32_t pollGamepads();
 
-    virtual void setMaxGamepadCount(int32_t max);
-    virtual int32_t getMaxGamepadCount();
+	virtual void setMaxGamepadCount(int32_t max);
+	virtual int32_t getMaxGamepadCount();
 
 protected:
-    void updateFromXState(State& dest, const XINPUT_STATE& src);
-    State* mStates;
-    XINPUT_STATE* mXStates;
+	void updateFromXState(State& dest, const XINPUT_STATE& src);
+	State* mStates;
+	XINPUT_STATE* mXStates;
+	static HMODULE msXInputDLL;
+	static XInputGetStatePtr msXInputGetState;
 };
 
 #endif

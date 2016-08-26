@@ -561,7 +561,9 @@ bool MotionBlurAdvanced::handleGamepadChanged(uint32_t changedPadFlags)
 }
 
 void MotionBlurAdvanced::initRendering(void) {
-    // This sample requires at least OpenGL ES 3.0 or OpenGL 4.0
+	NV_APP_BASE_SHARED_INIT();
+
+	// This sample requires at least OpenGL ES 3.0 or OpenGL 4.0
     if (!requireMinAPIVersion(NvGLAPIVersionES3())) 
         return;
 

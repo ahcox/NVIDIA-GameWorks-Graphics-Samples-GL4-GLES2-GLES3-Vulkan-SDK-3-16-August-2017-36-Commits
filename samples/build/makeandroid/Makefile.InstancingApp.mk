@@ -36,6 +36,7 @@ InstancingApp_debug_defines   += _LIB
 InstancingApp_debug_defines   += NV_ANDROID
 InstancingApp_debug_defines   += __STDC_LIMIT_MACROS
 InstancingApp_debug_defines   += VK_NO_PROTOTYPES
+InstancingApp_debug_defines   += GW_APP_NAME=\"InstancingApp\"
 InstancingApp_debug_defines   += GL_API_LEVEL_ES2
 InstancingApp_debug_defines   += _DEBUG
 InstancingApp_debug_libraries := 
@@ -151,6 +152,7 @@ InstancingApp_release_defines   += _LIB
 InstancingApp_release_defines   += NV_ANDROID
 InstancingApp_release_defines   += __STDC_LIMIT_MACROS
 InstancingApp_release_defines   += VK_NO_PROTOTYPES
+InstancingApp_release_defines   += GW_APP_NAME=\"InstancingApp\"
 InstancingApp_release_defines   += GL_API_LEVEL_ES2
 InstancingApp_release_defines   += NDEBUG
 InstancingApp_release_libraries := 

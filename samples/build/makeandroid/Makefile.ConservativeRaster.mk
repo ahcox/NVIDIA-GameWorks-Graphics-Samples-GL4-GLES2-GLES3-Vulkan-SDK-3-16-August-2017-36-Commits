@@ -36,6 +36,7 @@ ConservativeRaster_debug_defines   += _LIB
 ConservativeRaster_debug_defines   += NV_ANDROID
 ConservativeRaster_debug_defines   += __STDC_LIMIT_MACROS
 ConservativeRaster_debug_defines   += VK_NO_PROTOTYPES
+ConservativeRaster_debug_defines   += GW_APP_NAME=\"ConservativeRaster\"
 ConservativeRaster_debug_defines   += GL_API_LEVEL_ES2
 ConservativeRaster_debug_defines   += USE_REGAL=1
 ConservativeRaster_debug_defines   += _DEBUG
@@ -153,6 +154,7 @@ ConservativeRaster_release_defines   += _LIB
 ConservativeRaster_release_defines   += NV_ANDROID
 ConservativeRaster_release_defines   += __STDC_LIMIT_MACROS
 ConservativeRaster_release_defines   += VK_NO_PROTOTYPES
+ConservativeRaster_release_defines   += GW_APP_NAME=\"ConservativeRaster\"
 ConservativeRaster_release_defines   += GL_API_LEVEL_ES2
 ConservativeRaster_release_defines   += USE_REGAL=1
 ConservativeRaster_release_defines   += NDEBUG

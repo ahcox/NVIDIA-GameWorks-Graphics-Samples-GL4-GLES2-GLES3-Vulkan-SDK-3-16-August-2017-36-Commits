@@ -84,6 +84,8 @@ ModelTestVk::~ModelTestVk()
 }
 
 void ModelTestVk::initRendering(void) {
+	NV_APP_BASE_SHARED_INIT();
+
 	VkResult result;
 	NvAssetLoaderAddSearchPath("vk10-kepler/ModelTestVk");
 
@@ -200,7 +202,7 @@ void ModelTestVk::initRendering(void) {
 	binding[2].binding = 2;
 	binding[2].descriptorCount = 1;
 	binding[2].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
-	binding[2].descriptorType = VK_DESCRIPTOR_TYPE_SAMPLER;
+	binding[2].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
 	binding[2].pImmutableSamplers = NULL;
 
 	VkDescriptorSetLayoutCreateInfo descriptorSetEntry = { VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO };
@@ -254,10 +256,11 @@ void ModelTestVk::initRendering(void) {
 	rsStateInfo.polygonMode = VK_POLYGON_MODE_FILL;
 	rsStateInfo.cullMode = VK_CULL_MODE_BACK_BIT;
 	rsStateInfo.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
+	rsStateInfo.lineWidth = 1.0f;
 
 	VkPipelineColorBlendAttachmentState attachments[1] = {};
 	attachments[0].blendEnable = VK_FALSE;
-	attachments[0].colorWriteMask = ~0;
+	attachments[0].colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
 
 	VkPipelineColorBlendStateCreateInfo cbStateInfo = { VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO };
 	cbStateInfo.logicOpEnable = VK_FALSE;
@@ -296,13 +299,13 @@ void ModelTestVk::initRendering(void) {
 	VkPipelineShaderStageCreateInfo shaderStages[2];
 	uint32_t shaderCount = 0;
 #ifdef SOURCE_SHADERS
-	shaderCount = vk().createShadersFromSourceFile(
+	shaderCount = vk().createShadersFromSourceString(
 		NvAssetLoadTextFile("src_shaders/base_model.glsl"), shaderStages, 2);
 #else
 	{
 		int32_t length;
 		char* data = NvAssetLoaderRead("shaders/base_model.nvs", length);
-		shaderCount = vk().createShadersFromBinaryFile((uint32_t*)data,
+		shaderCount = vk().createShadersFromBinaryBlob((uint32_t*)data,
 			length, shaderStages, 2);
 	}
 #endif
@@ -355,13 +358,13 @@ void ModelTestVk::initRendering(void) {
 
 	// Shaders
 #ifdef SOURCE_SHADERS
-	shaderCount = vk().createShadersFromSourceFile(
+	shaderCount = vk().createShadersFromSourceString(
 		NvAssetLoadTextFile("src_shaders/cube_map.glsl"), shaderStages, 2);
 #else
 	{
 		int32_t length;
 		char* data = NvAssetLoaderRead("shaders/cube_map.nvs", length);
-		uint32_t shaderCount = vk().createShadersFromBinaryFile((uint32_t*)data,
+		uint32_t shaderCount = vk().createShadersFromBinaryBlob((uint32_t*)data,
 			length, shaderStages, 2);
 	}
 #endif

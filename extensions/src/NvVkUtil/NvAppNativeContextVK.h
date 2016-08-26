@@ -43,7 +43,7 @@ class NvVkSwapchainRenderTarget;
 ///  Context wrapper (VK on top of OpenGL).
 class NvAppNativeContextVK : public NvAppContextVK {
 public:
-	NvAppNativeContextVK(const std::string& appTitle, NvPlatformInfo info);
+	NvAppNativeContextVK(NvVKConfiguration config, const std::string& appTitle, NvPlatformInfo info);
 
 	virtual void contextInitRendering();
 

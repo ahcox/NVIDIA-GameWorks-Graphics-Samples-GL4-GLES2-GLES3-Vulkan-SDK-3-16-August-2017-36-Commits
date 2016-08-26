@@ -80,7 +80,7 @@
 <a name="l00024"></a>00024                 <span class="keywordflow">if</span> (result != VK_SUCCESS)
 <a name="l00025"></a>00025                         <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00026"></a>00026 
-<a name="l00027"></a>00027                 result = vkMapMemory(vk.<a class="code" href="class_nv_vk_context.html#d362b9aea78898744e9c843ff8bcc6b1" title="Device access.">device</a>(), m_buffer.<a class="code" href="struct_nv_vk_buffer.html#e23d5802d65914aa7ae5acbd9cfa34f8" title="Buffer memory object.">mem</a>, 0, size, 0, (<span class="keywordtype">void</span>**)&amp;m_mapped);
+<a name="l00027"></a>00027                 result = vkMapMemory(vk.<a class="code" href="class_nv_vk_context.html#6b0a497652e8af6e1c283fbe8d01b3a4" title="Device access.">device</a>(), m_buffer.<a class="code" href="struct_nv_vk_buffer.html#e23d5802d65914aa7ae5acbd9cfa34f8" title="Buffer memory object.">mem</a>, 0, size, 0, (<span class="keywordtype">void</span>**)&amp;m_mapped);
 <a name="l00028"></a>00028                 <span class="keywordflow">if</span> (result != VK_SUCCESS)
 <a name="l00029"></a>00029                         <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00030"></a>00030 
@@ -125,7 +125,7 @@
 <a name="l00077"></a>00077 
 <a name="l00083"></a>00083         <span class="keywordtype">bool</span> Initialize(<a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>&amp; vk, NvSyncRing&lt;m_copies&gt;* ring) {
 <a name="l00084"></a>00084                 m_ring = ring;
-<a name="l00085"></a>00085                 m_device = vk.<a class="code" href="class_nv_vk_context.html#d362b9aea78898744e9c843ff8bcc6b1" title="Device access.">device</a>();
+<a name="l00085"></a>00085                 m_device = vk.<a class="code" href="class_nv_vk_context.html#6b0a497652e8af6e1c283fbe8d01b3a4" title="Device access.">device</a>();
 <a name="l00086"></a>00086 
 <a name="l00087"></a>00087                 <span class="comment">// round size up to 256 byte multiple - this is the stride</span>
 <a name="l00088"></a>00088                 m_stride = <span class="keyword">sizeof</span>(UBOType);
@@ -149,7 +149,7 @@
 <a name="l00106"></a>00106 
 <a name="l00113"></a>00113         <span class="keywordtype">bool</span> Initialize(<a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>&amp; vk, <a class="code" href="class_nv_simple_u_b_o_allocator.html" title="A simple, start to end allocator of UBO memory for multiple UBOs from a single memory...">NvSimpleUBOAllocator</a>&amp; alloc, NvSyncRing&lt;m_copies&gt;* ring) {
 <a name="l00114"></a>00114                 m_ring = ring;
-<a name="l00115"></a>00115                 m_device = vk.<a class="code" href="class_nv_vk_context.html#d362b9aea78898744e9c843ff8bcc6b1" title="Device access.">device</a>();
+<a name="l00115"></a>00115                 m_device = vk.<a class="code" href="class_nv_vk_context.html#6b0a497652e8af6e1c283fbe8d01b3a4" title="Device access.">device</a>();
 <a name="l00116"></a>00116 
 <a name="l00117"></a>00117                 <span class="comment">// round size up to 256 byte multiple - this is the stride</span>
 <a name="l00118"></a>00118                 m_stride = <span class="keyword">sizeof</span>(UBOType);
@@ -289,7 +289,7 @@
 	<div class="seperator"></div>
 	<div class="seperator"></div>
 	<address style="text-align: right;"><small>
-Generated on Thu Jul 28 10:35:51 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
+Generated on Thu Aug 25 12:48:26 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
 	<footer>
 		<div class="row">
 			<div class="text-center">&copy;2016 NVIDIA Corporation.</div>

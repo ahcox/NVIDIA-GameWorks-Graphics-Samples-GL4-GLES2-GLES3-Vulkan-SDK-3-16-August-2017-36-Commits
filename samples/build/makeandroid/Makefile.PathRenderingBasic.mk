@@ -36,6 +36,7 @@ PathRenderingBasic_debug_defines   += _LIB
 PathRenderingBasic_debug_defines   += NV_ANDROID
 PathRenderingBasic_debug_defines   += __STDC_LIMIT_MACROS
 PathRenderingBasic_debug_defines   += VK_NO_PROTOTYPES
+PathRenderingBasic_debug_defines   += GW_APP_NAME=\"PathRenderingBasic\"
 PathRenderingBasic_debug_defines   += GL_API_LEVEL_ES2
 PathRenderingBasic_debug_defines   += USE_REGAL=1
 PathRenderingBasic_debug_defines   += _DEBUG
@@ -153,6 +154,7 @@ PathRenderingBasic_release_defines   += _LIB
 PathRenderingBasic_release_defines   += NV_ANDROID
 PathRenderingBasic_release_defines   += __STDC_LIMIT_MACROS
 PathRenderingBasic_release_defines   += VK_NO_PROTOTYPES
+PathRenderingBasic_release_defines   += GW_APP_NAME=\"PathRenderingBasic\"
 PathRenderingBasic_release_defines   += GL_API_LEVEL_ES2
 PathRenderingBasic_release_defines   += USE_REGAL=1
 PathRenderingBasic_release_defines   += NDEBUG

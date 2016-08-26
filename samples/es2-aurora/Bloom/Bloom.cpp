@@ -88,7 +88,9 @@ void Bloom::configurationCallback(NvGLConfiguration& config)
 }
 
 void Bloom::initRendering(void) {
-    if (getGLContext()->getConfiguration().apiVer == NvGLAPIVersionES2()) {
+	NV_APP_BASE_SHARED_INIT();
+
+	if (getGLContext()->getConfiguration().apiVer == NvGLAPIVersionES2()) {
         gLumaTypeEnum = GL_LUMINANCE;
     } else {
         gLumaTypeEnum = 0x1903; // GL_RED, not declared in ES

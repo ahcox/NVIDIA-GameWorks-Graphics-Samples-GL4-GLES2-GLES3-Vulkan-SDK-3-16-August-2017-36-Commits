@@ -185,9 +185,9 @@ void logLayersAndExtensions(const char* type, const vector<VkExtensionProperties
 
 }
 
-std::vector<std::string> requestedLayers(bool instance, bool useValidation, bool useApiDump)
+std::vector<std::string> requestedLayers(const std::vector<std::string>& additionalLayers, bool useValidation, bool useApiDump)
 {
-    vector<string> layers;
+    vector<string> layers (additionalLayers);
     if (useApiDump)
     {
         layers.push_back("VK_LAYER_LUNARG_api_dump");
@@ -199,44 +199,33 @@ std::vector<std::string> requestedLayers(bool instance, bool useValidation, bool
         //https://github.com/KhronosGroup/Vulkan-LoaderAndValidationLayers/tree/master/layers#standard-validation
         
 #if !SOURCE_SHADERS
-        // 1.0.3.1 loader doesn't support that yet
         layers.push_back("VK_LAYER_LUNARG_standard_validation");
 #endif
 
-//        layers.push_back("VK_LAYER_GOOGLE_threading");
-        
+        layers.push_back("VK_LAYER_GOOGLE_threading");
+		
 		layers.push_back("VK_LAYER_LUNARG_parameter_validation");
-		layers.push_back("VK_LAYER_LUNARG_core_validation");
-		layers.push_back("VK_LAYER_LUNARG_device_limits");
+		layers.push_back("VK_LAYER_LUNARG_object_tracker");
+		layers.push_back("VK_LAYER_LUNARG_image");
 
-        
-        layers.push_back("VK_LAYER_LUNARG_object_tracker"); // errors out in swapchain resize code, enable after this is fixed
         layers.push_back("VK_LAYER_LUNARG_image");
-        layers.push_back("VK_LAYER_LUNARG_mem_tracker");    // errors out in swapchain resize code, enable after this is fixed
+        layers.push_back("VK_LAYER_LUNARG_core_validation");    // errors out in swapchain resize code, enable after this is fixed
 
         layers.push_back("VK_LAYER_LUNARG_swapchain");
 
 #if !SOURCE_SHADERS
-        layers.push_back("VK_LAYER_LUNARG_draw_state"); // should be anbled once we use SPIR-V
+        layers.push_back("VK_LAYER_LUNARG_core_validation"); // should be anbled once we use SPIR-V
 #endif
-//        layers.push_back("VK_LAYER_GOOGLE_unique_objects");
+        layers.push_back("VK_LAYER_GOOGLE_unique_objects");
     }
     return layers;
 }
 
 
-std::vector<std::string> requestedExtensions(bool instance, bool useDebugReport)
+std::vector<std::string> requestedExtensions(const std::vector<std::string>& additionalExtensions, bool useDebugReport)
 {
-	vector<string> extensions;
-	if (instance)
-	{
-
-	}
-	else
-	{
-
-	}
-
+	vector<string> extensions(additionalExtensions);
+	
 	extensions.push_back("VK_KHR_surface");
 	extensions.push_back("VK_KHR_android_surface");
 	extensions.push_back("VK_KHR_win32_surface");
@@ -244,11 +233,16 @@ std::vector<std::string> requestedExtensions(bool instance, bool useDebugReport)
 	extensions.push_back("VK_KHR_xcb_surface");
 	extensions.push_back("VK_KHR_xlib_surface");
 
-#if VK_EXT_debug_report
+#if defined(VK_EXT_debug_report)
     if (useDebugReport)
     {
         extensions.push_back(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
     }
+#endif
+
+#if defined (VK_EXT_debug_marker)
+	// always enable this since it's only supported if a tool exposes it
+	extensions.push_back(VK_EXT_DEBUG_MARKER_EXTENSION_NAME);
 #endif
 
 	return extensions;
@@ -520,13 +514,13 @@ bool NvAppContextVK::initializeInstance(PFN_vkGetProcAddressNV getProc, const st
 		mCombinedLayerNames.insert(mInstanceLayerProperties[i].layerName);
 	}
 
-	const vector<string> instanceLayersToEnable = filterLayers(mInstanceLayerProperties, requestedLayers(true, useValidation(), useApiDump()));
+	const vector<string> instanceLayersToEnable = filterLayers(mInstanceLayerProperties, requestedLayers(configuration().layersToEnable, useValidation(), useApiDump()));
 
 	vector<const char*> instanceLayerNames;
 	for (size_t i = 0; i < instanceLayersToEnable.size(); ++i)
 		instanceLayerNames.push_back(instanceLayersToEnable[i].c_str());
 
-	const vector<string> instanceExtensionsToEnable = filterExtensions(mInstanceExtensionsProperties, requestedExtensions(true, useValidation() || useLoaderDebug()));
+	const vector<string> instanceExtensionsToEnable = filterExtensions(mInstanceExtensionsProperties, requestedExtensions(configuration().extensionsToEnable, useValidation() || useLoaderDebug()));
 
 	vector<const char*> instanceExtensionNames;
 	for (size_t i = 0; i < instanceExtensionsToEnable.size(); ++i)
@@ -633,8 +627,6 @@ bool NvAppContextVK::initializeDevice(PFN_vkGetProcAddressNV getProc)
 	deviceCreateInfo.queueCreateInfoCount = 1;
     deviceCreateInfo.pQueueCreateInfos = &queueCreateInfo;
     
-
-
 	// physical device layers and extensions
 	mPhysicalDeviceLayerProperties = GetPhysicalDeviceLayerProperties(_physicalDevice);
 	mPhysicalDeviceExtensionsProperties = GetPhysicalDeviceExtensionProperties(_physicalDevice);
@@ -646,14 +638,13 @@ bool NvAppContextVK::initializeDevice(PFN_vkGetProcAddressNV getProc)
 		mCombinedLayerNames.insert(mPhysicalDeviceLayerProperties[i].layerName);
 	}
 
-
-	const vector<string> physicalDeviceLayersToEnable = filterLayers(mPhysicalDeviceLayerProperties, requestedLayers(false, useValidation(), useApiDump()));
+	const vector<string> physicalDeviceLayersToEnable = filterLayers(mPhysicalDeviceLayerProperties, requestedLayers(configuration().layersToEnable, useValidation(), useApiDump()));
 
 	vector<const char*> physicalDeviceLayerNames;
 	for (size_t i = 0; i < physicalDeviceLayersToEnable.size(); ++i)
 		physicalDeviceLayerNames.push_back(physicalDeviceLayersToEnable[i].c_str());
 
-	const vector<string> physicalDeviceExtensionsToEnable = filterExtensions(mPhysicalDeviceExtensionsProperties, requestedExtensions(false, useValidation() || useLoaderDebug()));
+	const vector<string> physicalDeviceExtensionsToEnable = filterExtensions(mPhysicalDeviceExtensionsProperties, requestedExtensions(configuration().extensionsToEnable, useValidation() || useLoaderDebug()));
 
 	vector<const char*> physicalDeviceExtensionNames;
 	for (size_t i = 0; i < physicalDeviceExtensionsToEnable.size(); ++i)
@@ -665,12 +656,31 @@ bool NvAppContextVK::initializeDevice(PFN_vkGetProcAddressNV getProc)
 	deviceCreateInfo.enabledLayerCount = physicalDeviceLayerNames.size();
     deviceCreateInfo.ppEnabledLayerNames = physicalDeviceLayerNames.data();
 
-    // device features
+    // device features filtering: turn off features that are enabled by the configuration callback but not supported by the device
     {
+		_physicalDeviceFeaturesEnabled = configuration().featuresToEnable;
+
         vkGetPhysicalDeviceFeatures(_physicalDevice, &_physicalDeviceFeatures);
 
-        _physicalDeviceFeaturesEnabled = _physicalDeviceFeatures;
-        _physicalDeviceFeaturesEnabled.robustBufferAccess = 0;
+		const VkBool32* firstSupportedFeature = &_physicalDeviceFeatures.robustBufferAccess;
+		const VkBool32* lastSupportedFeature = &_physicalDeviceFeatures.inheritedQueries;
+		const VkBool32* supportedFeature = firstSupportedFeature;
+
+		VkBool32* firstEnabledFeature = &_physicalDeviceFeaturesEnabled.robustBufferAccess;
+		VkBool32* lastEnabledFeature = &_physicalDeviceFeaturesEnabled.inheritedQueries;
+		VkBool32* enabledFeature = firstEnabledFeature;
+
+		do
+		{
+			if ( (*enabledFeature  == VK_TRUE) && (*supportedFeature == VK_FALSE) )
+			{
+				*enabledFeature = VK_FALSE;
+				LOGI("Disabling vkPhysicalDeviceFeatures::feature #%u since it was enabled by the configurationCallback, but is not supported by the device.", enabledFeature - firstEnabledFeature);
+			}
+
+			++enabledFeature;
+			++supportedFeature;
+		} while (enabledFeature != lastEnabledFeature);
 
         deviceCreateInfo.pEnabledFeatures = &_physicalDeviceFeaturesEnabled;
     }
@@ -692,6 +702,20 @@ bool NvAppContextVK::initializeDevice(PFN_vkGetProcAddressNV getProc)
         LOGI("Vulkan GPU '%s': 'apiversion '%u' driver version '%u'\n", _physicalDeviceProperties.deviceName, _physicalDeviceProperties.apiVersion, _physicalDeviceProperties.driverVersion);
     }
 
+#if defined (VK_EXT_debug_marker)
+
+	mSupportsDebugMarkers = isExtensionSupported(VK_EXT_DEBUG_MARKER_EXTENSION_NAME);
+	if (mSupportsDebugMarkers)
+	{
+		ext_vkDebugMarkerSetObjectTagEXT = (PFN_vkDebugMarkerSetObjectTagEXT)vkGetDeviceProcAddr(_device, "vkDebugMarkerSetObjectTagEXT");
+		ext_vkDebugMarkerSetObjectNameEXT = (PFN_vkDebugMarkerSetObjectNameEXT)vkGetDeviceProcAddr(_device, "vkDebugMarkerSetObjectNameEXT");
+
+		ext_vkCmdDebugMarkerBeginEXT = (PFN_vkCmdDebugMarkerBeginEXT)vkGetDeviceProcAddr(_device, "vkCmdDebugMarkerBeginEXT");
+		ext_vkCmdDebugMarkerEndEXT = (PFN_vkCmdDebugMarkerEndEXT)vkGetDeviceProcAddr(_device, "vkCmdDebugMarkerEndEXT");
+		ext_vkCmdDebugMarkerInsertEXT = (PFN_vkCmdDebugMarkerInsertEXT)vkGetDeviceProcAddr(_device, "vkCmdDebugMarkerInsertEXT");
+	}
+
+#endif
 
 	// temp cmd pool
 	{

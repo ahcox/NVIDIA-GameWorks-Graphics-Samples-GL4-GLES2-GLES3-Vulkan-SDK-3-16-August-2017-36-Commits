@@ -29,6 +29,7 @@ TigerWarpES_debug_defines   := $(TigerWarpES_custom_defines)
 TigerWarpES_debug_defines   += LINUX=1
 TigerWarpES_debug_defines   += NV_LINUX
 TigerWarpES_debug_defines   += GLEW_NO_GLU=1
+TigerWarpES_debug_defines   += GW_APP_NAME=\"TigerWarpES\"
 TigerWarpES_debug_defines   += _DEBUG
 TigerWarpES_debug_libraries := 
 TigerWarpES_debug_libraries += cg4cppD
@@ -141,6 +142,7 @@ TigerWarpES_release_defines   := $(TigerWarpES_custom_defines)
 TigerWarpES_release_defines   += LINUX=1
 TigerWarpES_release_defines   += NV_LINUX
 TigerWarpES_release_defines   += GLEW_NO_GLU=1
+TigerWarpES_release_defines   += GW_APP_NAME=\"TigerWarpES\"
 TigerWarpES_release_defines   += NDEBUG
 TigerWarpES_release_libraries := 
 TigerWarpES_release_libraries += cg4cpp

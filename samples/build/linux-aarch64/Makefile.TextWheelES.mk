@@ -30,6 +30,7 @@ TextWheelES_debug_defines   := $(TextWheelES_custom_defines)
 TextWheelES_debug_defines   += LINUX=1
 TextWheelES_debug_defines   += NV_LINUX
 TextWheelES_debug_defines   += GLEW_NO_GLU=1
+TextWheelES_debug_defines   += GW_APP_NAME=\"TextWheelES\"
 TextWheelES_debug_defines   += _DEBUG
 TextWheelES_debug_libraries := 
 TextWheelES_debug_libraries += cg4cppD
@@ -142,6 +143,7 @@ TextWheelES_release_defines   := $(TextWheelES_custom_defines)
 TextWheelES_release_defines   += LINUX=1
 TextWheelES_release_defines   += NV_LINUX
 TextWheelES_release_defines   += GLEW_NO_GLU=1
+TextWheelES_release_defines   += GW_APP_NAME=\"TextWheelES\"
 TextWheelES_release_defines   += NDEBUG
 TextWheelES_release_libraries := 
 TextWheelES_release_libraries += cg4cpp

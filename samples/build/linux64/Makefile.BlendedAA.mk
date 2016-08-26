@@ -26,6 +26,7 @@ BlendedAA_debug_lpaths    += ./../../../extensions/externals/lib/linux64
 BlendedAA_debug_defines   := $(BlendedAA_custom_defines)
 BlendedAA_debug_defines   += LINUX=1
 BlendedAA_debug_defines   += NV_LINUX
+BlendedAA_debug_defines   += GW_APP_NAME=\"BlendedAA\"
 BlendedAA_debug_defines   += _DEBUG
 BlendedAA_debug_libraries := 
 BlendedAA_debug_libraries += NsFoundationD
@@ -131,6 +132,7 @@ BlendedAA_release_lpaths    += ./../../../extensions/externals/lib/linux64
 BlendedAA_release_defines   := $(BlendedAA_custom_defines)
 BlendedAA_release_defines   += LINUX=1
 BlendedAA_release_defines   += NV_LINUX
+BlendedAA_release_defines   += GW_APP_NAME=\"BlendedAA\"
 BlendedAA_release_defines   += NDEBUG
 BlendedAA_release_libraries := 
 BlendedAA_release_libraries += NsFoundation

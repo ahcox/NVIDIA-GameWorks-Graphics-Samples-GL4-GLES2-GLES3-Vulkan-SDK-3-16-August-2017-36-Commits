@@ -28,6 +28,7 @@ CursiveES_debug_lpaths    += ./../../../extensions/lib/linux64
 CursiveES_debug_defines   := $(CursiveES_custom_defines)
 CursiveES_debug_defines   += LINUX=1
 CursiveES_debug_defines   += NV_LINUX
+CursiveES_debug_defines   += GW_APP_NAME=\"CursiveES\"
 CursiveES_debug_defines   += _DEBUG
 CursiveES_debug_libraries := 
 CursiveES_debug_libraries += cg4cppD
@@ -134,6 +135,7 @@ CursiveES_release_lpaths    += ./../../../extensions/lib/linux64
 CursiveES_release_defines   := $(CursiveES_custom_defines)
 CursiveES_release_defines   += LINUX=1
 CursiveES_release_defines   += NV_LINUX
+CursiveES_release_defines   += GW_APP_NAME=\"CursiveES\"
 CursiveES_release_defines   += NDEBUG
 CursiveES_release_libraries := 
 CursiveES_release_libraries += cg4cpp

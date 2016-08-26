@@ -39,6 +39,7 @@ ComputeParticles_debug_defines   += _LIB
 ComputeParticles_debug_defines   += NV_ANDROID
 ComputeParticles_debug_defines   += __STDC_LIMIT_MACROS
 ComputeParticles_debug_defines   += VK_NO_PROTOTYPES
+ComputeParticles_debug_defines   += GW_APP_NAME=\"ComputeParticles\"
 ComputeParticles_debug_defines   += GL_API_LEVEL_ES3_1_AEP
 ComputeParticles_debug_defines   += _DEBUG
 ComputeParticles_debug_libraries := 
@@ -155,6 +156,7 @@ ComputeParticles_release_defines   += _LIB
 ComputeParticles_release_defines   += NV_ANDROID
 ComputeParticles_release_defines   += __STDC_LIMIT_MACROS
 ComputeParticles_release_defines   += VK_NO_PROTOTYPES
+ComputeParticles_release_defines   += GW_APP_NAME=\"ComputeParticles\"
 ComputeParticles_release_defines   += GL_API_LEVEL_ES3_1_AEP
 ComputeParticles_release_defines   += NDEBUG
 ComputeParticles_release_libraries := 

@@ -28,6 +28,7 @@ CascadedShadowMapping_debug_lpaths    += ./../../../extensions/externals/lib/lin
 CascadedShadowMapping_debug_defines   := $(CascadedShadowMapping_custom_defines)
 CascadedShadowMapping_debug_defines   += LINUX=1
 CascadedShadowMapping_debug_defines   += NV_LINUX
+CascadedShadowMapping_debug_defines   += GW_APP_NAME=\"CascadedShadowMapping\"
 CascadedShadowMapping_debug_defines   += _DEBUG
 CascadedShadowMapping_debug_libraries := 
 CascadedShadowMapping_debug_libraries += NsFoundationD
@@ -134,6 +135,7 @@ CascadedShadowMapping_release_lpaths    += ./../../../extensions/externals/lib/l
 CascadedShadowMapping_release_defines   := $(CascadedShadowMapping_custom_defines)
 CascadedShadowMapping_release_defines   += LINUX=1
 CascadedShadowMapping_release_defines   += NV_LINUX
+CascadedShadowMapping_release_defines   += GW_APP_NAME=\"CascadedShadowMapping\"
 CascadedShadowMapping_release_defines   += NDEBUG
 CascadedShadowMapping_release_libraries := 
 CascadedShadowMapping_release_libraries += NsFoundation

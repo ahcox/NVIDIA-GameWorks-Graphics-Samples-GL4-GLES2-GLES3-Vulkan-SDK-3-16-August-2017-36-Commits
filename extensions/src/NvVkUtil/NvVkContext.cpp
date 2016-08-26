@@ -291,7 +291,8 @@ VkResult NvVkContext::allocMemAndBindImage(NvVkImage& image, VkFlags memProps)
 	// Find an available memory type that satisfies the requested properties.
 	uint32_t memoryTypeIndex;
 	for (memoryTypeIndex = 0; memoryTypeIndex < memoryProperties.memoryTypeCount; ++memoryTypeIndex) {
-		if ((memoryProperties.memoryTypes[memoryTypeIndex].propertyFlags & memProps) == memProps) {
+		if (((memoryProperties.memoryTypes[memoryTypeIndex].propertyFlags & memProps) == memProps) &&
+			((memReqs.memoryTypeBits >> memoryTypeIndex) & 1))  {
 			break;
 		}
 	}
@@ -459,7 +460,8 @@ VkResult NvVkContext::allocMemAndBindBuffer(NvVkBuffer& buffer, VkFlags memProps
 	// Find an available memory type that satisfies the requested properties.
 	uint32_t memoryTypeIndex;
 	for (memoryTypeIndex = 0; memoryTypeIndex < memoryProperties.memoryTypeCount; ++memoryTypeIndex) {
-		if ((memoryProperties.memoryTypes[memoryTypeIndex].propertyFlags & memProps) == memProps) {
+		if (((memoryProperties.memoryTypes[memoryTypeIndex].propertyFlags & memProps) == memProps) &&
+			((memReqs.memoryTypeBits >> memoryTypeIndex) & 1))  {
 			break;
 		}
 	}
@@ -583,7 +585,7 @@ static const VkShaderStageFlagBits stageFlags[] = {
 	VK_SHADER_STAGE_COMPUTE_BIT
 };
 
-uint32_t NvVkContext::createShadersFromSourceFile(const std::string& sourceText, VkPipelineShaderStageCreateInfo* shaders, uint32_t maxShaders) {
+uint32_t NvVkContext::createShadersFromSourceString(const std::string& sourceText, VkPipelineShaderStageCreateInfo* shaders, uint32_t maxShaders) {
 	const int32_t MAX_STAGES = 6;
 
 	const char* infiles[MAX_STAGES];
@@ -654,6 +656,7 @@ uint32_t NvVkContext::createShadersFromSourceFile(const std::string& sourceText,
 			stage.pName = "main";
 			stage.module = createShader(infiles[i], stageFlags[i]);
 			stage.pSpecializationInfo = NULL;
+			stage.flags = 0;
 
 			numStages++;
 		}
@@ -662,7 +665,7 @@ uint32_t NvVkContext::createShadersFromSourceFile(const std::string& sourceText,
 	return numStages;
 }
 
-uint32_t NvVkContext::createShadersFromBinaryFile(uint32_t* data, uint32_t leng, VkPipelineShaderStageCreateInfo* shaders, uint32_t maxShaders) {
+uint32_t NvVkContext::createShadersFromBinaryBlob(uint32_t* data, uint32_t leng, VkPipelineShaderStageCreateInfo* shaders, uint32_t maxShaders) {
 	const int32_t MAX_STAGES = 6;
 
 	struct StageTableEntry {
@@ -693,6 +696,7 @@ uint32_t NvVkContext::createShadersFromBinaryFile(uint32_t* data, uint32_t leng,
 		stage.stage = entry.kind;
 		stage.pName = "main";
 		stage.pSpecializationInfo = NULL;
+		stage.flags = 0;
 
 		{
 			VkResult result;

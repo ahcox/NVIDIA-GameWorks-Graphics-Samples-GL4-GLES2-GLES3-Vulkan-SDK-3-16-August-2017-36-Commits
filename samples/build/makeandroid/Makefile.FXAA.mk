@@ -37,6 +37,7 @@ FXAA_debug_defines   += _LIB
 FXAA_debug_defines   += NV_ANDROID
 FXAA_debug_defines   += __STDC_LIMIT_MACROS
 FXAA_debug_defines   += VK_NO_PROTOTYPES
+FXAA_debug_defines   += GW_APP_NAME=\"FXAA\"
 FXAA_debug_defines   += GL_API_LEVEL_ES3
 FXAA_debug_defines   += _DEBUG
 FXAA_debug_libraries := 
@@ -153,6 +154,7 @@ FXAA_release_defines   += _LIB
 FXAA_release_defines   += NV_ANDROID
 FXAA_release_defines   += __STDC_LIMIT_MACROS
 FXAA_release_defines   += VK_NO_PROTOTYPES
+FXAA_release_defines   += GW_APP_NAME=\"FXAA\"
 FXAA_release_defines   += GL_API_LEVEL_ES3
 FXAA_release_defines   += NDEBUG
 FXAA_release_libraries := 

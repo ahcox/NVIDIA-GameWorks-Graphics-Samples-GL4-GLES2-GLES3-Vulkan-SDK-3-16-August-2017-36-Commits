@@ -32,6 +32,7 @@ HelloVulkan_debug_defines   := $(HelloVulkan_custom_defines)
 HelloVulkan_debug_defines   += LINUX=1
 HelloVulkan_debug_defines   += NV_LINUX
 HelloVulkan_debug_defines   += GLEW_NO_GLU=1
+HelloVulkan_debug_defines   += GW_APP_NAME=\"HelloVulkan\"
 HelloVulkan_debug_defines   += _DEBUG
 HelloVulkan_debug_libraries := 
 HelloVulkan_debug_libraries += NvVkUtilD
@@ -155,6 +156,7 @@ HelloVulkan_release_defines   := $(HelloVulkan_custom_defines)
 HelloVulkan_release_defines   += LINUX=1
 HelloVulkan_release_defines   += NV_LINUX
 HelloVulkan_release_defines   += GLEW_NO_GLU=1
+HelloVulkan_release_defines   += GW_APP_NAME=\"HelloVulkan\"
 HelloVulkan_release_defines   += NDEBUG
 HelloVulkan_release_libraries := 
 HelloVulkan_release_libraries += NvVkUtil

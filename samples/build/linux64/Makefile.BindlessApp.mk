@@ -27,6 +27,7 @@ BindlessApp_debug_lpaths    += ./../../../extensions/externals/lib/linux64
 BindlessApp_debug_defines   := $(BindlessApp_custom_defines)
 BindlessApp_debug_defines   += LINUX=1
 BindlessApp_debug_defines   += NV_LINUX
+BindlessApp_debug_defines   += GW_APP_NAME=\"BindlessApp\"
 BindlessApp_debug_defines   += _DEBUG
 BindlessApp_debug_libraries := 
 BindlessApp_debug_libraries += NsFoundationD
@@ -132,6 +133,7 @@ BindlessApp_release_lpaths    += ./../../../extensions/externals/lib/linux64
 BindlessApp_release_defines   := $(BindlessApp_custom_defines)
 BindlessApp_release_defines   += LINUX=1
 BindlessApp_release_defines   += NV_LINUX
+BindlessApp_release_defines   += GW_APP_NAME=\"BindlessApp\"
 BindlessApp_release_defines   += NDEBUG
 BindlessApp_release_libraries := 
 BindlessApp_release_libraries += NsFoundation

@@ -27,6 +27,7 @@ ComputeBasicGLSL_debug_lpaths    += ./../../../extensions/externals/lib/linux64
 ComputeBasicGLSL_debug_defines   := $(ComputeBasicGLSL_custom_defines)
 ComputeBasicGLSL_debug_defines   += LINUX=1
 ComputeBasicGLSL_debug_defines   += NV_LINUX
+ComputeBasicGLSL_debug_defines   += GW_APP_NAME=\"ComputeBasicGLSL\"
 ComputeBasicGLSL_debug_defines   += _DEBUG
 ComputeBasicGLSL_debug_libraries := 
 ComputeBasicGLSL_debug_libraries += NsFoundationD
@@ -133,6 +134,7 @@ ComputeBasicGLSL_release_lpaths    += ./../../../extensions/externals/lib/linux6
 ComputeBasicGLSL_release_defines   := $(ComputeBasicGLSL_custom_defines)
 ComputeBasicGLSL_release_defines   += LINUX=1
 ComputeBasicGLSL_release_defines   += NV_LINUX
+ComputeBasicGLSL_release_defines   += GW_APP_NAME=\"ComputeBasicGLSL\"
 ComputeBasicGLSL_release_defines   += NDEBUG
 ComputeBasicGLSL_release_libraries := 
 ComputeBasicGLSL_release_libraries += NsFoundation
