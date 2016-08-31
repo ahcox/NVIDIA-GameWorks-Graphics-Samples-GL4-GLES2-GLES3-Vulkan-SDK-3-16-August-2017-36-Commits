@@ -73,7 +73,6 @@ public:
     void reshape(int32_t width, int32_t height);
 
     void configurationCallback(NvGLConfiguration& config);
-    bool getRequestedWindowSize(int32_t& width, int32_t& height);
     virtual NvUIEventResponse handleReaction(const NvUIReaction& react);
 
     enum 

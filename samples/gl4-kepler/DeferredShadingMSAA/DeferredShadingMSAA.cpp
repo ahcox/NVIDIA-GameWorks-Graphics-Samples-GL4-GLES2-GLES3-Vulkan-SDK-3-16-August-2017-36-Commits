@@ -126,13 +126,6 @@ DeferredShadingMSAA::~DeferredShadingMSAA()
     LOGI("DeferredShadingMSAA: destroyed\n");
 }
 
-bool DeferredShadingMSAA::getRequestedWindowSize(int32_t& width, int32_t& height)
-{
-    width = 1280;
-    height = 1024;
-    return true;
-}
-
 NvUIEventResponse DeferredShadingMSAA::handleReaction(const NvUIReaction& react)
 {
     // Simple input hook to ensure that all settings are compatible after
