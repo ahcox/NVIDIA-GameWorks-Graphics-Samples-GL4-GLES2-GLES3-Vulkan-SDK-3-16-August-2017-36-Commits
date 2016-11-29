@@ -74,8 +74,9 @@
 <a href="class_nv_image-members.html">List of all members.</a><table border="0" cellpadding="0" cellspacing="0">
 <tr><td></td></tr>
 <tr><td colspan="2"><br><h2>Classes</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><b>FormatInfo</b></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nv_image_1_1_format_info.html">FormatInfo</a></td></tr>
 
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Format handlers descriptor for custom image loading.  <a href="struct_nv_image_1_1_format_info.html#_details">More...</a><br></td></tr>
 <tr><td colspan="2"><br><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int32_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_image.html#5ea2bb68488ab170831cfe30479c4404">getWidth</a> () const </td></tr>
 
@@ -131,6 +132,9 @@
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_image.html#b892c768859283dbb91ad5db05652b0b">convertCrossToCubemap</a> ()</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Convert a flat "cross" image to a cubemap Convert a suitable image from a cubemap cross to a cubemap.  <a href="#b892c768859283dbb91ad5db05652b0b"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_image.html#a73d67c3e9030806255ab4c48743a5ee">reformatImage</a> (int32_t width, int32_t height, uint32_t format, uint32_t type)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Replace (destructive to all content) the storage data and format of the image Mainly used by image loaders to resize and reformat an already-created image.  <a href="#a73d67c3e9030806255ab4c48743a5ee"></a><br></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="585bc54b57eb772c75b4230675d01e4c"></a><!-- doxytag: member="NvImage::setImage" ref="585bc54b57eb772c75b4230675d01e4c" args="(int32_t width, int32_t height, uint32_t format, uint32_t type, const void *data)" -->
 bool&nbsp;</td><td class="memItemRight" valign="bottom"><b>setImage</b> (int32_t width, int32_t height, uint32_t format, uint32_t type, const void *data)</td></tr>
 
@@ -185,6 +189,9 @@ bool&nbsp;</td><td class="memItemRight" valign="bottom"><b>setImage</b> (int32_t
 <tr><td class="memItemLeft" nowrap align="right" valign="top">static bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_image.html#3c4f922a82aa52107b67f1b1cca6e4a2">getDXTExpansion</a> ()</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the status of automatic DXT expansion.  <a href="#3c4f922a82aa52107b67f1b1cca6e4a2"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">static bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_image.html#dda7823c13309aa3b63cf92fbfee7b2e">addFileLoader</a> (const <a class="el" href="struct_nv_image_1_1_format_info.html">FormatInfo</a> &amp;loader)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Adds a file loader for the given file extension.  <a href="#dda7823c13309aa3b63cf92fbfee7b2e"></a><br></td></tr>
 <tr><td colspan="2"><br><h2>Friends</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="3b5361371c55064542252ad461327cf1"></a><!-- doxytag: member="NvImage::TranslateDX10Format" ref="3b5361371c55064542252ad461327cf1" args="(const void *ptr, NvImage &amp;i, int32_t &amp;bytesPerElement, bool &amp;btcCompressed)" -->
 bool&nbsp;</td><td class="memItemRight" valign="bottom"><b>TranslateDX10Format</b> (const void *ptr, <a class="el" href="class_nv_image.html">NvImage</a> &amp;i, int32_t &amp;bytesPerElement, bool &amp;btcCompressed)</td></tr>
@@ -194,6 +201,34 @@ bool&nbsp;</td><td class="memItemRight" valign="bottom"><b>TranslateDX10Format</
 Image loading, representation and handling Support loading of images from DDS files and data, including cube maps, arrays mipmap levels, formats, etc. 
 <p>
 The class does NOT encapsulate a rendering texture object, only the client side pixel data that could be used to create such a texture <hr><h2>Member Function Documentation</h2>
+<a class="anchor" name="dda7823c13309aa3b63cf92fbfee7b2e"></a><!-- doxytag: member="NvImage::addFileLoader" ref="dda7823c13309aa3b63cf92fbfee7b2e" args="(const FormatInfo &amp;loader)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool NvImage::addFileLoader           </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_nv_image_1_1_format_info.html">FormatInfo</a> &amp;&nbsp;</td>
+          <td class="paramname"> <em>loader</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Adds a file loader for the given file extension. 
+<p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"><tt>[in]</tt>&nbsp;</td><td valign="top"><em>loader</em>&nbsp;</td><td>the descriptor for the loading system </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>true on success or false on failure (no more loader slots or extension already handled) </dd></dl>
+
+</div>
+</div><p>
 <a class="anchor" name="b892c768859283dbb91ad5db05652b0b"></a><!-- doxytag: member="NvImage::convertCrossToCubemap" ref="b892c768859283dbb91ad5db05652b0b" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -1047,6 +1082,58 @@ Initialize an image from file-formatted memory; only DDS files are supported <dl
 
 </div>
 </div><p>
+<a class="anchor" name="a73d67c3e9030806255ab4c48743a5ee"></a><!-- doxytag: member="NvImage::reformatImage" ref="a73d67c3e9030806255ab4c48743a5ee" args="(int32_t width, int32_t height, uint32_t format, uint32_t type)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool NvImage::reformatImage           </td>
+          <td>(</td>
+          <td class="paramtype">int32_t&nbsp;</td>
+          <td class="paramname"> <em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t&nbsp;</td>
+          <td class="paramname"> <em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&nbsp;</td>
+          <td class="paramname"> <em>format</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&nbsp;</td>
+          <td class="paramname"> <em>type</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Replace (destructive to all content) the storage data and format of the image Mainly used by image loaders to resize and reformat an already-created image. 
+<p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"><tt>[in]</tt>&nbsp;</td><td valign="top"><em>width</em>&nbsp;</td><td>of the new image </td></tr>
+    <tr><td valign="top"><tt>[in]</tt>&nbsp;</td><td valign="top"><em>height</em>&nbsp;</td><td>of the new image </td></tr>
+    <tr><td valign="top"><tt>[in]</tt>&nbsp;</td><td valign="top"><em>format</em>&nbsp;</td><td>NVIMAGE_ format of the new image </td></tr>
+    <tr><td valign="top"><tt>[in]</tt>&nbsp;</td><td valign="top"><em>type</em>&nbsp;</td><td>NVIMAGE_ type of the component data in the new image </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>true on success or false for failure </dd></dl>
+
+</div>
+</div><p>
 <a class="anchor" name="649ac5c8a11f3c7fce25df7187cb93fc"></a><!-- doxytag: member="NvImage::setDXTExpansion" ref="649ac5c8a11f3c7fce25df7187cb93fc" args="(bool expand)" -->
 <div class="memitem">
 <div class="memproto">
@@ -1137,7 +1224,7 @@ By default, the image library places the origin of images at the lower-left corn
 	<div class="seperator"></div>
 	<div class="seperator"></div>
 	<address style="text-align: right;"><small>
-Generated on Thu Aug 25 12:48:27 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
+Generated on Mon Nov 28 16:25:00 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
 	<footer>
 		<div class="row">
 			<div class="text-center">&copy;2016 NVIDIA Corporation.</div>

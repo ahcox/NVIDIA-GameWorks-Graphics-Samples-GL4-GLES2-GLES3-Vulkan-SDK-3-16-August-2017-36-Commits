@@ -156,6 +156,9 @@ VkResult&nbsp;</td><td class="memItemRight" valign="bottom"><b>createAndFillBuff
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_vk_context.html#2eed1808376c1baa82d6d826c7e35156">uploadTextureFromDDSFile</a> (const char *filename, <a class="el" href="struct_nv_vk_texture.html">NvVkTexture</a> &amp;tex)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Creates a texture from an asset-based DDS file.  <a href="#2eed1808376c1baa82d6d826c7e35156"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_vk_context.html#c00ce5227d9a04692df5fb2de5a1bef2">uploadTextureFromFile</a> (const char *filename, <a class="el" href="struct_nv_vk_texture.html">NvVkTexture</a> &amp;tex)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Creates a texture from an asset-based image file.  <a href="#c00ce5227d9a04692df5fb2de5a1bef2"></a><br></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nv_vk_context.html#e229c109742cf63c81167c64e2ea6759">uploadTextureFromDDSData</a> (const char *ddsData, int32_t length, <a class="el" href="struct_nv_vk_texture.html">NvVkTexture</a> &amp;tex)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Creates a texture from preloaded data in DDS file format.  <a href="#e229c109742cf63c81167c64e2ea6759"></a><br></td></tr>
@@ -475,6 +478,44 @@ Creates a texture from an asset-based DDS file.
 
 </div>
 </div><p>
+<a class="anchor" name="c00ce5227d9a04692df5fb2de5a1bef2"></a><!-- doxytag: member="NvVkContext::uploadTextureFromFile" ref="c00ce5227d9a04692df5fb2de5a1bef2" args="(const char *filename, NvVkTexture &amp;tex)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool NvVkContext::uploadTextureFromFile           </td>
+          <td>(</td>
+          <td class="paramtype">const char *&nbsp;</td>
+          <td class="paramname"> <em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_nv_vk_texture.html">NvVkTexture</a> &amp;&nbsp;</td>
+          <td class="paramname"> <em>tex</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Creates a texture from an asset-based image file. 
+<p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"><tt>[in]</tt>&nbsp;</td><td valign="top"><em>filename</em>&nbsp;</td><td>the asset-path of the image file to load </td></tr>
+    <tr><td valign="top"><tt>[out]</tt>&nbsp;</td><td valign="top"><em>tex</em>&nbsp;</td><td>the loaded texture </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>true on success and false on failure </dd></dl>
+
+</div>
+</div><p>
 <hr>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="_nv_vk_context_8h-source.html">NvVkContext.h</a></ul>
 </div>
@@ -484,7 +525,7 @@ Creates a texture from an asset-based DDS file.
 	<div class="seperator"></div>
 	<div class="seperator"></div>
 	<address style="text-align: right;"><small>
-Generated on Thu Aug 25 12:48:27 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
+Generated on Mon Nov 28 16:25:00 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
 	<footer>
 		<div class="row">
 			<div class="text-center">&copy;2016 NVIDIA Corporation.</div>

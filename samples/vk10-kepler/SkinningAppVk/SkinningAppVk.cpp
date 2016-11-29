@@ -100,7 +100,7 @@ void SkinningAppVk::initRendering(void) {
 	vpStateInfo.scissorCount = 1;
 
 	VkPipelineRasterizationStateCreateInfo rsStateInfo = { VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO };
-	rsStateInfo.depthClampEnable = VK_TRUE;
+	rsStateInfo.depthClampEnable = VK_FALSE;
 	rsStateInfo.rasterizerDiscardEnable = VK_FALSE;
 	rsStateInfo.polygonMode = VK_POLYGON_MODE_FILL;
 	rsStateInfo.cullMode = VK_CULL_MODE_BACK_BIT;
@@ -349,7 +349,7 @@ void SkinningAppVk::draw(void)
 	SkinnedMesh::UBOBlock& ubo = *uboObj;
 
 	// Compute and update the ModelViewProjection matrix
-	nv::perspectiveLH(ubo.mMVP, 45.0f, (float)m_width / (float)m_height, 0.1f, 100.0f);
+	nv::perspectiveVk(ubo.mMVP, 45.0f, (float)m_width / (float)m_height, 0.1f, 100.0f);
 	
 	ubo.mMVP *= m_transformer->getModelViewMat();
 

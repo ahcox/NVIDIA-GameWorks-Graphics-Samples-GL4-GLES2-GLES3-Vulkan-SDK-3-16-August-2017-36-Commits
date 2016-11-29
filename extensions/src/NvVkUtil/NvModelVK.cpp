@@ -164,7 +164,7 @@ void NvModelVK::initBuffers(NvVkContext& vk)
 	mVIStateInfo = { VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO };
 	mVIStateInfo.vertexBindingDescriptionCount = 1;
 	mVIStateInfo.pVertexBindingDescriptions = &mVertexBindings;
-	mVIStateInfo.vertexAttributeDescriptionCount = 2;
+	mVIStateInfo.vertexAttributeDescriptionCount = 3;
 	mVIStateInfo.pVertexAttributeDescriptions = mAttributes;
 
 	mIAStateInfo = { VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO };

@@ -52,6 +52,9 @@ layout(viewport_relative) out int gl_Layer;
 
 void main()
 {
+	// Required by spec to set this...
+	gl_Layer = 0;
+
 #if USE_CULLING
 	int pm0 = int(planeMask[0]);
 	int pm1 = int(planeMask[1]);

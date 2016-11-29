@@ -79,12 +79,12 @@ class NvTweakSwitchContainer : public NvTweakContainer
 private:
     INHERIT_FROM(NvTweakContainer);
     T m_baseVal;
-    uint32_t m_actionCode;
+	NvTweakVar<T>& m_tvar;
 public:
-    NvTweakSwitchContainer(float width, NvTweakVarBase *tvar, T val, NvUIGraphic *bg=NULL)
+    NvTweakSwitchContainer(float width, NvTweakVar<T> *tvar, T val, NvUIGraphic *bg=NULL)
         : NvTweakContainer(width, 0, bg)
         , m_baseVal(val)
-        , m_actionCode(tvar->getActionCode())
+        , m_tvar(*tvar)
     {
         SetVisibility(tvar->equals(val)); 
     };
@@ -96,40 +96,79 @@ public:
 template <>
 NvUIEventResponse NvTweakSwitchContainer<bool>::HandleReaction(const NvUIReaction& react)
 {
-    INHERITED::HandleReaction(react);
-    if (   (react.code && (react.code==m_actionCode))
-        || (react.flags & NvReactFlag::FORCE_UPDATE) )
-    {
-        // bool TweakVar stashed value in state in HandleReaction
-        SetVisibility(m_baseVal == (react.state>0));
-    }
-    return nvuiEventNotHandled;
+	if (react.code && (react.code != m_tvar.getActionCode()))
+		return nvuiEventNotHandled; // not a message for us.
+
+	if (react.flags & NvReactFlag::FORCE_UPDATE)
+	{
+		NvUIReaction &change = GetReactionEdit(false); // false to not clear it!!!
+		change.ival = m_tvar; // update to what's stored in the variable.
+	}
+
+	INHERITED::HandleReaction(react);
+
+	NvUIEventResponse r = nvuiEventNotHandled;
+	if ((react.uid == GetUID()) // we always listen to our own sent messages.
+		|| (react.code && (react.code == m_tvar.getActionCode())) // we always listen to our action code
+		|| (!react.code && (react.flags & NvReactFlag::FORCE_UPDATE))) // we listen to force-update only if NO action code
+	{
+		// bool TweakVar stashed value in state in HandleReaction
+		SetVisibility(m_baseVal == (react.state>0));
+	}
+
+	return r;
 }
 
 template <>
 NvUIEventResponse NvTweakSwitchContainer<uint32_t>::HandleReaction(const NvUIReaction& react)
 {
-    INHERITED::HandleReaction(react);
-    if (   (react.code && (react.code==m_actionCode))
-        || (react.flags & NvReactFlag::FORCE_UPDATE) )
-    {
-        // uint TweakVar stashed value in ival in HandleReaction
-        SetVisibility((m_baseVal == react.ival)); 
-    }
-    return nvuiEventNotHandled;
+	if (react.code && (react.code != m_tvar.getActionCode()))
+		return nvuiEventNotHandled; // not a message for us.
+
+	if (react.flags & NvReactFlag::FORCE_UPDATE)
+	{
+		NvUIReaction &change = GetReactionEdit(false); // false to not clear it!!!
+		change.ival = m_tvar; // update to what's stored in the variable.
+	}
+
+	INHERITED::HandleReaction(react);
+
+	NvUIEventResponse r = nvuiEventNotHandled;
+	if ((react.uid == GetUID()) // we always listen to our own sent messages.
+		|| (react.code && (react.code == m_tvar.getActionCode())) // we always listen to our action code
+		|| (!react.code && (react.flags & NvReactFlag::FORCE_UPDATE))) // we listen to force-update only if NO action code
+	{
+		// uint TweakVar stashed value in ival in HandleReaction
+		SetVisibility((m_baseVal == react.ival));
+	}
+
+	return r;
 }
 
 template <>
 NvUIEventResponse NvTweakSwitchContainer<float>::HandleReaction(const NvUIReaction& react)
 {
-    INHERITED::HandleReaction(react);
-    if (   (react.code && (react.code==m_actionCode))
-        || (react.flags & NvReactFlag::FORCE_UPDATE) )
-    {
-        // float TweakVar stashed value in fval in HandleReaction
-        SetVisibility((m_baseVal == react.fval)); 
-    }
-    return nvuiEventNotHandled;
+	if (react.code && (react.code != m_tvar.getActionCode()))
+		return nvuiEventNotHandled; // not a message for us.
+
+	if (react.flags & NvReactFlag::FORCE_UPDATE)
+	{
+		NvUIReaction &change = GetReactionEdit(false); // false to not clear it!!!
+		change.ival = m_tvar; // update to what's stored in the variable.
+	}
+
+	INHERITED::HandleReaction(react);
+
+	NvUIEventResponse r = nvuiEventNotHandled;
+	if ((react.uid == GetUID()) // we always listen to our own sent messages.
+		|| (react.code && (react.code == m_tvar.getActionCode())) // we always listen to our action code
+		|| (!react.code && (react.flags & NvReactFlag::FORCE_UPDATE))) // we listen to force-update only if NO action code
+	{
+		// float TweakVar stashed value in fval in HandleReaction
+		SetVisibility((m_baseVal == react.fval));
+	}
+
+	return r;
 }
 
 //=====================================================================
@@ -491,17 +530,20 @@ void NvTweakBar::subgroupSwitchCase(NvUIContainer *c)
 
 void NvTweakBar::subgroupSwitchCase(bool val)
 {
-    subgroupSwitchCase(new NvTweakSwitchContainer<bool>(GetDefaultLineWidth()+(2*m_padHeight), m_subgroupSwitchVar, val));
+	// risky down-cast; up to this caller to ensure that <T> is correct
+    subgroupSwitchCase(new NvTweakSwitchContainer<bool>(GetDefaultLineWidth()+(2*m_padHeight), (NvTweakVar<bool>*)m_subgroupSwitchVar, val));
 }
 
 void NvTweakBar::subgroupSwitchCase(float val)
 {
-    subgroupSwitchCase(new NvTweakSwitchContainer<float>(GetDefaultLineWidth()+(2*m_padHeight), m_subgroupSwitchVar, val));
+	// risky down-cast; up to this caller to ensure that <T> is correct
+	subgroupSwitchCase(new NvTweakSwitchContainer<float>(GetDefaultLineWidth()+(2*m_padHeight), (NvTweakVar<float>*)m_subgroupSwitchVar, val));
 }
 
 void NvTweakBar::subgroupSwitchCase(uint32_t val)
 {
-    subgroupSwitchCase(new NvTweakSwitchContainer<uint32_t>(GetDefaultLineWidth()+(2*m_padHeight), m_subgroupSwitchVar, val));
+	// risky down-cast; up to this caller to ensure that <T> is correct
+	subgroupSwitchCase(new NvTweakSwitchContainer<uint32_t>(GetDefaultLineWidth()+(2*m_padHeight), (NvTweakVar<uint32_t>*)m_subgroupSwitchVar, val));
 }
 
 void NvTweakBar::subgroupClose()

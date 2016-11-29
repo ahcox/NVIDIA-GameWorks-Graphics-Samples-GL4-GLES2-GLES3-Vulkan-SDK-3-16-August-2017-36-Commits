@@ -262,7 +262,7 @@ void NvUIGraphicRenderBaseVK::InitPipeline(uint32_t shaderCount,
 	vpStateInfo.scissorCount = 1;
 
 	VkPipelineRasterizationStateCreateInfo rsStateInfo = { VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO };
-	rsStateInfo.depthClampEnable = VK_TRUE;
+	rsStateInfo.depthClampEnable = VK_FALSE;
 	rsStateInfo.rasterizerDiscardEnable = VK_FALSE;
 	rsStateInfo.polygonMode = VK_POLYGON_MODE_FILL;
 	rsStateInfo.cullMode = VK_CULL_MODE_NONE;

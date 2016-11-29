@@ -364,11 +364,12 @@ to the number of meshes in the model.</p>
 	<li><b>Draw using GLES3 AEP</b>: Only available on NVIDIA devices, switches live from rendering using Vulkan to rendering using OpenGL ES.</li>
 	<li><b>Threaded Rendering</b>: In Vulkan mode, changes whether the command buffers for rendering are generated per animation thread, or all on the main thread.</li>
 	<li><b>Number of worker threads</b>: Changes the number of OS threads used by the app to animate and render.</li>
-	<li><b>Batch Size</b>: Sets the number of fish rendered per draw call.  Decreasing this simulates more individual fish and shows the low overhead of Vulkan better.</li>
+	<li><b>Requested Batch Size</b>: Sets the number of fish rendered per draw call.  Decreasing this simulates more individual fish and shows the low overhead of Vulkan better.</li>
+	<li><b>Actual Batch Size</b>: Displays the number of fish rendered per draw call.  This may be smaller than the requested size if the number of fish per school is smaller than the requested batch size.</li>
 	<li><b>Pause Animation</b>: Pauses the animation and movement of all fish.</li>
 	<li><b>Use Avoidance</b>: Enables the more expensive, O(N^2) CPU animation mode.</li>
 	<li><b>Flocking complexity</b>: Trades off between smoother flocking and low CPU overhead in animation.</li>
-	<li><b>Reset</b>: Selecting a type of reset from this dropdown will set all active schools (and the camera) to the state indicated.
+	<li><b>Reset Schools</b>: Selecting a type of reset from this dropdown will set all active schools (and the camera) to the state indicated.
 		<ul>
 		<li><i>Fish Fireworks</i>: Chooses a random location for each school and moves all of its fish to that spot.  Also sets the camera to the center of the aquarium.</li>
 		<li><i>Fishsplosion</i>: Moves all of Fish in all Schools to the center of the aquarium and places the camera at a point looking at that location.</li>

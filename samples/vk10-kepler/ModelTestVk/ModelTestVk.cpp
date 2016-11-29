@@ -251,7 +251,7 @@ void ModelTestVk::initRendering(void) {
 	vpStateInfo.scissorCount = 1;
 
 	VkPipelineRasterizationStateCreateInfo rsStateInfo = { VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO };
-	rsStateInfo.depthClampEnable = VK_TRUE;
+	rsStateInfo.depthClampEnable = VK_FALSE;
 	rsStateInfo.rasterizerDiscardEnable = VK_FALSE;
 	rsStateInfo.polygonMode = VK_POLYGON_MODE_FILL;
 	rsStateInfo.cullMode = VK_CULL_MODE_BACK_BIT;
@@ -348,7 +348,7 @@ void ModelTestVk::initRendering(void) {
 
 	mUBO->mModelViewMatrix = m_transformer->getModelViewMat();
 
-	nv::perspectiveLH(mUBO->mProjectionMatrix, 45.0f * (NV_PI / 180.0f), 16.0f / 9.0f, 1.0f, 100.0f);
+	nv::perspectiveVk(mUBO->mProjectionMatrix, 45.0f * (NV_PI / 180.0f), 16.0f / 9.0f, 1.0f, 100.0f);
 
 	mUBO->mInvProjectionMatrix = nv::inverse(mUBO->mProjectionMatrix);
 
@@ -531,11 +531,10 @@ void ModelTestVk::draw(void)
 
 		vkCmdBindPipeline(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, mQuadPipeline);
 		{
-			uint32_t offset[3];
+			uint32_t offset[2];
 			offset[0] = mUBO.getDynamicOffset();
 			offset[1] = 0;
-			offset[2] = 0;
-			vkCmdBindDescriptorSets(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, mPipelineLayout, 0, 1, &mDescriptorSet, 1, offset);
+			vkCmdBindDescriptorSets(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, mPipelineLayout, 0, 1, &mDescriptorSet, 2, offset);
 
 			mQuad->Draw(cmd);
 		}
@@ -547,7 +546,7 @@ void ModelTestVk::draw(void)
 			uint32_t offset[2];
 			offset[0] = mUBO.getDynamicOffset();
 			offset[1] = 0;
-			vkCmdBindDescriptorSets(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, mPipelineLayout, 0, 1, &mDescriptorSet, 1, offset);
+			vkCmdBindDescriptorSets(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, mPipelineLayout, 0, 1, &mDescriptorSet, 2, offset);
 
 			mModels[mCurrentModel]->Draw(cmd);
 		} else {
@@ -559,7 +558,7 @@ void ModelTestVk::draw(void)
 				uint32_t offset[2];
 				offset[0] = mUBO.getDynamicOffset();
 				offset[1] = mMatBlockStride * index;
-				vkCmdBindDescriptorSets(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, mPipelineLayout, 0, 1, &mDescriptorSet, 1, offset);
+				vkCmdBindDescriptorSets(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, mPipelineLayout, 0, 1, &mDescriptorSet, 2, offset);
 
 				mesh->Draw(cmd);
 			}

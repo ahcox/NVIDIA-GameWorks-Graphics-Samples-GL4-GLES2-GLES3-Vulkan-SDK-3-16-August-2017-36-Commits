@@ -72,215 +72,215 @@
 <a name="l00009"></a>00009 <span class="comment">/*</span>
 <a name="l00010"></a>00010 <span class="comment">** Copyright (c) 2015-2016 The Khronos Group Inc.</span>
 <a name="l00011"></a>00011 <span class="comment">**</span>
-<a name="l00012"></a>00012 <span class="comment">** Permission is hereby granted, free of charge, to any person obtaining a</span>
-<a name="l00013"></a>00013 <span class="comment">** copy of this software and/or associated documentation files (the</span>
-<a name="l00014"></a>00014 <span class="comment">** "Materials"), to deal in the Materials without restriction, including</span>
-<a name="l00015"></a>00015 <span class="comment">** without limitation the rights to use, copy, modify, merge, publish,</span>
-<a name="l00016"></a>00016 <span class="comment">** distribute, sublicense, and/or sell copies of the Materials, and to</span>
-<a name="l00017"></a>00017 <span class="comment">** permit persons to whom the Materials are furnished to do so, subject to</span>
-<a name="l00018"></a>00018 <span class="comment">** the following conditions:</span>
-<a name="l00019"></a>00019 <span class="comment">**</span>
-<a name="l00020"></a>00020 <span class="comment">** The above copyright notice and this permission notice shall be included</span>
-<a name="l00021"></a>00021 <span class="comment">** in all copies or substantial portions of the Materials.</span>
-<a name="l00022"></a>00022 <span class="comment">**</span>
-<a name="l00023"></a>00023 <span class="comment">** THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,</span>
-<a name="l00024"></a>00024 <span class="comment">** EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF</span>
-<a name="l00025"></a>00025 <span class="comment">** MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.</span>
-<a name="l00026"></a>00026 <span class="comment">** IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY</span>
-<a name="l00027"></a>00027 <span class="comment">** CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,</span>
-<a name="l00028"></a>00028 <span class="comment">** TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE</span>
-<a name="l00029"></a>00029 <span class="comment">** MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.</span>
-<a name="l00030"></a>00030 <span class="comment">*/</span>
-<a name="l00031"></a>00031 
-<a name="l00032"></a>00032 <span class="comment">/*</span>
-<a name="l00033"></a>00033 <span class="comment">** This header is generated from the Khronos Vulkan XML API Registry.</span>
-<a name="l00034"></a>00034 <span class="comment">**</span>
-<a name="l00035"></a>00035 <span class="comment">*/</span>
-<a name="l00036"></a>00036 
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038 <span class="preprocessor">#define VK_VERSION_1_0 1</span>
-<a name="l00039"></a>00039 <span class="preprocessor"></span><span class="preprocessor">#include "vk_platform.h"</span>
-<a name="l00040"></a>00040 
-<a name="l00041"></a>00041 <span class="preprocessor">#define VK_MAKE_VERSION(major, minor, patch) \</span>
-<a name="l00042"></a>00042 <span class="preprocessor">    (((major) &lt;&lt; 22) | ((minor) &lt;&lt; 12) | (patch))</span>
-<a name="l00043"></a>00043 <span class="preprocessor"></span>
-<a name="l00044"></a>00044 <span class="comment">// DEPRECATED: This define has been removed. Specific version defines (e.g. VK_API_VERSION_1_0), or the VK_MAKE_VERSION macro, should be used instead.</span>
-<a name="l00045"></a>00045 <span class="comment">//#define VK_API_VERSION VK_MAKE_VERSION(1, 0, 0)</span>
-<a name="l00046"></a>00046 
-<a name="l00047"></a>00047 <span class="comment">// Vulkan 1.0 version number</span>
-<a name="l00048"></a>00048 <span class="preprocessor">#define VK_API_VERSION_1_0 VK_MAKE_VERSION(1, 0, 0)</span>
-<a name="l00049"></a>00049 <span class="preprocessor"></span>
-<a name="l00050"></a>00050 <span class="preprocessor">#define VK_VERSION_MAJOR(version) ((uint32_t)(version) &gt;&gt; 22)</span>
-<a name="l00051"></a>00051 <span class="preprocessor"></span><span class="preprocessor">#define VK_VERSION_MINOR(version) (((uint32_t)(version) &gt;&gt; 12) &amp; 0x3ff)</span>
-<a name="l00052"></a>00052 <span class="preprocessor"></span><span class="preprocessor">#define VK_VERSION_PATCH(version) ((uint32_t)(version) &amp; 0xfff)</span>
-<a name="l00053"></a>00053 <span class="preprocessor"></span><span class="comment">// Version of this file</span>
-<a name="l00054"></a>00054 <span class="preprocessor">#define VK_HEADER_VERSION 8</span>
+<a name="l00012"></a>00012 <span class="comment">** Licensed under the Apache License, Version 2.0 (the "License");</span>
+<a name="l00013"></a>00013 <span class="comment">** you may not use this file except in compliance with the License.</span>
+<a name="l00014"></a>00014 <span class="comment">** You may obtain a copy of the License at</span>
+<a name="l00015"></a>00015 <span class="comment">**</span>
+<a name="l00016"></a>00016 <span class="comment">**     http://www.apache.org/licenses/LICENSE-2.0</span>
+<a name="l00017"></a>00017 <span class="comment">**</span>
+<a name="l00018"></a>00018 <span class="comment">** Unless required by applicable law or agreed to in writing, software</span>
+<a name="l00019"></a>00019 <span class="comment">** distributed under the License is distributed on an "AS IS" BASIS,</span>
+<a name="l00020"></a>00020 <span class="comment">** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<a name="l00021"></a>00021 <span class="comment">** See the License for the specific language governing permissions and</span>
+<a name="l00022"></a>00022 <span class="comment">** limitations under the License.</span>
+<a name="l00023"></a>00023 <span class="comment">*/</span>
+<a name="l00024"></a>00024 
+<a name="l00025"></a>00025 <span class="comment">/*</span>
+<a name="l00026"></a>00026 <span class="comment">** This header is generated from the Khronos Vulkan XML API Registry.</span>
+<a name="l00027"></a>00027 <span class="comment">**</span>
+<a name="l00028"></a>00028 <span class="comment">*/</span>
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030 
+<a name="l00031"></a>00031 <span class="preprocessor">#define VK_VERSION_1_0 1</span>
+<a name="l00032"></a>00032 <span class="preprocessor"></span><span class="preprocessor">#include "vk_platform.h"</span>
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034 <span class="preprocessor">#define VK_MAKE_VERSION(major, minor, patch) \</span>
+<a name="l00035"></a>00035 <span class="preprocessor">    (((major) &lt;&lt; 22) | ((minor) &lt;&lt; 12) | (patch))</span>
+<a name="l00036"></a>00036 <span class="preprocessor"></span>
+<a name="l00037"></a>00037 <span class="comment">// DEPRECATED: This define has been removed. Specific version defines (e.g. VK_API_VERSION_1_0), or the VK_MAKE_VERSION macro, should be used instead.</span>
+<a name="l00038"></a>00038 <span class="comment">//#define VK_API_VERSION VK_MAKE_VERSION(1, 0, 0)</span>
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040 <span class="comment">// Vulkan 1.0 version number</span>
+<a name="l00041"></a>00041 <span class="preprocessor">#define VK_API_VERSION_1_0 VK_MAKE_VERSION(1, 0, 0)</span>
+<a name="l00042"></a>00042 <span class="preprocessor"></span>
+<a name="l00043"></a>00043 <span class="preprocessor">#define VK_VERSION_MAJOR(version) ((uint32_t)(version) &gt;&gt; 22)</span>
+<a name="l00044"></a>00044 <span class="preprocessor"></span><span class="preprocessor">#define VK_VERSION_MINOR(version) (((uint32_t)(version) &gt;&gt; 12) &amp; 0x3ff)</span>
+<a name="l00045"></a>00045 <span class="preprocessor"></span><span class="preprocessor">#define VK_VERSION_PATCH(version) ((uint32_t)(version) &amp; 0xfff)</span>
+<a name="l00046"></a>00046 <span class="preprocessor"></span><span class="comment">// Version of this file</span>
+<a name="l00047"></a>00047 <span class="preprocessor">#define VK_HEADER_VERSION 21</span>
+<a name="l00048"></a>00048 <span class="preprocessor"></span>
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050 <span class="preprocessor">#define VK_NULL_HANDLE 0</span>
+<a name="l00051"></a>00051 <span class="preprocessor"></span>        
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054 <span class="preprocessor">#define VK_DEFINE_HANDLE(object) typedef struct object##_T* object;</span>
 <a name="l00055"></a>00055 <span class="preprocessor"></span>
 <a name="l00056"></a>00056 
-<a name="l00057"></a>00057 <span class="preprocessor">#define VK_NULL_HANDLE 0</span>
-<a name="l00058"></a>00058 <span class="preprocessor"></span>        
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060 
-<a name="l00061"></a>00061 <span class="preprocessor">#define VK_DEFINE_HANDLE(object) typedef struct object##_T* object;</span>
-<a name="l00062"></a>00062 <span class="preprocessor"></span>
+<a name="l00057"></a>00057 <span class="preprocessor">#if defined(__LP64__) || defined(_WIN64) || defined(__x86_64__) || defined(_M_X64) || defined(__ia64) || defined (_M_IA64) || defined(__aarch64__) || defined(__powerpc64__)</span>
+<a name="l00058"></a>00058 <span class="preprocessor"></span><span class="preprocessor">        #define VK_DEFINE_NON_DISPATCHABLE_HANDLE(object) typedef struct object##_T *object;</span>
+<a name="l00059"></a>00059 <span class="preprocessor"></span><span class="preprocessor">#else</span>
+<a name="l00060"></a>00060 <span class="preprocessor"></span><span class="preprocessor">        #define VK_DEFINE_NON_DISPATCHABLE_HANDLE(object) typedef uint64_t object;</span>
+<a name="l00061"></a>00061 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00062"></a>00062 <span class="preprocessor"></span>        
 <a name="l00063"></a>00063 
-<a name="l00064"></a>00064 <span class="preprocessor">#if defined(__LP64__) || defined(_WIN64) || defined(__x86_64__) || defined(_M_X64) || defined(__ia64) || defined (_M_IA64) || defined(__aarch64__) || defined(__powerpc64__)</span>
-<a name="l00065"></a>00065 <span class="preprocessor"></span><span class="preprocessor">        #define VK_DEFINE_NON_DISPATCHABLE_HANDLE(object) typedef struct object##_T *object;</span>
-<a name="l00066"></a>00066 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00067"></a>00067 <span class="preprocessor"></span><span class="preprocessor">        #define VK_DEFINE_NON_DISPATCHABLE_HANDLE(object) typedef uint64_t object;</span>
-<a name="l00068"></a>00068 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00069"></a>00069 <span class="preprocessor"></span>        
-<a name="l00070"></a>00070 
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072 <span class="keyword">typedef</span> uint32_t VkFlags;
-<a name="l00073"></a>00073 <span class="keyword">typedef</span> uint32_t VkBool32;
-<a name="l00074"></a>00074 <span class="keyword">typedef</span> uint64_t VkDeviceSize;
-<a name="l00075"></a>00075 <span class="keyword">typedef</span> uint32_t VkSampleMask;
-<a name="l00076"></a>00076 
-<a name="l00077"></a>00077 VK_DEFINE_HANDLE(VkInstance)
-<a name="l00078"></a>00078 VK_DEFINE_HANDLE(VkPhysicalDevice)
-<a name="l00079"></a>00079 VK_DEFINE_HANDLE(VkDevice)
-<a name="l00080"></a>00080 VK_DEFINE_HANDLE(VkQueue)
-<a name="l00081"></a>00081 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkSemaphore)
-<a name="l00082"></a>00082 VK_DEFINE_HANDLE(VkCommandBuffer)
-<a name="l00083"></a>00083 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkFence)
-<a name="l00084"></a>00084 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDeviceMemory)
-<a name="l00085"></a>00085 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkBuffer)
-<a name="l00086"></a>00086 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkImage)
-<a name="l00087"></a>00087 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkEvent)
-<a name="l00088"></a>00088 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkQueryPool)
-<a name="l00089"></a>00089 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkBufferView)
-<a name="l00090"></a>00090 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkImageView)
-<a name="l00091"></a>00091 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkShaderModule)
-<a name="l00092"></a>00092 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkPipelineCache)
-<a name="l00093"></a>00093 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkPipelineLayout)
-<a name="l00094"></a>00094 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkRenderPass)
-<a name="l00095"></a>00095 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkPipeline)
-<a name="l00096"></a>00096 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDescriptorSetLayout)
-<a name="l00097"></a>00097 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkSampler)
-<a name="l00098"></a>00098 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDescriptorPool)
-<a name="l00099"></a>00099 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDescriptorSet)
-<a name="l00100"></a>00100 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkFramebuffer)
-<a name="l00101"></a>00101 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkCommandPool)
-<a name="l00102"></a>00102 
-<a name="l00103"></a>00103 <span class="preprocessor">#define VK_LOD_CLAMP_NONE                 1000.0f</span>
-<a name="l00104"></a>00104 <span class="preprocessor"></span><span class="preprocessor">#define VK_REMAINING_MIP_LEVELS           (~0U)</span>
-<a name="l00105"></a>00105 <span class="preprocessor"></span><span class="preprocessor">#define VK_REMAINING_ARRAY_LAYERS         (~0U)</span>
-<a name="l00106"></a>00106 <span class="preprocessor"></span><span class="preprocessor">#define VK_WHOLE_SIZE                     (~0ULL)</span>
-<a name="l00107"></a>00107 <span class="preprocessor"></span><span class="preprocessor">#define VK_ATTACHMENT_UNUSED              (~0U)</span>
-<a name="l00108"></a>00108 <span class="preprocessor"></span><span class="preprocessor">#define VK_TRUE                           1</span>
-<a name="l00109"></a>00109 <span class="preprocessor"></span><span class="preprocessor">#define VK_FALSE                          0</span>
-<a name="l00110"></a>00110 <span class="preprocessor"></span><span class="preprocessor">#define VK_QUEUE_FAMILY_IGNORED           (~0U)</span>
-<a name="l00111"></a>00111 <span class="preprocessor"></span><span class="preprocessor">#define VK_SUBPASS_EXTERNAL               (~0U)</span>
-<a name="l00112"></a>00112 <span class="preprocessor"></span><span class="preprocessor">#define VK_MAX_PHYSICAL_DEVICE_NAME_SIZE  256</span>
-<a name="l00113"></a>00113 <span class="preprocessor"></span><span class="preprocessor">#define VK_UUID_SIZE                      16</span>
-<a name="l00114"></a>00114 <span class="preprocessor"></span><span class="preprocessor">#define VK_MAX_MEMORY_TYPES               32</span>
-<a name="l00115"></a>00115 <span class="preprocessor"></span><span class="preprocessor">#define VK_MAX_MEMORY_HEAPS               16</span>
-<a name="l00116"></a>00116 <span class="preprocessor"></span><span class="preprocessor">#define VK_MAX_EXTENSION_NAME_SIZE        256</span>
-<a name="l00117"></a>00117 <span class="preprocessor"></span><span class="preprocessor">#define VK_MAX_DESCRIPTION_SIZE           256</span>
-<a name="l00118"></a>00118 <span class="preprocessor"></span>
-<a name="l00119"></a>00119 
-<a name="l00120"></a>00120 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkPipelineCacheHeaderVersion {
-<a name="l00121"></a>00121     VK_PIPELINE_CACHE_HEADER_VERSION_ONE = 1,
-<a name="l00122"></a>00122     VK_PIPELINE_CACHE_HEADER_VERSION_BEGIN_RANGE = VK_PIPELINE_CACHE_HEADER_VERSION_ONE,
-<a name="l00123"></a>00123     VK_PIPELINE_CACHE_HEADER_VERSION_END_RANGE = VK_PIPELINE_CACHE_HEADER_VERSION_ONE,
-<a name="l00124"></a>00124     VK_PIPELINE_CACHE_HEADER_VERSION_RANGE_SIZE = (VK_PIPELINE_CACHE_HEADER_VERSION_ONE - VK_PIPELINE_CACHE_HEADER_VERSION_ONE + 1),
-<a name="l00125"></a>00125     VK_PIPELINE_CACHE_HEADER_VERSION_MAX_ENUM = 0x7FFFFFFF
-<a name="l00126"></a>00126 } VkPipelineCacheHeaderVersion;
-<a name="l00127"></a>00127 
-<a name="l00128"></a>00128 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkResult {
-<a name="l00129"></a>00129     VK_SUCCESS = 0,
-<a name="l00130"></a>00130     VK_NOT_READY = 1,
-<a name="l00131"></a>00131     VK_TIMEOUT = 2,
-<a name="l00132"></a>00132     VK_EVENT_SET = 3,
-<a name="l00133"></a>00133     VK_EVENT_RESET = 4,
-<a name="l00134"></a>00134     VK_INCOMPLETE = 5,
-<a name="l00135"></a>00135     VK_ERROR_OUT_OF_HOST_MEMORY = -1,
-<a name="l00136"></a>00136     VK_ERROR_OUT_OF_DEVICE_MEMORY = -2,
-<a name="l00137"></a>00137     VK_ERROR_INITIALIZATION_FAILED = -3,
-<a name="l00138"></a>00138     VK_ERROR_DEVICE_LOST = -4,
-<a name="l00139"></a>00139     VK_ERROR_MEMORY_MAP_FAILED = -5,
-<a name="l00140"></a>00140     VK_ERROR_LAYER_NOT_PRESENT = -6,
-<a name="l00141"></a>00141     VK_ERROR_EXTENSION_NOT_PRESENT = -7,
-<a name="l00142"></a>00142     VK_ERROR_FEATURE_NOT_PRESENT = -8,
-<a name="l00143"></a>00143     VK_ERROR_INCOMPATIBLE_DRIVER = -9,
-<a name="l00144"></a>00144     VK_ERROR_TOO_MANY_OBJECTS = -10,
-<a name="l00145"></a>00145     VK_ERROR_FORMAT_NOT_SUPPORTED = -11,
-<a name="l00146"></a>00146     VK_ERROR_SURFACE_LOST_KHR = -1000000000,
-<a name="l00147"></a>00147     VK_ERROR_NATIVE_WINDOW_IN_USE_KHR = -1000000001,
-<a name="l00148"></a>00148     VK_SUBOPTIMAL_KHR = 1000001003,
-<a name="l00149"></a>00149     VK_ERROR_OUT_OF_DATE_KHR = -1000001004,
-<a name="l00150"></a>00150     VK_ERROR_INCOMPATIBLE_DISPLAY_KHR = -1000003001,
-<a name="l00151"></a>00151     VK_ERROR_VALIDATION_FAILED_EXT = -1000011001,
-<a name="l00152"></a>00152     VK_ERROR_INVALID_SHADER_NV = -1000012000,
-<a name="l00153"></a>00153     VK_RESULT_BEGIN_RANGE = VK_ERROR_FORMAT_NOT_SUPPORTED,
-<a name="l00154"></a>00154     VK_RESULT_END_RANGE = VK_INCOMPLETE,
-<a name="l00155"></a>00155     VK_RESULT_RANGE_SIZE = (VK_INCOMPLETE - VK_ERROR_FORMAT_NOT_SUPPORTED + 1),
-<a name="l00156"></a>00156     VK_RESULT_MAX_ENUM = 0x7FFFFFFF
-<a name="l00157"></a>00157 } VkResult;
-<a name="l00158"></a>00158 
-<a name="l00159"></a>00159 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkStructureType {
-<a name="l00160"></a>00160     VK_STRUCTURE_TYPE_APPLICATION_INFO = 0,
-<a name="l00161"></a>00161     VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO = 1,
-<a name="l00162"></a>00162     VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO = 2,
-<a name="l00163"></a>00163     VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO = 3,
-<a name="l00164"></a>00164     VK_STRUCTURE_TYPE_SUBMIT_INFO = 4,
-<a name="l00165"></a>00165     VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO = 5,
-<a name="l00166"></a>00166     VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE = 6,
-<a name="l00167"></a>00167     VK_STRUCTURE_TYPE_BIND_SPARSE_INFO = 7,
-<a name="l00168"></a>00168     VK_STRUCTURE_TYPE_FENCE_CREATE_INFO = 8,
-<a name="l00169"></a>00169     VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO = 9,
-<a name="l00170"></a>00170     VK_STRUCTURE_TYPE_EVENT_CREATE_INFO = 10,
-<a name="l00171"></a>00171     VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO = 11,
-<a name="l00172"></a>00172     VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO = 12,
-<a name="l00173"></a>00173     VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO = 13,
-<a name="l00174"></a>00174     VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO = 14,
-<a name="l00175"></a>00175     VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO = 15,
-<a name="l00176"></a>00176     VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO = 16,
-<a name="l00177"></a>00177     VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO = 17,
-<a name="l00178"></a>00178     VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO = 18,
-<a name="l00179"></a>00179     VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO = 19,
-<a name="l00180"></a>00180     VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO = 20,
-<a name="l00181"></a>00181     VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO = 21,
-<a name="l00182"></a>00182     VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO = 22,
-<a name="l00183"></a>00183     VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO = 23,
-<a name="l00184"></a>00184     VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO = 24,
-<a name="l00185"></a>00185     VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO = 25,
-<a name="l00186"></a>00186     VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO = 26,
-<a name="l00187"></a>00187     VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO = 27,
-<a name="l00188"></a>00188     VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO = 28,
-<a name="l00189"></a>00189     VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO = 29,
-<a name="l00190"></a>00190     VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO = 30,
-<a name="l00191"></a>00191     VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO = 31,
-<a name="l00192"></a>00192     VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO = 32,
-<a name="l00193"></a>00193     VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO = 33,
-<a name="l00194"></a>00194     VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO = 34,
-<a name="l00195"></a>00195     VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET = 35,
-<a name="l00196"></a>00196     VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET = 36,
-<a name="l00197"></a>00197     VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO = 37,
-<a name="l00198"></a>00198     VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO = 38,
-<a name="l00199"></a>00199     VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO = 39,
-<a name="l00200"></a>00200     VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO = 40,
-<a name="l00201"></a>00201     VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO = 41,
-<a name="l00202"></a>00202     VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO = 42,
-<a name="l00203"></a>00203     VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO = 43,
-<a name="l00204"></a>00204     VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER = 44,
-<a name="l00205"></a>00205     VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER = 45,
-<a name="l00206"></a>00206     VK_STRUCTURE_TYPE_MEMORY_BARRIER = 46,
-<a name="l00207"></a>00207     VK_STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO = 47,
-<a name="l00208"></a>00208     VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO = 48,
-<a name="l00209"></a>00209     VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR = 1000001000,
-<a name="l00210"></a>00210     VK_STRUCTURE_TYPE_PRESENT_INFO_KHR = 1000001001,
-<a name="l00211"></a>00211     VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR = 1000002000,
-<a name="l00212"></a>00212     VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR = 1000002001,
-<a name="l00213"></a>00213     VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR = 1000003000,
-<a name="l00214"></a>00214     VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR = 1000004000,
-<a name="l00215"></a>00215     VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR = 1000005000,
-<a name="l00216"></a>00216     VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR = 1000006000,
-<a name="l00217"></a>00217     VK_STRUCTURE_TYPE_MIR_SURFACE_CREATE_INFO_KHR = 1000007000,
-<a name="l00218"></a>00218     VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR = 1000008000,
-<a name="l00219"></a>00219     VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR = 1000009000,
-<a name="l00220"></a>00220     VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT = 1000011000,
+<a name="l00064"></a>00064 
+<a name="l00065"></a>00065 <span class="keyword">typedef</span> uint32_t VkFlags;
+<a name="l00066"></a>00066 <span class="keyword">typedef</span> uint32_t VkBool32;
+<a name="l00067"></a>00067 <span class="keyword">typedef</span> uint64_t VkDeviceSize;
+<a name="l00068"></a>00068 <span class="keyword">typedef</span> uint32_t VkSampleMask;
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070 VK_DEFINE_HANDLE(VkInstance)
+<a name="l00071"></a>00071 VK_DEFINE_HANDLE(VkPhysicalDevice)
+<a name="l00072"></a>00072 VK_DEFINE_HANDLE(VkDevice)
+<a name="l00073"></a>00073 VK_DEFINE_HANDLE(VkQueue)
+<a name="l00074"></a>00074 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkSemaphore)
+<a name="l00075"></a>00075 VK_DEFINE_HANDLE(VkCommandBuffer)
+<a name="l00076"></a>00076 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkFence)
+<a name="l00077"></a>00077 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDeviceMemory)
+<a name="l00078"></a>00078 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkBuffer)
+<a name="l00079"></a>00079 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkImage)
+<a name="l00080"></a>00080 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkEvent)
+<a name="l00081"></a>00081 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkQueryPool)
+<a name="l00082"></a>00082 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkBufferView)
+<a name="l00083"></a>00083 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkImageView)
+<a name="l00084"></a>00084 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkShaderModule)
+<a name="l00085"></a>00085 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkPipelineCache)
+<a name="l00086"></a>00086 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkPipelineLayout)
+<a name="l00087"></a>00087 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkRenderPass)
+<a name="l00088"></a>00088 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkPipeline)
+<a name="l00089"></a>00089 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDescriptorSetLayout)
+<a name="l00090"></a>00090 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkSampler)
+<a name="l00091"></a>00091 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDescriptorPool)
+<a name="l00092"></a>00092 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDescriptorSet)
+<a name="l00093"></a>00093 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkFramebuffer)
+<a name="l00094"></a>00094 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkCommandPool)
+<a name="l00095"></a>00095 
+<a name="l00096"></a>00096 <span class="preprocessor">#define VK_LOD_CLAMP_NONE                 1000.0f</span>
+<a name="l00097"></a>00097 <span class="preprocessor"></span><span class="preprocessor">#define VK_REMAINING_MIP_LEVELS           (~0U)</span>
+<a name="l00098"></a>00098 <span class="preprocessor"></span><span class="preprocessor">#define VK_REMAINING_ARRAY_LAYERS         (~0U)</span>
+<a name="l00099"></a>00099 <span class="preprocessor"></span><span class="preprocessor">#define VK_WHOLE_SIZE                     (~0ULL)</span>
+<a name="l00100"></a>00100 <span class="preprocessor"></span><span class="preprocessor">#define VK_ATTACHMENT_UNUSED              (~0U)</span>
+<a name="l00101"></a>00101 <span class="preprocessor"></span><span class="preprocessor">#define VK_TRUE                           1</span>
+<a name="l00102"></a>00102 <span class="preprocessor"></span><span class="preprocessor">#define VK_FALSE                          0</span>
+<a name="l00103"></a>00103 <span class="preprocessor"></span><span class="preprocessor">#define VK_QUEUE_FAMILY_IGNORED           (~0U)</span>
+<a name="l00104"></a>00104 <span class="preprocessor"></span><span class="preprocessor">#define VK_SUBPASS_EXTERNAL               (~0U)</span>
+<a name="l00105"></a>00105 <span class="preprocessor"></span><span class="preprocessor">#define VK_MAX_PHYSICAL_DEVICE_NAME_SIZE  256</span>
+<a name="l00106"></a>00106 <span class="preprocessor"></span><span class="preprocessor">#define VK_UUID_SIZE                      16</span>
+<a name="l00107"></a>00107 <span class="preprocessor"></span><span class="preprocessor">#define VK_MAX_MEMORY_TYPES               32</span>
+<a name="l00108"></a>00108 <span class="preprocessor"></span><span class="preprocessor">#define VK_MAX_MEMORY_HEAPS               16</span>
+<a name="l00109"></a>00109 <span class="preprocessor"></span><span class="preprocessor">#define VK_MAX_EXTENSION_NAME_SIZE        256</span>
+<a name="l00110"></a>00110 <span class="preprocessor"></span><span class="preprocessor">#define VK_MAX_DESCRIPTION_SIZE           256</span>
+<a name="l00111"></a>00111 <span class="preprocessor"></span>
+<a name="l00112"></a>00112 
+<a name="l00113"></a>00113 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkPipelineCacheHeaderVersion {
+<a name="l00114"></a>00114     VK_PIPELINE_CACHE_HEADER_VERSION_ONE = 1,
+<a name="l00115"></a>00115     VK_PIPELINE_CACHE_HEADER_VERSION_BEGIN_RANGE = VK_PIPELINE_CACHE_HEADER_VERSION_ONE,
+<a name="l00116"></a>00116     VK_PIPELINE_CACHE_HEADER_VERSION_END_RANGE = VK_PIPELINE_CACHE_HEADER_VERSION_ONE,
+<a name="l00117"></a>00117     VK_PIPELINE_CACHE_HEADER_VERSION_RANGE_SIZE = (VK_PIPELINE_CACHE_HEADER_VERSION_ONE - VK_PIPELINE_CACHE_HEADER_VERSION_ONE + 1),
+<a name="l00118"></a>00118     VK_PIPELINE_CACHE_HEADER_VERSION_MAX_ENUM = 0x7FFFFFFF
+<a name="l00119"></a>00119 } VkPipelineCacheHeaderVersion;
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkResult {
+<a name="l00122"></a>00122     VK_SUCCESS = 0,
+<a name="l00123"></a>00123     VK_NOT_READY = 1,
+<a name="l00124"></a>00124     VK_TIMEOUT = 2,
+<a name="l00125"></a>00125     VK_EVENT_SET = 3,
+<a name="l00126"></a>00126     VK_EVENT_RESET = 4,
+<a name="l00127"></a>00127     VK_INCOMPLETE = 5,
+<a name="l00128"></a>00128     VK_ERROR_OUT_OF_HOST_MEMORY = -1,
+<a name="l00129"></a>00129     VK_ERROR_OUT_OF_DEVICE_MEMORY = -2,
+<a name="l00130"></a>00130     VK_ERROR_INITIALIZATION_FAILED = -3,
+<a name="l00131"></a>00131     VK_ERROR_DEVICE_LOST = -4,
+<a name="l00132"></a>00132     VK_ERROR_MEMORY_MAP_FAILED = -5,
+<a name="l00133"></a>00133     VK_ERROR_LAYER_NOT_PRESENT = -6,
+<a name="l00134"></a>00134     VK_ERROR_EXTENSION_NOT_PRESENT = -7,
+<a name="l00135"></a>00135     VK_ERROR_FEATURE_NOT_PRESENT = -8,
+<a name="l00136"></a>00136     VK_ERROR_INCOMPATIBLE_DRIVER = -9,
+<a name="l00137"></a>00137     VK_ERROR_TOO_MANY_OBJECTS = -10,
+<a name="l00138"></a>00138     VK_ERROR_FORMAT_NOT_SUPPORTED = -11,
+<a name="l00139"></a>00139     VK_ERROR_SURFACE_LOST_KHR = -1000000000,
+<a name="l00140"></a>00140     VK_ERROR_NATIVE_WINDOW_IN_USE_KHR = -1000000001,
+<a name="l00141"></a>00141     VK_SUBOPTIMAL_KHR = 1000001003,
+<a name="l00142"></a>00142     VK_ERROR_OUT_OF_DATE_KHR = -1000001004,
+<a name="l00143"></a>00143     VK_ERROR_INCOMPATIBLE_DISPLAY_KHR = -1000003001,
+<a name="l00144"></a>00144     VK_ERROR_VALIDATION_FAILED_EXT = -1000011001,
+<a name="l00145"></a>00145     VK_ERROR_INVALID_SHADER_NV = -1000012000,
+<a name="l00146"></a>00146     VK_RESULT_BEGIN_RANGE = VK_ERROR_FORMAT_NOT_SUPPORTED,
+<a name="l00147"></a>00147     VK_RESULT_END_RANGE = VK_INCOMPLETE,
+<a name="l00148"></a>00148     VK_RESULT_RANGE_SIZE = (VK_INCOMPLETE - VK_ERROR_FORMAT_NOT_SUPPORTED + 1),
+<a name="l00149"></a>00149     VK_RESULT_MAX_ENUM = 0x7FFFFFFF
+<a name="l00150"></a>00150 } VkResult;
+<a name="l00151"></a>00151 
+<a name="l00152"></a>00152 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkStructureType {
+<a name="l00153"></a>00153     VK_STRUCTURE_TYPE_APPLICATION_INFO = 0,
+<a name="l00154"></a>00154     VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO = 1,
+<a name="l00155"></a>00155     VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO = 2,
+<a name="l00156"></a>00156     VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO = 3,
+<a name="l00157"></a>00157     VK_STRUCTURE_TYPE_SUBMIT_INFO = 4,
+<a name="l00158"></a>00158     VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO = 5,
+<a name="l00159"></a>00159     VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE = 6,
+<a name="l00160"></a>00160     VK_STRUCTURE_TYPE_BIND_SPARSE_INFO = 7,
+<a name="l00161"></a>00161     VK_STRUCTURE_TYPE_FENCE_CREATE_INFO = 8,
+<a name="l00162"></a>00162     VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO = 9,
+<a name="l00163"></a>00163     VK_STRUCTURE_TYPE_EVENT_CREATE_INFO = 10,
+<a name="l00164"></a>00164     VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO = 11,
+<a name="l00165"></a>00165     VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO = 12,
+<a name="l00166"></a>00166     VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO = 13,
+<a name="l00167"></a>00167     VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO = 14,
+<a name="l00168"></a>00168     VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO = 15,
+<a name="l00169"></a>00169     VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO = 16,
+<a name="l00170"></a>00170     VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO = 17,
+<a name="l00171"></a>00171     VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO = 18,
+<a name="l00172"></a>00172     VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO = 19,
+<a name="l00173"></a>00173     VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO = 20,
+<a name="l00174"></a>00174     VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO = 21,
+<a name="l00175"></a>00175     VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO = 22,
+<a name="l00176"></a>00176     VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO = 23,
+<a name="l00177"></a>00177     VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO = 24,
+<a name="l00178"></a>00178     VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO = 25,
+<a name="l00179"></a>00179     VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO = 26,
+<a name="l00180"></a>00180     VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO = 27,
+<a name="l00181"></a>00181     VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO = 28,
+<a name="l00182"></a>00182     VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO = 29,
+<a name="l00183"></a>00183     VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO = 30,
+<a name="l00184"></a>00184     VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO = 31,
+<a name="l00185"></a>00185     VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO = 32,
+<a name="l00186"></a>00186     VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO = 33,
+<a name="l00187"></a>00187     VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO = 34,
+<a name="l00188"></a>00188     VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET = 35,
+<a name="l00189"></a>00189     VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET = 36,
+<a name="l00190"></a>00190     VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO = 37,
+<a name="l00191"></a>00191     VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO = 38,
+<a name="l00192"></a>00192     VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO = 39,
+<a name="l00193"></a>00193     VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO = 40,
+<a name="l00194"></a>00194     VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO = 41,
+<a name="l00195"></a>00195     VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO = 42,
+<a name="l00196"></a>00196     VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO = 43,
+<a name="l00197"></a>00197     VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER = 44,
+<a name="l00198"></a>00198     VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER = 45,
+<a name="l00199"></a>00199     VK_STRUCTURE_TYPE_MEMORY_BARRIER = 46,
+<a name="l00200"></a>00200     VK_STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO = 47,
+<a name="l00201"></a>00201     VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO = 48,
+<a name="l00202"></a>00202     VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR = 1000001000,
+<a name="l00203"></a>00203     VK_STRUCTURE_TYPE_PRESENT_INFO_KHR = 1000001001,
+<a name="l00204"></a>00204     VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR = 1000002000,
+<a name="l00205"></a>00205     VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR = 1000002001,
+<a name="l00206"></a>00206     VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR = 1000003000,
+<a name="l00207"></a>00207     VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR = 1000004000,
+<a name="l00208"></a>00208     VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR = 1000005000,
+<a name="l00209"></a>00209     VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR = 1000006000,
+<a name="l00210"></a>00210     VK_STRUCTURE_TYPE_MIR_SURFACE_CREATE_INFO_KHR = 1000007000,
+<a name="l00211"></a>00211     VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR = 1000008000,
+<a name="l00212"></a>00212     VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR = 1000009000,
+<a name="l00213"></a>00213     VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT = 1000011000,
+<a name="l00214"></a>00214     VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD = 1000018000,
+<a name="l00215"></a>00215     VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT = 1000022000,
+<a name="l00216"></a>00216     VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT = 1000022001,
+<a name="l00217"></a>00217     VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT = 1000022002,
+<a name="l00218"></a>00218     VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV = 1000026000,
+<a name="l00219"></a>00219     VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV = 1000026001,
+<a name="l00220"></a>00220     VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV = 1000026002,
 <a name="l00221"></a>00221     VK_STRUCTURE_TYPE_BEGIN_RANGE = VK_STRUCTURE_TYPE_APPLICATION_INFO,
 <a name="l00222"></a>00222     VK_STRUCTURE_TYPE_END_RANGE = VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO,
 <a name="l00223"></a>00223     VK_STRUCTURE_TYPE_RANGE_SIZE = (VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO - VK_STRUCTURE_TYPE_APPLICATION_INFO + 1),
@@ -2414,7 +2414,7 @@
 <a name="l02351"></a>02351 <span class="keyword">typedef</span> void (VKAPI_PTR *PFN_vkCmdBlitImage)(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, uint32_t regionCount, <span class="keyword">const</span> VkImageBlit* pRegions, VkFilter filter);
 <a name="l02352"></a>02352 <span class="keyword">typedef</span> void (VKAPI_PTR *PFN_vkCmdCopyBufferToImage)(VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkImage dstImage, VkImageLayout dstImageLayout, uint32_t regionCount, <span class="keyword">const</span> VkBufferImageCopy* pRegions);
 <a name="l02353"></a>02353 <span class="keyword">typedef</span> void (VKAPI_PTR *PFN_vkCmdCopyImageToBuffer)(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkBuffer dstBuffer, uint32_t regionCount, <span class="keyword">const</span> VkBufferImageCopy* pRegions);
-<a name="l02354"></a>02354 <span class="keyword">typedef</span> void (VKAPI_PTR *PFN_vkCmdUpdateBuffer)(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, <span class="keyword">const</span> uint32_t* pData);
+<a name="l02354"></a>02354 <span class="keyword">typedef</span> void (VKAPI_PTR *PFN_vkCmdUpdateBuffer)(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, <span class="keyword">const</span> <span class="keywordtype">void</span>* pData);
 <a name="l02355"></a>02355 <span class="keyword">typedef</span> void (VKAPI_PTR *PFN_vkCmdFillBuffer)(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize size, uint32_t data);
 <a name="l02356"></a>02356 <span class="keyword">typedef</span> void (VKAPI_PTR *PFN_vkCmdClearColorImage)(VkCommandBuffer commandBuffer, VkImage image, VkImageLayout imageLayout, <span class="keyword">const</span> VkClearColorValue* pColor, uint32_t rangeCount, <span class="keyword">const</span> VkImageSubresourceRange* pRanges);
 <a name="l02357"></a>02357 <span class="keyword">typedef</span> void (VKAPI_PTR *PFN_vkCmdClearDepthStencilImage)(VkCommandBuffer commandBuffer, VkImage image, VkImageLayout imageLayout, <span class="keyword">const</span> VkClearDepthStencilValue* pDepthStencil, uint32_t rangeCount, <span class="keyword">const</span> VkImageSubresourceRange* pRanges);
@@ -3099,7 +3099,7 @@
 <a name="l03036"></a>03036     VkBuffer                                    dstBuffer,
 <a name="l03037"></a>03037     VkDeviceSize                                dstOffset,
 <a name="l03038"></a>03038     VkDeviceSize                                dataSize,
-<a name="l03039"></a>03039     <span class="keyword">const</span> uint32_t*                             pData);
+<a name="l03039"></a>03039     <span class="keyword">const</span> <span class="keywordtype">void</span>*                                 pData);
 <a name="l03040"></a>03040 
 <a name="l03041"></a>03041 VKAPI_ATTR <span class="keywordtype">void</span> VKAPI_CALL vkCmdFillBuffer(
 <a name="l03042"></a>03042     VkCommandBuffer                             commandBuffer,
@@ -3239,671 +3239,791 @@
 <a name="l03176"></a>03176 
 <a name="l03177"></a>03177 <span class="preprocessor">#define VK_KHR_SURFACE_SPEC_VERSION       25</span>
 <a name="l03178"></a>03178 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_SURFACE_EXTENSION_NAME     "VK_KHR_surface"</span>
-<a name="l03179"></a>03179 <span class="preprocessor"></span>
-<a name="l03180"></a>03180 
-<a name="l03181"></a>03181 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkColorSpaceKHR {
-<a name="l03182"></a>03182     VK_COLORSPACE_SRGB_NONLINEAR_KHR = 0,
-<a name="l03183"></a>03183     VK_COLOR_SPACE_BEGIN_RANGE_KHR = VK_COLORSPACE_SRGB_NONLINEAR_KHR,
-<a name="l03184"></a>03184     VK_COLOR_SPACE_END_RANGE_KHR = VK_COLORSPACE_SRGB_NONLINEAR_KHR,
-<a name="l03185"></a>03185     VK_COLOR_SPACE_RANGE_SIZE_KHR = (VK_COLORSPACE_SRGB_NONLINEAR_KHR - VK_COLORSPACE_SRGB_NONLINEAR_KHR + 1),
-<a name="l03186"></a>03186     VK_COLOR_SPACE_MAX_ENUM_KHR = 0x7FFFFFFF
-<a name="l03187"></a>03187 } VkColorSpaceKHR;
-<a name="l03188"></a>03188 
-<a name="l03189"></a>03189 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkPresentModeKHR {
-<a name="l03190"></a>03190     VK_PRESENT_MODE_IMMEDIATE_KHR = 0,
-<a name="l03191"></a>03191     VK_PRESENT_MODE_MAILBOX_KHR = 1,
-<a name="l03192"></a>03192     VK_PRESENT_MODE_FIFO_KHR = 2,
-<a name="l03193"></a>03193     VK_PRESENT_MODE_FIFO_RELAXED_KHR = 3,
-<a name="l03194"></a>03194     VK_PRESENT_MODE_BEGIN_RANGE_KHR = VK_PRESENT_MODE_IMMEDIATE_KHR,
-<a name="l03195"></a>03195     VK_PRESENT_MODE_END_RANGE_KHR = VK_PRESENT_MODE_FIFO_RELAXED_KHR,
-<a name="l03196"></a>03196     VK_PRESENT_MODE_RANGE_SIZE_KHR = (VK_PRESENT_MODE_FIFO_RELAXED_KHR - VK_PRESENT_MODE_IMMEDIATE_KHR + 1),
-<a name="l03197"></a>03197     VK_PRESENT_MODE_MAX_ENUM_KHR = 0x7FFFFFFF
-<a name="l03198"></a>03198 } VkPresentModeKHR;
-<a name="l03199"></a>03199 
+<a name="l03179"></a>03179 <span class="preprocessor"></span><span class="preprocessor">#define VK_COLORSPACE_SRGB_NONLINEAR_KHR  VK_COLOR_SPACE_SRGB_NONLINEAR_KHR</span>
+<a name="l03180"></a>03180 <span class="preprocessor"></span>
+<a name="l03181"></a>03181 
+<a name="l03182"></a>03182 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkColorSpaceKHR {
+<a name="l03183"></a>03183     VK_COLOR_SPACE_SRGB_NONLINEAR_KHR = 0,
+<a name="l03184"></a>03184     VK_COLOR_SPACE_BEGIN_RANGE_KHR = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR,
+<a name="l03185"></a>03185     VK_COLOR_SPACE_END_RANGE_KHR = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR,
+<a name="l03186"></a>03186     VK_COLOR_SPACE_RANGE_SIZE_KHR = (VK_COLOR_SPACE_SRGB_NONLINEAR_KHR - VK_COLOR_SPACE_SRGB_NONLINEAR_KHR + 1),
+<a name="l03187"></a>03187     VK_COLOR_SPACE_MAX_ENUM_KHR = 0x7FFFFFFF
+<a name="l03188"></a>03188 } VkColorSpaceKHR;
+<a name="l03189"></a>03189 
+<a name="l03190"></a>03190 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkPresentModeKHR {
+<a name="l03191"></a>03191     VK_PRESENT_MODE_IMMEDIATE_KHR = 0,
+<a name="l03192"></a>03192     VK_PRESENT_MODE_MAILBOX_KHR = 1,
+<a name="l03193"></a>03193     VK_PRESENT_MODE_FIFO_KHR = 2,
+<a name="l03194"></a>03194     VK_PRESENT_MODE_FIFO_RELAXED_KHR = 3,
+<a name="l03195"></a>03195     VK_PRESENT_MODE_BEGIN_RANGE_KHR = VK_PRESENT_MODE_IMMEDIATE_KHR,
+<a name="l03196"></a>03196     VK_PRESENT_MODE_END_RANGE_KHR = VK_PRESENT_MODE_FIFO_RELAXED_KHR,
+<a name="l03197"></a>03197     VK_PRESENT_MODE_RANGE_SIZE_KHR = (VK_PRESENT_MODE_FIFO_RELAXED_KHR - VK_PRESENT_MODE_IMMEDIATE_KHR + 1),
+<a name="l03198"></a>03198     VK_PRESENT_MODE_MAX_ENUM_KHR = 0x7FFFFFFF
+<a name="l03199"></a>03199 } VkPresentModeKHR;
 <a name="l03200"></a>03200 
-<a name="l03201"></a>03201 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkSurfaceTransformFlagBitsKHR {
-<a name="l03202"></a>03202     VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR = 0x00000001,
-<a name="l03203"></a>03203     VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR = 0x00000002,
-<a name="l03204"></a>03204     VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR = 0x00000004,
-<a name="l03205"></a>03205     VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR = 0x00000008,
-<a name="l03206"></a>03206     VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR = 0x00000010,
-<a name="l03207"></a>03207     VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR = 0x00000020,
-<a name="l03208"></a>03208     VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR = 0x00000040,
-<a name="l03209"></a>03209     VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR = 0x00000080,
-<a name="l03210"></a>03210     VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR = 0x00000100,
-<a name="l03211"></a>03211     VK_SURFACE_TRANSFORM_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
-<a name="l03212"></a>03212 } VkSurfaceTransformFlagBitsKHR;
-<a name="l03213"></a>03213 <span class="keyword">typedef</span> VkFlags VkSurfaceTransformFlagsKHR;
-<a name="l03214"></a>03214 
-<a name="l03215"></a>03215 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkCompositeAlphaFlagBitsKHR {
-<a name="l03216"></a>03216     VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR = 0x00000001,
-<a name="l03217"></a>03217     VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR = 0x00000002,
-<a name="l03218"></a>03218     VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR = 0x00000004,
-<a name="l03219"></a>03219     VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR = 0x00000008,
-<a name="l03220"></a>03220     VK_COMPOSITE_ALPHA_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
-<a name="l03221"></a>03221 } VkCompositeAlphaFlagBitsKHR;
-<a name="l03222"></a>03222 <span class="keyword">typedef</span> VkFlags VkCompositeAlphaFlagsKHR;
-<a name="l03223"></a>03223 
-<a name="l03224"></a>03224 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkSurfaceCapabilitiesKHR {
-<a name="l03225"></a>03225     uint32_t                         minImageCount;
-<a name="l03226"></a>03226     uint32_t                         maxImageCount;
-<a name="l03227"></a>03227     VkExtent2D                       currentExtent;
-<a name="l03228"></a>03228     VkExtent2D                       minImageExtent;
-<a name="l03229"></a>03229     VkExtent2D                       maxImageExtent;
-<a name="l03230"></a>03230     uint32_t                         maxImageArrayLayers;
-<a name="l03231"></a>03231     VkSurfaceTransformFlagsKHR       supportedTransforms;
-<a name="l03232"></a>03232     VkSurfaceTransformFlagBitsKHR    currentTransform;
-<a name="l03233"></a>03233     VkCompositeAlphaFlagsKHR         supportedCompositeAlpha;
-<a name="l03234"></a>03234     VkImageUsageFlags                supportedUsageFlags;
-<a name="l03235"></a>03235 } VkSurfaceCapabilitiesKHR;
-<a name="l03236"></a>03236 
-<a name="l03237"></a>03237 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkSurfaceFormatKHR {
-<a name="l03238"></a>03238     VkFormat           format;
-<a name="l03239"></a>03239     VkColorSpaceKHR    colorSpace;
-<a name="l03240"></a>03240 } VkSurfaceFormatKHR;
-<a name="l03241"></a>03241 
+<a name="l03201"></a>03201 
+<a name="l03202"></a>03202 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkSurfaceTransformFlagBitsKHR {
+<a name="l03203"></a>03203     VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR = 0x00000001,
+<a name="l03204"></a>03204     VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR = 0x00000002,
+<a name="l03205"></a>03205     VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR = 0x00000004,
+<a name="l03206"></a>03206     VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR = 0x00000008,
+<a name="l03207"></a>03207     VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR = 0x00000010,
+<a name="l03208"></a>03208     VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR = 0x00000020,
+<a name="l03209"></a>03209     VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR = 0x00000040,
+<a name="l03210"></a>03210     VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR = 0x00000080,
+<a name="l03211"></a>03211     VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR = 0x00000100,
+<a name="l03212"></a>03212     VK_SURFACE_TRANSFORM_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
+<a name="l03213"></a>03213 } VkSurfaceTransformFlagBitsKHR;
+<a name="l03214"></a>03214 <span class="keyword">typedef</span> VkFlags VkSurfaceTransformFlagsKHR;
+<a name="l03215"></a>03215 
+<a name="l03216"></a>03216 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkCompositeAlphaFlagBitsKHR {
+<a name="l03217"></a>03217     VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR = 0x00000001,
+<a name="l03218"></a>03218     VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR = 0x00000002,
+<a name="l03219"></a>03219     VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR = 0x00000004,
+<a name="l03220"></a>03220     VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR = 0x00000008,
+<a name="l03221"></a>03221     VK_COMPOSITE_ALPHA_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
+<a name="l03222"></a>03222 } VkCompositeAlphaFlagBitsKHR;
+<a name="l03223"></a>03223 <span class="keyword">typedef</span> VkFlags VkCompositeAlphaFlagsKHR;
+<a name="l03224"></a>03224 
+<a name="l03225"></a>03225 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkSurfaceCapabilitiesKHR {
+<a name="l03226"></a>03226     uint32_t                         minImageCount;
+<a name="l03227"></a>03227     uint32_t                         maxImageCount;
+<a name="l03228"></a>03228     VkExtent2D                       currentExtent;
+<a name="l03229"></a>03229     VkExtent2D                       minImageExtent;
+<a name="l03230"></a>03230     VkExtent2D                       maxImageExtent;
+<a name="l03231"></a>03231     uint32_t                         maxImageArrayLayers;
+<a name="l03232"></a>03232     VkSurfaceTransformFlagsKHR       supportedTransforms;
+<a name="l03233"></a>03233     VkSurfaceTransformFlagBitsKHR    currentTransform;
+<a name="l03234"></a>03234     VkCompositeAlphaFlagsKHR         supportedCompositeAlpha;
+<a name="l03235"></a>03235     VkImageUsageFlags                supportedUsageFlags;
+<a name="l03236"></a>03236 } VkSurfaceCapabilitiesKHR;
+<a name="l03237"></a>03237 
+<a name="l03238"></a>03238 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkSurfaceFormatKHR {
+<a name="l03239"></a>03239     VkFormat           format;
+<a name="l03240"></a>03240     VkColorSpaceKHR    colorSpace;
+<a name="l03241"></a>03241 } VkSurfaceFormatKHR;
 <a name="l03242"></a>03242 
-<a name="l03243"></a>03243 <span class="keyword">typedef</span> void (VKAPI_PTR *PFN_vkDestroySurfaceKHR)(VkInstance instance, VkSurfaceKHR surface, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator);
-<a name="l03244"></a>03244 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetPhysicalDeviceSurfaceSupportKHR)(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, VkSurfaceKHR surface, VkBool32* pSupported);
-<a name="l03245"></a>03245 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetPhysicalDeviceSurfaceCapabilitiesKHR)(VkPhysicalDevice physicalDevice, VkSurfaceKHR surface, VkSurfaceCapabilitiesKHR* pSurfaceCapabilities);
-<a name="l03246"></a>03246 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetPhysicalDeviceSurfaceFormatsKHR)(VkPhysicalDevice physicalDevice, VkSurfaceKHR surface, uint32_t* pSurfaceFormatCount, VkSurfaceFormatKHR* pSurfaceFormats);
-<a name="l03247"></a>03247 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetPhysicalDeviceSurfacePresentModesKHR)(VkPhysicalDevice physicalDevice, VkSurfaceKHR surface, uint32_t* pPresentModeCount, VkPresentModeKHR* pPresentModes);
-<a name="l03248"></a>03248 
-<a name="l03249"></a>03249 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
-<a name="l03250"></a>03250 <span class="preprocessor"></span>VKAPI_ATTR <span class="keywordtype">void</span> VKAPI_CALL vkDestroySurfaceKHR(
-<a name="l03251"></a>03251     VkInstance                                  instance,
-<a name="l03252"></a>03252     VkSurfaceKHR                                surface,
-<a name="l03253"></a>03253     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator);
-<a name="l03254"></a>03254 
-<a name="l03255"></a>03255 VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceSurfaceSupportKHR(
-<a name="l03256"></a>03256     VkPhysicalDevice                            physicalDevice,
-<a name="l03257"></a>03257     uint32_t                                    queueFamilyIndex,
-<a name="l03258"></a>03258     VkSurfaceKHR                                surface,
-<a name="l03259"></a>03259     VkBool32*                                   pSupported);
-<a name="l03260"></a>03260 
-<a name="l03261"></a>03261 VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceSurfaceCapabilitiesKHR(
-<a name="l03262"></a>03262     VkPhysicalDevice                            physicalDevice,
-<a name="l03263"></a>03263     VkSurfaceKHR                                surface,
-<a name="l03264"></a>03264     VkSurfaceCapabilitiesKHR*                   pSurfaceCapabilities);
-<a name="l03265"></a>03265 
-<a name="l03266"></a>03266 VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceSurfaceFormatsKHR(
-<a name="l03267"></a>03267     VkPhysicalDevice                            physicalDevice,
-<a name="l03268"></a>03268     VkSurfaceKHR                                surface,
-<a name="l03269"></a>03269     uint32_t*                                   pSurfaceFormatCount,
-<a name="l03270"></a>03270     VkSurfaceFormatKHR*                         pSurfaceFormats);
-<a name="l03271"></a>03271 
-<a name="l03272"></a>03272 VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceSurfacePresentModesKHR(
-<a name="l03273"></a>03273     VkPhysicalDevice                            physicalDevice,
-<a name="l03274"></a>03274     VkSurfaceKHR                                surface,
-<a name="l03275"></a>03275     uint32_t*                                   pPresentModeCount,
-<a name="l03276"></a>03276     VkPresentModeKHR*                           pPresentModes);
-<a name="l03277"></a>03277 <span class="preprocessor">#endif</span>
-<a name="l03278"></a>03278 <span class="preprocessor"></span>
-<a name="l03279"></a>03279 <span class="preprocessor">#define VK_KHR_swapchain 1</span>
-<a name="l03280"></a>03280 <span class="preprocessor"></span>VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkSwapchainKHR)
-<a name="l03281"></a>03281 
-<a name="l03282"></a>03282 <span class="preprocessor">#define VK_KHR_SWAPCHAIN_SPEC_VERSION     67</span>
-<a name="l03283"></a>03283 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_SWAPCHAIN_EXTENSION_NAME   "VK_KHR_swapchain"</span>
-<a name="l03284"></a>03284 <span class="preprocessor"></span>
-<a name="l03285"></a>03285 <span class="keyword">typedef</span> VkFlags VkSwapchainCreateFlagsKHR;
-<a name="l03286"></a>03286 
-<a name="l03287"></a>03287 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkSwapchainCreateInfoKHR {
-<a name="l03288"></a>03288     VkStructureType                  sType;
-<a name="l03289"></a>03289     <span class="keyword">const</span> <span class="keywordtype">void</span>*                      pNext;
-<a name="l03290"></a>03290     VkSwapchainCreateFlagsKHR        flags;
-<a name="l03291"></a>03291     VkSurfaceKHR                     surface;
-<a name="l03292"></a>03292     uint32_t                         minImageCount;
-<a name="l03293"></a>03293     VkFormat                         imageFormat;
-<a name="l03294"></a>03294     VkColorSpaceKHR                  imageColorSpace;
-<a name="l03295"></a>03295     VkExtent2D                       imageExtent;
-<a name="l03296"></a>03296     uint32_t                         imageArrayLayers;
-<a name="l03297"></a>03297     VkImageUsageFlags                imageUsage;
-<a name="l03298"></a>03298     VkSharingMode                    imageSharingMode;
-<a name="l03299"></a>03299     uint32_t                         queueFamilyIndexCount;
-<a name="l03300"></a>03300     <span class="keyword">const</span> uint32_t*                  pQueueFamilyIndices;
-<a name="l03301"></a>03301     VkSurfaceTransformFlagBitsKHR    preTransform;
-<a name="l03302"></a>03302     VkCompositeAlphaFlagBitsKHR      compositeAlpha;
-<a name="l03303"></a>03303     VkPresentModeKHR                 presentMode;
-<a name="l03304"></a>03304     VkBool32                         clipped;
-<a name="l03305"></a>03305     VkSwapchainKHR                   oldSwapchain;
-<a name="l03306"></a>03306 } VkSwapchainCreateInfoKHR;
-<a name="l03307"></a>03307 
-<a name="l03308"></a>03308 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkPresentInfoKHR {
-<a name="l03309"></a>03309     VkStructureType          sType;
-<a name="l03310"></a>03310     <span class="keyword">const</span> <span class="keywordtype">void</span>*              pNext;
-<a name="l03311"></a>03311     uint32_t                 waitSemaphoreCount;
-<a name="l03312"></a>03312     <span class="keyword">const</span> VkSemaphore*       pWaitSemaphores;
-<a name="l03313"></a>03313     uint32_t                 swapchainCount;
-<a name="l03314"></a>03314     <span class="keyword">const</span> VkSwapchainKHR*    pSwapchains;
-<a name="l03315"></a>03315     <span class="keyword">const</span> uint32_t*          pImageIndices;
-<a name="l03316"></a>03316     VkResult*                pResults;
-<a name="l03317"></a>03317 } VkPresentInfoKHR;
-<a name="l03318"></a>03318 
+<a name="l03243"></a>03243 
+<a name="l03244"></a>03244 <span class="keyword">typedef</span> void (VKAPI_PTR *PFN_vkDestroySurfaceKHR)(VkInstance instance, VkSurfaceKHR surface, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator);
+<a name="l03245"></a>03245 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetPhysicalDeviceSurfaceSupportKHR)(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, VkSurfaceKHR surface, VkBool32* pSupported);
+<a name="l03246"></a>03246 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetPhysicalDeviceSurfaceCapabilitiesKHR)(VkPhysicalDevice physicalDevice, VkSurfaceKHR surface, VkSurfaceCapabilitiesKHR* pSurfaceCapabilities);
+<a name="l03247"></a>03247 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetPhysicalDeviceSurfaceFormatsKHR)(VkPhysicalDevice physicalDevice, VkSurfaceKHR surface, uint32_t* pSurfaceFormatCount, VkSurfaceFormatKHR* pSurfaceFormats);
+<a name="l03248"></a>03248 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetPhysicalDeviceSurfacePresentModesKHR)(VkPhysicalDevice physicalDevice, VkSurfaceKHR surface, uint32_t* pPresentModeCount, VkPresentModeKHR* pPresentModes);
+<a name="l03249"></a>03249 
+<a name="l03250"></a>03250 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
+<a name="l03251"></a>03251 <span class="preprocessor"></span>VKAPI_ATTR <span class="keywordtype">void</span> VKAPI_CALL vkDestroySurfaceKHR(
+<a name="l03252"></a>03252     VkInstance                                  instance,
+<a name="l03253"></a>03253     VkSurfaceKHR                                surface,
+<a name="l03254"></a>03254     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator);
+<a name="l03255"></a>03255 
+<a name="l03256"></a>03256 VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceSurfaceSupportKHR(
+<a name="l03257"></a>03257     VkPhysicalDevice                            physicalDevice,
+<a name="l03258"></a>03258     uint32_t                                    queueFamilyIndex,
+<a name="l03259"></a>03259     VkSurfaceKHR                                surface,
+<a name="l03260"></a>03260     VkBool32*                                   pSupported);
+<a name="l03261"></a>03261 
+<a name="l03262"></a>03262 VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceSurfaceCapabilitiesKHR(
+<a name="l03263"></a>03263     VkPhysicalDevice                            physicalDevice,
+<a name="l03264"></a>03264     VkSurfaceKHR                                surface,
+<a name="l03265"></a>03265     VkSurfaceCapabilitiesKHR*                   pSurfaceCapabilities);
+<a name="l03266"></a>03266 
+<a name="l03267"></a>03267 VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceSurfaceFormatsKHR(
+<a name="l03268"></a>03268     VkPhysicalDevice                            physicalDevice,
+<a name="l03269"></a>03269     VkSurfaceKHR                                surface,
+<a name="l03270"></a>03270     uint32_t*                                   pSurfaceFormatCount,
+<a name="l03271"></a>03271     VkSurfaceFormatKHR*                         pSurfaceFormats);
+<a name="l03272"></a>03272 
+<a name="l03273"></a>03273 VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceSurfacePresentModesKHR(
+<a name="l03274"></a>03274     VkPhysicalDevice                            physicalDevice,
+<a name="l03275"></a>03275     VkSurfaceKHR                                surface,
+<a name="l03276"></a>03276     uint32_t*                                   pPresentModeCount,
+<a name="l03277"></a>03277     VkPresentModeKHR*                           pPresentModes);
+<a name="l03278"></a>03278 <span class="preprocessor">#endif</span>
+<a name="l03279"></a>03279 <span class="preprocessor"></span>
+<a name="l03280"></a>03280 <span class="preprocessor">#define VK_KHR_swapchain 1</span>
+<a name="l03281"></a>03281 <span class="preprocessor"></span>VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkSwapchainKHR)
+<a name="l03282"></a>03282 
+<a name="l03283"></a>03283 <span class="preprocessor">#define VK_KHR_SWAPCHAIN_SPEC_VERSION     68</span>
+<a name="l03284"></a>03284 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_SWAPCHAIN_EXTENSION_NAME   "VK_KHR_swapchain"</span>
+<a name="l03285"></a>03285 <span class="preprocessor"></span>
+<a name="l03286"></a>03286 <span class="keyword">typedef</span> VkFlags VkSwapchainCreateFlagsKHR;
+<a name="l03287"></a>03287 
+<a name="l03288"></a>03288 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkSwapchainCreateInfoKHR {
+<a name="l03289"></a>03289     VkStructureType                  sType;
+<a name="l03290"></a>03290     <span class="keyword">const</span> <span class="keywordtype">void</span>*                      pNext;
+<a name="l03291"></a>03291     VkSwapchainCreateFlagsKHR        flags;
+<a name="l03292"></a>03292     VkSurfaceKHR                     surface;
+<a name="l03293"></a>03293     uint32_t                         minImageCount;
+<a name="l03294"></a>03294     VkFormat                         imageFormat;
+<a name="l03295"></a>03295     VkColorSpaceKHR                  imageColorSpace;
+<a name="l03296"></a>03296     VkExtent2D                       imageExtent;
+<a name="l03297"></a>03297     uint32_t                         imageArrayLayers;
+<a name="l03298"></a>03298     VkImageUsageFlags                imageUsage;
+<a name="l03299"></a>03299     VkSharingMode                    imageSharingMode;
+<a name="l03300"></a>03300     uint32_t                         queueFamilyIndexCount;
+<a name="l03301"></a>03301     <span class="keyword">const</span> uint32_t*                  pQueueFamilyIndices;
+<a name="l03302"></a>03302     VkSurfaceTransformFlagBitsKHR    preTransform;
+<a name="l03303"></a>03303     VkCompositeAlphaFlagBitsKHR      compositeAlpha;
+<a name="l03304"></a>03304     VkPresentModeKHR                 presentMode;
+<a name="l03305"></a>03305     VkBool32                         clipped;
+<a name="l03306"></a>03306     VkSwapchainKHR                   oldSwapchain;
+<a name="l03307"></a>03307 } VkSwapchainCreateInfoKHR;
+<a name="l03308"></a>03308 
+<a name="l03309"></a>03309 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkPresentInfoKHR {
+<a name="l03310"></a>03310     VkStructureType          sType;
+<a name="l03311"></a>03311     <span class="keyword">const</span> <span class="keywordtype">void</span>*              pNext;
+<a name="l03312"></a>03312     uint32_t                 waitSemaphoreCount;
+<a name="l03313"></a>03313     <span class="keyword">const</span> VkSemaphore*       pWaitSemaphores;
+<a name="l03314"></a>03314     uint32_t                 swapchainCount;
+<a name="l03315"></a>03315     <span class="keyword">const</span> VkSwapchainKHR*    pSwapchains;
+<a name="l03316"></a>03316     <span class="keyword">const</span> uint32_t*          pImageIndices;
+<a name="l03317"></a>03317     VkResult*                pResults;
+<a name="l03318"></a>03318 } VkPresentInfoKHR;
 <a name="l03319"></a>03319 
-<a name="l03320"></a>03320 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateSwapchainKHR)(VkDevice device, <span class="keyword">const</span> VkSwapchainCreateInfoKHR* pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkSwapchainKHR* pSwapchain);
-<a name="l03321"></a>03321 <span class="keyword">typedef</span> void (VKAPI_PTR *PFN_vkDestroySwapchainKHR)(VkDevice device, VkSwapchainKHR swapchain, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator);
-<a name="l03322"></a>03322 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetSwapchainImagesKHR)(VkDevice device, VkSwapchainKHR swapchain, uint32_t* pSwapchainImageCount, VkImage* pSwapchainImages);
-<a name="l03323"></a>03323 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkAcquireNextImageKHR)(VkDevice device, VkSwapchainKHR swapchain, uint64_t timeout, VkSemaphore semaphore, VkFence fence, uint32_t* pImageIndex);
-<a name="l03324"></a>03324 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkQueuePresentKHR)(VkQueue queue, <span class="keyword">const</span> VkPresentInfoKHR* pPresentInfo);
-<a name="l03325"></a>03325 
-<a name="l03326"></a>03326 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
-<a name="l03327"></a>03327 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkCreateSwapchainKHR(
-<a name="l03328"></a>03328     VkDevice                                    device,
-<a name="l03329"></a>03329     <span class="keyword">const</span> VkSwapchainCreateInfoKHR*             pCreateInfo,
-<a name="l03330"></a>03330     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
-<a name="l03331"></a>03331     VkSwapchainKHR*                             pSwapchain);
-<a name="l03332"></a>03332 
-<a name="l03333"></a>03333 VKAPI_ATTR <span class="keywordtype">void</span> VKAPI_CALL vkDestroySwapchainKHR(
-<a name="l03334"></a>03334     VkDevice                                    device,
-<a name="l03335"></a>03335     VkSwapchainKHR                              swapchain,
-<a name="l03336"></a>03336     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator);
-<a name="l03337"></a>03337 
-<a name="l03338"></a>03338 VKAPI_ATTR VkResult VKAPI_CALL vkGetSwapchainImagesKHR(
-<a name="l03339"></a>03339     VkDevice                                    device,
-<a name="l03340"></a>03340     VkSwapchainKHR                              swapchain,
-<a name="l03341"></a>03341     uint32_t*                                   pSwapchainImageCount,
-<a name="l03342"></a>03342     VkImage*                                    pSwapchainImages);
-<a name="l03343"></a>03343 
-<a name="l03344"></a>03344 VKAPI_ATTR VkResult VKAPI_CALL vkAcquireNextImageKHR(
-<a name="l03345"></a>03345     VkDevice                                    device,
-<a name="l03346"></a>03346     VkSwapchainKHR                              swapchain,
-<a name="l03347"></a>03347     uint64_t                                    timeout,
-<a name="l03348"></a>03348     VkSemaphore                                 semaphore,
-<a name="l03349"></a>03349     VkFence                                     fence,
-<a name="l03350"></a>03350     uint32_t*                                   pImageIndex);
-<a name="l03351"></a>03351 
-<a name="l03352"></a>03352 VKAPI_ATTR VkResult VKAPI_CALL vkQueuePresentKHR(
-<a name="l03353"></a>03353     VkQueue                                     queue,
-<a name="l03354"></a>03354     <span class="keyword">const</span> VkPresentInfoKHR*                     pPresentInfo);
-<a name="l03355"></a>03355 <span class="preprocessor">#endif</span>
-<a name="l03356"></a>03356 <span class="preprocessor"></span>
-<a name="l03357"></a>03357 <span class="preprocessor">#define VK_KHR_display 1</span>
-<a name="l03358"></a>03358 <span class="preprocessor"></span>VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDisplayKHR)
-<a name="l03359"></a>03359 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDisplayModeKHR)
-<a name="l03360"></a>03360 
-<a name="l03361"></a>03361 <span class="preprocessor">#define VK_KHR_DISPLAY_SPEC_VERSION       21</span>
-<a name="l03362"></a>03362 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_DISPLAY_EXTENSION_NAME     "VK_KHR_display"</span>
-<a name="l03363"></a>03363 <span class="preprocessor"></span>
-<a name="l03364"></a>03364 
-<a name="l03365"></a>03365 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkDisplayPlaneAlphaFlagBitsKHR {
-<a name="l03366"></a>03366     VK_DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR = 0x00000001,
-<a name="l03367"></a>03367     VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR = 0x00000002,
-<a name="l03368"></a>03368     VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR = 0x00000004,
-<a name="l03369"></a>03369     VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR = 0x00000008,
-<a name="l03370"></a>03370     VK_DISPLAY_PLANE_ALPHA_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
-<a name="l03371"></a>03371 } VkDisplayPlaneAlphaFlagBitsKHR;
-<a name="l03372"></a>03372 <span class="keyword">typedef</span> VkFlags VkDisplayPlaneAlphaFlagsKHR;
-<a name="l03373"></a>03373 <span class="keyword">typedef</span> VkFlags VkDisplayModeCreateFlagsKHR;
-<a name="l03374"></a>03374 <span class="keyword">typedef</span> VkFlags VkDisplaySurfaceCreateFlagsKHR;
-<a name="l03375"></a>03375 
-<a name="l03376"></a>03376 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDisplayPropertiesKHR {
-<a name="l03377"></a>03377     VkDisplayKHR                  display;
-<a name="l03378"></a>03378     <span class="keyword">const</span> <span class="keywordtype">char</span>*                   displayName;
-<a name="l03379"></a>03379     VkExtent2D                    physicalDimensions;
-<a name="l03380"></a>03380     VkExtent2D                    physicalResolution;
-<a name="l03381"></a>03381     VkSurfaceTransformFlagsKHR    supportedTransforms;
-<a name="l03382"></a>03382     VkBool32                      planeReorderPossible;
-<a name="l03383"></a>03383     VkBool32                      persistentContent;
-<a name="l03384"></a>03384 } VkDisplayPropertiesKHR;
-<a name="l03385"></a>03385 
-<a name="l03386"></a>03386 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDisplayModeParametersKHR {
-<a name="l03387"></a>03387     VkExtent2D    visibleRegion;
-<a name="l03388"></a>03388     uint32_t      refreshRate;
-<a name="l03389"></a>03389 } VkDisplayModeParametersKHR;
-<a name="l03390"></a>03390 
-<a name="l03391"></a>03391 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDisplayModePropertiesKHR {
-<a name="l03392"></a>03392     VkDisplayModeKHR              displayMode;
-<a name="l03393"></a>03393     VkDisplayModeParametersKHR    parameters;
-<a name="l03394"></a>03394 } VkDisplayModePropertiesKHR;
-<a name="l03395"></a>03395 
-<a name="l03396"></a>03396 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDisplayModeCreateInfoKHR {
-<a name="l03397"></a>03397     VkStructureType                sType;
-<a name="l03398"></a>03398     <span class="keyword">const</span> <span class="keywordtype">void</span>*                    pNext;
-<a name="l03399"></a>03399     VkDisplayModeCreateFlagsKHR    flags;
-<a name="l03400"></a>03400     VkDisplayModeParametersKHR     parameters;
-<a name="l03401"></a>03401 } VkDisplayModeCreateInfoKHR;
-<a name="l03402"></a>03402 
-<a name="l03403"></a>03403 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDisplayPlaneCapabilitiesKHR {
-<a name="l03404"></a>03404     VkDisplayPlaneAlphaFlagsKHR    supportedAlpha;
-<a name="l03405"></a>03405     VkOffset2D                     minSrcPosition;
-<a name="l03406"></a>03406     VkOffset2D                     maxSrcPosition;
-<a name="l03407"></a>03407     VkExtent2D                     minSrcExtent;
-<a name="l03408"></a>03408     VkExtent2D                     maxSrcExtent;
-<a name="l03409"></a>03409     VkOffset2D                     minDstPosition;
-<a name="l03410"></a>03410     VkOffset2D                     maxDstPosition;
-<a name="l03411"></a>03411     VkExtent2D                     minDstExtent;
-<a name="l03412"></a>03412     VkExtent2D                     maxDstExtent;
-<a name="l03413"></a>03413 } VkDisplayPlaneCapabilitiesKHR;
-<a name="l03414"></a>03414 
-<a name="l03415"></a>03415 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDisplayPlanePropertiesKHR {
-<a name="l03416"></a>03416     VkDisplayKHR    currentDisplay;
-<a name="l03417"></a>03417     uint32_t        currentStackIndex;
-<a name="l03418"></a>03418 } VkDisplayPlanePropertiesKHR;
-<a name="l03419"></a>03419 
-<a name="l03420"></a>03420 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDisplaySurfaceCreateInfoKHR {
-<a name="l03421"></a>03421     VkStructureType                   sType;
-<a name="l03422"></a>03422     <span class="keyword">const</span> <span class="keywordtype">void</span>*                       pNext;
-<a name="l03423"></a>03423     VkDisplaySurfaceCreateFlagsKHR    flags;
-<a name="l03424"></a>03424     VkDisplayModeKHR                  displayMode;
-<a name="l03425"></a>03425     uint32_t                          planeIndex;
-<a name="l03426"></a>03426     uint32_t                          planeStackIndex;
-<a name="l03427"></a>03427     VkSurfaceTransformFlagBitsKHR     transform;
-<a name="l03428"></a>03428     <span class="keywordtype">float</span>                             globalAlpha;
-<a name="l03429"></a>03429     VkDisplayPlaneAlphaFlagBitsKHR    alphaMode;
-<a name="l03430"></a>03430     VkExtent2D                        imageExtent;
-<a name="l03431"></a>03431 } VkDisplaySurfaceCreateInfoKHR;
-<a name="l03432"></a>03432 
+<a name="l03320"></a>03320 
+<a name="l03321"></a>03321 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateSwapchainKHR)(VkDevice device, <span class="keyword">const</span> VkSwapchainCreateInfoKHR* pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkSwapchainKHR* pSwapchain);
+<a name="l03322"></a>03322 <span class="keyword">typedef</span> void (VKAPI_PTR *PFN_vkDestroySwapchainKHR)(VkDevice device, VkSwapchainKHR swapchain, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator);
+<a name="l03323"></a>03323 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetSwapchainImagesKHR)(VkDevice device, VkSwapchainKHR swapchain, uint32_t* pSwapchainImageCount, VkImage* pSwapchainImages);
+<a name="l03324"></a>03324 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkAcquireNextImageKHR)(VkDevice device, VkSwapchainKHR swapchain, uint64_t timeout, VkSemaphore semaphore, VkFence fence, uint32_t* pImageIndex);
+<a name="l03325"></a>03325 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkQueuePresentKHR)(VkQueue queue, <span class="keyword">const</span> VkPresentInfoKHR* pPresentInfo);
+<a name="l03326"></a>03326 
+<a name="l03327"></a>03327 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
+<a name="l03328"></a>03328 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkCreateSwapchainKHR(
+<a name="l03329"></a>03329     VkDevice                                    device,
+<a name="l03330"></a>03330     <span class="keyword">const</span> VkSwapchainCreateInfoKHR*             pCreateInfo,
+<a name="l03331"></a>03331     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
+<a name="l03332"></a>03332     VkSwapchainKHR*                             pSwapchain);
+<a name="l03333"></a>03333 
+<a name="l03334"></a>03334 VKAPI_ATTR <span class="keywordtype">void</span> VKAPI_CALL vkDestroySwapchainKHR(
+<a name="l03335"></a>03335     VkDevice                                    device,
+<a name="l03336"></a>03336     VkSwapchainKHR                              swapchain,
+<a name="l03337"></a>03337     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator);
+<a name="l03338"></a>03338 
+<a name="l03339"></a>03339 VKAPI_ATTR VkResult VKAPI_CALL vkGetSwapchainImagesKHR(
+<a name="l03340"></a>03340     VkDevice                                    device,
+<a name="l03341"></a>03341     VkSwapchainKHR                              swapchain,
+<a name="l03342"></a>03342     uint32_t*                                   pSwapchainImageCount,
+<a name="l03343"></a>03343     VkImage*                                    pSwapchainImages);
+<a name="l03344"></a>03344 
+<a name="l03345"></a>03345 VKAPI_ATTR VkResult VKAPI_CALL vkAcquireNextImageKHR(
+<a name="l03346"></a>03346     VkDevice                                    device,
+<a name="l03347"></a>03347     VkSwapchainKHR                              swapchain,
+<a name="l03348"></a>03348     uint64_t                                    timeout,
+<a name="l03349"></a>03349     VkSemaphore                                 semaphore,
+<a name="l03350"></a>03350     VkFence                                     fence,
+<a name="l03351"></a>03351     uint32_t*                                   pImageIndex);
+<a name="l03352"></a>03352 
+<a name="l03353"></a>03353 VKAPI_ATTR VkResult VKAPI_CALL vkQueuePresentKHR(
+<a name="l03354"></a>03354     VkQueue                                     queue,
+<a name="l03355"></a>03355     <span class="keyword">const</span> VkPresentInfoKHR*                     pPresentInfo);
+<a name="l03356"></a>03356 <span class="preprocessor">#endif</span>
+<a name="l03357"></a>03357 <span class="preprocessor"></span>
+<a name="l03358"></a>03358 <span class="preprocessor">#define VK_KHR_display 1</span>
+<a name="l03359"></a>03359 <span class="preprocessor"></span>VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDisplayKHR)
+<a name="l03360"></a>03360 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDisplayModeKHR)
+<a name="l03361"></a>03361 
+<a name="l03362"></a>03362 <span class="preprocessor">#define VK_KHR_DISPLAY_SPEC_VERSION       21</span>
+<a name="l03363"></a>03363 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_DISPLAY_EXTENSION_NAME     "VK_KHR_display"</span>
+<a name="l03364"></a>03364 <span class="preprocessor"></span>
+<a name="l03365"></a>03365 
+<a name="l03366"></a>03366 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkDisplayPlaneAlphaFlagBitsKHR {
+<a name="l03367"></a>03367     VK_DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR = 0x00000001,
+<a name="l03368"></a>03368     VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR = 0x00000002,
+<a name="l03369"></a>03369     VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR = 0x00000004,
+<a name="l03370"></a>03370     VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR = 0x00000008,
+<a name="l03371"></a>03371     VK_DISPLAY_PLANE_ALPHA_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
+<a name="l03372"></a>03372 } VkDisplayPlaneAlphaFlagBitsKHR;
+<a name="l03373"></a>03373 <span class="keyword">typedef</span> VkFlags VkDisplayPlaneAlphaFlagsKHR;
+<a name="l03374"></a>03374 <span class="keyword">typedef</span> VkFlags VkDisplayModeCreateFlagsKHR;
+<a name="l03375"></a>03375 <span class="keyword">typedef</span> VkFlags VkDisplaySurfaceCreateFlagsKHR;
+<a name="l03376"></a>03376 
+<a name="l03377"></a>03377 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDisplayPropertiesKHR {
+<a name="l03378"></a>03378     VkDisplayKHR                  display;
+<a name="l03379"></a>03379     <span class="keyword">const</span> <span class="keywordtype">char</span>*                   displayName;
+<a name="l03380"></a>03380     VkExtent2D                    physicalDimensions;
+<a name="l03381"></a>03381     VkExtent2D                    physicalResolution;
+<a name="l03382"></a>03382     VkSurfaceTransformFlagsKHR    supportedTransforms;
+<a name="l03383"></a>03383     VkBool32                      planeReorderPossible;
+<a name="l03384"></a>03384     VkBool32                      persistentContent;
+<a name="l03385"></a>03385 } VkDisplayPropertiesKHR;
+<a name="l03386"></a>03386 
+<a name="l03387"></a>03387 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDisplayModeParametersKHR {
+<a name="l03388"></a>03388     VkExtent2D    visibleRegion;
+<a name="l03389"></a>03389     uint32_t      refreshRate;
+<a name="l03390"></a>03390 } VkDisplayModeParametersKHR;
+<a name="l03391"></a>03391 
+<a name="l03392"></a>03392 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDisplayModePropertiesKHR {
+<a name="l03393"></a>03393     VkDisplayModeKHR              displayMode;
+<a name="l03394"></a>03394     VkDisplayModeParametersKHR    parameters;
+<a name="l03395"></a>03395 } VkDisplayModePropertiesKHR;
+<a name="l03396"></a>03396 
+<a name="l03397"></a>03397 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDisplayModeCreateInfoKHR {
+<a name="l03398"></a>03398     VkStructureType                sType;
+<a name="l03399"></a>03399     <span class="keyword">const</span> <span class="keywordtype">void</span>*                    pNext;
+<a name="l03400"></a>03400     VkDisplayModeCreateFlagsKHR    flags;
+<a name="l03401"></a>03401     VkDisplayModeParametersKHR     parameters;
+<a name="l03402"></a>03402 } VkDisplayModeCreateInfoKHR;
+<a name="l03403"></a>03403 
+<a name="l03404"></a>03404 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDisplayPlaneCapabilitiesKHR {
+<a name="l03405"></a>03405     VkDisplayPlaneAlphaFlagsKHR    supportedAlpha;
+<a name="l03406"></a>03406     VkOffset2D                     minSrcPosition;
+<a name="l03407"></a>03407     VkOffset2D                     maxSrcPosition;
+<a name="l03408"></a>03408     VkExtent2D                     minSrcExtent;
+<a name="l03409"></a>03409     VkExtent2D                     maxSrcExtent;
+<a name="l03410"></a>03410     VkOffset2D                     minDstPosition;
+<a name="l03411"></a>03411     VkOffset2D                     maxDstPosition;
+<a name="l03412"></a>03412     VkExtent2D                     minDstExtent;
+<a name="l03413"></a>03413     VkExtent2D                     maxDstExtent;
+<a name="l03414"></a>03414 } VkDisplayPlaneCapabilitiesKHR;
+<a name="l03415"></a>03415 
+<a name="l03416"></a>03416 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDisplayPlanePropertiesKHR {
+<a name="l03417"></a>03417     VkDisplayKHR    currentDisplay;
+<a name="l03418"></a>03418     uint32_t        currentStackIndex;
+<a name="l03419"></a>03419 } VkDisplayPlanePropertiesKHR;
+<a name="l03420"></a>03420 
+<a name="l03421"></a>03421 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDisplaySurfaceCreateInfoKHR {
+<a name="l03422"></a>03422     VkStructureType                   sType;
+<a name="l03423"></a>03423     <span class="keyword">const</span> <span class="keywordtype">void</span>*                       pNext;
+<a name="l03424"></a>03424     VkDisplaySurfaceCreateFlagsKHR    flags;
+<a name="l03425"></a>03425     VkDisplayModeKHR                  displayMode;
+<a name="l03426"></a>03426     uint32_t                          planeIndex;
+<a name="l03427"></a>03427     uint32_t                          planeStackIndex;
+<a name="l03428"></a>03428     VkSurfaceTransformFlagBitsKHR     transform;
+<a name="l03429"></a>03429     <span class="keywordtype">float</span>                             globalAlpha;
+<a name="l03430"></a>03430     VkDisplayPlaneAlphaFlagBitsKHR    alphaMode;
+<a name="l03431"></a>03431     VkExtent2D                        imageExtent;
+<a name="l03432"></a>03432 } VkDisplaySurfaceCreateInfoKHR;
 <a name="l03433"></a>03433 
-<a name="l03434"></a>03434 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetPhysicalDeviceDisplayPropertiesKHR)(VkPhysicalDevice physicalDevice, uint32_t* pPropertyCount, VkDisplayPropertiesKHR* pProperties);
-<a name="l03435"></a>03435 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetPhysicalDeviceDisplayPlanePropertiesKHR)(VkPhysicalDevice physicalDevice, uint32_t* pPropertyCount, VkDisplayPlanePropertiesKHR* pProperties);
-<a name="l03436"></a>03436 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetDisplayPlaneSupportedDisplaysKHR)(VkPhysicalDevice physicalDevice, uint32_t planeIndex, uint32_t* pDisplayCount, VkDisplayKHR* pDisplays);
-<a name="l03437"></a>03437 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetDisplayModePropertiesKHR)(VkPhysicalDevice physicalDevice, VkDisplayKHR display, uint32_t* pPropertyCount, VkDisplayModePropertiesKHR* pProperties);
-<a name="l03438"></a>03438 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateDisplayModeKHR)(VkPhysicalDevice physicalDevice, VkDisplayKHR display, <span class="keyword">const</span> VkDisplayModeCreateInfoKHR*pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkDisplayModeKHR* pMode);
-<a name="l03439"></a>03439 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetDisplayPlaneCapabilitiesKHR)(VkPhysicalDevice physicalDevice, VkDisplayModeKHR mode, uint32_t planeIndex, VkDisplayPlaneCapabilitiesKHR* pCapabilities);
-<a name="l03440"></a>03440 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateDisplayPlaneSurfaceKHR)(VkInstance instance, <span class="keyword">const</span> VkDisplaySurfaceCreateInfoKHR* pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
-<a name="l03441"></a>03441 
-<a name="l03442"></a>03442 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
-<a name="l03443"></a>03443 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceDisplayPropertiesKHR(
-<a name="l03444"></a>03444     VkPhysicalDevice                            physicalDevice,
-<a name="l03445"></a>03445     uint32_t*                                   pPropertyCount,
-<a name="l03446"></a>03446     VkDisplayPropertiesKHR*                     pProperties);
-<a name="l03447"></a>03447 
-<a name="l03448"></a>03448 VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceDisplayPlanePropertiesKHR(
-<a name="l03449"></a>03449     VkPhysicalDevice                            physicalDevice,
-<a name="l03450"></a>03450     uint32_t*                                   pPropertyCount,
-<a name="l03451"></a>03451     VkDisplayPlanePropertiesKHR*                pProperties);
-<a name="l03452"></a>03452 
-<a name="l03453"></a>03453 VKAPI_ATTR VkResult VKAPI_CALL vkGetDisplayPlaneSupportedDisplaysKHR(
-<a name="l03454"></a>03454     VkPhysicalDevice                            physicalDevice,
-<a name="l03455"></a>03455     uint32_t                                    planeIndex,
-<a name="l03456"></a>03456     uint32_t*                                   pDisplayCount,
-<a name="l03457"></a>03457     VkDisplayKHR*                               pDisplays);
-<a name="l03458"></a>03458 
-<a name="l03459"></a>03459 VKAPI_ATTR VkResult VKAPI_CALL vkGetDisplayModePropertiesKHR(
-<a name="l03460"></a>03460     VkPhysicalDevice                            physicalDevice,
-<a name="l03461"></a>03461     VkDisplayKHR                                display,
-<a name="l03462"></a>03462     uint32_t*                                   pPropertyCount,
-<a name="l03463"></a>03463     VkDisplayModePropertiesKHR*                 pProperties);
-<a name="l03464"></a>03464 
-<a name="l03465"></a>03465 VKAPI_ATTR VkResult VKAPI_CALL vkCreateDisplayModeKHR(
-<a name="l03466"></a>03466     VkPhysicalDevice                            physicalDevice,
-<a name="l03467"></a>03467     VkDisplayKHR                                display,
-<a name="l03468"></a>03468     <span class="keyword">const</span> VkDisplayModeCreateInfoKHR*           pCreateInfo,
-<a name="l03469"></a>03469     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
-<a name="l03470"></a>03470     VkDisplayModeKHR*                           pMode);
-<a name="l03471"></a>03471 
-<a name="l03472"></a>03472 VKAPI_ATTR VkResult VKAPI_CALL vkGetDisplayPlaneCapabilitiesKHR(
-<a name="l03473"></a>03473     VkPhysicalDevice                            physicalDevice,
-<a name="l03474"></a>03474     VkDisplayModeKHR                            mode,
-<a name="l03475"></a>03475     uint32_t                                    planeIndex,
-<a name="l03476"></a>03476     VkDisplayPlaneCapabilitiesKHR*              pCapabilities);
-<a name="l03477"></a>03477 
-<a name="l03478"></a>03478 VKAPI_ATTR VkResult VKAPI_CALL vkCreateDisplayPlaneSurfaceKHR(
-<a name="l03479"></a>03479     VkInstance                                  instance,
-<a name="l03480"></a>03480     <span class="keyword">const</span> VkDisplaySurfaceCreateInfoKHR*        pCreateInfo,
-<a name="l03481"></a>03481     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
-<a name="l03482"></a>03482     VkSurfaceKHR*                               pSurface);
-<a name="l03483"></a>03483 <span class="preprocessor">#endif</span>
-<a name="l03484"></a>03484 <span class="preprocessor"></span>
-<a name="l03485"></a>03485 <span class="preprocessor">#define VK_KHR_display_swapchain 1</span>
-<a name="l03486"></a>03486 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_DISPLAY_SWAPCHAIN_SPEC_VERSION 9</span>
-<a name="l03487"></a>03487 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_DISPLAY_SWAPCHAIN_EXTENSION_NAME "VK_KHR_display_swapchain"</span>
-<a name="l03488"></a>03488 <span class="preprocessor"></span>
-<a name="l03489"></a>03489 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDisplayPresentInfoKHR {
-<a name="l03490"></a>03490     VkStructureType    sType;
-<a name="l03491"></a>03491     <span class="keyword">const</span> <span class="keywordtype">void</span>*        pNext;
-<a name="l03492"></a>03492     VkRect2D           srcRect;
-<a name="l03493"></a>03493     VkRect2D           dstRect;
-<a name="l03494"></a>03494     VkBool32           persistent;
-<a name="l03495"></a>03495 } VkDisplayPresentInfoKHR;
-<a name="l03496"></a>03496 
+<a name="l03434"></a>03434 
+<a name="l03435"></a>03435 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetPhysicalDeviceDisplayPropertiesKHR)(VkPhysicalDevice physicalDevice, uint32_t* pPropertyCount, VkDisplayPropertiesKHR* pProperties);
+<a name="l03436"></a>03436 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetPhysicalDeviceDisplayPlanePropertiesKHR)(VkPhysicalDevice physicalDevice, uint32_t* pPropertyCount, VkDisplayPlanePropertiesKHR* pProperties);
+<a name="l03437"></a>03437 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetDisplayPlaneSupportedDisplaysKHR)(VkPhysicalDevice physicalDevice, uint32_t planeIndex, uint32_t* pDisplayCount, VkDisplayKHR* pDisplays);
+<a name="l03438"></a>03438 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetDisplayModePropertiesKHR)(VkPhysicalDevice physicalDevice, VkDisplayKHR display, uint32_t* pPropertyCount, VkDisplayModePropertiesKHR* pProperties);
+<a name="l03439"></a>03439 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateDisplayModeKHR)(VkPhysicalDevice physicalDevice, VkDisplayKHR display, <span class="keyword">const</span> VkDisplayModeCreateInfoKHR* pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkDisplayModeKHR* pMode);
+<a name="l03440"></a>03440 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkGetDisplayPlaneCapabilitiesKHR)(VkPhysicalDevice physicalDevice, VkDisplayModeKHR mode, uint32_t planeIndex, VkDisplayPlaneCapabilitiesKHR* pCapabilities);
+<a name="l03441"></a>03441 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateDisplayPlaneSurfaceKHR)(VkInstance instance, <span class="keyword">const</span> VkDisplaySurfaceCreateInfoKHR* pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
+<a name="l03442"></a>03442 
+<a name="l03443"></a>03443 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
+<a name="l03444"></a>03444 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceDisplayPropertiesKHR(
+<a name="l03445"></a>03445     VkPhysicalDevice                            physicalDevice,
+<a name="l03446"></a>03446     uint32_t*                                   pPropertyCount,
+<a name="l03447"></a>03447     VkDisplayPropertiesKHR*                     pProperties);
+<a name="l03448"></a>03448 
+<a name="l03449"></a>03449 VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceDisplayPlanePropertiesKHR(
+<a name="l03450"></a>03450     VkPhysicalDevice                            physicalDevice,
+<a name="l03451"></a>03451     uint32_t*                                   pPropertyCount,
+<a name="l03452"></a>03452     VkDisplayPlanePropertiesKHR*                pProperties);
+<a name="l03453"></a>03453 
+<a name="l03454"></a>03454 VKAPI_ATTR VkResult VKAPI_CALL vkGetDisplayPlaneSupportedDisplaysKHR(
+<a name="l03455"></a>03455     VkPhysicalDevice                            physicalDevice,
+<a name="l03456"></a>03456     uint32_t                                    planeIndex,
+<a name="l03457"></a>03457     uint32_t*                                   pDisplayCount,
+<a name="l03458"></a>03458     VkDisplayKHR*                               pDisplays);
+<a name="l03459"></a>03459 
+<a name="l03460"></a>03460 VKAPI_ATTR VkResult VKAPI_CALL vkGetDisplayModePropertiesKHR(
+<a name="l03461"></a>03461     VkPhysicalDevice                            physicalDevice,
+<a name="l03462"></a>03462     VkDisplayKHR                                display,
+<a name="l03463"></a>03463     uint32_t*                                   pPropertyCount,
+<a name="l03464"></a>03464     VkDisplayModePropertiesKHR*                 pProperties);
+<a name="l03465"></a>03465 
+<a name="l03466"></a>03466 VKAPI_ATTR VkResult VKAPI_CALL vkCreateDisplayModeKHR(
+<a name="l03467"></a>03467     VkPhysicalDevice                            physicalDevice,
+<a name="l03468"></a>03468     VkDisplayKHR                                display,
+<a name="l03469"></a>03469     <span class="keyword">const</span> VkDisplayModeCreateInfoKHR*           pCreateInfo,
+<a name="l03470"></a>03470     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
+<a name="l03471"></a>03471     VkDisplayModeKHR*                           pMode);
+<a name="l03472"></a>03472 
+<a name="l03473"></a>03473 VKAPI_ATTR VkResult VKAPI_CALL vkGetDisplayPlaneCapabilitiesKHR(
+<a name="l03474"></a>03474     VkPhysicalDevice                            physicalDevice,
+<a name="l03475"></a>03475     VkDisplayModeKHR                            mode,
+<a name="l03476"></a>03476     uint32_t                                    planeIndex,
+<a name="l03477"></a>03477     VkDisplayPlaneCapabilitiesKHR*              pCapabilities);
+<a name="l03478"></a>03478 
+<a name="l03479"></a>03479 VKAPI_ATTR VkResult VKAPI_CALL vkCreateDisplayPlaneSurfaceKHR(
+<a name="l03480"></a>03480     VkInstance                                  instance,
+<a name="l03481"></a>03481     <span class="keyword">const</span> VkDisplaySurfaceCreateInfoKHR*        pCreateInfo,
+<a name="l03482"></a>03482     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
+<a name="l03483"></a>03483     VkSurfaceKHR*                               pSurface);
+<a name="l03484"></a>03484 <span class="preprocessor">#endif</span>
+<a name="l03485"></a>03485 <span class="preprocessor"></span>
+<a name="l03486"></a>03486 <span class="preprocessor">#define VK_KHR_display_swapchain 1</span>
+<a name="l03487"></a>03487 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_DISPLAY_SWAPCHAIN_SPEC_VERSION 9</span>
+<a name="l03488"></a>03488 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_DISPLAY_SWAPCHAIN_EXTENSION_NAME "VK_KHR_display_swapchain"</span>
+<a name="l03489"></a>03489 <span class="preprocessor"></span>
+<a name="l03490"></a>03490 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDisplayPresentInfoKHR {
+<a name="l03491"></a>03491     VkStructureType    sType;
+<a name="l03492"></a>03492     <span class="keyword">const</span> <span class="keywordtype">void</span>*        pNext;
+<a name="l03493"></a>03493     VkRect2D           srcRect;
+<a name="l03494"></a>03494     VkRect2D           dstRect;
+<a name="l03495"></a>03495     VkBool32           persistent;
+<a name="l03496"></a>03496 } VkDisplayPresentInfoKHR;
 <a name="l03497"></a>03497 
-<a name="l03498"></a>03498 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateSharedSwapchainsKHR)(VkDevice device, uint32_t swapchainCount, <span class="keyword">const</span> VkSwapchainCreateInfoKHR* pCreateInfos, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkSwapchainKHR* pSwapchains);
-<a name="l03499"></a>03499 
-<a name="l03500"></a>03500 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
-<a name="l03501"></a>03501 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkCreateSharedSwapchainsKHR(
-<a name="l03502"></a>03502     VkDevice                                    device,
-<a name="l03503"></a>03503     uint32_t                                    swapchainCount,
-<a name="l03504"></a>03504     <span class="keyword">const</span> VkSwapchainCreateInfoKHR*             pCreateInfos,
-<a name="l03505"></a>03505     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
-<a name="l03506"></a>03506     VkSwapchainKHR*                             pSwapchains);
-<a name="l03507"></a>03507 <span class="preprocessor">#endif</span>
-<a name="l03508"></a>03508 <span class="preprocessor"></span>
-<a name="l03509"></a>03509 <span class="preprocessor">#ifdef VK_USE_PLATFORM_XLIB_KHR</span>
-<a name="l03510"></a>03510 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_xlib_surface 1</span>
-<a name="l03511"></a>03511 <span class="preprocessor"></span><span class="preprocessor">#include &lt;X11/Xlib.h&gt;</span>
-<a name="l03512"></a>03512 
-<a name="l03513"></a>03513 <span class="preprocessor">#define VK_KHR_XLIB_SURFACE_SPEC_VERSION  6</span>
-<a name="l03514"></a>03514 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_XLIB_SURFACE_EXTENSION_NAME "VK_KHR_xlib_surface"</span>
-<a name="l03515"></a>03515 <span class="preprocessor"></span>
-<a name="l03516"></a>03516 <span class="keyword">typedef</span> VkFlags VkXlibSurfaceCreateFlagsKHR;
-<a name="l03517"></a>03517 
-<a name="l03518"></a>03518 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkXlibSurfaceCreateInfoKHR {
-<a name="l03519"></a>03519     VkStructureType                sType;
-<a name="l03520"></a>03520     <span class="keyword">const</span> <span class="keywordtype">void</span>*                    pNext;
-<a name="l03521"></a>03521     VkXlibSurfaceCreateFlagsKHR    flags;
-<a name="l03522"></a>03522     Display*                       dpy;
-<a name="l03523"></a>03523     Window                         window;
-<a name="l03524"></a>03524 } VkXlibSurfaceCreateInfoKHR;
-<a name="l03525"></a>03525 
+<a name="l03498"></a>03498 
+<a name="l03499"></a>03499 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateSharedSwapchainsKHR)(VkDevice device, uint32_t swapchainCount, <span class="keyword">const</span> VkSwapchainCreateInfoKHR* pCreateInfos, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkSwapchainKHR* pSwapchains);
+<a name="l03500"></a>03500 
+<a name="l03501"></a>03501 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
+<a name="l03502"></a>03502 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkCreateSharedSwapchainsKHR(
+<a name="l03503"></a>03503     VkDevice                                    device,
+<a name="l03504"></a>03504     uint32_t                                    swapchainCount,
+<a name="l03505"></a>03505     <span class="keyword">const</span> VkSwapchainCreateInfoKHR*             pCreateInfos,
+<a name="l03506"></a>03506     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
+<a name="l03507"></a>03507     VkSwapchainKHR*                             pSwapchains);
+<a name="l03508"></a>03508 <span class="preprocessor">#endif</span>
+<a name="l03509"></a>03509 <span class="preprocessor"></span>
+<a name="l03510"></a>03510 <span class="preprocessor">#ifdef VK_USE_PLATFORM_XLIB_KHR</span>
+<a name="l03511"></a>03511 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_xlib_surface 1</span>
+<a name="l03512"></a>03512 <span class="preprocessor"></span><span class="preprocessor">#include &lt;X11/Xlib.h&gt;</span>
+<a name="l03513"></a>03513 
+<a name="l03514"></a>03514 <span class="preprocessor">#define VK_KHR_XLIB_SURFACE_SPEC_VERSION  6</span>
+<a name="l03515"></a>03515 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_XLIB_SURFACE_EXTENSION_NAME "VK_KHR_xlib_surface"</span>
+<a name="l03516"></a>03516 <span class="preprocessor"></span>
+<a name="l03517"></a>03517 <span class="keyword">typedef</span> VkFlags VkXlibSurfaceCreateFlagsKHR;
+<a name="l03518"></a>03518 
+<a name="l03519"></a>03519 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkXlibSurfaceCreateInfoKHR {
+<a name="l03520"></a>03520     VkStructureType                sType;
+<a name="l03521"></a>03521     <span class="keyword">const</span> <span class="keywordtype">void</span>*                    pNext;
+<a name="l03522"></a>03522     VkXlibSurfaceCreateFlagsKHR    flags;
+<a name="l03523"></a>03523     Display*                       dpy;
+<a name="l03524"></a>03524     Window                         window;
+<a name="l03525"></a>03525 } VkXlibSurfaceCreateInfoKHR;
 <a name="l03526"></a>03526 
-<a name="l03527"></a>03527 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateXlibSurfaceKHR)(VkInstance instance, <span class="keyword">const</span> VkXlibSurfaceCreateInfoKHR* pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
-<a name="l03528"></a>03528 <span class="keyword">typedef</span> VkBool32 (VKAPI_PTR *PFN_vkGetPhysicalDeviceXlibPresentationSupportKHR)(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, Display* dpy, VisualID visualID);
-<a name="l03529"></a>03529 
-<a name="l03530"></a>03530 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
-<a name="l03531"></a>03531 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkCreateXlibSurfaceKHR(
-<a name="l03532"></a>03532     VkInstance                                  instance,
-<a name="l03533"></a>03533     <span class="keyword">const</span> VkXlibSurfaceCreateInfoKHR*           pCreateInfo,
-<a name="l03534"></a>03534     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
-<a name="l03535"></a>03535     VkSurfaceKHR*                               pSurface);
-<a name="l03536"></a>03536 
-<a name="l03537"></a>03537 VKAPI_ATTR VkBool32 VKAPI_CALL vkGetPhysicalDeviceXlibPresentationSupportKHR(
-<a name="l03538"></a>03538     VkPhysicalDevice                            physicalDevice,
-<a name="l03539"></a>03539     uint32_t                                    queueFamilyIndex,
-<a name="l03540"></a>03540     Display*                                    dpy,
-<a name="l03541"></a>03541     VisualID                                    visualID);
-<a name="l03542"></a>03542 <span class="preprocessor">#endif</span>
-<a name="l03543"></a>03543 <span class="preprocessor"></span><span class="preprocessor">#endif </span><span class="comment">/* VK_USE_PLATFORM_XLIB_KHR */</span>
-<a name="l03544"></a>03544 
-<a name="l03545"></a>03545 <span class="preprocessor">#ifdef VK_USE_PLATFORM_XCB_KHR</span>
-<a name="l03546"></a>03546 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_xcb_surface 1</span>
-<a name="l03547"></a>03547 <span class="preprocessor"></span><span class="preprocessor">#include &lt;xcb/xcb.h&gt;</span>
-<a name="l03548"></a>03548 
-<a name="l03549"></a>03549 <span class="preprocessor">#define VK_KHR_XCB_SURFACE_SPEC_VERSION   6</span>
-<a name="l03550"></a>03550 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_XCB_SURFACE_EXTENSION_NAME "VK_KHR_xcb_surface"</span>
-<a name="l03551"></a>03551 <span class="preprocessor"></span>
-<a name="l03552"></a>03552 <span class="keyword">typedef</span> VkFlags VkXcbSurfaceCreateFlagsKHR;
-<a name="l03553"></a>03553 
-<a name="l03554"></a>03554 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkXcbSurfaceCreateInfoKHR {
-<a name="l03555"></a>03555     VkStructureType               sType;
-<a name="l03556"></a>03556     <span class="keyword">const</span> <span class="keywordtype">void</span>*                   pNext;
-<a name="l03557"></a>03557     VkXcbSurfaceCreateFlagsKHR    flags;
-<a name="l03558"></a>03558     xcb_connection_t*             connection;
-<a name="l03559"></a>03559     xcb_window_t                  window;
-<a name="l03560"></a>03560 } VkXcbSurfaceCreateInfoKHR;
-<a name="l03561"></a>03561 
+<a name="l03527"></a>03527 
+<a name="l03528"></a>03528 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateXlibSurfaceKHR)(VkInstance instance, <span class="keyword">const</span> VkXlibSurfaceCreateInfoKHR* pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
+<a name="l03529"></a>03529 <span class="keyword">typedef</span> VkBool32 (VKAPI_PTR *PFN_vkGetPhysicalDeviceXlibPresentationSupportKHR)(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, Display* dpy, VisualID visualID);
+<a name="l03530"></a>03530 
+<a name="l03531"></a>03531 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
+<a name="l03532"></a>03532 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkCreateXlibSurfaceKHR(
+<a name="l03533"></a>03533     VkInstance                                  instance,
+<a name="l03534"></a>03534     <span class="keyword">const</span> VkXlibSurfaceCreateInfoKHR*           pCreateInfo,
+<a name="l03535"></a>03535     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
+<a name="l03536"></a>03536     VkSurfaceKHR*                               pSurface);
+<a name="l03537"></a>03537 
+<a name="l03538"></a>03538 VKAPI_ATTR VkBool32 VKAPI_CALL vkGetPhysicalDeviceXlibPresentationSupportKHR(
+<a name="l03539"></a>03539     VkPhysicalDevice                            physicalDevice,
+<a name="l03540"></a>03540     uint32_t                                    queueFamilyIndex,
+<a name="l03541"></a>03541     Display*                                    dpy,
+<a name="l03542"></a>03542     VisualID                                    visualID);
+<a name="l03543"></a>03543 <span class="preprocessor">#endif</span>
+<a name="l03544"></a>03544 <span class="preprocessor"></span><span class="preprocessor">#endif </span><span class="comment">/* VK_USE_PLATFORM_XLIB_KHR */</span>
+<a name="l03545"></a>03545 
+<a name="l03546"></a>03546 <span class="preprocessor">#ifdef VK_USE_PLATFORM_XCB_KHR</span>
+<a name="l03547"></a>03547 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_xcb_surface 1</span>
+<a name="l03548"></a>03548 <span class="preprocessor"></span><span class="preprocessor">#include &lt;xcb/xcb.h&gt;</span>
+<a name="l03549"></a>03549 
+<a name="l03550"></a>03550 <span class="preprocessor">#define VK_KHR_XCB_SURFACE_SPEC_VERSION   6</span>
+<a name="l03551"></a>03551 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_XCB_SURFACE_EXTENSION_NAME "VK_KHR_xcb_surface"</span>
+<a name="l03552"></a>03552 <span class="preprocessor"></span>
+<a name="l03553"></a>03553 <span class="keyword">typedef</span> VkFlags VkXcbSurfaceCreateFlagsKHR;
+<a name="l03554"></a>03554 
+<a name="l03555"></a>03555 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkXcbSurfaceCreateInfoKHR {
+<a name="l03556"></a>03556     VkStructureType               sType;
+<a name="l03557"></a>03557     <span class="keyword">const</span> <span class="keywordtype">void</span>*                   pNext;
+<a name="l03558"></a>03558     VkXcbSurfaceCreateFlagsKHR    flags;
+<a name="l03559"></a>03559     xcb_connection_t*             connection;
+<a name="l03560"></a>03560     xcb_window_t                  window;
+<a name="l03561"></a>03561 } VkXcbSurfaceCreateInfoKHR;
 <a name="l03562"></a>03562 
-<a name="l03563"></a>03563 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateXcbSurfaceKHR)(VkInstance instance, <span class="keyword">const</span> VkXcbSurfaceCreateInfoKHR* pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
-<a name="l03564"></a>03564 <span class="keyword">typedef</span> VkBool32 (VKAPI_PTR *PFN_vkGetPhysicalDeviceXcbPresentationSupportKHR)(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, xcb_connection_t* connection, xcb_visualid_t visual_id);
-<a name="l03565"></a>03565 
-<a name="l03566"></a>03566 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
-<a name="l03567"></a>03567 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkCreateXcbSurfaceKHR(
-<a name="l03568"></a>03568     VkInstance                                  instance,
-<a name="l03569"></a>03569     <span class="keyword">const</span> VkXcbSurfaceCreateInfoKHR*            pCreateInfo,
-<a name="l03570"></a>03570     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
-<a name="l03571"></a>03571     VkSurfaceKHR*                               pSurface);
-<a name="l03572"></a>03572 
-<a name="l03573"></a>03573 VKAPI_ATTR VkBool32 VKAPI_CALL vkGetPhysicalDeviceXcbPresentationSupportKHR(
-<a name="l03574"></a>03574     VkPhysicalDevice                            physicalDevice,
-<a name="l03575"></a>03575     uint32_t                                    queueFamilyIndex,
-<a name="l03576"></a>03576     xcb_connection_t*                           connection,
-<a name="l03577"></a>03577     xcb_visualid_t                              visual_id);
-<a name="l03578"></a>03578 <span class="preprocessor">#endif</span>
-<a name="l03579"></a>03579 <span class="preprocessor"></span><span class="preprocessor">#endif </span><span class="comment">/* VK_USE_PLATFORM_XCB_KHR */</span>
-<a name="l03580"></a>03580 
-<a name="l03581"></a>03581 <span class="preprocessor">#ifdef VK_USE_PLATFORM_WAYLAND_KHR</span>
-<a name="l03582"></a>03582 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_wayland_surface 1</span>
-<a name="l03583"></a>03583 <span class="preprocessor"></span><span class="preprocessor">#include &lt;wayland-client.h&gt;</span>
-<a name="l03584"></a>03584 
-<a name="l03585"></a>03585 <span class="preprocessor">#define VK_KHR_WAYLAND_SURFACE_SPEC_VERSION 5</span>
-<a name="l03586"></a>03586 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_WAYLAND_SURFACE_EXTENSION_NAME "VK_KHR_wayland_surface"</span>
-<a name="l03587"></a>03587 <span class="preprocessor"></span>
-<a name="l03588"></a>03588 <span class="keyword">typedef</span> VkFlags VkWaylandSurfaceCreateFlagsKHR;
-<a name="l03589"></a>03589 
-<a name="l03590"></a>03590 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkWaylandSurfaceCreateInfoKHR {
-<a name="l03591"></a>03591     VkStructureType                   sType;
-<a name="l03592"></a>03592     <span class="keyword">const</span> <span class="keywordtype">void</span>*                       pNext;
-<a name="l03593"></a>03593     VkWaylandSurfaceCreateFlagsKHR    flags;
-<a name="l03594"></a>03594     <span class="keyword">struct </span>wl_display*                display;
-<a name="l03595"></a>03595     <span class="keyword">struct </span>wl_surface*                surface;
-<a name="l03596"></a>03596 } VkWaylandSurfaceCreateInfoKHR;
-<a name="l03597"></a>03597 
+<a name="l03563"></a>03563 
+<a name="l03564"></a>03564 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateXcbSurfaceKHR)(VkInstance instance, <span class="keyword">const</span> VkXcbSurfaceCreateInfoKHR* pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
+<a name="l03565"></a>03565 <span class="keyword">typedef</span> VkBool32 (VKAPI_PTR *PFN_vkGetPhysicalDeviceXcbPresentationSupportKHR)(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, xcb_connection_t* connection, xcb_visualid_t visual_id);
+<a name="l03566"></a>03566 
+<a name="l03567"></a>03567 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
+<a name="l03568"></a>03568 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkCreateXcbSurfaceKHR(
+<a name="l03569"></a>03569     VkInstance                                  instance,
+<a name="l03570"></a>03570     <span class="keyword">const</span> VkXcbSurfaceCreateInfoKHR*            pCreateInfo,
+<a name="l03571"></a>03571     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
+<a name="l03572"></a>03572     VkSurfaceKHR*                               pSurface);
+<a name="l03573"></a>03573 
+<a name="l03574"></a>03574 VKAPI_ATTR VkBool32 VKAPI_CALL vkGetPhysicalDeviceXcbPresentationSupportKHR(
+<a name="l03575"></a>03575     VkPhysicalDevice                            physicalDevice,
+<a name="l03576"></a>03576     uint32_t                                    queueFamilyIndex,
+<a name="l03577"></a>03577     xcb_connection_t*                           connection,
+<a name="l03578"></a>03578     xcb_visualid_t                              visual_id);
+<a name="l03579"></a>03579 <span class="preprocessor">#endif</span>
+<a name="l03580"></a>03580 <span class="preprocessor"></span><span class="preprocessor">#endif </span><span class="comment">/* VK_USE_PLATFORM_XCB_KHR */</span>
+<a name="l03581"></a>03581 
+<a name="l03582"></a>03582 <span class="preprocessor">#ifdef VK_USE_PLATFORM_WAYLAND_KHR</span>
+<a name="l03583"></a>03583 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_wayland_surface 1</span>
+<a name="l03584"></a>03584 <span class="preprocessor"></span><span class="preprocessor">#include &lt;wayland-client.h&gt;</span>
+<a name="l03585"></a>03585 
+<a name="l03586"></a>03586 <span class="preprocessor">#define VK_KHR_WAYLAND_SURFACE_SPEC_VERSION 5</span>
+<a name="l03587"></a>03587 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_WAYLAND_SURFACE_EXTENSION_NAME "VK_KHR_wayland_surface"</span>
+<a name="l03588"></a>03588 <span class="preprocessor"></span>
+<a name="l03589"></a>03589 <span class="keyword">typedef</span> VkFlags VkWaylandSurfaceCreateFlagsKHR;
+<a name="l03590"></a>03590 
+<a name="l03591"></a>03591 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkWaylandSurfaceCreateInfoKHR {
+<a name="l03592"></a>03592     VkStructureType                   sType;
+<a name="l03593"></a>03593     <span class="keyword">const</span> <span class="keywordtype">void</span>*                       pNext;
+<a name="l03594"></a>03594     VkWaylandSurfaceCreateFlagsKHR    flags;
+<a name="l03595"></a>03595     <span class="keyword">struct </span>wl_display*                display;
+<a name="l03596"></a>03596     <span class="keyword">struct </span>wl_surface*                surface;
+<a name="l03597"></a>03597 } VkWaylandSurfaceCreateInfoKHR;
 <a name="l03598"></a>03598 
-<a name="l03599"></a>03599 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateWaylandSurfaceKHR)(VkInstance instance, <span class="keyword">const</span> VkWaylandSurfaceCreateInfoKHR* pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
-<a name="l03600"></a>03600 <span class="keyword">typedef</span> VkBool32 (VKAPI_PTR *PFN_vkGetPhysicalDeviceWaylandPresentationSupportKHR)(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, <span class="keyword">struct </span>wl_display* display);
-<a name="l03601"></a>03601 
-<a name="l03602"></a>03602 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
-<a name="l03603"></a>03603 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkCreateWaylandSurfaceKHR(
-<a name="l03604"></a>03604     VkInstance                                  instance,
-<a name="l03605"></a>03605     <span class="keyword">const</span> VkWaylandSurfaceCreateInfoKHR*        pCreateInfo,
-<a name="l03606"></a>03606     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
-<a name="l03607"></a>03607     VkSurfaceKHR*                               pSurface);
-<a name="l03608"></a>03608 
-<a name="l03609"></a>03609 VKAPI_ATTR VkBool32 VKAPI_CALL vkGetPhysicalDeviceWaylandPresentationSupportKHR(
-<a name="l03610"></a>03610     VkPhysicalDevice                            physicalDevice,
-<a name="l03611"></a>03611     uint32_t                                    queueFamilyIndex,
-<a name="l03612"></a>03612     <span class="keyword">struct</span> wl_display*                          display);
-<a name="l03613"></a>03613 <span class="preprocessor">#endif</span>
-<a name="l03614"></a>03614 <span class="preprocessor"></span><span class="preprocessor">#endif </span><span class="comment">/* VK_USE_PLATFORM_WAYLAND_KHR */</span>
-<a name="l03615"></a>03615 
-<a name="l03616"></a>03616 <span class="preprocessor">#ifdef VK_USE_PLATFORM_MIR_KHR</span>
-<a name="l03617"></a>03617 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_mir_surface 1</span>
-<a name="l03618"></a>03618 <span class="preprocessor"></span><span class="preprocessor">#include &lt;mir_toolkit/client_types.h&gt;</span>
-<a name="l03619"></a>03619 
-<a name="l03620"></a>03620 <span class="preprocessor">#define VK_KHR_MIR_SURFACE_SPEC_VERSION   4</span>
-<a name="l03621"></a>03621 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_MIR_SURFACE_EXTENSION_NAME "VK_KHR_mir_surface"</span>
-<a name="l03622"></a>03622 <span class="preprocessor"></span>
-<a name="l03623"></a>03623 <span class="keyword">typedef</span> VkFlags VkMirSurfaceCreateFlagsKHR;
-<a name="l03624"></a>03624 
-<a name="l03625"></a>03625 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkMirSurfaceCreateInfoKHR {
-<a name="l03626"></a>03626     VkStructureType               sType;
-<a name="l03627"></a>03627     <span class="keyword">const</span> <span class="keywordtype">void</span>*                   pNext;
-<a name="l03628"></a>03628     VkMirSurfaceCreateFlagsKHR    flags;
-<a name="l03629"></a>03629     MirConnection*                connection;
-<a name="l03630"></a>03630     MirSurface*                   mirSurface;
-<a name="l03631"></a>03631 } VkMirSurfaceCreateInfoKHR;
-<a name="l03632"></a>03632 
+<a name="l03599"></a>03599 
+<a name="l03600"></a>03600 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateWaylandSurfaceKHR)(VkInstance instance, <span class="keyword">const</span> VkWaylandSurfaceCreateInfoKHR* pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
+<a name="l03601"></a>03601 <span class="keyword">typedef</span> VkBool32 (VKAPI_PTR *PFN_vkGetPhysicalDeviceWaylandPresentationSupportKHR)(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, <span class="keyword">struct </span>wl_display* display);
+<a name="l03602"></a>03602 
+<a name="l03603"></a>03603 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
+<a name="l03604"></a>03604 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkCreateWaylandSurfaceKHR(
+<a name="l03605"></a>03605     VkInstance                                  instance,
+<a name="l03606"></a>03606     <span class="keyword">const</span> VkWaylandSurfaceCreateInfoKHR*        pCreateInfo,
+<a name="l03607"></a>03607     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
+<a name="l03608"></a>03608     VkSurfaceKHR*                               pSurface);
+<a name="l03609"></a>03609 
+<a name="l03610"></a>03610 VKAPI_ATTR VkBool32 VKAPI_CALL vkGetPhysicalDeviceWaylandPresentationSupportKHR(
+<a name="l03611"></a>03611     VkPhysicalDevice                            physicalDevice,
+<a name="l03612"></a>03612     uint32_t                                    queueFamilyIndex,
+<a name="l03613"></a>03613     <span class="keyword">struct</span> wl_display*                          display);
+<a name="l03614"></a>03614 <span class="preprocessor">#endif</span>
+<a name="l03615"></a>03615 <span class="preprocessor"></span><span class="preprocessor">#endif </span><span class="comment">/* VK_USE_PLATFORM_WAYLAND_KHR */</span>
+<a name="l03616"></a>03616 
+<a name="l03617"></a>03617 <span class="preprocessor">#ifdef VK_USE_PLATFORM_MIR_KHR</span>
+<a name="l03618"></a>03618 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_mir_surface 1</span>
+<a name="l03619"></a>03619 <span class="preprocessor"></span><span class="preprocessor">#include &lt;mir_toolkit/client_types.h&gt;</span>
+<a name="l03620"></a>03620 
+<a name="l03621"></a>03621 <span class="preprocessor">#define VK_KHR_MIR_SURFACE_SPEC_VERSION   4</span>
+<a name="l03622"></a>03622 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_MIR_SURFACE_EXTENSION_NAME "VK_KHR_mir_surface"</span>
+<a name="l03623"></a>03623 <span class="preprocessor"></span>
+<a name="l03624"></a>03624 <span class="keyword">typedef</span> VkFlags VkMirSurfaceCreateFlagsKHR;
+<a name="l03625"></a>03625 
+<a name="l03626"></a>03626 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkMirSurfaceCreateInfoKHR {
+<a name="l03627"></a>03627     VkStructureType               sType;
+<a name="l03628"></a>03628     <span class="keyword">const</span> <span class="keywordtype">void</span>*                   pNext;
+<a name="l03629"></a>03629     VkMirSurfaceCreateFlagsKHR    flags;
+<a name="l03630"></a>03630     MirConnection*                connection;
+<a name="l03631"></a>03631     MirSurface*                   mirSurface;
+<a name="l03632"></a>03632 } VkMirSurfaceCreateInfoKHR;
 <a name="l03633"></a>03633 
-<a name="l03634"></a>03634 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateMirSurfaceKHR)(VkInstance instance, <span class="keyword">const</span> VkMirSurfaceCreateInfoKHR* pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
-<a name="l03635"></a>03635 <span class="keyword">typedef</span> VkBool32 (VKAPI_PTR *PFN_vkGetPhysicalDeviceMirPresentationSupportKHR)(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, MirConnection* connection);
-<a name="l03636"></a>03636 
-<a name="l03637"></a>03637 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
-<a name="l03638"></a>03638 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkCreateMirSurfaceKHR(
-<a name="l03639"></a>03639     VkInstance                                  instance,
-<a name="l03640"></a>03640     <span class="keyword">const</span> VkMirSurfaceCreateInfoKHR*            pCreateInfo,
-<a name="l03641"></a>03641     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
-<a name="l03642"></a>03642     VkSurfaceKHR*                               pSurface);
-<a name="l03643"></a>03643 
-<a name="l03644"></a>03644 VKAPI_ATTR VkBool32 VKAPI_CALL vkGetPhysicalDeviceMirPresentationSupportKHR(
-<a name="l03645"></a>03645     VkPhysicalDevice                            physicalDevice,
-<a name="l03646"></a>03646     uint32_t                                    queueFamilyIndex,
-<a name="l03647"></a>03647     MirConnection*                              connection);
-<a name="l03648"></a>03648 <span class="preprocessor">#endif</span>
-<a name="l03649"></a>03649 <span class="preprocessor"></span><span class="preprocessor">#endif </span><span class="comment">/* VK_USE_PLATFORM_MIR_KHR */</span>
-<a name="l03650"></a>03650 
-<a name="l03651"></a>03651 <span class="preprocessor">#ifdef VK_USE_PLATFORM_ANDROID_KHR</span>
-<a name="l03652"></a>03652 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_android_surface 1</span>
-<a name="l03653"></a>03653 <span class="preprocessor"></span><span class="preprocessor">#include &lt;android/native_window.h&gt;</span>
-<a name="l03654"></a>03654 
-<a name="l03655"></a>03655 <span class="preprocessor">#define VK_KHR_ANDROID_SURFACE_SPEC_VERSION 6</span>
-<a name="l03656"></a>03656 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_ANDROID_SURFACE_EXTENSION_NAME "VK_KHR_android_surface"</span>
-<a name="l03657"></a>03657 <span class="preprocessor"></span>
-<a name="l03658"></a>03658 <span class="keyword">typedef</span> VkFlags VkAndroidSurfaceCreateFlagsKHR;
-<a name="l03659"></a>03659 
-<a name="l03660"></a>03660 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkAndroidSurfaceCreateInfoKHR {
-<a name="l03661"></a>03661     VkStructureType                   sType;
-<a name="l03662"></a>03662     <span class="keyword">const</span> <span class="keywordtype">void</span>*                       pNext;
-<a name="l03663"></a>03663     VkAndroidSurfaceCreateFlagsKHR    flags;
-<a name="l03664"></a>03664     ANativeWindow*                    window;
-<a name="l03665"></a>03665 } VkAndroidSurfaceCreateInfoKHR;
-<a name="l03666"></a>03666 
+<a name="l03634"></a>03634 
+<a name="l03635"></a>03635 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateMirSurfaceKHR)(VkInstance instance, <span class="keyword">const</span> VkMirSurfaceCreateInfoKHR* pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
+<a name="l03636"></a>03636 <span class="keyword">typedef</span> VkBool32 (VKAPI_PTR *PFN_vkGetPhysicalDeviceMirPresentationSupportKHR)(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, MirConnection* connection);
+<a name="l03637"></a>03637 
+<a name="l03638"></a>03638 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
+<a name="l03639"></a>03639 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkCreateMirSurfaceKHR(
+<a name="l03640"></a>03640     VkInstance                                  instance,
+<a name="l03641"></a>03641     <span class="keyword">const</span> VkMirSurfaceCreateInfoKHR*            pCreateInfo,
+<a name="l03642"></a>03642     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
+<a name="l03643"></a>03643     VkSurfaceKHR*                               pSurface);
+<a name="l03644"></a>03644 
+<a name="l03645"></a>03645 VKAPI_ATTR VkBool32 VKAPI_CALL vkGetPhysicalDeviceMirPresentationSupportKHR(
+<a name="l03646"></a>03646     VkPhysicalDevice                            physicalDevice,
+<a name="l03647"></a>03647     uint32_t                                    queueFamilyIndex,
+<a name="l03648"></a>03648     MirConnection*                              connection);
+<a name="l03649"></a>03649 <span class="preprocessor">#endif</span>
+<a name="l03650"></a>03650 <span class="preprocessor"></span><span class="preprocessor">#endif </span><span class="comment">/* VK_USE_PLATFORM_MIR_KHR */</span>
+<a name="l03651"></a>03651 
+<a name="l03652"></a>03652 <span class="preprocessor">#ifdef VK_USE_PLATFORM_ANDROID_KHR</span>
+<a name="l03653"></a>03653 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_android_surface 1</span>
+<a name="l03654"></a>03654 <span class="preprocessor"></span><span class="preprocessor">#include &lt;android/native_window.h&gt;</span>
+<a name="l03655"></a>03655 
+<a name="l03656"></a>03656 <span class="preprocessor">#define VK_KHR_ANDROID_SURFACE_SPEC_VERSION 6</span>
+<a name="l03657"></a>03657 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_ANDROID_SURFACE_EXTENSION_NAME "VK_KHR_android_surface"</span>
+<a name="l03658"></a>03658 <span class="preprocessor"></span>
+<a name="l03659"></a>03659 <span class="keyword">typedef</span> VkFlags VkAndroidSurfaceCreateFlagsKHR;
+<a name="l03660"></a>03660 
+<a name="l03661"></a>03661 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkAndroidSurfaceCreateInfoKHR {
+<a name="l03662"></a>03662     VkStructureType                   sType;
+<a name="l03663"></a>03663     <span class="keyword">const</span> <span class="keywordtype">void</span>*                       pNext;
+<a name="l03664"></a>03664     VkAndroidSurfaceCreateFlagsKHR    flags;
+<a name="l03665"></a>03665     ANativeWindow*                    window;
+<a name="l03666"></a>03666 } VkAndroidSurfaceCreateInfoKHR;
 <a name="l03667"></a>03667 
-<a name="l03668"></a>03668 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateAndroidSurfaceKHR)(VkInstance instance, <span class="keyword">const</span> VkAndroidSurfaceCreateInfoKHR* pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
-<a name="l03669"></a>03669 
-<a name="l03670"></a>03670 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
-<a name="l03671"></a>03671 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkCreateAndroidSurfaceKHR(
-<a name="l03672"></a>03672     VkInstance                                  instance,
-<a name="l03673"></a>03673     <span class="keyword">const</span> VkAndroidSurfaceCreateInfoKHR*        pCreateInfo,
-<a name="l03674"></a>03674     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
-<a name="l03675"></a>03675     VkSurfaceKHR*                               pSurface);
-<a name="l03676"></a>03676 <span class="preprocessor">#endif</span>
-<a name="l03677"></a>03677 <span class="preprocessor"></span><span class="preprocessor">#endif </span><span class="comment">/* VK_USE_PLATFORM_ANDROID_KHR */</span>
-<a name="l03678"></a>03678 
-<a name="l03679"></a>03679 <span class="preprocessor">#ifdef VK_USE_PLATFORM_WIN32_KHR</span>
-<a name="l03680"></a>03680 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_win32_surface 1</span>
-<a name="l03681"></a>03681 <span class="preprocessor"></span><span class="preprocessor">#include &lt;windows.h&gt;</span>
-<a name="l03682"></a>03682 
-<a name="l03683"></a>03683 <span class="preprocessor">#define VK_KHR_WIN32_SURFACE_SPEC_VERSION 5</span>
-<a name="l03684"></a>03684 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_WIN32_SURFACE_EXTENSION_NAME "VK_KHR_win32_surface"</span>
-<a name="l03685"></a>03685 <span class="preprocessor"></span>
-<a name="l03686"></a>03686 <span class="keyword">typedef</span> VkFlags VkWin32SurfaceCreateFlagsKHR;
-<a name="l03687"></a>03687 
-<a name="l03688"></a>03688 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkWin32SurfaceCreateInfoKHR {
-<a name="l03689"></a>03689     VkStructureType                 sType;
-<a name="l03690"></a>03690     <span class="keyword">const</span> <span class="keywordtype">void</span>*                     pNext;
-<a name="l03691"></a>03691     VkWin32SurfaceCreateFlagsKHR    flags;
-<a name="l03692"></a>03692     HINSTANCE                       hinstance;
-<a name="l03693"></a>03693     HWND                            hwnd;
-<a name="l03694"></a>03694 } VkWin32SurfaceCreateInfoKHR;
-<a name="l03695"></a>03695 
+<a name="l03668"></a>03668 
+<a name="l03669"></a>03669 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateAndroidSurfaceKHR)(VkInstance instance, <span class="keyword">const</span> VkAndroidSurfaceCreateInfoKHR* pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
+<a name="l03670"></a>03670 
+<a name="l03671"></a>03671 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
+<a name="l03672"></a>03672 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkCreateAndroidSurfaceKHR(
+<a name="l03673"></a>03673     VkInstance                                  instance,
+<a name="l03674"></a>03674     <span class="keyword">const</span> VkAndroidSurfaceCreateInfoKHR*        pCreateInfo,
+<a name="l03675"></a>03675     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
+<a name="l03676"></a>03676     VkSurfaceKHR*                               pSurface);
+<a name="l03677"></a>03677 <span class="preprocessor">#endif</span>
+<a name="l03678"></a>03678 <span class="preprocessor"></span><span class="preprocessor">#endif </span><span class="comment">/* VK_USE_PLATFORM_ANDROID_KHR */</span>
+<a name="l03679"></a>03679 
+<a name="l03680"></a>03680 <span class="preprocessor">#ifdef VK_USE_PLATFORM_WIN32_KHR</span>
+<a name="l03681"></a>03681 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_win32_surface 1</span>
+<a name="l03682"></a>03682 <span class="preprocessor"></span><span class="preprocessor">#include &lt;windows.h&gt;</span>
+<a name="l03683"></a>03683 
+<a name="l03684"></a>03684 <span class="preprocessor">#define VK_KHR_WIN32_SURFACE_SPEC_VERSION 5</span>
+<a name="l03685"></a>03685 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_WIN32_SURFACE_EXTENSION_NAME "VK_KHR_win32_surface"</span>
+<a name="l03686"></a>03686 <span class="preprocessor"></span>
+<a name="l03687"></a>03687 <span class="keyword">typedef</span> VkFlags VkWin32SurfaceCreateFlagsKHR;
+<a name="l03688"></a>03688 
+<a name="l03689"></a>03689 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkWin32SurfaceCreateInfoKHR {
+<a name="l03690"></a>03690     VkStructureType                 sType;
+<a name="l03691"></a>03691     <span class="keyword">const</span> <span class="keywordtype">void</span>*                     pNext;
+<a name="l03692"></a>03692     VkWin32SurfaceCreateFlagsKHR    flags;
+<a name="l03693"></a>03693     HINSTANCE                       hinstance;
+<a name="l03694"></a>03694     HWND                            hwnd;
+<a name="l03695"></a>03695 } VkWin32SurfaceCreateInfoKHR;
 <a name="l03696"></a>03696 
-<a name="l03697"></a>03697 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateWin32SurfaceKHR)(VkInstance instance, <span class="keyword">const</span> VkWin32SurfaceCreateInfoKHR* pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
-<a name="l03698"></a>03698 <span class="keyword">typedef</span> VkBool32 (VKAPI_PTR *PFN_vkGetPhysicalDeviceWin32PresentationSupportKHR)(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex);
-<a name="l03699"></a>03699 
-<a name="l03700"></a>03700 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
-<a name="l03701"></a>03701 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkCreateWin32SurfaceKHR(
-<a name="l03702"></a>03702     VkInstance                                  instance,
-<a name="l03703"></a>03703     <span class="keyword">const</span> VkWin32SurfaceCreateInfoKHR*          pCreateInfo,
-<a name="l03704"></a>03704     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
-<a name="l03705"></a>03705     VkSurfaceKHR*                               pSurface);
-<a name="l03706"></a>03706 
-<a name="l03707"></a>03707 VKAPI_ATTR VkBool32 VKAPI_CALL vkGetPhysicalDeviceWin32PresentationSupportKHR(
-<a name="l03708"></a>03708     VkPhysicalDevice                            physicalDevice,
-<a name="l03709"></a>03709     uint32_t                                    queueFamilyIndex);
-<a name="l03710"></a>03710 <span class="preprocessor">#endif</span>
-<a name="l03711"></a>03711 <span class="preprocessor"></span><span class="preprocessor">#endif </span><span class="comment">/* VK_USE_PLATFORM_WIN32_KHR */</span>
-<a name="l03712"></a>03712 
-<a name="l03713"></a>03713 <span class="preprocessor">#define VK_KHR_sampler_mirror_clamp_to_edge 1</span>
-<a name="l03714"></a>03714 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_SPEC_VERSION 1</span>
-<a name="l03715"></a>03715 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_EXTENSION_NAME "VK_KHR_sampler_mirror_clamp_to_edge"</span>
-<a name="l03716"></a>03716 <span class="preprocessor"></span>
-<a name="l03717"></a>03717 
-<a name="l03718"></a>03718 <span class="preprocessor">#define VK_EXT_debug_report 1</span>
-<a name="l03719"></a>03719 <span class="preprocessor"></span>VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDebugReportCallbackEXT)
-<a name="l03720"></a>03720 
-<a name="l03721"></a>03721 <span class="preprocessor">#define VK_EXT_DEBUG_REPORT_SPEC_VERSION  2</span>
-<a name="l03722"></a>03722 <span class="preprocessor"></span><span class="preprocessor">#define VK_EXT_DEBUG_REPORT_EXTENSION_NAME "VK_EXT_debug_report"</span>
-<a name="l03723"></a>03723 <span class="preprocessor"></span><span class="preprocessor">#define VK_STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT</span>
-<a name="l03724"></a>03724 <span class="preprocessor"></span>
-<a name="l03725"></a>03725 
-<a name="l03726"></a>03726 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkDebugReportObjectTypeEXT {
-<a name="l03727"></a>03727     VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT = 0,
-<a name="l03728"></a>03728     VK_DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT = 1,
-<a name="l03729"></a>03729     VK_DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT = 2,
-<a name="l03730"></a>03730     VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT = 3,
-<a name="l03731"></a>03731     VK_DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT = 4,
-<a name="l03732"></a>03732     VK_DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT = 5,
-<a name="l03733"></a>03733     VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT = 6,
-<a name="l03734"></a>03734     VK_DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT = 7,
-<a name="l03735"></a>03735     VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT = 8,
-<a name="l03736"></a>03736     VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT = 9,
-<a name="l03737"></a>03737     VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT = 10,
-<a name="l03738"></a>03738     VK_DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT = 11,
-<a name="l03739"></a>03739     VK_DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT = 12,
-<a name="l03740"></a>03740     VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT = 13,
-<a name="l03741"></a>03741     VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT = 14,
-<a name="l03742"></a>03742     VK_DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT = 15,
-<a name="l03743"></a>03743     VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT = 16,
-<a name="l03744"></a>03744     VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT = 17,
-<a name="l03745"></a>03745     VK_DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT = 18,
-<a name="l03746"></a>03746     VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT = 19,
-<a name="l03747"></a>03747     VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT = 20,
-<a name="l03748"></a>03748     VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT = 21,
-<a name="l03749"></a>03749     VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT = 22,
-<a name="l03750"></a>03750     VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT = 23,
-<a name="l03751"></a>03751     VK_DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT = 24,
-<a name="l03752"></a>03752     VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT = 25,
-<a name="l03753"></a>03753     VK_DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT = 26,
-<a name="l03754"></a>03754     VK_DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT = 27,
-<a name="l03755"></a>03755     VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT = 28,
-<a name="l03756"></a>03756     VK_DEBUG_REPORT_OBJECT_TYPE_BEGIN_RANGE_EXT = VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT,
-<a name="l03757"></a>03757     VK_DEBUG_REPORT_OBJECT_TYPE_END_RANGE_EXT = VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT,
-<a name="l03758"></a>03758     VK_DEBUG_REPORT_OBJECT_TYPE_RANGE_SIZE_EXT = (VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT - VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT + 1),
-<a name="l03759"></a>03759     VK_DEBUG_REPORT_OBJECT_TYPE_MAX_ENUM_EXT = 0x7FFFFFFF
-<a name="l03760"></a>03760 } VkDebugReportObjectTypeEXT;
-<a name="l03761"></a>03761 
-<a name="l03762"></a>03762 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkDebugReportErrorEXT {
-<a name="l03763"></a>03763     VK_DEBUG_REPORT_ERROR_NONE_EXT = 0,
-<a name="l03764"></a>03764     VK_DEBUG_REPORT_ERROR_CALLBACK_REF_EXT = 1,
-<a name="l03765"></a>03765     VK_DEBUG_REPORT_ERROR_BEGIN_RANGE_EXT = VK_DEBUG_REPORT_ERROR_NONE_EXT,
-<a name="l03766"></a>03766     VK_DEBUG_REPORT_ERROR_END_RANGE_EXT = VK_DEBUG_REPORT_ERROR_CALLBACK_REF_EXT,
-<a name="l03767"></a>03767     VK_DEBUG_REPORT_ERROR_RANGE_SIZE_EXT = (VK_DEBUG_REPORT_ERROR_CALLBACK_REF_EXT - VK_DEBUG_REPORT_ERROR_NONE_EXT + 1),
-<a name="l03768"></a>03768     VK_DEBUG_REPORT_ERROR_MAX_ENUM_EXT = 0x7FFFFFFF
-<a name="l03769"></a>03769 } VkDebugReportErrorEXT;
-<a name="l03770"></a>03770 
+<a name="l03697"></a>03697 
+<a name="l03698"></a>03698 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateWin32SurfaceKHR)(VkInstance instance, <span class="keyword">const</span> VkWin32SurfaceCreateInfoKHR* pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
+<a name="l03699"></a>03699 <span class="keyword">typedef</span> VkBool32 (VKAPI_PTR *PFN_vkGetPhysicalDeviceWin32PresentationSupportKHR)(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex);
+<a name="l03700"></a>03700 
+<a name="l03701"></a>03701 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
+<a name="l03702"></a>03702 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkCreateWin32SurfaceKHR(
+<a name="l03703"></a>03703     VkInstance                                  instance,
+<a name="l03704"></a>03704     <span class="keyword">const</span> VkWin32SurfaceCreateInfoKHR*          pCreateInfo,
+<a name="l03705"></a>03705     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
+<a name="l03706"></a>03706     VkSurfaceKHR*                               pSurface);
+<a name="l03707"></a>03707 
+<a name="l03708"></a>03708 VKAPI_ATTR VkBool32 VKAPI_CALL vkGetPhysicalDeviceWin32PresentationSupportKHR(
+<a name="l03709"></a>03709     VkPhysicalDevice                            physicalDevice,
+<a name="l03710"></a>03710     uint32_t                                    queueFamilyIndex);
+<a name="l03711"></a>03711 <span class="preprocessor">#endif</span>
+<a name="l03712"></a>03712 <span class="preprocessor"></span><span class="preprocessor">#endif </span><span class="comment">/* VK_USE_PLATFORM_WIN32_KHR */</span>
+<a name="l03713"></a>03713 
+<a name="l03714"></a>03714 <span class="preprocessor">#define VK_KHR_sampler_mirror_clamp_to_edge 1</span>
+<a name="l03715"></a>03715 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_SPEC_VERSION 1</span>
+<a name="l03716"></a>03716 <span class="preprocessor"></span><span class="preprocessor">#define VK_KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_EXTENSION_NAME "VK_KHR_sampler_mirror_clamp_to_edge"</span>
+<a name="l03717"></a>03717 <span class="preprocessor"></span>
+<a name="l03718"></a>03718 
+<a name="l03719"></a>03719 <span class="preprocessor">#define VK_EXT_debug_report 1</span>
+<a name="l03720"></a>03720 <span class="preprocessor"></span>VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDebugReportCallbackEXT)
+<a name="l03721"></a>03721 
+<a name="l03722"></a>03722 <span class="preprocessor">#define VK_EXT_DEBUG_REPORT_SPEC_VERSION  3</span>
+<a name="l03723"></a>03723 <span class="preprocessor"></span><span class="preprocessor">#define VK_EXT_DEBUG_REPORT_EXTENSION_NAME "VK_EXT_debug_report"</span>
+<a name="l03724"></a>03724 <span class="preprocessor"></span><span class="preprocessor">#define VK_STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT</span>
+<a name="l03725"></a>03725 <span class="preprocessor"></span>
+<a name="l03726"></a>03726 
+<a name="l03727"></a>03727 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkDebugReportObjectTypeEXT {
+<a name="l03728"></a>03728     VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT = 0,
+<a name="l03729"></a>03729     VK_DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT = 1,
+<a name="l03730"></a>03730     VK_DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT = 2,
+<a name="l03731"></a>03731     VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT = 3,
+<a name="l03732"></a>03732     VK_DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT = 4,
+<a name="l03733"></a>03733     VK_DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT = 5,
+<a name="l03734"></a>03734     VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT = 6,
+<a name="l03735"></a>03735     VK_DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT = 7,
+<a name="l03736"></a>03736     VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT = 8,
+<a name="l03737"></a>03737     VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT = 9,
+<a name="l03738"></a>03738     VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT = 10,
+<a name="l03739"></a>03739     VK_DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT = 11,
+<a name="l03740"></a>03740     VK_DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT = 12,
+<a name="l03741"></a>03741     VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT = 13,
+<a name="l03742"></a>03742     VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT = 14,
+<a name="l03743"></a>03743     VK_DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT = 15,
+<a name="l03744"></a>03744     VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT = 16,
+<a name="l03745"></a>03745     VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT = 17,
+<a name="l03746"></a>03746     VK_DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT = 18,
+<a name="l03747"></a>03747     VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT = 19,
+<a name="l03748"></a>03748     VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT = 20,
+<a name="l03749"></a>03749     VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT = 21,
+<a name="l03750"></a>03750     VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT = 22,
+<a name="l03751"></a>03751     VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT = 23,
+<a name="l03752"></a>03752     VK_DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT = 24,
+<a name="l03753"></a>03753     VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT = 25,
+<a name="l03754"></a>03754     VK_DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT = 26,
+<a name="l03755"></a>03755     VK_DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT = 27,
+<a name="l03756"></a>03756     VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT = 28,
+<a name="l03757"></a>03757     VK_DEBUG_REPORT_OBJECT_TYPE_BEGIN_RANGE_EXT = VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT,
+<a name="l03758"></a>03758     VK_DEBUG_REPORT_OBJECT_TYPE_END_RANGE_EXT = VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT,
+<a name="l03759"></a>03759     VK_DEBUG_REPORT_OBJECT_TYPE_RANGE_SIZE_EXT = (VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT - VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT + 1),
+<a name="l03760"></a>03760     VK_DEBUG_REPORT_OBJECT_TYPE_MAX_ENUM_EXT = 0x7FFFFFFF
+<a name="l03761"></a>03761 } VkDebugReportObjectTypeEXT;
+<a name="l03762"></a>03762 
+<a name="l03763"></a>03763 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkDebugReportErrorEXT {
+<a name="l03764"></a>03764     VK_DEBUG_REPORT_ERROR_NONE_EXT = 0,
+<a name="l03765"></a>03765     VK_DEBUG_REPORT_ERROR_CALLBACK_REF_EXT = 1,
+<a name="l03766"></a>03766     VK_DEBUG_REPORT_ERROR_BEGIN_RANGE_EXT = VK_DEBUG_REPORT_ERROR_NONE_EXT,
+<a name="l03767"></a>03767     VK_DEBUG_REPORT_ERROR_END_RANGE_EXT = VK_DEBUG_REPORT_ERROR_CALLBACK_REF_EXT,
+<a name="l03768"></a>03768     VK_DEBUG_REPORT_ERROR_RANGE_SIZE_EXT = (VK_DEBUG_REPORT_ERROR_CALLBACK_REF_EXT - VK_DEBUG_REPORT_ERROR_NONE_EXT + 1),
+<a name="l03769"></a>03769     VK_DEBUG_REPORT_ERROR_MAX_ENUM_EXT = 0x7FFFFFFF
+<a name="l03770"></a>03770 } VkDebugReportErrorEXT;
 <a name="l03771"></a>03771 
-<a name="l03772"></a>03772 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkDebugReportFlagBitsEXT {
-<a name="l03773"></a>03773     VK_DEBUG_REPORT_INFORMATION_BIT_EXT = 0x00000001,
-<a name="l03774"></a>03774     VK_DEBUG_REPORT_WARNING_BIT_EXT = 0x00000002,
-<a name="l03775"></a>03775     VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT = 0x00000004,
-<a name="l03776"></a>03776     VK_DEBUG_REPORT_ERROR_BIT_EXT = 0x00000008,
-<a name="l03777"></a>03777     VK_DEBUG_REPORT_DEBUG_BIT_EXT = 0x00000010,
-<a name="l03778"></a>03778     VK_DEBUG_REPORT_FLAG_BITS_MAX_ENUM_EXT = 0x7FFFFFFF
-<a name="l03779"></a>03779 } VkDebugReportFlagBitsEXT;
-<a name="l03780"></a>03780 <span class="keyword">typedef</span> VkFlags VkDebugReportFlagsEXT;
-<a name="l03781"></a>03781 
-<a name="l03782"></a>03782 <span class="keyword">typedef</span> VkBool32 (VKAPI_PTR *PFN_vkDebugReportCallbackEXT)(
-<a name="l03783"></a>03783     VkDebugReportFlagsEXT                       flags,
-<a name="l03784"></a>03784     VkDebugReportObjectTypeEXT                  objectType,
-<a name="l03785"></a>03785     uint64_t                                    object,
-<a name="l03786"></a>03786     <span class="keywordtype">size_t</span>                                      location,
-<a name="l03787"></a>03787     int32_t                                     messageCode,
-<a name="l03788"></a>03788     <span class="keyword">const</span> <span class="keywordtype">char</span>*                                 pLayerPrefix,
-<a name="l03789"></a>03789     <span class="keyword">const</span> <span class="keywordtype">char</span>*                                 pMessage,
-<a name="l03790"></a>03790     <span class="keywordtype">void</span>*                                       pUserData);
-<a name="l03791"></a>03791 
+<a name="l03772"></a>03772 
+<a name="l03773"></a>03773 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkDebugReportFlagBitsEXT {
+<a name="l03774"></a>03774     VK_DEBUG_REPORT_INFORMATION_BIT_EXT = 0x00000001,
+<a name="l03775"></a>03775     VK_DEBUG_REPORT_WARNING_BIT_EXT = 0x00000002,
+<a name="l03776"></a>03776     VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT = 0x00000004,
+<a name="l03777"></a>03777     VK_DEBUG_REPORT_ERROR_BIT_EXT = 0x00000008,
+<a name="l03778"></a>03778     VK_DEBUG_REPORT_DEBUG_BIT_EXT = 0x00000010,
+<a name="l03779"></a>03779     VK_DEBUG_REPORT_FLAG_BITS_MAX_ENUM_EXT = 0x7FFFFFFF
+<a name="l03780"></a>03780 } VkDebugReportFlagBitsEXT;
+<a name="l03781"></a>03781 <span class="keyword">typedef</span> VkFlags VkDebugReportFlagsEXT;
+<a name="l03782"></a>03782 
+<a name="l03783"></a>03783 <span class="keyword">typedef</span> VkBool32 (VKAPI_PTR *PFN_vkDebugReportCallbackEXT)(
+<a name="l03784"></a>03784     VkDebugReportFlagsEXT                       flags,
+<a name="l03785"></a>03785     VkDebugReportObjectTypeEXT                  objectType,
+<a name="l03786"></a>03786     uint64_t                                    object,
+<a name="l03787"></a>03787     <span class="keywordtype">size_t</span>                                      location,
+<a name="l03788"></a>03788     int32_t                                     messageCode,
+<a name="l03789"></a>03789     <span class="keyword">const</span> <span class="keywordtype">char</span>*                                 pLayerPrefix,
+<a name="l03790"></a>03790     <span class="keyword">const</span> <span class="keywordtype">char</span>*                                 pMessage,
+<a name="l03791"></a>03791     <span class="keywordtype">void</span>*                                       pUserData);
 <a name="l03792"></a>03792 
-<a name="l03793"></a>03793 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDebugReportCallbackCreateInfoEXT {
-<a name="l03794"></a>03794     VkStructureType                 sType;
-<a name="l03795"></a>03795     <span class="keyword">const</span> <span class="keywordtype">void</span>*                     pNext;
-<a name="l03796"></a>03796     VkDebugReportFlagsEXT           flags;
-<a name="l03797"></a>03797     PFN_vkDebugReportCallbackEXT    pfnCallback;
-<a name="l03798"></a>03798     <span class="keywordtype">void</span>*                           pUserData;
-<a name="l03799"></a>03799 } VkDebugReportCallbackCreateInfoEXT;
-<a name="l03800"></a>03800 
+<a name="l03793"></a>03793 
+<a name="l03794"></a>03794 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDebugReportCallbackCreateInfoEXT {
+<a name="l03795"></a>03795     VkStructureType                 sType;
+<a name="l03796"></a>03796     <span class="keyword">const</span> <span class="keywordtype">void</span>*                     pNext;
+<a name="l03797"></a>03797     VkDebugReportFlagsEXT           flags;
+<a name="l03798"></a>03798     PFN_vkDebugReportCallbackEXT    pfnCallback;
+<a name="l03799"></a>03799     <span class="keywordtype">void</span>*                           pUserData;
+<a name="l03800"></a>03800 } VkDebugReportCallbackCreateInfoEXT;
 <a name="l03801"></a>03801 
-<a name="l03802"></a>03802 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateDebugReportCallbackEXT)(VkInstance instance, <span class="keyword">const</span> VkDebugReportCallbackCreateInfoEXT* pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkDebugReportCallbackEXT* pCallback);
-<a name="l03803"></a>03803 <span class="keyword">typedef</span> void (VKAPI_PTR *PFN_vkDestroyDebugReportCallbackEXT)(VkInstance instance, VkDebugReportCallbackEXT callback, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator);
-<a name="l03804"></a>03804 <span class="keyword">typedef</span> void (VKAPI_PTR *PFN_vkDebugReportMessageEXT)(VkInstance instance, VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT objectType, uint64_t object, <span class="keywordtype">size_t</span> location, int32_t messageCode, <span class="keyword">const</span> <span class="keywordtype">char</span>* pLayerPrefix, <span class="keyword">const</span> <span class="keywordtype">char</span>* pMessage);
-<a name="l03805"></a>03805 
-<a name="l03806"></a>03806 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
-<a name="l03807"></a>03807 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkCreateDebugReportCallbackEXT(
-<a name="l03808"></a>03808     VkInstance                                  instance,
-<a name="l03809"></a>03809     <span class="keyword">const</span> VkDebugReportCallbackCreateInfoEXT*   pCreateInfo,
-<a name="l03810"></a>03810     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
-<a name="l03811"></a>03811     VkDebugReportCallbackEXT*                   pCallback);
-<a name="l03812"></a>03812 
-<a name="l03813"></a>03813 VKAPI_ATTR <span class="keywordtype">void</span> VKAPI_CALL vkDestroyDebugReportCallbackEXT(
-<a name="l03814"></a>03814     VkInstance                                  instance,
-<a name="l03815"></a>03815     VkDebugReportCallbackEXT                    callback,
-<a name="l03816"></a>03816     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator);
-<a name="l03817"></a>03817 
-<a name="l03818"></a>03818 VKAPI_ATTR <span class="keywordtype">void</span> VKAPI_CALL vkDebugReportMessageEXT(
-<a name="l03819"></a>03819     VkInstance                                  instance,
-<a name="l03820"></a>03820     VkDebugReportFlagsEXT                       flags,
-<a name="l03821"></a>03821     VkDebugReportObjectTypeEXT                  objectType,
-<a name="l03822"></a>03822     uint64_t                                    <span class="keywordtype">object</span>,
-<a name="l03823"></a>03823     <span class="keywordtype">size_t</span>                                      location,
-<a name="l03824"></a>03824     int32_t                                     messageCode,
-<a name="l03825"></a>03825     <span class="keyword">const</span> <span class="keywordtype">char</span>*                                 pLayerPrefix,
-<a name="l03826"></a>03826     <span class="keyword">const</span> <span class="keywordtype">char</span>*                                 pMessage);
-<a name="l03827"></a>03827 <span class="preprocessor">#endif</span>
-<a name="l03828"></a>03828 <span class="preprocessor"></span>
-<a name="l03829"></a>03829 <span class="preprocessor">#define VK_NV_glsl_shader 1</span>
-<a name="l03830"></a>03830 <span class="preprocessor"></span><span class="preprocessor">#define VK_NV_GLSL_SHADER_SPEC_VERSION    1</span>
-<a name="l03831"></a>03831 <span class="preprocessor"></span><span class="preprocessor">#define VK_NV_GLSL_SHADER_EXTENSION_NAME  "VK_NV_glsl_shader"</span>
-<a name="l03832"></a>03832 <span class="preprocessor"></span>
-<a name="l03833"></a>03833 
-<a name="l03834"></a>03834 <span class="preprocessor">#define VK_IMG_filter_cubic 1</span>
-<a name="l03835"></a>03835 <span class="preprocessor"></span><span class="preprocessor">#define VK_IMG_FILTER_CUBIC_SPEC_VERSION  1</span>
-<a name="l03836"></a>03836 <span class="preprocessor"></span><span class="preprocessor">#define VK_IMG_FILTER_CUBIC_EXTENSION_NAME "VK_IMG_filter_cubic"</span>
-<a name="l03837"></a>03837 <span class="preprocessor"></span>
-<a name="l03838"></a>03838 
-<a name="l03839"></a>03839 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l03840"></a>03840 <span class="preprocessor"></span>}
-<a name="l03841"></a>03841 <span class="preprocessor">#endif</span>
-<a name="l03842"></a>03842 <span class="preprocessor"></span>
-<a name="l03843"></a>03843 <span class="preprocessor">#endif</span>
+<a name="l03802"></a>03802 
+<a name="l03803"></a>03803 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkCreateDebugReportCallbackEXT)(VkInstance instance, <span class="keyword">const</span> VkDebugReportCallbackCreateInfoEXT* pCreateInfo, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator, VkDebugReportCallbackEXT* pCallback);
+<a name="l03804"></a>03804 <span class="keyword">typedef</span> void (VKAPI_PTR *PFN_vkDestroyDebugReportCallbackEXT)(VkInstance instance, VkDebugReportCallbackEXT callback, <span class="keyword">const</span> VkAllocationCallbacks* pAllocator);
+<a name="l03805"></a>03805 <span class="keyword">typedef</span> void (VKAPI_PTR *PFN_vkDebugReportMessageEXT)(VkInstance instance, VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT objectType, uint64_t object, <span class="keywordtype">size_t</span> location, int32_t messageCode, <span class="keyword">const</span> <span class="keywordtype">char</span>* pLayerPrefix, <span class="keyword">const</span> <span class="keywordtype">char</span>* pMessage);
+<a name="l03806"></a>03806 
+<a name="l03807"></a>03807 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
+<a name="l03808"></a>03808 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkCreateDebugReportCallbackEXT(
+<a name="l03809"></a>03809     VkInstance                                  instance,
+<a name="l03810"></a>03810     <span class="keyword">const</span> VkDebugReportCallbackCreateInfoEXT*   pCreateInfo,
+<a name="l03811"></a>03811     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator,
+<a name="l03812"></a>03812     VkDebugReportCallbackEXT*                   pCallback);
+<a name="l03813"></a>03813 
+<a name="l03814"></a>03814 VKAPI_ATTR <span class="keywordtype">void</span> VKAPI_CALL vkDestroyDebugReportCallbackEXT(
+<a name="l03815"></a>03815     VkInstance                                  instance,
+<a name="l03816"></a>03816     VkDebugReportCallbackEXT                    callback,
+<a name="l03817"></a>03817     <span class="keyword">const</span> VkAllocationCallbacks*                pAllocator);
+<a name="l03818"></a>03818 
+<a name="l03819"></a>03819 VKAPI_ATTR <span class="keywordtype">void</span> VKAPI_CALL vkDebugReportMessageEXT(
+<a name="l03820"></a>03820     VkInstance                                  instance,
+<a name="l03821"></a>03821     VkDebugReportFlagsEXT                       flags,
+<a name="l03822"></a>03822     VkDebugReportObjectTypeEXT                  objectType,
+<a name="l03823"></a>03823     uint64_t                                    <span class="keywordtype">object</span>,
+<a name="l03824"></a>03824     <span class="keywordtype">size_t</span>                                      location,
+<a name="l03825"></a>03825     int32_t                                     messageCode,
+<a name="l03826"></a>03826     <span class="keyword">const</span> <span class="keywordtype">char</span>*                                 pLayerPrefix,
+<a name="l03827"></a>03827     <span class="keyword">const</span> <span class="keywordtype">char</span>*                                 pMessage);
+<a name="l03828"></a>03828 <span class="preprocessor">#endif</span>
+<a name="l03829"></a>03829 <span class="preprocessor"></span>
+<a name="l03830"></a>03830 <span class="preprocessor">#define VK_NV_glsl_shader 1</span>
+<a name="l03831"></a>03831 <span class="preprocessor"></span><span class="preprocessor">#define VK_NV_GLSL_SHADER_SPEC_VERSION    1</span>
+<a name="l03832"></a>03832 <span class="preprocessor"></span><span class="preprocessor">#define VK_NV_GLSL_SHADER_EXTENSION_NAME  "VK_NV_glsl_shader"</span>
+<a name="l03833"></a>03833 <span class="preprocessor"></span>
+<a name="l03834"></a>03834 
+<a name="l03835"></a>03835 <span class="preprocessor">#define VK_IMG_filter_cubic 1</span>
+<a name="l03836"></a>03836 <span class="preprocessor"></span><span class="preprocessor">#define VK_IMG_FILTER_CUBIC_SPEC_VERSION  1</span>
+<a name="l03837"></a>03837 <span class="preprocessor"></span><span class="preprocessor">#define VK_IMG_FILTER_CUBIC_EXTENSION_NAME "VK_IMG_filter_cubic"</span>
+<a name="l03838"></a>03838 <span class="preprocessor"></span>
+<a name="l03839"></a>03839 
+<a name="l03840"></a>03840 <span class="preprocessor">#define VK_AMD_rasterization_order 1</span>
+<a name="l03841"></a>03841 <span class="preprocessor"></span><span class="preprocessor">#define VK_AMD_RASTERIZATION_ORDER_SPEC_VERSION 1</span>
+<a name="l03842"></a>03842 <span class="preprocessor"></span><span class="preprocessor">#define VK_AMD_RASTERIZATION_ORDER_EXTENSION_NAME "VK_AMD_rasterization_order"</span>
+<a name="l03843"></a>03843 <span class="preprocessor"></span>
+<a name="l03844"></a>03844 
+<a name="l03845"></a>03845 <span class="keyword">typedef</span> <span class="keyword">enum</span> VkRasterizationOrderAMD {
+<a name="l03846"></a>03846     VK_RASTERIZATION_ORDER_STRICT_AMD = 0,
+<a name="l03847"></a>03847     VK_RASTERIZATION_ORDER_RELAXED_AMD = 1,
+<a name="l03848"></a>03848     VK_RASTERIZATION_ORDER_BEGIN_RANGE_AMD = VK_RASTERIZATION_ORDER_STRICT_AMD,
+<a name="l03849"></a>03849     VK_RASTERIZATION_ORDER_END_RANGE_AMD = VK_RASTERIZATION_ORDER_RELAXED_AMD,
+<a name="l03850"></a>03850     VK_RASTERIZATION_ORDER_RANGE_SIZE_AMD = (VK_RASTERIZATION_ORDER_RELAXED_AMD - VK_RASTERIZATION_ORDER_STRICT_AMD + 1),
+<a name="l03851"></a>03851     VK_RASTERIZATION_ORDER_MAX_ENUM_AMD = 0x7FFFFFFF
+<a name="l03852"></a>03852 } VkRasterizationOrderAMD;
+<a name="l03853"></a>03853 
+<a name="l03854"></a>03854 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkPipelineRasterizationStateRasterizationOrderAMD {
+<a name="l03855"></a>03855     VkStructureType            sType;
+<a name="l03856"></a>03856     <span class="keyword">const</span> <span class="keywordtype">void</span>*                pNext;
+<a name="l03857"></a>03857     VkRasterizationOrderAMD    rasterizationOrder;
+<a name="l03858"></a>03858 } VkPipelineRasterizationStateRasterizationOrderAMD;
+<a name="l03859"></a>03859 
+<a name="l03860"></a>03860 
+<a name="l03861"></a>03861 
+<a name="l03862"></a>03862 <span class="preprocessor">#define VK_AMD_shader_trinary_minmax 1</span>
+<a name="l03863"></a>03863 <span class="preprocessor"></span><span class="preprocessor">#define VK_AMD_SHADER_TRINARY_MINMAX_SPEC_VERSION 1</span>
+<a name="l03864"></a>03864 <span class="preprocessor"></span><span class="preprocessor">#define VK_AMD_SHADER_TRINARY_MINMAX_EXTENSION_NAME "VK_AMD_shader_trinary_minmax"</span>
+<a name="l03865"></a>03865 <span class="preprocessor"></span>
+<a name="l03866"></a>03866 
+<a name="l03867"></a>03867 <span class="preprocessor">#define VK_AMD_shader_explicit_vertex_parameter 1</span>
+<a name="l03868"></a>03868 <span class="preprocessor"></span><span class="preprocessor">#define VK_AMD_SHADER_EXPLICIT_VERTEX_PARAMETER_SPEC_VERSION 1</span>
+<a name="l03869"></a>03869 <span class="preprocessor"></span><span class="preprocessor">#define VK_AMD_SHADER_EXPLICIT_VERTEX_PARAMETER_EXTENSION_NAME "VK_AMD_shader_explicit_vertex_parameter"</span>
+<a name="l03870"></a>03870 <span class="preprocessor"></span>
+<a name="l03871"></a>03871 
+<a name="l03872"></a>03872 <span class="preprocessor">#define VK_EXT_debug_marker 1</span>
+<a name="l03873"></a>03873 <span class="preprocessor"></span><span class="preprocessor">#define VK_EXT_DEBUG_MARKER_SPEC_VERSION  3</span>
+<a name="l03874"></a>03874 <span class="preprocessor"></span><span class="preprocessor">#define VK_EXT_DEBUG_MARKER_EXTENSION_NAME "VK_EXT_debug_marker"</span>
+<a name="l03875"></a>03875 <span class="preprocessor"></span>
+<a name="l03876"></a>03876 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDebugMarkerObjectNameInfoEXT {
+<a name="l03877"></a>03877     VkStructureType               sType;
+<a name="l03878"></a>03878     <span class="keyword">const</span> <span class="keywordtype">void</span>*                   pNext;
+<a name="l03879"></a>03879     VkDebugReportObjectTypeEXT    objectType;
+<a name="l03880"></a>03880     uint64_t                      object;
+<a name="l03881"></a>03881     <span class="keyword">const</span> <span class="keywordtype">char</span>*                   pObjectName;
+<a name="l03882"></a>03882 } VkDebugMarkerObjectNameInfoEXT;
+<a name="l03883"></a>03883 
+<a name="l03884"></a>03884 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDebugMarkerObjectTagInfoEXT {
+<a name="l03885"></a>03885     VkStructureType               sType;
+<a name="l03886"></a>03886     <span class="keyword">const</span> <span class="keywordtype">void</span>*                   pNext;
+<a name="l03887"></a>03887     VkDebugReportObjectTypeEXT    objectType;
+<a name="l03888"></a>03888     uint64_t                      object;
+<a name="l03889"></a>03889     uint64_t                      tagName;
+<a name="l03890"></a>03890     <span class="keywordtype">size_t</span>                        tagSize;
+<a name="l03891"></a>03891     <span class="keyword">const</span> <span class="keywordtype">void</span>*                   pTag;
+<a name="l03892"></a>03892 } VkDebugMarkerObjectTagInfoEXT;
+<a name="l03893"></a>03893 
+<a name="l03894"></a>03894 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDebugMarkerMarkerInfoEXT {
+<a name="l03895"></a>03895     VkStructureType    sType;
+<a name="l03896"></a>03896     <span class="keyword">const</span> <span class="keywordtype">void</span>*        pNext;
+<a name="l03897"></a>03897     <span class="keyword">const</span> <span class="keywordtype">char</span>*        pMarkerName;
+<a name="l03898"></a>03898     <span class="keywordtype">float</span>              color[4];
+<a name="l03899"></a>03899 } VkDebugMarkerMarkerInfoEXT;
+<a name="l03900"></a>03900 
+<a name="l03901"></a>03901 
+<a name="l03902"></a>03902 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkDebugMarkerSetObjectTagEXT)(VkDevice device, VkDebugMarkerObjectTagInfoEXT* pTagInfo);
+<a name="l03903"></a>03903 <span class="keyword">typedef</span> VkResult (VKAPI_PTR *PFN_vkDebugMarkerSetObjectNameEXT)(VkDevice device, VkDebugMarkerObjectNameInfoEXT* pNameInfo);
+<a name="l03904"></a>03904 <span class="keyword">typedef</span> void (VKAPI_PTR *PFN_vkCmdDebugMarkerBeginEXT)(VkCommandBuffer commandBuffer, VkDebugMarkerMarkerInfoEXT* pMarkerInfo);
+<a name="l03905"></a>03905 <span class="keyword">typedef</span> void (VKAPI_PTR *PFN_vkCmdDebugMarkerEndEXT)(VkCommandBuffer commandBuffer);
+<a name="l03906"></a>03906 <span class="keyword">typedef</span> void (VKAPI_PTR *PFN_vkCmdDebugMarkerInsertEXT)(VkCommandBuffer commandBuffer, VkDebugMarkerMarkerInfoEXT* pMarkerInfo);
+<a name="l03907"></a>03907 
+<a name="l03908"></a>03908 <span class="preprocessor">#ifndef VK_NO_PROTOTYPES</span>
+<a name="l03909"></a>03909 <span class="preprocessor"></span>VKAPI_ATTR VkResult VKAPI_CALL vkDebugMarkerSetObjectTagEXT(
+<a name="l03910"></a>03910     VkDevice                                    device,
+<a name="l03911"></a>03911     VkDebugMarkerObjectTagInfoEXT*              pTagInfo);
+<a name="l03912"></a>03912 
+<a name="l03913"></a>03913 VKAPI_ATTR VkResult VKAPI_CALL vkDebugMarkerSetObjectNameEXT(
+<a name="l03914"></a>03914     VkDevice                                    device,
+<a name="l03915"></a>03915     VkDebugMarkerObjectNameInfoEXT*             pNameInfo);
+<a name="l03916"></a>03916 
+<a name="l03917"></a>03917 VKAPI_ATTR <span class="keywordtype">void</span> VKAPI_CALL vkCmdDebugMarkerBeginEXT(
+<a name="l03918"></a>03918     VkCommandBuffer                             commandBuffer,
+<a name="l03919"></a>03919     VkDebugMarkerMarkerInfoEXT*                 pMarkerInfo);
+<a name="l03920"></a>03920 
+<a name="l03921"></a>03921 VKAPI_ATTR <span class="keywordtype">void</span> VKAPI_CALL vkCmdDebugMarkerEndEXT(
+<a name="l03922"></a>03922     VkCommandBuffer                             commandBuffer);
+<a name="l03923"></a>03923 
+<a name="l03924"></a>03924 VKAPI_ATTR <span class="keywordtype">void</span> VKAPI_CALL vkCmdDebugMarkerInsertEXT(
+<a name="l03925"></a>03925     VkCommandBuffer                             commandBuffer,
+<a name="l03926"></a>03926     VkDebugMarkerMarkerInfoEXT*                 pMarkerInfo);
+<a name="l03927"></a>03927 <span class="preprocessor">#endif</span>
+<a name="l03928"></a>03928 <span class="preprocessor"></span>
+<a name="l03929"></a>03929 <span class="preprocessor">#define VK_AMD_gcn_shader 1</span>
+<a name="l03930"></a>03930 <span class="preprocessor"></span><span class="preprocessor">#define VK_AMD_GCN_SHADER_SPEC_VERSION    1</span>
+<a name="l03931"></a>03931 <span class="preprocessor"></span><span class="preprocessor">#define VK_AMD_GCN_SHADER_EXTENSION_NAME  "VK_AMD_gcn_shader"</span>
+<a name="l03932"></a>03932 <span class="preprocessor"></span>
+<a name="l03933"></a>03933 
+<a name="l03934"></a>03934 <span class="preprocessor">#define VK_NV_dedicated_allocation 1</span>
+<a name="l03935"></a>03935 <span class="preprocessor"></span><span class="preprocessor">#define VK_NV_DEDICATED_ALLOCATION_SPEC_VERSION 1</span>
+<a name="l03936"></a>03936 <span class="preprocessor"></span><span class="preprocessor">#define VK_NV_DEDICATED_ALLOCATION_EXTENSION_NAME "VK_NV_dedicated_allocation"</span>
+<a name="l03937"></a>03937 <span class="preprocessor"></span>
+<a name="l03938"></a>03938 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDedicatedAllocationImageCreateInfoNV {
+<a name="l03939"></a>03939     VkStructureType    sType;
+<a name="l03940"></a>03940     <span class="keyword">const</span> <span class="keywordtype">void</span>*        pNext;
+<a name="l03941"></a>03941     VkBool32           dedicatedAllocation;
+<a name="l03942"></a>03942 } VkDedicatedAllocationImageCreateInfoNV;
+<a name="l03943"></a>03943 
+<a name="l03944"></a>03944 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDedicatedAllocationBufferCreateInfoNV {
+<a name="l03945"></a>03945     VkStructureType    sType;
+<a name="l03946"></a>03946     <span class="keyword">const</span> <span class="keywordtype">void</span>*        pNext;
+<a name="l03947"></a>03947     VkBool32           dedicatedAllocation;
+<a name="l03948"></a>03948 } VkDedicatedAllocationBufferCreateInfoNV;
+<a name="l03949"></a>03949 
+<a name="l03950"></a>03950 <span class="keyword">typedef</span> <span class="keyword">struct </span>VkDedicatedAllocationMemoryAllocateInfoNV {
+<a name="l03951"></a>03951     VkStructureType    sType;
+<a name="l03952"></a>03952     <span class="keyword">const</span> <span class="keywordtype">void</span>*        pNext;
+<a name="l03953"></a>03953     VkImage            image;
+<a name="l03954"></a>03954     VkBuffer           buffer;
+<a name="l03955"></a>03955 } VkDedicatedAllocationMemoryAllocateInfoNV;
+<a name="l03956"></a>03956 
+<a name="l03957"></a>03957 
+<a name="l03958"></a>03958 
+<a name="l03959"></a>03959 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l03960"></a>03960 <span class="preprocessor"></span>}
+<a name="l03961"></a>03961 <span class="preprocessor">#endif</span>
+<a name="l03962"></a>03962 <span class="preprocessor"></span>
+<a name="l03963"></a>03963 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div> <!--content-->
 <!-- footer block-->
@@ -3911,7 +4031,7 @@
 	<div class="seperator"></div>
 	<div class="seperator"></div>
 	<address style="text-align: right;"><small>
-Generated on Thu Aug 25 12:48:26 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
+Generated on Mon Nov 28 16:24:59 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
 	<footer>
 		<div class="row">
 			<div class="text-center">&copy;2016 NVIDIA Corporation.</div>

@@ -36,6 +36,8 @@
 #include "NvModel/NvModelExt.h"
 #include "NvGLUtils/NvImageGL.h"
 
+bool Nv::NvModelExtGL::ms_loadTextures = true;
+
 namespace Nv
 {
 
@@ -86,13 +88,19 @@ namespace Nv
 		// mapping from texture index to the returned texture GL "name"
         uint32_t textureCount = m_pSourceModel->GetTextureCount();
         m_textures.resize(textureCount);
-        for (uint32_t textureIndex = 0; textureIndex < textureCount; ++textureIndex)
-        {
-            m_textures[textureIndex] = NvImageGL::UploadTextureFromDDSFile(m_pSourceModel->GetTextureName(textureIndex).c_str());
-            glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, m_textures[textureIndex]);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-            glBindTexture(GL_TEXTURE_2D, 0);
+        if (ms_loadTextures) {
+            for (uint32_t textureIndex = 0; textureIndex < textureCount; ++textureIndex)
+            {
+                m_textures[textureIndex] = NvImageGL::UploadTextureFromFile(m_pSourceModel->GetTextureName(textureIndex).c_str());
+                glActiveTexture(GL_TEXTURE0);
+                glBindTexture(GL_TEXTURE_2D, m_textures[textureIndex]);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+                glBindTexture(GL_TEXTURE_2D, 0);
+            }
+        }
+        else {
+            for (uint32_t textureIndex = 0; textureIndex < textureCount; ++textureIndex)
+                m_textures[textureIndex] = 0;
         }
  
 		// Get GL usable versions of all the materials in the model

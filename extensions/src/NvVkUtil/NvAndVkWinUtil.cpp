@@ -38,8 +38,10 @@
 #include "NvVkRenderTargetImpls.h"
 
 typedef VkResult(VKAPI_PTR *PFN_vkCreateAndroidSurfaceKHR)(VkInstance instance, const VkAndroidSurfaceCreateInfoKHR* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
+typedef void (VKAPI_PTR *PFN_vkDestroySurfaceKHR)(VkInstance instance, VkSurfaceKHR surface, const VkAllocationCallbacks* pAllocator);
 
-static PFN_vkCreateAndroidSurfaceKHR pfn_vkCreateAndroidSurfaceKHR =  NULL;
+static PFN_vkCreateAndroidSurfaceKHR pfn_vkCreateAndroidSurfaceKHR = NULL;
+static PFN_vkDestroySurfaceKHR pfn_vkDestroySurfaceKHR = NULL;
 
 bool NvAndVkWinUtil::initialize(NvVkContext* vk, VkFormat cbFormat, VkFormat dsFormat) {
 	m_cbFormat = cbFormat;
@@ -57,6 +59,14 @@ NvAndVkWinUtil::~NvAndVkWinUtil() {
 // Must be called with NULL when the window is destroyed
 bool NvAndVkWinUtil::setWindow(ANativeWindow* window) {
 	m_window = window;
+    if (!m_window && m_renderTarget) {
+        extern void* NvAndroidGetVKProcAddr(const char* name);
+        pfn_vkDestroySurfaceKHR = (PFN_vkDestroySurfaceKHR)NvAndroidGetVKProcAddr("vkDestroySurfaceKHR");
+
+        pfn_vkDestroySurfaceKHR(m_vk->instance(), m_renderTarget->getSurface(), NULL);
+        delete m_renderTarget;
+        m_renderTarget = NULL;
+    }
 	return true;
 }
 

@@ -785,7 +785,7 @@ static VKINLINE void vkCmdCopyImageToBuffer(VkCommandBuffer commandBuffer, VkIma
 }
 
 extern PFN_vkCmdUpdateBuffer pfn_vkCmdUpdateBuffer;
-static VKINLINE void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, const uint32_t *pData)
+static VKINLINE void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, const void *pData)
 {
     pfn_vkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, dataSize, pData);
 }

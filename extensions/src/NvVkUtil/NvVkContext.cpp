@@ -737,6 +737,36 @@ bool NvVkContext::uploadTextureFromDDSFile(const char* filename, NvVkTexture& te
 	return success;
 }
 
+bool NvVkContext::uploadTextureFromFile(const char* filename, NvVkTexture& tex) {
+    int32_t len;
+    NvImage* image = new NvImage;
+    char* ddsData = NvAssetLoaderRead(filename, len);
+
+    if (!ddsData)
+        return 0;
+
+    const char* ext = filename + strlen(filename) - 1;
+
+    while (ext > filename) {
+        if (*ext == '.') {
+            ext++;
+            break;
+        }
+        ext--;
+    }
+
+    bool success = false;
+    if (image->loadImageFromFileData((const uint8_t*)ddsData, len, ext)) {
+        success = uploadTexture(image, tex);
+    }
+
+    NvAssetLoaderFree(ddsData);
+
+    delete image;
+
+    return success;
+}
+
 bool NvVkContext::uploadTextureFromDDSData(const char* ddsData, int32_t length, NvVkTexture& tex) {
 	NvImage* image = new NvImage;
 
@@ -788,9 +818,12 @@ bool NvVkContext::uploadTexture(const NvImage* image, NvVkTexture& tex) {
 	if (result != VK_SUCCESS)
 		return false;
 
+	uint32_t regionCount = info.arrayLayers * info.mipLevels;
+
 	// Create a buffer to hold the texture data before we copy it to the image.
 	VkBufferCreateInfo texBufferInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
-	texBufferInfo.size = image->getDataBlockSize();
+	// pad block, as we may need to align the data to 4 bytes
+	texBufferInfo.size = image->getDataBlockSize() + 4 * regionCount;
 	texBufferInfo.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
 	texBufferInfo.flags = 0;
 	NvVkBuffer texBuffer;
@@ -807,22 +840,27 @@ bool NvVkContext::uploadTexture(const NvImage* image, NvVkTexture& tex) {
 	if (result != VK_SUCCESS)
 		return false;
 
-	memcpy(destPtr, image->getDataBlock(), texBufferInfo.size);
-
-	vkUnmapMemory(device(), texBuffer.mem);
-	
-	uint32_t regionCount = info.arrayLayers * info.mipLevels;
 	VkBufferImageCopy* texCopyRegions 
 		= new VkBufferImageCopy[regionCount];
 	VkBufferImageCopy* rgn = texCopyRegions;
 
 	memset(texCopyRegions, 0, sizeof(VkBufferImageCopy) * regionCount);
 
+	uint32_t offset = 0;
 	for (uint32_t layer = 0; layer < info.arrayLayers; layer++) {
 		uint32_t width = image->getWidth();
 		uint32_t height = image->getHeight();
 		for (uint32_t mip = 0; mip < info.mipLevels; mip++) {
-			rgn->bufferOffset = image->getLayerLevelOffset(mip, layer);
+			uint32_t srcOffset = image->getLayerLevelOffset(mip, layer);
+			uint32_t srcSize = image->getImageSize(mip);
+			rgn->bufferOffset = offset;
+
+			memcpy(destPtr, image->getDataBlock() + srcOffset, srcSize);
+			uint32_t paddedSize = (srcSize + 3) & (~0x03);
+			offset += paddedSize;
+
+			destPtr = ((uint8_t*)destPtr) + paddedSize;
+
 			rgn->imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
 			rgn->imageSubresource.baseArrayLayer = layer;
 			rgn->imageSubresource.mipLevel = mip;
@@ -841,15 +879,17 @@ bool NvVkContext::uploadTexture(const NvImage* image, NvVkTexture& tex) {
 		}
 	}
 
+	vkUnmapMemory(device(), texBuffer.mem);
+
 	VkCommandBuffer cmd = beginTempCmdBuffer();
 	{
 		// Transition the texture from undefined to transfer destination
 		VkImageSubresourceRange subresourceRange = {};
 		subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
 		subresourceRange.baseMipLevel = 0;
-		subresourceRange.levelCount = info.mipLevels; // TODO fetch from actual image
+		subresourceRange.levelCount = info.mipLevels;
 		subresourceRange.baseArrayLayer = 0;
-		subresourceRange.layerCount = info.arrayLayers; // TODO fetch from actual image
+		subresourceRange.layerCount = info.arrayLayers;
 
 		VkImageMemoryBarrier memBarrier = { VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER };
 		memBarrier.srcAccessMask = 0;
@@ -870,9 +910,9 @@ bool NvVkContext::uploadTexture(const NvImage* image, NvVkTexture& tex) {
 		VkImageSubresourceRange subresourceRange = {};
 		subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
 		subresourceRange.baseMipLevel = 0;
-		subresourceRange.levelCount = 1; // TODO fetch from actual image
+		subresourceRange.levelCount = info.mipLevels; 
 		subresourceRange.baseArrayLayer = 0;
-		subresourceRange.layerCount = 1; // TODO fetch from actual image
+		subresourceRange.layerCount = info.arrayLayers; // TODO fetch from actual image
 
 		VkImageMemoryBarrier memBarrier = { VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER };
 		memBarrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;

@@ -229,10 +229,11 @@ public:
 
     // inequality
     friend bool operator != ( const vec2<T> &lhs, const vec2<T> &rhs ) {
-        bool r = true;
-        for (int32_t i = 0; i < lhs.size(); i++)
-            r &= lhs._array[i] != rhs._array[i];
-        return r;
+        for (int32_t i = 0; i < lhs.size(); i++) {
+            if (lhs._array[i] != rhs._array[i])
+                return true;
+        }
+        return false;
     }
 
     //data intentionally left public to allow vec2.x
@@ -467,10 +468,11 @@ public:
 
     // inequality
     friend bool operator != ( const vec3<T> &lhs, const vec3<T> &rhs ) {
-        bool r = true;
-        for (int32_t i = 0; i < lhs.size(); i++)
-            r &= lhs._array[i] != rhs._array[i];
-        return r;
+        for (int32_t i = 0; i < lhs.size(); i++) {
+            if (lhs._array[i] != rhs._array[i])
+                return true;
+        }
+        return false;
     }
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -687,10 +689,11 @@ public:
 
     // inequality
     friend bool operator != ( const vec4<T> &lhs, const vec4<T> &rhs ) {
-        bool r = true;
-        for (int32_t i = 0; i < lhs.size(); i++)
-            r &= lhs._array[i] != rhs._array[i];
-        return r;
+        for (int32_t i = 0; i < lhs.size(); i++) {
+            if (lhs._array[i] != rhs._array[i])
+                return true;
+        }
+        return false;
     }
 
     //data intentionally left public to allow vec2.x

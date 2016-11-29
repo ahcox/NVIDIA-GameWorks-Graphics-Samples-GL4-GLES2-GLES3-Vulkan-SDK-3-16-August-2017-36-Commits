@@ -421,6 +421,15 @@ public:
     /// \return true on success or false for unsuitable source images
     bool convertCrossToCubemap();
 
+    /// Replace (destructive to all content) the storage data and format of the image
+    /// Mainly used by image loaders to resize and reformat an already-created image
+    /// \param[in] width of the new image
+    /// \param[in] height of the new image
+    /// \param[in] format NVIMAGE_ format of the new image
+    /// \param[in] type NVIMAGE_ type of the component data in the new image
+    /// \return true on success or false for failure
+    bool reformatImage(int32_t width, int32_t height, uint32_t format, uint32_t type);
+
     bool setImage( int32_t width, int32_t height, uint32_t format, uint32_t type, const void* data);
 
     /// Enables or disables automatic swapping of BGR-order images to RGB
@@ -440,6 +449,19 @@ public:
     /// Gets the status of automatic DXT expansion
     /// \return true if DXT images will be expanded, false if they will be passed through
     static bool getDXTExpansion() { return m_expandDXT; }
+
+    /// Format handlers descriptor for custom image loading
+	struct FormatInfo {
+		const char* extension; /// string with the filename extension (no .)
+		bool(*reader)(const uint8_t* fileData, size_t size, NvImage& i); /// reader function
+		bool(*writer)(uint8_t* fileData, size_t size, NvImage& i); /// optional writer function
+	};
+
+    /// Adds a file loader for the given file extension
+    /// \param[in] loader the descriptor for the loading system
+    /// \return true on success or false on failure (no more loader slots or extension
+    /// already handled)
+	static bool addFileLoader(const FormatInfo& loader);
 
 protected:
     /// \privatesection
@@ -474,13 +496,9 @@ protected:
     // Static elements used to dispatch to proper sub-readers
     //
     //////////////////////////////////////////////////////////////
-    struct FormatInfo {
-        const char* extension;
-        bool (*reader)(const uint8_t* fileData, size_t size, NvImage& i);
-        bool (*writer)(uint8_t* fileData, size_t size, NvImage& i);
-    };
-
-    static FormatInfo formatTable[]; 
+	enum { MAX_LOADERS = 8 };
+	static uint32_t formatLoaderCount;
+    static FormatInfo formatTable[MAX_LOADERS];
     static bool vertFlip;
     static bool m_expandDXT;
     static bool m_supportsBGR;

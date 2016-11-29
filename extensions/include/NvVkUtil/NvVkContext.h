@@ -38,6 +38,7 @@
 /// VK context utilities and wrappers.
 
 #include <NvSimpleTypes.h>
+#include "NV/NvMatrix.h"
 #include "NvPlatformVK.h"
 #include <NV/NvGfxConfiguration.h>
 #include <NvVkUtil/NvVkUtil.h>
@@ -48,6 +49,60 @@ void checkVkResult(const char* file, int32_t line, VkResult result);
 #ifndef CHECK_VK_RESULT
 #define CHECK_VK_RESULT() checkVkResult(__FILE__, __LINE__, result)
 #endif
+
+namespace nv {
+    //
+    // Projection matrix creation (Vulkan standard)
+    // From the frustum definition
+    //
+    //   return the projection matrix
+    ////////////////////////////////////////////////////////////
+    template<class T>
+    matrix4<T>& frustumVk(matrix4<T> & M, const T l, const T r, const T b, const T t, const T n, const T f)
+    {
+        M.element(0, 0) = ((T)(2.0))*n / (r - l);
+        M.element(1, 0) = 0.0;
+        M.element(2, 0) = 0.0;
+        M.element(3, 0) = 0.0;
+
+        M.element(0, 1) = 0.0;
+        M.element(1, 1) = ((T)(2.0))*n / (b - t);
+        M.element(2, 1) = 0.0;
+        M.element(3, 1) = 0.0;
+
+        M.element(0, 2) = (r + l) / (r - l);
+        M.element(1, 2) = (b + t) / (b - t);
+        M.element(2, 2) = -f / (f - n);
+        M.element(3, 2) = -1.0;
+
+        M.element(0, 3) = 0.0;
+        M.element(1, 3) = 0.0;
+        M.element(2, 3) = -(f*n) / (f - n);
+        M.element(3, 3) = 0.0;
+
+        return M;
+    }
+
+    //
+    // Projection matrix creation (Right Handed, Vulkan standard)
+    // From the fovy in radians, aspect ratio and near far definition
+    //
+    //   return the projection matrix
+    ////////////////////////////////////////////////////////////
+    template<class T>
+    matrix4<T>& perspectiveVk(matrix4<T> & M, const T fovy, const T aspect, const T n, const T f)
+    {
+        T xmin, xmax, ymin, ymax;
+
+        ymax = n * (T)tan(fovy * 0.5);
+        ymin = -ymax;
+
+        xmin = ymin * aspect;
+        xmax = ymax * aspect;
+
+        return frustumVk(M, xmin, xmax, ymin, ymax, n, f);
+    }
+};
 
 /// VK config representation.
 struct NvVKConfiguration : public NvGfxConfiguration {
@@ -301,6 +356,12 @@ public:
 	/// \param[out] tex the loaded texture
 	/// \return true on success and false on failure
 	bool uploadTextureFromDDSFile(const char* filename, NvVkTexture& tex);
+
+    /// Creates a texture from an asset-based image file
+    /// \param[in] filename the asset-path of the image file to load
+    /// \param[out] tex the loaded texture
+    /// \return true on success and false on failure
+    bool uploadTextureFromFile(const char* filename, NvVkTexture& tex);
 
 	/// Creates a texture from preloaded data in DDS file format
 	/// \param[in] ddsData pointer to the DDS file data to load

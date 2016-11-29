@@ -161,7 +161,7 @@ void HelloVulkan::initRendering(void) {
 	vpStateInfo.scissorCount = 1;
 
 	VkPipelineRasterizationStateCreateInfo rsStateInfo = { VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO };
-	rsStateInfo.depthClampEnable = VK_TRUE;
+	rsStateInfo.depthClampEnable = VK_FALSE;
 	rsStateInfo.rasterizerDiscardEnable = VK_FALSE;
 	rsStateInfo.polygonMode = VK_POLYGON_MODE_FILL;
     rsStateInfo.cullMode = VK_CULL_MODE_NONE;
@@ -302,12 +302,13 @@ void HelloVulkan::updateRenderCommands() {
 	CHECK_VK_RESULT();
 
 	VkCommandBufferInheritanceInfo inherit = { VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO };
-	inherit.framebuffer = vk().mainRenderTarget()->frameBuffer();
+	inherit.framebuffer = VK_NULL_HANDLE;
 	inherit.renderPass = vk().mainRenderTarget()->clearRenderPass();
 
 	// Record the commands (resets the buffer)
 	VkCommandBufferBeginInfo beginInfo = { VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO };
-	beginInfo.flags = VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT;
+	beginInfo.flags = VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT |
+		VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT;
 	beginInfo.pInheritanceInfo = &inherit;
 
 	result = vkBeginCommandBuffer(mCmd, &beginInfo);

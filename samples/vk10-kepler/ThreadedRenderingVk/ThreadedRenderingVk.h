@@ -452,8 +452,9 @@ private:
     bool     m_bTankSizeChanged;
 	uint32_t m_uiThreadCount;
 	uint32_t m_uiInstanceCount;
-	uint32_t m_uiBatchSize;
-	NvUISlider* m_pBatchSlider;
+    uint32_t m_uiBatchSizeRequested;
+    uint32_t m_uiBatchSizeActual;
+    NvUISlider* m_pBatchSlider;
 	NvTweakVar<uint32_t>* m_pBatchVar;
 	NvUIButton* m_pThreadedRenderingButton;
 

@@ -67,510 +67,565 @@
 <a name="l00004"></a>00004 <span class="preprocessor"></span>
 <a name="l00007"></a>00007 
 <a name="l00008"></a>00008 <span class="preprocessor">#include &lt;NvSimpleTypes.h&gt;</span>
-<a name="l00009"></a>00009 <span class="preprocessor">#include "<a class="code" href="_nv_platform_v_k_8h.html" title="Platform-independent VK header.">NvPlatformVK.h</a>"</span>
-<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;<a class="code" href="_nv_gfx_configuration_8h.html" title="Graphics API representation.">NV/NvGfxConfiguration.h</a>&gt;</span>
-<a name="l00011"></a>00011 <span class="preprocessor">#include &lt;NvVkUtil/NvVkUtil.h&gt;</span>
-<a name="l00012"></a>00012 <span class="preprocessor">#include &lt;vector&gt;</span>
-<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;set&gt;</span>
-<a name="l00014"></a>00014 
-<a name="l00015"></a>00015 <span class="keywordtype">void</span> checkVkResult(<span class="keyword">const</span> <span class="keywordtype">char</span>* file, int32_t line, VkResult result);
-<a name="l00016"></a>00016 <span class="preprocessor">#ifndef CHECK_VK_RESULT</span>
-<a name="l00017"></a>00017 <span class="preprocessor"></span><span class="preprocessor">#define CHECK_VK_RESULT() checkVkResult(__FILE__, __LINE__, result)</span>
-<a name="l00018"></a>00018 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00019"></a>00019 <span class="preprocessor"></span>
-<a name="l00021"></a><a class="code" href="struct_nv_v_k_configuration.html">00021</a> <span class="keyword">struct </span><a class="code" href="struct_nv_v_k_configuration.html" title="VK config representation.">NvVKConfiguration</a> : <span class="keyword">public</span> NvGfxConfiguration {
-<a name="l00022"></a>00022         <a class="code" href="struct_nv_v_k_configuration.html" title="VK config representation.">NvVKConfiguration</a>(<span class="keyword">const</span> NvGfxConfiguration&amp; gfx) :
-<a name="l00023"></a>00023                 NvGfxConfiguration(gfx)
-<a name="l00024"></a>00024                 , <a class="code" href="struct_nv_v_k_configuration.html#2d5ca2cc0e5ff961ddee04f2e7187a0f" title="Usage flags for the main color render target default is VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT...">mainTargetUsageFlags</a>(VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT)
-<a name="l00025"></a>00025                 , <a class="code" href="struct_nv_v_k_configuration.html#c946de8cc6e09f2e6d3b26537bd4a3ed" title="Usage flags for the main depth stencil render target default is VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHM...">mainDepthStencilUsageFlags</a>(VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT)
-<a name="l00026"></a>00026                 , <a class="code" href="struct_nv_v_k_configuration.html#fdec11e5638f46b11f0c80c5962e4075" title="Features to enable during device create time.">featuresToEnable</a>(<a class="code" href="struct_nv_v_k_configuration.html#1fc57b5b4ef7cf9ba1730f7540d328f9" title="Features required by the framework which are enabled by default.">requiredFeaturesToEnable</a>())
-<a name="l00027"></a>00027                 {
-<a name="l00028"></a>00028                 }
-<a name="l00029"></a>00029 
-<a name="l00038"></a><a class="code" href="struct_nv_v_k_configuration.html#c37fe147dd31dc2c643652ef20dadc3c">00038</a>         <a class="code" href="struct_nv_v_k_configuration.html" title="VK config representation.">NvVKConfiguration</a>(uint32_t r = 8, uint32_t g = 8,
-<a name="l00039"></a>00039                 uint32_t b = 8, uint32_t a = 8,
-<a name="l00040"></a>00040                 uint32_t d = 24, uint32_t s = 0, uint32_t msaa = 0) :
-<a name="l00041"></a>00041                 NvGfxConfiguration(r, g, b, a, d, s, msaa) 
-<a name="l00042"></a>00042                 , <a class="code" href="struct_nv_v_k_configuration.html#2d5ca2cc0e5ff961ddee04f2e7187a0f" title="Usage flags for the main color render target default is VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT...">mainTargetUsageFlags</a>(VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT)
-<a name="l00043"></a>00043                 , <a class="code" href="struct_nv_v_k_configuration.html#c946de8cc6e09f2e6d3b26537bd4a3ed" title="Usage flags for the main depth stencil render target default is VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHM...">mainDepthStencilUsageFlags</a>(VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT)
-<a name="l00044"></a>00044                 , <a class="code" href="struct_nv_v_k_configuration.html#fdec11e5638f46b11f0c80c5962e4075" title="Features to enable during device create time.">featuresToEnable</a> (<a class="code" href="struct_nv_v_k_configuration.html#1fc57b5b4ef7cf9ba1730f7540d328f9" title="Features required by the framework which are enabled by default.">requiredFeaturesToEnable</a>())
-<a name="l00045"></a>00045         {}
-<a name="l00046"></a>00046         
-<a name="l00048"></a><a class="code" href="struct_nv_v_k_configuration.html#2d5ca2cc0e5ff961ddee04f2e7187a0f">00048</a>         VkImageUsageFlags <a class="code" href="struct_nv_v_k_configuration.html#2d5ca2cc0e5ff961ddee04f2e7187a0f" title="Usage flags for the main color render target default is VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT...">mainTargetUsageFlags</a>;
-<a name="l00050"></a><a class="code" href="struct_nv_v_k_configuration.html#c946de8cc6e09f2e6d3b26537bd4a3ed">00050</a>         VkImageUsageFlags <a class="code" href="struct_nv_v_k_configuration.html#c946de8cc6e09f2e6d3b26537bd4a3ed" title="Usage flags for the main depth stencil render target default is VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHM...">mainDepthStencilUsageFlags</a>;
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052 
-<a name="l00054"></a><a class="code" href="struct_nv_v_k_configuration.html#427048fabd6e7018e9db321039010f2c">00054</a>         std::vector&lt;std::string&gt; <a class="code" href="struct_nv_v_k_configuration.html#427048fabd6e7018e9db321039010f2c" title="Additional extensions to enable during instance and device create time.">extensionsToEnable</a>;
-<a name="l00056"></a><a class="code" href="struct_nv_v_k_configuration.html#ac90cb84b5b61c2e7c5d46a67809e063">00056</a>         std::vector&lt;std::string&gt; <a class="code" href="struct_nv_v_k_configuration.html#ac90cb84b5b61c2e7c5d46a67809e063" title="Additional layers to enable during instance create time (device layers are deprecated)...">layersToEnable</a>;
-<a name="l00057"></a>00057 
-<a name="l00059"></a><a class="code" href="struct_nv_v_k_configuration.html#fdec11e5638f46b11f0c80c5962e4075">00059</a>         VkPhysicalDeviceFeatures        <a class="code" href="struct_nv_v_k_configuration.html#fdec11e5638f46b11f0c80c5962e4075" title="Features to enable during device create time.">featuresToEnable</a>;
-<a name="l00060"></a>00060         
-<a name="l00062"></a><a class="code" href="struct_nv_v_k_configuration.html#1fc57b5b4ef7cf9ba1730f7540d328f9">00062</a>         <span class="keyword">static</span> VkPhysicalDeviceFeatures <a class="code" href="struct_nv_v_k_configuration.html#1fc57b5b4ef7cf9ba1730f7540d328f9" title="Features required by the framework which are enabled by default.">requiredFeaturesToEnable</a>()
-<a name="l00063"></a>00063         {
-<a name="l00064"></a>00064                 VkPhysicalDeviceFeatures result = { 0 };
-<a name="l00065"></a>00065                 result.shaderClipDistance = VK_TRUE;
-<a name="l00066"></a>00066                 result.shaderCullDistance = VK_TRUE;
-<a name="l00067"></a>00067                 <span class="keywordflow">return</span> result;
-<a name="l00068"></a>00068         }
-<a name="l00069"></a>00069 };
+<a name="l00009"></a>00009 <span class="preprocessor">#include "<a class="code" href="_nv_matrix_8h.html" title="Basic matrix classes with math operations.">NV/NvMatrix.h</a>"</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include "<a class="code" href="_nv_platform_v_k_8h.html" title="Platform-independent VK header.">NvPlatformVK.h</a>"</span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &lt;<a class="code" href="_nv_gfx_configuration_8h.html" title="Graphics API representation.">NV/NvGfxConfiguration.h</a>&gt;</span>
+<a name="l00012"></a>00012 <span class="preprocessor">#include &lt;NvVkUtil/NvVkUtil.h&gt;</span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;vector&gt;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;set&gt;</span>
+<a name="l00015"></a>00015 
+<a name="l00016"></a>00016 <span class="keywordtype">void</span> checkVkResult(<span class="keyword">const</span> <span class="keywordtype">char</span>* file, int32_t line, VkResult result);
+<a name="l00017"></a>00017 <span class="preprocessor">#ifndef CHECK_VK_RESULT</span>
+<a name="l00018"></a>00018 <span class="preprocessor"></span><span class="preprocessor">#define CHECK_VK_RESULT() checkVkResult(__FILE__, __LINE__, result)</span>
+<a name="l00019"></a>00019 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00020"></a>00020 <span class="preprocessor"></span>
+<a name="l00021"></a>00021 <span class="keyword">namespace </span>nv {
+<a name="l00022"></a>00022     <span class="comment">//</span>
+<a name="l00023"></a>00023     <span class="comment">// Projection matrix creation (Vulkan standard)</span>
+<a name="l00024"></a>00024     <span class="comment">// From the frustum definition</span>
+<a name="l00025"></a>00025     <span class="comment">//</span>
+<a name="l00026"></a>00026     <span class="comment">//   return the projection matrix</span>
+<a name="l00028"></a>00028 <span class="comment"></span>    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;
+<a name="l00029"></a>00029     matrix4&lt;T&gt;&amp; frustumVk(matrix4&lt;T&gt; &amp; M, <span class="keyword">const</span> T l, <span class="keyword">const</span> T r, <span class="keyword">const</span> T b, <span class="keyword">const</span> T t, <span class="keyword">const</span> T n, <span class="keyword">const</span> T f)
+<a name="l00030"></a>00030     {
+<a name="l00031"></a>00031         M.element(0, 0) = ((T)(2.0))*n / (r - l);
+<a name="l00032"></a>00032         M.element(1, 0) = 0.0;
+<a name="l00033"></a>00033         M.element(2, 0) = 0.0;
+<a name="l00034"></a>00034         M.element(3, 0) = 0.0;
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036         M.element(0, 1) = 0.0;
+<a name="l00037"></a>00037         M.element(1, 1) = ((T)(2.0))*n / (b - t);
+<a name="l00038"></a>00038         M.element(2, 1) = 0.0;
+<a name="l00039"></a>00039         M.element(3, 1) = 0.0;
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041         M.element(0, 2) = (r + l) / (r - l);
+<a name="l00042"></a>00042         M.element(1, 2) = (b + t) / (b - t);
+<a name="l00043"></a>00043         M.element(2, 2) = -f / (f - n);
+<a name="l00044"></a>00044         M.element(3, 2) = -1.0;
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046         M.element(0, 3) = 0.0;
+<a name="l00047"></a>00047         M.element(1, 3) = 0.0;
+<a name="l00048"></a>00048         M.element(2, 3) = -(f*n) / (f - n);
+<a name="l00049"></a>00049         M.element(3, 3) = 0.0;
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051         <span class="keywordflow">return</span> M;
+<a name="l00052"></a>00052     }
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054     <span class="comment">//</span>
+<a name="l00055"></a>00055     <span class="comment">// Projection matrix creation (Right Handed, Vulkan standard)</span>
+<a name="l00056"></a>00056     <span class="comment">// From the fovy in radians, aspect ratio and near far definition</span>
+<a name="l00057"></a>00057     <span class="comment">//</span>
+<a name="l00058"></a>00058     <span class="comment">//   return the projection matrix</span>
+<a name="l00060"></a>00060 <span class="comment"></span>    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;
+<a name="l00061"></a>00061     matrix4&lt;T&gt;&amp; perspectiveVk(matrix4&lt;T&gt; &amp; M, <span class="keyword">const</span> T fovy, <span class="keyword">const</span> T aspect, <span class="keyword">const</span> T n, <span class="keyword">const</span> T f)
+<a name="l00062"></a>00062     {
+<a name="l00063"></a>00063         T xmin, xmax, ymin, ymax;
+<a name="l00064"></a>00064 
+<a name="l00065"></a>00065         ymax = n * (T)tan(fovy * 0.5);
+<a name="l00066"></a>00066         ymin = -ymax;
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068         xmin = ymin * aspect;
+<a name="l00069"></a>00069         xmax = ymax * aspect;
 <a name="l00070"></a>00070 
-<a name="l00071"></a>00071 <span class="keyword">class </span><a class="code" href="class_nv_image.html" title="Image loading, representation and handling Support loading of images from DDS files...">NvImage</a>;
-<a name="l00072"></a>00072 <span class="keyword">class </span><a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>;
-<a name="l00073"></a>00073 <span class="keyword">class </span>NvGPUTimerVK;
+<a name="l00071"></a>00071         <span class="keywordflow">return</span> frustumVk(M, xmin, xmax, ymin, ymax, n, f);
+<a name="l00072"></a>00072     }
+<a name="l00073"></a>00073 };
 <a name="l00074"></a>00074 
-<a name="l00076"></a><a class="code" href="struct_nv_vk_buffer.html">00076</a> <span class="keyword">struct </span><a class="code" href="struct_nv_vk_buffer.html" title="A wrapper for a VkBuffer and its memory.">NvVkBuffer</a> {
-<a name="l00077"></a><a class="code" href="struct_nv_vk_buffer.html#e23d5802d65914aa7ae5acbd9cfa34f8">00077</a>         VkDeviceMemory <a class="code" href="struct_nv_vk_buffer.html#e23d5802d65914aa7ae5acbd9cfa34f8" title="Buffer memory object.">mem</a>; 
-<a name="l00078"></a><a class="code" href="struct_nv_vk_buffer.html#63da0eb8c65a337144e159fd48649e77">00078</a>         VkBuffer <a class="code" href="struct_nv_vk_buffer.html#63da0eb8c65a337144e159fd48649e77" title="Buffer object.">buffer</a>; 
-<a name="l00079"></a>00079 
-<a name="l00080"></a>00080 
-<a name="l00081"></a><a class="code" href="struct_nv_vk_buffer.html#8f2d3459dffce7cde41321cfe4f6d73c">00081</a>         VkBuffer&amp; <a class="code" href="struct_nv_vk_buffer.html#8f2d3459dffce7cde41321cfe4f6d73c" title="Value-of operator.">operator ()</a>() { <span class="keywordflow">return</span> <a class="code" href="struct_nv_vk_buffer.html#63da0eb8c65a337144e159fd48649e77" title="Buffer object.">buffer</a>; }
-<a name="l00082"></a>00082         <a class="code" href="struct_nv_vk_buffer.html" title="A wrapper for a VkBuffer and its memory.">NvVkBuffer</a>() : <a class="code" href="struct_nv_vk_buffer.html#e23d5802d65914aa7ae5acbd9cfa34f8" title="Buffer memory object.">mem</a>(0), <a class="code" href="struct_nv_vk_buffer.html#63da0eb8c65a337144e159fd48649e77" title="Buffer object.">buffer</a>(0) {}
-<a name="l00083"></a>00083 };
+<a name="l00076"></a><a class="code" href="struct_nv_v_k_configuration.html">00076</a> <span class="keyword">struct </span><a class="code" href="struct_nv_v_k_configuration.html" title="VK config representation.">NvVKConfiguration</a> : <span class="keyword">public</span> NvGfxConfiguration {
+<a name="l00077"></a>00077         <a class="code" href="struct_nv_v_k_configuration.html" title="VK config representation.">NvVKConfiguration</a>(<span class="keyword">const</span> NvGfxConfiguration&amp; gfx) :
+<a name="l00078"></a>00078                 NvGfxConfiguration(gfx)
+<a name="l00079"></a>00079                 , <a class="code" href="struct_nv_v_k_configuration.html#2d5ca2cc0e5ff961ddee04f2e7187a0f" title="Usage flags for the main color render target default is VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT...">mainTargetUsageFlags</a>(VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT)
+<a name="l00080"></a>00080                 , <a class="code" href="struct_nv_v_k_configuration.html#c946de8cc6e09f2e6d3b26537bd4a3ed" title="Usage flags for the main depth stencil render target default is VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHM...">mainDepthStencilUsageFlags</a>(VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT)
+<a name="l00081"></a>00081                 , <a class="code" href="struct_nv_v_k_configuration.html#fdec11e5638f46b11f0c80c5962e4075" title="Features to enable during device create time.">featuresToEnable</a>(<a class="code" href="struct_nv_v_k_configuration.html#1fc57b5b4ef7cf9ba1730f7540d328f9" title="Features required by the framework which are enabled by default.">requiredFeaturesToEnable</a>())
+<a name="l00082"></a>00082                 {
+<a name="l00083"></a>00083                 }
 <a name="l00084"></a>00084 
-<a name="l00086"></a><a class="code" href="struct_nv_vk_image.html">00086</a> <span class="keyword">struct </span><a class="code" href="struct_nv_vk_image.html" title="A wrapper for a VkImage and its memory.">NvVkImage</a> {
-<a name="l00087"></a><a class="code" href="struct_nv_vk_image.html#bd6182182e4d505a9cd3a642d3bf45e3">00087</a>         VkDeviceMemory <a class="code" href="struct_nv_vk_image.html#bd6182182e4d505a9cd3a642d3bf45e3" title="Image memory object.">mem</a>; 
-<a name="l00088"></a><a class="code" href="struct_nv_vk_image.html#0220533064bdb0a8061b61362362b58f">00088</a>         VkImage <a class="code" href="struct_nv_vk_image.html#0220533064bdb0a8061b61362362b58f" title="Image object.">image</a>; 
-<a name="l00089"></a>00089 
-<a name="l00090"></a>00090 
-<a name="l00091"></a><a class="code" href="struct_nv_vk_image.html#50998681355867411bfa220f74f4ccc1">00091</a>         VkImage&amp; <a class="code" href="struct_nv_vk_image.html#50998681355867411bfa220f74f4ccc1" title="Value-of operator.">operator ()</a>() { <span class="keywordflow">return</span> <a class="code" href="struct_nv_vk_image.html#0220533064bdb0a8061b61362362b58f" title="Image object.">image</a>; }
-<a name="l00092"></a>00092         <a class="code" href="struct_nv_vk_image.html" title="A wrapper for a VkImage and its memory.">NvVkImage</a>() : <a class="code" href="struct_nv_vk_image.html#bd6182182e4d505a9cd3a642d3bf45e3" title="Image memory object.">mem</a>(0), <a class="code" href="struct_nv_vk_image.html#0220533064bdb0a8061b61362362b58f" title="Image object.">image</a>(0) {}
-<a name="l00093"></a>00093 };
-<a name="l00094"></a>00094 
-<a name="l00096"></a><a class="code" href="struct_nv_vk_texture.html">00096</a> <span class="keyword">struct </span><a class="code" href="struct_nv_vk_texture.html" title="A &amp;quot;texture&amp;quot;: a wrapper for a VkImage and its VkImageView.">NvVkTexture</a> {
-<a name="l00099"></a><a class="code" href="struct_nv_vk_texture.html#ddba418400fb11f82336be79e831c79b">00099</a>         <a class="code" href="struct_nv_vk_image.html" title="A wrapper for a VkImage and its memory.">NvVkImage</a>&amp; <a class="code" href="struct_nv_vk_texture.html#ddba418400fb11f82336be79e831c79b" title="Value-of operator.">operator ()</a>() { <span class="keywordflow">return</span> <a class="code" href="struct_nv_vk_texture.html#7c8b450b8f5e166c11fe6b34e8b699a3" title="Image object.">image</a>; }
-<a name="l00100"></a><a class="code" href="struct_nv_vk_texture.html#7c8b450b8f5e166c11fe6b34e8b699a3">00100</a>         <a class="code" href="struct_nv_vk_image.html" title="A wrapper for a VkImage and its memory.">NvVkImage</a> <a class="code" href="struct_nv_vk_texture.html#7c8b450b8f5e166c11fe6b34e8b699a3" title="Image object.">image</a>; 
-<a name="l00101"></a><a class="code" href="struct_nv_vk_texture.html#314b18ae131b044e49da54270c926ade">00101</a>         VkImageView <a class="code" href="struct_nv_vk_texture.html#314b18ae131b044e49da54270c926ade" title="Image view object.">view</a>; 
-<a name="l00102"></a>00102 };
-<a name="l00103"></a>00103 
-<a name="l00105"></a><a class="code" href="class_nv_vk_staging_buffer.html">00105</a> <span class="keyword">class </span><a class="code" href="class_nv_vk_staging_buffer.html" title="An allocatable staging buffer for transfers.">NvVkStagingBuffer</a> {
-<a name="l00106"></a>00106 <span class="keyword">public</span>:
-<a name="l00107"></a>00107         VkBuffer getBuffer(){
-<a name="l00108"></a>00108                 <span class="keywordflow">return</span> mBuffer();
-<a name="l00109"></a>00109         }
-<a name="l00110"></a>00110         <span class="keywordtype">bool</span> needSync(<span class="keywordtype">size_t</span> sz) {
-<a name="l00111"></a>00111                 <span class="keywordflow">return</span> (mAllocated &amp;&amp; mUsed + sz &gt; mAllocated);
-<a name="l00112"></a>00112         }
-<a name="l00113"></a>00113 
-<a name="l00114"></a>00114         <span class="keywordtype">size_t</span> append(<span class="keywordtype">size_t</span> sz, <span class="keyword">const</span> <span class="keywordtype">void</span>* data);
-<a name="l00115"></a>00115 
-<a name="l00116"></a>00116         <span class="keywordtype">void</span> reset(){
-<a name="l00117"></a>00117                 mUsed = 0;
-<a name="l00118"></a>00118         }
-<a name="l00119"></a>00119 
-<a name="l00120"></a>00120         <span class="keywordtype">void</span> init(<a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>* vk){
-<a name="l00121"></a>00121                 mVk = vk;
-<a name="l00122"></a>00122                 mAllocated = 0;
-<a name="l00123"></a>00123                 mUsed = 0;
-<a name="l00124"></a>00124         }
+<a name="l00093"></a><a class="code" href="struct_nv_v_k_configuration.html#c37fe147dd31dc2c643652ef20dadc3c">00093</a>         <a class="code" href="struct_nv_v_k_configuration.html" title="VK config representation.">NvVKConfiguration</a>(uint32_t r = 8, uint32_t g = 8,
+<a name="l00094"></a>00094                 uint32_t b = 8, uint32_t a = 8,
+<a name="l00095"></a>00095                 uint32_t d = 24, uint32_t s = 0, uint32_t msaa = 0) :
+<a name="l00096"></a>00096                 NvGfxConfiguration(r, g, b, a, d, s, msaa) 
+<a name="l00097"></a>00097                 , <a class="code" href="struct_nv_v_k_configuration.html#2d5ca2cc0e5ff961ddee04f2e7187a0f" title="Usage flags for the main color render target default is VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT...">mainTargetUsageFlags</a>(VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT)
+<a name="l00098"></a>00098                 , <a class="code" href="struct_nv_v_k_configuration.html#c946de8cc6e09f2e6d3b26537bd4a3ed" title="Usage flags for the main depth stencil render target default is VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHM...">mainDepthStencilUsageFlags</a>(VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT)
+<a name="l00099"></a>00099                 , <a class="code" href="struct_nv_v_k_configuration.html#fdec11e5638f46b11f0c80c5962e4075" title="Features to enable during device create time.">featuresToEnable</a> (<a class="code" href="struct_nv_v_k_configuration.html#1fc57b5b4ef7cf9ba1730f7540d328f9" title="Features required by the framework which are enabled by default.">requiredFeaturesToEnable</a>())
+<a name="l00100"></a>00100         {}
+<a name="l00101"></a>00101         
+<a name="l00103"></a><a class="code" href="struct_nv_v_k_configuration.html#2d5ca2cc0e5ff961ddee04f2e7187a0f">00103</a>         VkImageUsageFlags <a class="code" href="struct_nv_v_k_configuration.html#2d5ca2cc0e5ff961ddee04f2e7187a0f" title="Usage flags for the main color render target default is VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT...">mainTargetUsageFlags</a>;
+<a name="l00105"></a><a class="code" href="struct_nv_v_k_configuration.html#c946de8cc6e09f2e6d3b26537bd4a3ed">00105</a>         VkImageUsageFlags <a class="code" href="struct_nv_v_k_configuration.html#c946de8cc6e09f2e6d3b26537bd4a3ed" title="Usage flags for the main depth stencil render target default is VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHM...">mainDepthStencilUsageFlags</a>;
+<a name="l00106"></a>00106 
+<a name="l00107"></a>00107 
+<a name="l00109"></a><a class="code" href="struct_nv_v_k_configuration.html#427048fabd6e7018e9db321039010f2c">00109</a>         std::vector&lt;std::string&gt; <a class="code" href="struct_nv_v_k_configuration.html#427048fabd6e7018e9db321039010f2c" title="Additional extensions to enable during instance and device create time.">extensionsToEnable</a>;
+<a name="l00111"></a><a class="code" href="struct_nv_v_k_configuration.html#ac90cb84b5b61c2e7c5d46a67809e063">00111</a>         std::vector&lt;std::string&gt; <a class="code" href="struct_nv_v_k_configuration.html#ac90cb84b5b61c2e7c5d46a67809e063" title="Additional layers to enable during instance create time (device layers are deprecated)...">layersToEnable</a>;
+<a name="l00112"></a>00112 
+<a name="l00114"></a><a class="code" href="struct_nv_v_k_configuration.html#fdec11e5638f46b11f0c80c5962e4075">00114</a>         VkPhysicalDeviceFeatures        <a class="code" href="struct_nv_v_k_configuration.html#fdec11e5638f46b11f0c80c5962e4075" title="Features to enable during device create time.">featuresToEnable</a>;
+<a name="l00115"></a>00115         
+<a name="l00117"></a><a class="code" href="struct_nv_v_k_configuration.html#1fc57b5b4ef7cf9ba1730f7540d328f9">00117</a>         <span class="keyword">static</span> VkPhysicalDeviceFeatures <a class="code" href="struct_nv_v_k_configuration.html#1fc57b5b4ef7cf9ba1730f7540d328f9" title="Features required by the framework which are enabled by default.">requiredFeaturesToEnable</a>()
+<a name="l00118"></a>00118         {
+<a name="l00119"></a>00119                 VkPhysicalDeviceFeatures result = { 0 };
+<a name="l00120"></a>00120                 result.shaderClipDistance = VK_TRUE;
+<a name="l00121"></a>00121                 result.shaderCullDistance = VK_TRUE;
+<a name="l00122"></a>00122                 <span class="keywordflow">return</span> result;
+<a name="l00123"></a>00123         }
+<a name="l00124"></a>00124 };
 <a name="l00125"></a>00125 
-<a name="l00126"></a>00126         <span class="keywordtype">void</span> deinit();
-<a name="l00127"></a>00127 
-<a name="l00128"></a>00128         <a class="code" href="class_nv_vk_staging_buffer.html" title="An allocatable staging buffer for transfers.">NvVkStagingBuffer</a>() : mVk(NULL), mAllocated(0), mUsed(0), mBuffer() {}
-<a name="l00129"></a>00129         ~<a class="code" href="class_nv_vk_staging_buffer.html" title="An allocatable staging buffer for transfers.">NvVkStagingBuffer</a>() {
-<a name="l00130"></a>00130                 deinit();
-<a name="l00131"></a>00131         }
-<a name="l00132"></a>00132 
-<a name="l00133"></a>00133 <span class="keyword">private</span>:
-<a name="l00134"></a>00134         <a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>* mVk;
-<a name="l00135"></a>00135         <a class="code" href="struct_nv_vk_buffer.html" title="A wrapper for a VkBuffer and its memory.">NvVkBuffer</a>   mBuffer;
-<a name="l00136"></a>00136         <span class="keywordtype">char</span>*        mMapping;
-<a name="l00137"></a>00137         <span class="keywordtype">size_t</span>       mUsed;
-<a name="l00138"></a>00138         <span class="keywordtype">size_t</span>       mAllocated;
-<a name="l00139"></a>00139 };
-<a name="l00140"></a>00140 
-<a name="l00142"></a><a class="code" href="class_nv_vk_render_target.html">00142</a> <span class="keyword">class </span><a class="code" href="class_nv_vk_render_target.html" title="A wrapper for all forms of render target.">NvVkRenderTarget</a> {
-<a name="l00143"></a>00143 <span class="keyword">public</span>:
-<a name="l00144"></a>00144         ~<a class="code" href="class_nv_vk_render_target.html" title="A wrapper for all forms of render target.">NvVkRenderTarget</a>();
+<a name="l00126"></a>00126 <span class="keyword">class </span><a class="code" href="class_nv_image.html" title="Image loading, representation and handling Support loading of images from DDS files...">NvImage</a>;
+<a name="l00127"></a>00127 <span class="keyword">class </span><a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>;
+<a name="l00128"></a>00128 <span class="keyword">class </span>NvGPUTimerVK;
+<a name="l00129"></a>00129 
+<a name="l00131"></a><a class="code" href="struct_nv_vk_buffer.html">00131</a> <span class="keyword">struct </span><a class="code" href="struct_nv_vk_buffer.html" title="A wrapper for a VkBuffer and its memory.">NvVkBuffer</a> {
+<a name="l00132"></a><a class="code" href="struct_nv_vk_buffer.html#e23d5802d65914aa7ae5acbd9cfa34f8">00132</a>         VkDeviceMemory <a class="code" href="struct_nv_vk_buffer.html#e23d5802d65914aa7ae5acbd9cfa34f8" title="Buffer memory object.">mem</a>; 
+<a name="l00133"></a><a class="code" href="struct_nv_vk_buffer.html#63da0eb8c65a337144e159fd48649e77">00133</a>         VkBuffer <a class="code" href="struct_nv_vk_buffer.html#63da0eb8c65a337144e159fd48649e77" title="Buffer object.">buffer</a>; 
+<a name="l00134"></a>00134 
+<a name="l00135"></a>00135 
+<a name="l00136"></a><a class="code" href="struct_nv_vk_buffer.html#8f2d3459dffce7cde41321cfe4f6d73c">00136</a>         VkBuffer&amp; <a class="code" href="struct_nv_vk_buffer.html#8f2d3459dffce7cde41321cfe4f6d73c" title="Value-of operator.">operator ()</a>() { <span class="keywordflow">return</span> <a class="code" href="struct_nv_vk_buffer.html#63da0eb8c65a337144e159fd48649e77" title="Buffer object.">buffer</a>; }
+<a name="l00137"></a>00137         <a class="code" href="struct_nv_vk_buffer.html" title="A wrapper for a VkBuffer and its memory.">NvVkBuffer</a>() : <a class="code" href="struct_nv_vk_buffer.html#e23d5802d65914aa7ae5acbd9cfa34f8" title="Buffer memory object.">mem</a>(0), <a class="code" href="struct_nv_vk_buffer.html#63da0eb8c65a337144e159fd48649e77" title="Buffer object.">buffer</a>(0) {}
+<a name="l00138"></a>00138 };
+<a name="l00139"></a>00139 
+<a name="l00141"></a><a class="code" href="struct_nv_vk_image.html">00141</a> <span class="keyword">struct </span><a class="code" href="struct_nv_vk_image.html" title="A wrapper for a VkImage and its memory.">NvVkImage</a> {
+<a name="l00142"></a><a class="code" href="struct_nv_vk_image.html#bd6182182e4d505a9cd3a642d3bf45e3">00142</a>         VkDeviceMemory <a class="code" href="struct_nv_vk_image.html#bd6182182e4d505a9cd3a642d3bf45e3" title="Image memory object.">mem</a>; 
+<a name="l00143"></a><a class="code" href="struct_nv_vk_image.html#0220533064bdb0a8061b61362362b58f">00143</a>         VkImage <a class="code" href="struct_nv_vk_image.html#0220533064bdb0a8061b61362362b58f" title="Image object.">image</a>; 
+<a name="l00144"></a>00144 
 <a name="l00145"></a>00145 
-<a name="l00147"></a>00147         <span class="keyword">virtual</span> <a class="code" href="struct_nv_vk_image.html" title="A wrapper for a VkImage and its memory.">NvVkImage</a>&amp; <a class="code" href="class_nv_vk_render_target.html#e00d3ae6cb20f2d22ba952339bdf3816" title="Retrieve the current frame&amp;#39;s NvVkImage.">target</a>() = 0;
-<a name="l00148"></a>00148 
-<a name="l00150"></a>00150         <span class="keyword">virtual</span> VkImage&amp; <a class="code" href="class_nv_vk_render_target.html#2cf817ab960253a6d4e7d9f4a480fb31" title="Retrieve the current frame&amp;#39;s VkImage.">image</a>() = 0;
-<a name="l00151"></a>00151 
-<a name="l00153"></a>00153         <span class="keyword">virtual</span> VkImage&amp; <a class="code" href="class_nv_vk_render_target.html#533ad7b7951fa08a6dc677a1e22cb7bf" title="Retrieve the current frame&amp;#39;s depth/stencil image.">depthStencil</a>() = 0;
-<a name="l00154"></a>00154 
-<a name="l00156"></a>00156         <span class="keyword">virtual</span> VkImageView&amp; <a class="code" href="class_nv_vk_render_target.html#4f05cde292405e3129dfb76a1a710429" title="Retrieve the VkImageView of the current frame&amp;#39;s color target.">targetView</a>() = 0;
-<a name="l00157"></a>00157 
-<a name="l00159"></a>00159         <span class="keyword">virtual</span> VkFramebuffer&amp; <a class="code" href="class_nv_vk_render_target.html#a32c6d730ba666b0df1b74cb41aa361e" title="Retrieve the framebuffer object for the current frame.">frameBuffer</a>() = 0;
-<a name="l00160"></a>00160 
-<a name="l00162"></a><a class="code" href="class_nv_vk_render_target.html#c1b237dc10ba00dab4094f841b3aa2ae">00162</a>         <a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>&amp; <a class="code" href="class_nv_vk_render_target.html#c1b237dc10ba00dab4094f841b3aa2ae" title="Retrieve the VK app context associated with the render target.">vk</a>() { <span class="keywordflow">return</span> _vk; }
-<a name="l00163"></a>00163 
-<a name="l00165"></a><a class="code" href="class_nv_vk_render_target.html#bc955e35bcd6c8a737be23da0699cb01">00165</a>         VkFormat&amp; <a class="code" href="class_nv_vk_render_target.html#bc955e35bcd6c8a737be23da0699cb01" title="Retrieve the color format of the target.">targetFormat</a>() { <span class="keywordflow">return</span> _targetFormat; }
-<a name="l00166"></a>00166 
-<a name="l00168"></a><a class="code" href="class_nv_vk_render_target.html#e3252b680072aa2650307fadae63b039">00168</a>         VkFormat&amp; <a class="code" href="class_nv_vk_render_target.html#e3252b680072aa2650307fadae63b039" title="Retrieve the despth/stencil format of the target.">depthStencilFormat</a>() { <span class="keywordflow">return</span> _depthStencilFormat; }
-<a name="l00169"></a>00169 
-<a name="l00171"></a><a class="code" href="class_nv_vk_render_target.html#9e3ce2b22f6f21e5770093851a19afd0">00171</a>         VkRenderPass&amp; <a class="code" href="class_nv_vk_render_target.html#9e3ce2b22f6f21e5770093851a19afd0" title="Retrieve the a compatible clearing render pass for this target.">clearRenderPass</a>() { <span class="keywordflow">return</span> _clearRenderPass; }
-<a name="l00172"></a>00172 
-<a name="l00174"></a><a class="code" href="class_nv_vk_render_target.html#17b1d940378cbf5b8858b16df0e4fb49">00174</a>         VkRenderPass&amp; <a class="code" href="class_nv_vk_render_target.html#17b1d940378cbf5b8858b16df0e4fb49" title="Retrieve the a compatible non-clearing render pass for this target.">copyRenderPass</a>() { <span class="keywordflow">return</span> _copyRenderPass; }
-<a name="l00175"></a>00175 
-<a name="l00177"></a><a class="code" href="class_nv_vk_render_target.html#8e7b67e6091062563f13e795d824f721">00177</a>         int32_t <a class="code" href="class_nv_vk_render_target.html#8e7b67e6091062563f13e795d824f721" title="Retrieve the target width.">width</a>() { <span class="keywordflow">return</span> _width; }
-<a name="l00178"></a>00178 
-<a name="l00180"></a><a class="code" href="class_nv_vk_render_target.html#3aa13d6eba96e910321680e27a8a7dc9">00180</a>         int32_t <a class="code" href="class_nv_vk_render_target.html#3aa13d6eba96e910321680e27a8a7dc9" title="Retrieve the target height.">height</a>() { <span class="keywordflow">return</span> _height; }
-<a name="l00181"></a>00181 
-<a name="l00183"></a>00183 
-<a name="l00184"></a>00184         <span class="keywordtype">bool</span> initialize(VkImageLayout layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
-<a name="l00185"></a>00185         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> resize(int32_t&amp; w, int32_t&amp; h) = 0;
-<a name="l00186"></a>00186 
-<a name="l00187"></a>00187         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> beginFrame() { <span class="keywordflow">return</span> <span class="keyword">true</span>; }
-<a name="l00188"></a>00188         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> endFrame() { <span class="keywordflow">return</span> <span class="keyword">true</span>; }
-<a name="l00189"></a>00189 
-<a name="l00190"></a>00190         <span class="keyword">virtual</span> VkSemaphore* getWaitSemaphore() = 0;
-<a name="l00191"></a>00191         <span class="keyword">virtual</span> VkSemaphore* getSignalSemaphore() = 0;
-<a name="l00192"></a>00192 
-<a name="l00193"></a>00193 <span class="keyword">protected</span>:
-<a name="l00194"></a>00194         <a class="code" href="class_nv_vk_render_target.html" title="A wrapper for all forms of render target.">NvVkRenderTarget</a>(<a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>&amp; <a class="code" href="class_nv_vk_render_target.html#c1b237dc10ba00dab4094f841b3aa2ae" title="Retrieve the VK app context associated with the render target.">vk</a>) :
-<a name="l00195"></a>00195                 _vk(vk),
-<a name="l00196"></a>00196                 _targetFormat(VK_FORMAT_UNDEFINED),
-<a name="l00197"></a>00197                 _depthStencilFormat(VK_FORMAT_UNDEFINED),
-<a name="l00198"></a>00198                 _clearRenderPass(VK_NULL_HANDLE),
-<a name="l00199"></a>00199                 _copyRenderPass(VK_NULL_HANDLE),
-<a name="l00200"></a>00200                 _width(0), _height(0)
-<a name="l00201"></a>00201         {}
-<a name="l00202"></a>00202 
-<a name="l00203"></a>00203         <a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>&amp; _vk;
-<a name="l00204"></a>00204         VkFormat _targetFormat;
-<a name="l00205"></a>00205         VkFormat _depthStencilFormat;
-<a name="l00206"></a>00206         VkRenderPass _clearRenderPass;
-<a name="l00207"></a>00207         VkRenderPass _copyRenderPass;
-<a name="l00208"></a>00208         int32_t _width;
-<a name="l00209"></a>00209         int32_t _height;
-<a name="l00210"></a>00210 };
-<a name="l00211"></a>00211 
-<a name="l00213"></a><a class="code" href="class_nv_vk_context.html">00213</a> <span class="keyword">class </span><a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a> {
-<a name="l00214"></a>00214 <span class="keyword">public</span>:
-<a name="l00215"></a>00215         <a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>(<span class="keyword">const</span> <a class="code" href="struct_nv_v_k_configuration.html" title="VK config representation.">NvVKConfiguration</a>&amp; config) :
-<a name="l00216"></a>00216                 mConfiguration(config),
-<a name="l00217"></a>00217                 _instance(NULL),
-<a name="l00218"></a>00218                 _physicalDevice(NULL),
-<a name="l00219"></a>00219                 _device(NULL),
-<a name="l00220"></a>00220                 _queue(NULL),
-<a name="l00221"></a>00221                 _queueFamilyIndex(0),
-<a name="l00222"></a>00222                 _queueIndex(0),
-<a name="l00223"></a>00223                 mSupportsDebugMarkers(<span class="keyword">false</span>)
-<a name="l00224"></a>00224         { }
-<a name="l00225"></a>00225 
-<a name="l00227"></a><a class="code" href="class_nv_vk_context.html#230f4efe931fc0cd9769a205f83c1277">00227</a>         VkInstance <a class="code" href="class_nv_vk_context.html#230f4efe931fc0cd9769a205f83c1277" title="VkInstance access.">instance</a>() { <span class="keywordflow">return</span> _instance; }
-<a name="l00228"></a>00228 
-<a name="l00230"></a><a class="code" href="class_nv_vk_context.html#6b0a497652e8af6e1c283fbe8d01b3a4">00230</a>         VkDevice <a class="code" href="class_nv_vk_context.html#6b0a497652e8af6e1c283fbe8d01b3a4" title="Device access.">device</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _device; }
-<a name="l00231"></a>00231 
-<a name="l00233"></a><a class="code" href="class_nv_vk_context.html#f63502cc8e6bca40458fb884af74f3ed">00233</a>         VkQueue <a class="code" href="class_nv_vk_context.html#f63502cc8e6bca40458fb884af74f3ed" title="Queue access.">queue</a>() { <span class="keywordflow">return</span> _queue; }
-<a name="l00234"></a>00234 
-<a name="l00236"></a><a class="code" href="class_nv_vk_context.html#a27d2d45de2858d11b079e9834c22427">00236</a>         uint32_t <a class="code" href="class_nv_vk_context.html#a27d2d45de2858d11b079e9834c22427" title="Queue family access.">queueFamilyIndex</a>() { <span class="keywordflow">return</span> _queueFamilyIndex; }
-<a name="l00237"></a>00237 
-<a name="l00239"></a><a class="code" href="class_nv_vk_context.html#0aa1711627ac3330c2996560c34e0ecc">00239</a>         uint32_t <a class="code" href="class_nv_vk_context.html#0aa1711627ac3330c2996560c34e0ecc" title="Queue index access.">queueIndex</a>() { <span class="keywordflow">return</span> _queueIndex; }
-<a name="l00240"></a>00240 
+<a name="l00146"></a><a class="code" href="struct_nv_vk_image.html#50998681355867411bfa220f74f4ccc1">00146</a>         VkImage&amp; <a class="code" href="struct_nv_vk_image.html#50998681355867411bfa220f74f4ccc1" title="Value-of operator.">operator ()</a>() { <span class="keywordflow">return</span> <a class="code" href="struct_nv_vk_image.html#0220533064bdb0a8061b61362362b58f" title="Image object.">image</a>; }
+<a name="l00147"></a>00147         <a class="code" href="struct_nv_vk_image.html" title="A wrapper for a VkImage and its memory.">NvVkImage</a>() : <a class="code" href="struct_nv_vk_image.html#bd6182182e4d505a9cd3a642d3bf45e3" title="Image memory object.">mem</a>(0), <a class="code" href="struct_nv_vk_image.html#0220533064bdb0a8061b61362362b58f" title="Image object.">image</a>(0) {}
+<a name="l00148"></a>00148 };
+<a name="l00149"></a>00149 
+<a name="l00151"></a><a class="code" href="struct_nv_vk_texture.html">00151</a> <span class="keyword">struct </span><a class="code" href="struct_nv_vk_texture.html" title="A &amp;quot;texture&amp;quot;: a wrapper for a VkImage and its VkImageView.">NvVkTexture</a> {
+<a name="l00154"></a><a class="code" href="struct_nv_vk_texture.html#ddba418400fb11f82336be79e831c79b">00154</a>         <a class="code" href="struct_nv_vk_image.html" title="A wrapper for a VkImage and its memory.">NvVkImage</a>&amp; <a class="code" href="struct_nv_vk_texture.html#ddba418400fb11f82336be79e831c79b" title="Value-of operator.">operator ()</a>() { <span class="keywordflow">return</span> <a class="code" href="struct_nv_vk_texture.html#7c8b450b8f5e166c11fe6b34e8b699a3" title="Image object.">image</a>; }
+<a name="l00155"></a><a class="code" href="struct_nv_vk_texture.html#7c8b450b8f5e166c11fe6b34e8b699a3">00155</a>         <a class="code" href="struct_nv_vk_image.html" title="A wrapper for a VkImage and its memory.">NvVkImage</a> <a class="code" href="struct_nv_vk_texture.html#7c8b450b8f5e166c11fe6b34e8b699a3" title="Image object.">image</a>; 
+<a name="l00156"></a><a class="code" href="struct_nv_vk_texture.html#314b18ae131b044e49da54270c926ade">00156</a>         VkImageView <a class="code" href="struct_nv_vk_texture.html#314b18ae131b044e49da54270c926ade" title="Image view object.">view</a>; 
+<a name="l00157"></a>00157 };
+<a name="l00158"></a>00158 
+<a name="l00160"></a><a class="code" href="class_nv_vk_staging_buffer.html">00160</a> <span class="keyword">class </span><a class="code" href="class_nv_vk_staging_buffer.html" title="An allocatable staging buffer for transfers.">NvVkStagingBuffer</a> {
+<a name="l00161"></a>00161 <span class="keyword">public</span>:
+<a name="l00162"></a>00162         VkBuffer getBuffer(){
+<a name="l00163"></a>00163                 <span class="keywordflow">return</span> mBuffer();
+<a name="l00164"></a>00164         }
+<a name="l00165"></a>00165         <span class="keywordtype">bool</span> needSync(<span class="keywordtype">size_t</span> sz) {
+<a name="l00166"></a>00166                 <span class="keywordflow">return</span> (mAllocated &amp;&amp; mUsed + sz &gt; mAllocated);
+<a name="l00167"></a>00167         }
+<a name="l00168"></a>00168 
+<a name="l00169"></a>00169         <span class="keywordtype">size_t</span> append(<span class="keywordtype">size_t</span> sz, <span class="keyword">const</span> <span class="keywordtype">void</span>* data);
+<a name="l00170"></a>00170 
+<a name="l00171"></a>00171         <span class="keywordtype">void</span> reset(){
+<a name="l00172"></a>00172                 mUsed = 0;
+<a name="l00173"></a>00173         }
+<a name="l00174"></a>00174 
+<a name="l00175"></a>00175         <span class="keywordtype">void</span> init(<a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>* vk){
+<a name="l00176"></a>00176                 mVk = vk;
+<a name="l00177"></a>00177                 mAllocated = 0;
+<a name="l00178"></a>00178                 mUsed = 0;
+<a name="l00179"></a>00179         }
+<a name="l00180"></a>00180 
+<a name="l00181"></a>00181         <span class="keywordtype">void</span> deinit();
+<a name="l00182"></a>00182 
+<a name="l00183"></a>00183         <a class="code" href="class_nv_vk_staging_buffer.html" title="An allocatable staging buffer for transfers.">NvVkStagingBuffer</a>() : mVk(NULL), mAllocated(0), mUsed(0), mBuffer() {}
+<a name="l00184"></a>00184         ~<a class="code" href="class_nv_vk_staging_buffer.html" title="An allocatable staging buffer for transfers.">NvVkStagingBuffer</a>() {
+<a name="l00185"></a>00185                 deinit();
+<a name="l00186"></a>00186         }
+<a name="l00187"></a>00187 
+<a name="l00188"></a>00188 <span class="keyword">private</span>:
+<a name="l00189"></a>00189         <a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>* mVk;
+<a name="l00190"></a>00190         <a class="code" href="struct_nv_vk_buffer.html" title="A wrapper for a VkBuffer and its memory.">NvVkBuffer</a>   mBuffer;
+<a name="l00191"></a>00191         <span class="keywordtype">char</span>*        mMapping;
+<a name="l00192"></a>00192         <span class="keywordtype">size_t</span>       mUsed;
+<a name="l00193"></a>00193         <span class="keywordtype">size_t</span>       mAllocated;
+<a name="l00194"></a>00194 };
+<a name="l00195"></a>00195 
+<a name="l00197"></a><a class="code" href="class_nv_vk_render_target.html">00197</a> <span class="keyword">class </span><a class="code" href="class_nv_vk_render_target.html" title="A wrapper for all forms of render target.">NvVkRenderTarget</a> {
+<a name="l00198"></a>00198 <span class="keyword">public</span>:
+<a name="l00199"></a>00199         ~<a class="code" href="class_nv_vk_render_target.html" title="A wrapper for all forms of render target.">NvVkRenderTarget</a>();
+<a name="l00200"></a>00200 
+<a name="l00202"></a>00202         <span class="keyword">virtual</span> <a class="code" href="struct_nv_vk_image.html" title="A wrapper for a VkImage and its memory.">NvVkImage</a>&amp; <a class="code" href="class_nv_vk_render_target.html#e00d3ae6cb20f2d22ba952339bdf3816" title="Retrieve the current frame&amp;#39;s NvVkImage.">target</a>() = 0;
+<a name="l00203"></a>00203 
+<a name="l00205"></a>00205         <span class="keyword">virtual</span> VkImage&amp; <a class="code" href="class_nv_vk_render_target.html#2cf817ab960253a6d4e7d9f4a480fb31" title="Retrieve the current frame&amp;#39;s VkImage.">image</a>() = 0;
+<a name="l00206"></a>00206 
+<a name="l00208"></a>00208         <span class="keyword">virtual</span> VkImage&amp; <a class="code" href="class_nv_vk_render_target.html#533ad7b7951fa08a6dc677a1e22cb7bf" title="Retrieve the current frame&amp;#39;s depth/stencil image.">depthStencil</a>() = 0;
+<a name="l00209"></a>00209 
+<a name="l00211"></a>00211         <span class="keyword">virtual</span> VkImageView&amp; <a class="code" href="class_nv_vk_render_target.html#4f05cde292405e3129dfb76a1a710429" title="Retrieve the VkImageView of the current frame&amp;#39;s color target.">targetView</a>() = 0;
+<a name="l00212"></a>00212 
+<a name="l00214"></a>00214         <span class="keyword">virtual</span> VkFramebuffer&amp; <a class="code" href="class_nv_vk_render_target.html#a32c6d730ba666b0df1b74cb41aa361e" title="Retrieve the framebuffer object for the current frame.">frameBuffer</a>() = 0;
+<a name="l00215"></a>00215 
+<a name="l00217"></a><a class="code" href="class_nv_vk_render_target.html#c1b237dc10ba00dab4094f841b3aa2ae">00217</a>         <a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>&amp; <a class="code" href="class_nv_vk_render_target.html#c1b237dc10ba00dab4094f841b3aa2ae" title="Retrieve the VK app context associated with the render target.">vk</a>() { <span class="keywordflow">return</span> _vk; }
+<a name="l00218"></a>00218 
+<a name="l00220"></a><a class="code" href="class_nv_vk_render_target.html#bc955e35bcd6c8a737be23da0699cb01">00220</a>         VkFormat&amp; <a class="code" href="class_nv_vk_render_target.html#bc955e35bcd6c8a737be23da0699cb01" title="Retrieve the color format of the target.">targetFormat</a>() { <span class="keywordflow">return</span> _targetFormat; }
+<a name="l00221"></a>00221 
+<a name="l00223"></a><a class="code" href="class_nv_vk_render_target.html#e3252b680072aa2650307fadae63b039">00223</a>         VkFormat&amp; <a class="code" href="class_nv_vk_render_target.html#e3252b680072aa2650307fadae63b039" title="Retrieve the despth/stencil format of the target.">depthStencilFormat</a>() { <span class="keywordflow">return</span> _depthStencilFormat; }
+<a name="l00224"></a>00224 
+<a name="l00226"></a><a class="code" href="class_nv_vk_render_target.html#9e3ce2b22f6f21e5770093851a19afd0">00226</a>         VkRenderPass&amp; <a class="code" href="class_nv_vk_render_target.html#9e3ce2b22f6f21e5770093851a19afd0" title="Retrieve the a compatible clearing render pass for this target.">clearRenderPass</a>() { <span class="keywordflow">return</span> _clearRenderPass; }
+<a name="l00227"></a>00227 
+<a name="l00229"></a><a class="code" href="class_nv_vk_render_target.html#17b1d940378cbf5b8858b16df0e4fb49">00229</a>         VkRenderPass&amp; <a class="code" href="class_nv_vk_render_target.html#17b1d940378cbf5b8858b16df0e4fb49" title="Retrieve the a compatible non-clearing render pass for this target.">copyRenderPass</a>() { <span class="keywordflow">return</span> _copyRenderPass; }
+<a name="l00230"></a>00230 
+<a name="l00232"></a><a class="code" href="class_nv_vk_render_target.html#8e7b67e6091062563f13e795d824f721">00232</a>         int32_t <a class="code" href="class_nv_vk_render_target.html#8e7b67e6091062563f13e795d824f721" title="Retrieve the target width.">width</a>() { <span class="keywordflow">return</span> _width; }
+<a name="l00233"></a>00233 
+<a name="l00235"></a><a class="code" href="class_nv_vk_render_target.html#3aa13d6eba96e910321680e27a8a7dc9">00235</a>         int32_t <a class="code" href="class_nv_vk_render_target.html#3aa13d6eba96e910321680e27a8a7dc9" title="Retrieve the target height.">height</a>() { <span class="keywordflow">return</span> _height; }
+<a name="l00236"></a>00236 
+<a name="l00238"></a>00238 
+<a name="l00239"></a>00239         <span class="keywordtype">bool</span> initialize(VkImageLayout layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
+<a name="l00240"></a>00240         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> resize(int32_t&amp; w, int32_t&amp; h) = 0;
 <a name="l00241"></a>00241 
-<a name="l00243"></a><a class="code" href="class_nv_vk_context.html#8f127a8fcb7525a661e07d545e8f200f">00243</a>         VkPhysicalDevice&amp; <a class="code" href="class_nv_vk_context.html#8f127a8fcb7525a661e07d545e8f200f" title="VkPhysicalDevice access.">physicalDevice</a>() { <span class="keywordflow">return</span> _physicalDevice; }
+<a name="l00242"></a>00242         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> beginFrame() { <span class="keywordflow">return</span> <span class="keyword">true</span>; }
+<a name="l00243"></a>00243         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> endFrame() { <span class="keywordflow">return</span> <span class="keyword">true</span>; }
 <a name="l00244"></a>00244 
-<a name="l00246"></a><a class="code" href="class_nv_vk_context.html#046c47968587750e71b37b372b0fc7f5">00246</a>         VkPhysicalDeviceLimits&amp; <a class="code" href="class_nv_vk_context.html#046c47968587750e71b37b372b0fc7f5" title="VkPhysicalDeviceLimits access.">physicalDeviceLimits</a>() { <span class="keywordflow">return</span> _physicalDeviceLimits; }
+<a name="l00245"></a>00245         <span class="keyword">virtual</span> VkSemaphore* getWaitSemaphore() = 0;
+<a name="l00246"></a>00246         <span class="keyword">virtual</span> VkSemaphore* getSignalSemaphore() = 0;
 <a name="l00247"></a>00247 
-<a name="l00249"></a><a class="code" href="class_nv_vk_context.html#ab6063b8a64fc36e6481b26c3aa41e35">00249</a>         VkPhysicalDeviceProperties&amp; <a class="code" href="class_nv_vk_context.html#ab6063b8a64fc36e6481b26c3aa41e35" title="VkPhysicalDeviceProperties access.">physicalDeviceProperties</a>() { <span class="keywordflow">return</span> _physicalDeviceProperties; }
-<a name="l00250"></a>00250 
-<a name="l00252"></a><a class="code" href="class_nv_vk_context.html#1549e467c19cb5fc6343b7cbd6a760c4">00252</a>         VkPhysicalDeviceFeatures&amp; <a class="code" href="class_nv_vk_context.html#1549e467c19cb5fc6343b7cbd6a760c4" title="VkPhysicalDeviceFeatures access.">physicalDeviceFeatures</a>() { <span class="keywordflow">return</span> _physicalDeviceFeatures; }
-<a name="l00253"></a>00253 
-<a name="l00255"></a><a class="code" href="class_nv_vk_context.html#305d727eb7d08eff8818b4a3eb828473">00255</a>         VkPhysicalDeviceMemoryProperties&amp; <a class="code" href="class_nv_vk_context.html#305d727eb7d08eff8818b4a3eb828473" title="VkPhysicalDeviceMemoryProperties access.">physicalDeviceMemoryProperties</a>() { <span class="keywordflow">return</span> _physicalDeviceMemoryProperties; }
-<a name="l00256"></a>00256 
+<a name="l00248"></a>00248 <span class="keyword">protected</span>:
+<a name="l00249"></a>00249         <a class="code" href="class_nv_vk_render_target.html" title="A wrapper for all forms of render target.">NvVkRenderTarget</a>(<a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>&amp; <a class="code" href="class_nv_vk_render_target.html#c1b237dc10ba00dab4094f841b3aa2ae" title="Retrieve the VK app context associated with the render target.">vk</a>) :
+<a name="l00250"></a>00250                 _vk(vk),
+<a name="l00251"></a>00251                 _targetFormat(VK_FORMAT_UNDEFINED),
+<a name="l00252"></a>00252                 _depthStencilFormat(VK_FORMAT_UNDEFINED),
+<a name="l00253"></a>00253                 _clearRenderPass(VK_NULL_HANDLE),
+<a name="l00254"></a>00254                 _copyRenderPass(VK_NULL_HANDLE),
+<a name="l00255"></a>00255                 _width(0), _height(0)
+<a name="l00256"></a>00256         {}
 <a name="l00257"></a>00257 
-<a name="l00259"></a>00259         <span class="keyword">virtual</span> <a class="code" href="class_nv_vk_render_target.html" title="A wrapper for all forms of render target.">NvVkRenderTarget</a>* <a class="code" href="class_nv_vk_context.html#d0e0fd4aeaae6093906f54a4df3eb209" title="Get the on-screen (or main) render target.">mainRenderTarget</a>() = 0;
-<a name="l00260"></a>00260 
-<a name="l00261"></a>00261         VkResult allocMemAndBindImage(<a class="code" href="struct_nv_vk_image.html" title="A wrapper for a VkImage and its memory.">NvVkImage</a>&amp; image, VkFlags memProps = 0);
-<a name="l00262"></a>00262         VkResult createImage(VkImageCreateInfo&amp; info, <a class="code" href="struct_nv_vk_image.html" title="A wrapper for a VkImage and its memory.">NvVkImage</a>&amp; image, VkFlags memProps = 0);
-<a name="l00263"></a>00263 
-<a name="l00264"></a>00264         VkResult allocMemAndBindBuffer(<a class="code" href="struct_nv_vk_buffer.html" title="A wrapper for a VkBuffer and its memory.">NvVkBuffer</a>&amp; buffer, VkFlags memProps = 0);
-<a name="l00265"></a>00265         VkResult createAndFillBuffer(<span class="keywordtype">size_t</span> size, VkFlags usage, VkFlags memProps, <a class="code" href="struct_nv_vk_buffer.html" title="A wrapper for a VkBuffer and its memory.">NvVkBuffer</a>&amp; buffer, <span class="keyword">const</span> <span class="keywordtype">void</span>* data = NULL, <a class="code" href="class_nv_vk_staging_buffer.html" title="An allocatable staging buffer for transfers.">NvVkStagingBuffer</a>* staging = NULL);
+<a name="l00258"></a>00258         <a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>&amp; _vk;
+<a name="l00259"></a>00259         VkFormat _targetFormat;
+<a name="l00260"></a>00260         VkFormat _depthStencilFormat;
+<a name="l00261"></a>00261         VkRenderPass _clearRenderPass;
+<a name="l00262"></a>00262         VkRenderPass _copyRenderPass;
+<a name="l00263"></a>00263         int32_t _width;
+<a name="l00264"></a>00264         int32_t _height;
+<a name="l00265"></a>00265 };
 <a name="l00266"></a>00266 
-<a name="l00271"></a>00271         <span class="keywordtype">bool</span> <a class="code" href="class_nv_vk_context.html#2eed1808376c1baa82d6d826c7e35156" title="Creates a texture from an asset-based DDS file.">uploadTextureFromDDSFile</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* filename, <a class="code" href="struct_nv_vk_texture.html" title="A &amp;quot;texture&amp;quot;: a wrapper for a VkImage and its VkImageView.">NvVkTexture</a>&amp; tex);
-<a name="l00272"></a>00272 
-<a name="l00277"></a>00277         <span class="keywordtype">bool</span> <a class="code" href="class_nv_vk_context.html#e229c109742cf63c81167c64e2ea6759" title="Creates a texture from preloaded data in DDS file format.">uploadTextureFromDDSData</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* ddsData, int32_t length, <a class="code" href="struct_nv_vk_texture.html" title="A &amp;quot;texture&amp;quot;: a wrapper for a VkImage and its VkImageView.">NvVkTexture</a>&amp; tex);
-<a name="l00278"></a>00278 
-<a name="l00283"></a>00283         <span class="keywordtype">bool</span> <a class="code" href="class_nv_vk_context.html#4d84f39afce6f3a64cbef298c3a35d7b" title="Creates a texture from an in-memory NvImage.">uploadTexture</a>(<span class="keyword">const</span> <a class="code" href="class_nv_image.html" title="Image loading, representation and handling Support loading of images from DDS files...">NvImage</a>* image, <a class="code" href="struct_nv_vk_texture.html" title="A &amp;quot;texture&amp;quot;: a wrapper for a VkImage and its VkImageView.">NvVkTexture</a>&amp; tex);
-<a name="l00284"></a>00284 
-<a name="l00286"></a>00286         uint32_t <a class="code" href="class_nv_vk_context.html#aa4a726ed0a2bca58ede51a8abf54ab9" title="Deprecated: Only supported on platforms/drivers that can accept GLSL directly.">createShadersFromSourceString</a>(<span class="keyword">const</span> std::string&amp; sourceText, VkPipelineShaderStageCreateInfo* shaders, uint32_t maxShaders);
-<a name="l00287"></a>00287 
-<a name="l00295"></a>00295         uint32_t <a class="code" href="class_nv_vk_context.html#103041a0c9ee379bc953ce459e224d7d" title="Load SPIR-V shaders from binary file data (generated from the glsl2spirv tool).">createShadersFromBinaryBlob</a>(uint32_t* data, uint32_t leng, VkPipelineShaderStageCreateInfo* shaders, uint32_t maxShaders);
+<a name="l00268"></a><a class="code" href="class_nv_vk_context.html">00268</a> <span class="keyword">class </span><a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a> {
+<a name="l00269"></a>00269 <span class="keyword">public</span>:
+<a name="l00270"></a>00270         <a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>(<span class="keyword">const</span> <a class="code" href="struct_nv_v_k_configuration.html" title="VK config representation.">NvVKConfiguration</a>&amp; config) :
+<a name="l00271"></a>00271                 mConfiguration(config),
+<a name="l00272"></a>00272                 _instance(NULL),
+<a name="l00273"></a>00273                 _physicalDevice(NULL),
+<a name="l00274"></a>00274                 _device(NULL),
+<a name="l00275"></a>00275                 _queue(NULL),
+<a name="l00276"></a>00276                 _queueFamilyIndex(0),
+<a name="l00277"></a>00277                 _queueIndex(0),
+<a name="l00278"></a>00278                 mSupportsDebugMarkers(<span class="keyword">false</span>)
+<a name="l00279"></a>00279         { }
+<a name="l00280"></a>00280 
+<a name="l00282"></a><a class="code" href="class_nv_vk_context.html#230f4efe931fc0cd9769a205f83c1277">00282</a>         VkInstance <a class="code" href="class_nv_vk_context.html#230f4efe931fc0cd9769a205f83c1277" title="VkInstance access.">instance</a>() { <span class="keywordflow">return</span> _instance; }
+<a name="l00283"></a>00283 
+<a name="l00285"></a><a class="code" href="class_nv_vk_context.html#6b0a497652e8af6e1c283fbe8d01b3a4">00285</a>         VkDevice <a class="code" href="class_nv_vk_context.html#6b0a497652e8af6e1c283fbe8d01b3a4" title="Device access.">device</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _device; }
+<a name="l00286"></a>00286 
+<a name="l00288"></a><a class="code" href="class_nv_vk_context.html#f63502cc8e6bca40458fb884af74f3ed">00288</a>         VkQueue <a class="code" href="class_nv_vk_context.html#f63502cc8e6bca40458fb884af74f3ed" title="Queue access.">queue</a>() { <span class="keywordflow">return</span> _queue; }
+<a name="l00289"></a>00289 
+<a name="l00291"></a><a class="code" href="class_nv_vk_context.html#a27d2d45de2858d11b079e9834c22427">00291</a>         uint32_t <a class="code" href="class_nv_vk_context.html#a27d2d45de2858d11b079e9834c22427" title="Queue family access.">queueFamilyIndex</a>() { <span class="keywordflow">return</span> _queueFamilyIndex; }
+<a name="l00292"></a>00292 
+<a name="l00294"></a><a class="code" href="class_nv_vk_context.html#0aa1711627ac3330c2996560c34e0ecc">00294</a>         uint32_t <a class="code" href="class_nv_vk_context.html#0aa1711627ac3330c2996560c34e0ecc" title="Queue index access.">queueIndex</a>() { <span class="keywordflow">return</span> _queueIndex; }
+<a name="l00295"></a>00295 
 <a name="l00296"></a>00296 
-<a name="l00297"></a>00297         VkResult transitionImageLayout(VkImage&amp; image, VkImageAspectFlags aspect,
-<a name="l00298"></a>00298                 VkImageLayout oldLayout, VkImageLayout newLayout, VkAccessFlagBits inSrcAccessmask = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT,
-<a name="l00299"></a>00299                 VkAccessFlagBits inDstAccessmask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT);
-<a name="l00300"></a>00300 
-<a name="l00301"></a>00301         <span class="keyword">enum</span> CmdBufferIndex {
-<a name="l00302"></a>00302                 CMD_ONSCREEN = 0,
-<a name="l00303"></a>00303                 CMD_UI_FRAMEWORK,
-<a name="l00304"></a>00304                 CMD_COUNT
-<a name="l00305"></a>00305         };
-<a name="l00306"></a>00306         <span class="comment">// Retrieves a reference to a managed, one-per-frame primary command buffer</span>
-<a name="l00307"></a>00307         <span class="comment">// Do not submit directly to a queue - use submitMainCommandBuffer</span>
-<a name="l00308"></a>00308         VkCommandBuffer getMainCommandBuffer(CmdBufferIndex index = CMD_ONSCREEN);
-<a name="l00309"></a>00309 
-<a name="l00310"></a>00310         <span class="comment">// Submits this frame's main command buffer and does any end-of-frame sync</span>
-<a name="l00311"></a>00311         <span class="keywordtype">bool</span> submitMainCommandBuffer(CmdBufferIndex index = CMD_ONSCREEN);
+<a name="l00298"></a><a class="code" href="class_nv_vk_context.html#8f127a8fcb7525a661e07d545e8f200f">00298</a>         VkPhysicalDevice&amp; <a class="code" href="class_nv_vk_context.html#8f127a8fcb7525a661e07d545e8f200f" title="VkPhysicalDevice access.">physicalDevice</a>() { <span class="keywordflow">return</span> _physicalDevice; }
+<a name="l00299"></a>00299 
+<a name="l00301"></a><a class="code" href="class_nv_vk_context.html#046c47968587750e71b37b372b0fc7f5">00301</a>         VkPhysicalDeviceLimits&amp; <a class="code" href="class_nv_vk_context.html#046c47968587750e71b37b372b0fc7f5" title="VkPhysicalDeviceLimits access.">physicalDeviceLimits</a>() { <span class="keywordflow">return</span> _physicalDeviceLimits; }
+<a name="l00302"></a>00302 
+<a name="l00304"></a><a class="code" href="class_nv_vk_context.html#ab6063b8a64fc36e6481b26c3aa41e35">00304</a>         VkPhysicalDeviceProperties&amp; <a class="code" href="class_nv_vk_context.html#ab6063b8a64fc36e6481b26c3aa41e35" title="VkPhysicalDeviceProperties access.">physicalDeviceProperties</a>() { <span class="keywordflow">return</span> _physicalDeviceProperties; }
+<a name="l00305"></a>00305 
+<a name="l00307"></a><a class="code" href="class_nv_vk_context.html#1549e467c19cb5fc6343b7cbd6a760c4">00307</a>         VkPhysicalDeviceFeatures&amp; <a class="code" href="class_nv_vk_context.html#1549e467c19cb5fc6343b7cbd6a760c4" title="VkPhysicalDeviceFeatures access.">physicalDeviceFeatures</a>() { <span class="keywordflow">return</span> _physicalDeviceFeatures; }
+<a name="l00308"></a>00308 
+<a name="l00310"></a><a class="code" href="class_nv_vk_context.html#305d727eb7d08eff8818b4a3eb828473">00310</a>         VkPhysicalDeviceMemoryProperties&amp; <a class="code" href="class_nv_vk_context.html#305d727eb7d08eff8818b4a3eb828473" title="VkPhysicalDeviceMemoryProperties access.">physicalDeviceMemoryProperties</a>() { <span class="keywordflow">return</span> _physicalDeviceMemoryProperties; }
+<a name="l00311"></a>00311 
 <a name="l00312"></a>00312 
-<a name="l00313"></a>00313         VkCommandBuffer   createCmdBuffer(VkCommandPool pool, <span class="keywordtype">bool</span> primary);
-<a name="l00314"></a>00314 
-<a name="l00315"></a>00315         <span class="keywordtype">void</span> purgeTempCmdBuffers() {
-<a name="l00316"></a>00316                 vkDeviceWaitIdle(_device);
-<a name="l00317"></a>00317                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> f = 0; f &lt; MAX_BUFFERED_FRAMES; f++){
-<a name="l00318"></a>00318                         FrameInfo&amp; frame = mFrames[f];
-<a name="l00319"></a>00319                         <span class="keywordflow">if</span> (!frame.mSubmittedTempCmdBuffers.empty()){
-<a name="l00320"></a>00320                                 vkFreeCommandBuffers(_device, mTempCmdPool, 
-<a name="l00321"></a>00321                                         (uint32_t)frame.mSubmittedTempCmdBuffers.size(), &amp;frame.mSubmittedTempCmdBuffers[0]);
-<a name="l00322"></a>00322                                 frame.mSubmittedTempCmdBuffers.clear();
-<a name="l00323"></a>00323                         }
-<a name="l00324"></a>00324                         frame.mOpen = <span class="keyword">false</span>;
-<a name="l00325"></a>00325                 }
-<a name="l00326"></a>00326                 mCurrFrameIndex = 0;
-<a name="l00327"></a>00327         }
-<a name="l00328"></a>00328 
-<a name="l00329"></a>00329         VkCommandBuffer beginTempCmdBuffer()
-<a name="l00330"></a>00330         {
-<a name="l00331"></a>00331                 VkCommandBuffer cmd = createCmdBuffer(mTempCmdPool, <span class="keyword">true</span>);
-<a name="l00332"></a>00332 
-<a name="l00333"></a>00333                 <span class="comment">// Record the commands.</span>
-<a name="l00334"></a>00334                 VkCommandBufferInheritanceInfo inheritInfo = { VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO };
-<a name="l00335"></a>00335 
-<a name="l00336"></a>00336                 VkCommandBufferBeginInfo beginInfo = { VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO };
-<a name="l00337"></a>00337                 beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
-<a name="l00338"></a>00338                 beginInfo.pInheritanceInfo = &amp;inheritInfo;
+<a name="l00314"></a>00314         <span class="keyword">virtual</span> <a class="code" href="class_nv_vk_render_target.html" title="A wrapper for all forms of render target.">NvVkRenderTarget</a>* <a class="code" href="class_nv_vk_context.html#d0e0fd4aeaae6093906f54a4df3eb209" title="Get the on-screen (or main) render target.">mainRenderTarget</a>() = 0;
+<a name="l00315"></a>00315 
+<a name="l00316"></a>00316         VkResult allocMemAndBindImage(<a class="code" href="struct_nv_vk_image.html" title="A wrapper for a VkImage and its memory.">NvVkImage</a>&amp; image, VkFlags memProps = 0);
+<a name="l00317"></a>00317         VkResult createImage(VkImageCreateInfo&amp; info, <a class="code" href="struct_nv_vk_image.html" title="A wrapper for a VkImage and its memory.">NvVkImage</a>&amp; image, VkFlags memProps = 0);
+<a name="l00318"></a>00318 
+<a name="l00319"></a>00319         VkResult allocMemAndBindBuffer(<a class="code" href="struct_nv_vk_buffer.html" title="A wrapper for a VkBuffer and its memory.">NvVkBuffer</a>&amp; buffer, VkFlags memProps = 0);
+<a name="l00320"></a>00320         VkResult createAndFillBuffer(<span class="keywordtype">size_t</span> size, VkFlags usage, VkFlags memProps, <a class="code" href="struct_nv_vk_buffer.html" title="A wrapper for a VkBuffer and its memory.">NvVkBuffer</a>&amp; buffer, <span class="keyword">const</span> <span class="keywordtype">void</span>* data = NULL, <a class="code" href="class_nv_vk_staging_buffer.html" title="An allocatable staging buffer for transfers.">NvVkStagingBuffer</a>* staging = NULL);
+<a name="l00321"></a>00321 
+<a name="l00326"></a>00326         <span class="keywordtype">bool</span> <a class="code" href="class_nv_vk_context.html#2eed1808376c1baa82d6d826c7e35156" title="Creates a texture from an asset-based DDS file.">uploadTextureFromDDSFile</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* filename, <a class="code" href="struct_nv_vk_texture.html" title="A &amp;quot;texture&amp;quot;: a wrapper for a VkImage and its VkImageView.">NvVkTexture</a>&amp; tex);
+<a name="l00327"></a>00327 
+<a name="l00332"></a>00332     <span class="keywordtype">bool</span> <a class="code" href="class_nv_vk_context.html#c00ce5227d9a04692df5fb2de5a1bef2" title="Creates a texture from an asset-based image file.">uploadTextureFromFile</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* filename, <a class="code" href="struct_nv_vk_texture.html" title="A &amp;quot;texture&amp;quot;: a wrapper for a VkImage and its VkImageView.">NvVkTexture</a>&amp; tex);
+<a name="l00333"></a>00333 
+<a name="l00338"></a>00338         <span class="keywordtype">bool</span> <a class="code" href="class_nv_vk_context.html#e229c109742cf63c81167c64e2ea6759" title="Creates a texture from preloaded data in DDS file format.">uploadTextureFromDDSData</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* ddsData, int32_t length, <a class="code" href="struct_nv_vk_texture.html" title="A &amp;quot;texture&amp;quot;: a wrapper for a VkImage and its VkImageView.">NvVkTexture</a>&amp; tex);
 <a name="l00339"></a>00339 
-<a name="l00340"></a>00340                 <span class="keywordflow">if</span> (vkBeginCommandBuffer(cmd, &amp;beginInfo) != VK_SUCCESS)
-<a name="l00341"></a>00341                         <span class="keywordflow">return</span> 0;
-<a name="l00342"></a>00342 
-<a name="l00343"></a>00343                 <span class="keywordflow">return</span> cmd;
-<a name="l00344"></a>00344         }
+<a name="l00344"></a>00344         <span class="keywordtype">bool</span> <a class="code" href="class_nv_vk_context.html#4d84f39afce6f3a64cbef298c3a35d7b" title="Creates a texture from an in-memory NvImage.">uploadTexture</a>(<span class="keyword">const</span> <a class="code" href="class_nv_image.html" title="Image loading, representation and handling Support loading of images from DDS files...">NvImage</a>* image, <a class="code" href="struct_nv_vk_texture.html" title="A &amp;quot;texture&amp;quot;: a wrapper for a VkImage and its VkImageView.">NvVkTexture</a>&amp; tex);
 <a name="l00345"></a>00345 
-<a name="l00346"></a>00346         VkResult doneWithTempCmdBufferSubmit(VkCommandBuffer&amp; cmd, VkFence* fence = NULL) {
-<a name="l00347"></a>00347                 VkResult result;
-<a name="l00348"></a>00348                 result = vkEndCommandBuffer(cmd);
-<a name="l00349"></a>00349                 <span class="keywordflow">if</span> (result != VK_SUCCESS) {
-<a name="l00350"></a>00350                         <span class="keywordflow">return</span> result;
-<a name="l00351"></a>00351                 }
-<a name="l00352"></a>00352 
-<a name="l00353"></a>00353                 VkSubmitInfo submitInfo = { VK_STRUCTURE_TYPE_SUBMIT_INFO };
-<a name="l00354"></a>00354                 submitInfo.commandBufferCount = 1;
-<a name="l00355"></a>00355                 submitInfo.pCommandBuffers = &amp;cmd;
-<a name="l00356"></a>00356 
-<a name="l00357"></a>00357                 result = vkQueueSubmit(<a class="code" href="class_nv_vk_context.html#f63502cc8e6bca40458fb884af74f3ed" title="Queue access.">queue</a>(), 1, &amp;submitInfo, fence ? *fence : VK_NULL_HANDLE);
-<a name="l00358"></a>00358                 <span class="keywordflow">if</span> (result != VK_SUCCESS)
-<a name="l00359"></a>00359                         <span class="keywordflow">return</span> result;
-<a name="l00360"></a>00360 
-<a name="l00361"></a>00361                 doneWithTempCmdBuffer(cmd);
-<a name="l00362"></a>00362                 <span class="keywordflow">return</span> VK_SUCCESS;
-<a name="l00363"></a>00363         }
-<a name="l00364"></a>00364 
-<a name="l00365"></a>00365         <span class="keywordtype">void</span> doneWithTempCmdBuffer(VkCommandBuffer&amp; cmd) {
-<a name="l00366"></a>00366                 <span class="keywordtype">int</span> current = mCurrFrameIndex % MAX_BUFFERED_FRAMES;
-<a name="l00367"></a>00367                 mFrames[current].mSubmittedTempCmdBuffers.push_back(cmd);
-<a name="l00368"></a>00368         }
-<a name="l00369"></a>00369 
-<a name="l00370"></a>00370         <span class="keywordtype">void</span> destroyPastFrameCmdBuffers()
-<a name="l00371"></a>00371         {
-<a name="l00372"></a>00372                 <span class="keywordtype">int</span> current = mCurrFrameIndex % MAX_BUFFERED_FRAMES;
-<a name="l00373"></a>00373                 <span class="keywordtype">int</span> past = (mCurrFrameIndex + 1) % MAX_BUFFERED_FRAMES;
-<a name="l00374"></a>00374 
-<a name="l00375"></a>00375                 <span class="keywordflow">if</span> (mCurrFrameIndex &lt; MAX_BUFFERED_FRAMES){
-<a name="l00376"></a>00376                         <span class="keywordflow">return</span>;
-<a name="l00377"></a>00377                 }
-<a name="l00378"></a>00378 
-<a name="l00379"></a>00379                 <span class="comment">// not exactly efficient, should do per pool processing</span>
-<a name="l00380"></a>00380                 std::vector&lt;VkCommandBuffer&gt;&amp; pastCmds = mFrames[past].mSubmittedTempCmdBuffers;
-<a name="l00381"></a>00381                 <span class="keywordflow">if</span> (pastCmds.size())
-<a name="l00382"></a>00382                         vkFreeCommandBuffers(_device, mTempCmdPool, (uint32_t)pastCmds.size(),  &amp;pastCmds[0]);
-<a name="l00383"></a>00383                 pastCmds.clear();
-<a name="l00384"></a>00384         }
-<a name="l00385"></a>00385 
-<a name="l00386"></a>00386         <a class="code" href="class_nv_vk_staging_buffer.html" title="An allocatable staging buffer for transfers.">NvVkStagingBuffer</a>&amp; stagingBuffer() {
-<a name="l00387"></a>00387                 <span class="keywordflow">return</span> mStaging;
+<a name="l00347"></a>00347         uint32_t <a class="code" href="class_nv_vk_context.html#aa4a726ed0a2bca58ede51a8abf54ab9" title="Deprecated: Only supported on platforms/drivers that can accept GLSL directly.">createShadersFromSourceString</a>(<span class="keyword">const</span> std::string&amp; sourceText, VkPipelineShaderStageCreateInfo* shaders, uint32_t maxShaders);
+<a name="l00348"></a>00348 
+<a name="l00356"></a>00356         uint32_t <a class="code" href="class_nv_vk_context.html#103041a0c9ee379bc953ce459e224d7d" title="Load SPIR-V shaders from binary file data (generated from the glsl2spirv tool).">createShadersFromBinaryBlob</a>(uint32_t* data, uint32_t leng, VkPipelineShaderStageCreateInfo* shaders, uint32_t maxShaders);
+<a name="l00357"></a>00357 
+<a name="l00358"></a>00358         VkResult transitionImageLayout(VkImage&amp; image, VkImageAspectFlags aspect,
+<a name="l00359"></a>00359                 VkImageLayout oldLayout, VkImageLayout newLayout, VkAccessFlagBits inSrcAccessmask = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT,
+<a name="l00360"></a>00360                 VkAccessFlagBits inDstAccessmask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT);
+<a name="l00361"></a>00361 
+<a name="l00362"></a>00362         <span class="keyword">enum</span> CmdBufferIndex {
+<a name="l00363"></a>00363                 CMD_ONSCREEN = 0,
+<a name="l00364"></a>00364                 CMD_UI_FRAMEWORK,
+<a name="l00365"></a>00365                 CMD_COUNT
+<a name="l00366"></a>00366         };
+<a name="l00367"></a>00367         <span class="comment">// Retrieves a reference to a managed, one-per-frame primary command buffer</span>
+<a name="l00368"></a>00368         <span class="comment">// Do not submit directly to a queue - use submitMainCommandBuffer</span>
+<a name="l00369"></a>00369         VkCommandBuffer getMainCommandBuffer(CmdBufferIndex index = CMD_ONSCREEN);
+<a name="l00370"></a>00370 
+<a name="l00371"></a>00371         <span class="comment">// Submits this frame's main command buffer and does any end-of-frame sync</span>
+<a name="l00372"></a>00372         <span class="keywordtype">bool</span> submitMainCommandBuffer(CmdBufferIndex index = CMD_ONSCREEN);
+<a name="l00373"></a>00373 
+<a name="l00374"></a>00374         VkCommandBuffer   createCmdBuffer(VkCommandPool pool, <span class="keywordtype">bool</span> primary);
+<a name="l00375"></a>00375 
+<a name="l00376"></a>00376         <span class="keywordtype">void</span> purgeTempCmdBuffers() {
+<a name="l00377"></a>00377                 vkDeviceWaitIdle(_device);
+<a name="l00378"></a>00378                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> f = 0; f &lt; MAX_BUFFERED_FRAMES; f++){
+<a name="l00379"></a>00379                         FrameInfo&amp; frame = mFrames[f];
+<a name="l00380"></a>00380                         <span class="keywordflow">if</span> (!frame.mSubmittedTempCmdBuffers.empty()){
+<a name="l00381"></a>00381                                 vkFreeCommandBuffers(_device, mTempCmdPool, 
+<a name="l00382"></a>00382                                         (uint32_t)frame.mSubmittedTempCmdBuffers.size(), &amp;frame.mSubmittedTempCmdBuffers[0]);
+<a name="l00383"></a>00383                                 frame.mSubmittedTempCmdBuffers.clear();
+<a name="l00384"></a>00384                         }
+<a name="l00385"></a>00385                         frame.mOpen = <span class="keyword">false</span>;
+<a name="l00386"></a>00386                 }
+<a name="l00387"></a>00387                 mCurrFrameIndex = 0;
 <a name="l00388"></a>00388         }
 <a name="l00389"></a>00389 
-<a name="l00390"></a>00390         NvGPUTimerVK&amp; getFrameTimer() { <span class="keywordflow">return</span> *m_frameTimer; }
-<a name="l00391"></a>00391 
-<a name="l00393"></a>00393         <span class="keywordtype">bool</span> nextFrame();
-<a name="l00394"></a>00394 
-<a name="l00395"></a>00395         VkFormat pickOptimalFormat(uint32_t count, <span class="keyword">const</span> VkFormat *formats, VkFlags properties);
+<a name="l00390"></a>00390         VkCommandBuffer beginTempCmdBuffer()
+<a name="l00391"></a>00391         {
+<a name="l00392"></a>00392                 VkCommandBuffer cmd = createCmdBuffer(mTempCmdPool, <span class="keyword">true</span>);
+<a name="l00393"></a>00393 
+<a name="l00394"></a>00394                 <span class="comment">// Record the commands.</span>
+<a name="l00395"></a>00395                 VkCommandBufferInheritanceInfo inheritInfo = { VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO };
 <a name="l00396"></a>00396 
-<a name="l00397"></a>00397         VkShaderModule createShader(<span class="keyword">const</span> std::string&amp; shaderSource, VkShaderStageFlagBits inStage);
-<a name="l00398"></a>00398         
-<a name="l00399"></a>00399         <span class="keywordtype">bool</span> isExtensionSupported(<span class="keyword">const</span> <span class="keywordtype">char</span>* ext);
-<a name="l00400"></a>00400         <span class="keywordtype">bool</span> isLayerSupported(<span class="keyword">const</span> <span class="keywordtype">char</span>* layer);
-<a name="l00401"></a>00401 
-<a name="l00402"></a>00402         <span class="keyword">const</span> <a class="code" href="struct_nv_v_k_configuration.html" title="VK config representation.">NvVKConfiguration</a>&amp; configuration()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> mConfiguration; }
+<a name="l00397"></a>00397                 VkCommandBufferBeginInfo beginInfo = { VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO };
+<a name="l00398"></a>00398                 beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+<a name="l00399"></a>00399                 beginInfo.pInheritanceInfo = &amp;inheritInfo;
+<a name="l00400"></a>00400 
+<a name="l00401"></a>00401                 <span class="keywordflow">if</span> (vkBeginCommandBuffer(cmd, &amp;beginInfo) != VK_SUCCESS)
+<a name="l00402"></a>00402                         <span class="keywordflow">return</span> 0;
 <a name="l00403"></a>00403 
-<a name="l00404"></a>00404 <span class="preprocessor">#if defined (VK_EXT_debug_marker)</span>
-<a name="l00405"></a>00405 <span class="preprocessor"></span>
-<a name="l00406"></a>00406         <span class="keywordtype">void</span> debugMarkerBegin(VkCommandBuffer cmd, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)<span class="keyword"> const </span>{
-<a name="l00407"></a>00407                 <span class="keywordflow">if</span> (mSupportsDebugMarkers)      {
-<a name="l00408"></a>00408                         VkDebugMarkerMarkerInfoEXT markerInfo = { VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT };
-<a name="l00409"></a>00409 
-<a name="l00410"></a>00410                         markerInfo.pMarkerName = name;
-<a name="l00411"></a>00411 
-<a name="l00412"></a>00412                         ext_vkCmdDebugMarkerBeginEXT(cmd, &amp;markerInfo);
-<a name="l00413"></a>00413                 }
-<a name="l00414"></a>00414         }
-<a name="l00415"></a>00415 
-<a name="l00416"></a>00416         <span class="keywordtype">void</span> debugMarkerEnd(VkCommandBuffer cmd)<span class="keyword"> const </span>{
-<a name="l00417"></a>00417                 <span class="keywordflow">if</span> (mSupportsDebugMarkers)      {
-<a name="l00418"></a>00418                         ext_vkCmdDebugMarkerEndEXT(cmd);
-<a name="l00419"></a>00419                 }
-<a name="l00420"></a>00420         }
-<a name="l00421"></a>00421         
-<a name="l00422"></a>00422         <span class="keywordtype">void</span> debugMarkerInsert(VkCommandBuffer cmd, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)<span class="keyword"> const </span>{
-<a name="l00423"></a>00423                 <span class="keywordflow">if</span> (mSupportsDebugMarkers) {
-<a name="l00424"></a>00424                         VkDebugMarkerMarkerInfoEXT markerInfo = { VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT };
+<a name="l00404"></a>00404                 <span class="keywordflow">return</span> cmd;
+<a name="l00405"></a>00405         }
+<a name="l00406"></a>00406 
+<a name="l00407"></a>00407         VkResult doneWithTempCmdBufferSubmit(VkCommandBuffer&amp; cmd, VkFence* fence = NULL) {
+<a name="l00408"></a>00408                 VkResult result;
+<a name="l00409"></a>00409                 result = vkEndCommandBuffer(cmd);
+<a name="l00410"></a>00410                 <span class="keywordflow">if</span> (result != VK_SUCCESS) {
+<a name="l00411"></a>00411                         <span class="keywordflow">return</span> result;
+<a name="l00412"></a>00412                 }
+<a name="l00413"></a>00413 
+<a name="l00414"></a>00414                 VkSubmitInfo submitInfo = { VK_STRUCTURE_TYPE_SUBMIT_INFO };
+<a name="l00415"></a>00415                 submitInfo.commandBufferCount = 1;
+<a name="l00416"></a>00416                 submitInfo.pCommandBuffers = &amp;cmd;
+<a name="l00417"></a>00417 
+<a name="l00418"></a>00418                 result = vkQueueSubmit(<a class="code" href="class_nv_vk_context.html#f63502cc8e6bca40458fb884af74f3ed" title="Queue access.">queue</a>(), 1, &amp;submitInfo, fence ? *fence : VK_NULL_HANDLE);
+<a name="l00419"></a>00419                 <span class="keywordflow">if</span> (result != VK_SUCCESS)
+<a name="l00420"></a>00420                         <span class="keywordflow">return</span> result;
+<a name="l00421"></a>00421 
+<a name="l00422"></a>00422                 doneWithTempCmdBuffer(cmd);
+<a name="l00423"></a>00423                 <span class="keywordflow">return</span> VK_SUCCESS;
+<a name="l00424"></a>00424         }
 <a name="l00425"></a>00425 
-<a name="l00426"></a>00426                         markerInfo.pMarkerName = name;
-<a name="l00427"></a>00427 
-<a name="l00428"></a>00428                         ext_vkCmdDebugMarkerInsertEXT(cmd, &amp;markerInfo);
-<a name="l00429"></a>00429                 }
-<a name="l00430"></a>00430         }
-<a name="l00431"></a>00431 
-<a name="l00432"></a>00432         <span class="keywordtype">void</span> debugLabelImpl(uint64_t <span class="keywordtype">object</span>, VkDebugReportObjectTypeEXT type, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)<span class="keyword"> const </span>{
-<a name="l00433"></a>00433                 <span class="keywordflow">if</span> (mSupportsDebugMarkers)      {
-<a name="l00434"></a>00434                         VkDebugMarkerObjectNameInfoEXT nameInfo = { VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT };
-<a name="l00435"></a>00435                         nameInfo.object = object;
-<a name="l00436"></a>00436                         nameInfo.objectType = type;
-<a name="l00437"></a>00437                         nameInfo.pObjectName = name;
-<a name="l00438"></a>00438 
-<a name="l00439"></a>00439                         ext_vkDebugMarkerSetObjectNameEXT(<a class="code" href="class_nv_vk_context.html#6b0a497652e8af6e1c283fbe8d01b3a4" title="Device access.">device</a>(), &amp;nameInfo);
-<a name="l00440"></a>00440                 }
-<a name="l00441"></a>00441         }
-<a name="l00442"></a>00442 
-<a name="l00443"></a>00443 <span class="preprocessor">#else</span>
-<a name="l00444"></a>00444 <span class="preprocessor"></span>        <span class="keywordtype">void</span> debugMarkerBegin(VkCommandBuffer cmd, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)<span class="keyword"> const </span>{}
-<a name="l00445"></a>00445         <span class="keywordtype">void</span> debugMarkerEnd(VkCommandBuffer cmd)<span class="keyword"> const </span>{}
-<a name="l00446"></a>00446         <span class="keywordtype">void</span> debugMarkerInsert(VkCommandBuffer cmd, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)<span class="keyword"> const </span>{}
-<a name="l00447"></a>00447         <span class="keywordtype">void</span> debugLabelImpl(uint64_t <span class="keywordtype">object</span>, VkDebugReportObjectTypeEXT type, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)<span class="keyword"> const </span>{ }
-<a name="l00448"></a>00448 <span class="preprocessor">#endif </span>
-<a name="l00449"></a>00449 <span class="preprocessor"></span>        <span class="comment">// on 32-bit system Vk handles all are typedefed to uint64_t so we need different function names to avoid collisions :(</span>
-<a name="l00450"></a>00450 <span class="preprocessor">#define NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(t,e) void debugLabel##t(Vk##t handle, const std::string&amp; label) const { debugLabelImpl(uint64_t(handle),  VK_DEBUG_REPORT_OBJECT_TYPE_##e##_EXT, label.c_str()); }</span>
-<a name="l00451"></a>00451 <span class="preprocessor"></span>        NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Instance, INSTANCE)
-<a name="l00452"></a>00452         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(PhysicalDevice, PHYSICAL_DEVICE)
-<a name="l00453"></a>00453         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Device, DEVICE)
-<a name="l00454"></a>00454         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Queue, QUEUE)
-<a name="l00455"></a>00455         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Semaphore, SEMAPHORE)
-<a name="l00456"></a>00456         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(CommandBuffer, COMMAND_BUFFER)
-<a name="l00457"></a>00457         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Fence, FENCE)
-<a name="l00458"></a>00458         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(DeviceMemory, DEVICE_MEMORY)
-<a name="l00459"></a>00459         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Buffer, BUFFER)
-<a name="l00460"></a>00460         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Image, IMAGE)
-<a name="l00461"></a>00461         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Event, EVENT)
-<a name="l00462"></a>00462         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(QueryPool, QUERY_POOL)
-<a name="l00463"></a>00463         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(BufferView, BUFFER_VIEW)
-<a name="l00464"></a>00464         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(ImageView, IMAGE_VIEW)
-<a name="l00465"></a>00465         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(ShaderModule, SHADER_MODULE)
-<a name="l00466"></a>00466         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(PipelineCache, PIPELINE_CACHE)
-<a name="l00467"></a>00467         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(PipelineLayout, PIPELINE_LAYOUT)
-<a name="l00468"></a>00468         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(RenderPass, RENDER_PASS)
-<a name="l00469"></a>00469         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Pipeline, PIPELINE)
-<a name="l00470"></a>00470         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(DescriptorSetLayout, DESCRIPTOR_SET_LAYOUT)
-<a name="l00471"></a>00471         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Sampler, SAMPLER)
-<a name="l00472"></a>00472         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(DescriptorPool, DESCRIPTOR_POOL)
-<a name="l00473"></a>00473         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(DescriptorSet, DESCRIPTOR_SET)
-<a name="l00474"></a>00474         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Framebuffer, FRAMEBUFFER)
-<a name="l00475"></a>00475         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(CommandPool, COMMAND_POOL)
-<a name="l00476"></a>00476         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(SurfaceKHR, SURFACE_KHR)
-<a name="l00477"></a>00477         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(SwapchainKHR, SWAPCHAIN_KHR)
-<a name="l00478"></a>00478 <span class="preprocessor">#undef NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION</span>
-<a name="l00479"></a>00479 <span class="preprocessor"></span>
-<a name="l00480"></a>00480         <span class="keyword">struct </span>DebugMarkerScope
-<a name="l00481"></a>00481         {
-<a name="l00482"></a>00482                 DebugMarkerScope(<span class="keyword">const</span> <a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>&amp; context, VkCommandBuffer cmd, <span class="keyword">const</span> <span class="keywordtype">char</span>* name )
-<a name="l00483"></a>00483                         : _context(context)
-<a name="l00484"></a>00484                         , _cmd(cmd)
-<a name="l00485"></a>00485                 {
-<a name="l00486"></a>00486                         _context.debugMarkerBegin(_cmd, name);
-<a name="l00487"></a>00487                 }
+<a name="l00426"></a>00426         <span class="keywordtype">void</span> doneWithTempCmdBuffer(VkCommandBuffer&amp; cmd) {
+<a name="l00427"></a>00427                 <span class="keywordtype">int</span> current = mCurrFrameIndex % MAX_BUFFERED_FRAMES;
+<a name="l00428"></a>00428                 mFrames[current].mSubmittedTempCmdBuffers.push_back(cmd);
+<a name="l00429"></a>00429         }
+<a name="l00430"></a>00430 
+<a name="l00431"></a>00431         <span class="keywordtype">void</span> destroyPastFrameCmdBuffers()
+<a name="l00432"></a>00432         {
+<a name="l00433"></a>00433                 <span class="keywordtype">int</span> current = mCurrFrameIndex % MAX_BUFFERED_FRAMES;
+<a name="l00434"></a>00434                 <span class="keywordtype">int</span> past = (mCurrFrameIndex + 1) % MAX_BUFFERED_FRAMES;
+<a name="l00435"></a>00435 
+<a name="l00436"></a>00436                 <span class="keywordflow">if</span> (mCurrFrameIndex &lt; MAX_BUFFERED_FRAMES){
+<a name="l00437"></a>00437                         <span class="keywordflow">return</span>;
+<a name="l00438"></a>00438                 }
+<a name="l00439"></a>00439 
+<a name="l00440"></a>00440                 <span class="comment">// not exactly efficient, should do per pool processing</span>
+<a name="l00441"></a>00441                 std::vector&lt;VkCommandBuffer&gt;&amp; pastCmds = mFrames[past].mSubmittedTempCmdBuffers;
+<a name="l00442"></a>00442                 <span class="keywordflow">if</span> (pastCmds.size())
+<a name="l00443"></a>00443                         vkFreeCommandBuffers(_device, mTempCmdPool, (uint32_t)pastCmds.size(),  &amp;pastCmds[0]);
+<a name="l00444"></a>00444                 pastCmds.clear();
+<a name="l00445"></a>00445         }
+<a name="l00446"></a>00446 
+<a name="l00447"></a>00447         <a class="code" href="class_nv_vk_staging_buffer.html" title="An allocatable staging buffer for transfers.">NvVkStagingBuffer</a>&amp; stagingBuffer() {
+<a name="l00448"></a>00448                 <span class="keywordflow">return</span> mStaging;
+<a name="l00449"></a>00449         }
+<a name="l00450"></a>00450 
+<a name="l00451"></a>00451         NvGPUTimerVK&amp; getFrameTimer() { <span class="keywordflow">return</span> *m_frameTimer; }
+<a name="l00452"></a>00452 
+<a name="l00454"></a>00454         <span class="keywordtype">bool</span> nextFrame();
+<a name="l00455"></a>00455 
+<a name="l00456"></a>00456         VkFormat pickOptimalFormat(uint32_t count, <span class="keyword">const</span> VkFormat *formats, VkFlags properties);
+<a name="l00457"></a>00457 
+<a name="l00458"></a>00458         VkShaderModule createShader(<span class="keyword">const</span> std::string&amp; shaderSource, VkShaderStageFlagBits inStage);
+<a name="l00459"></a>00459         
+<a name="l00460"></a>00460         <span class="keywordtype">bool</span> isExtensionSupported(<span class="keyword">const</span> <span class="keywordtype">char</span>* ext);
+<a name="l00461"></a>00461         <span class="keywordtype">bool</span> isLayerSupported(<span class="keyword">const</span> <span class="keywordtype">char</span>* layer);
+<a name="l00462"></a>00462 
+<a name="l00463"></a>00463         <span class="keyword">const</span> <a class="code" href="struct_nv_v_k_configuration.html" title="VK config representation.">NvVKConfiguration</a>&amp; configuration()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> mConfiguration; }
+<a name="l00464"></a>00464 
+<a name="l00465"></a>00465 <span class="preprocessor">#if defined (VK_EXT_debug_marker)</span>
+<a name="l00466"></a>00466 <span class="preprocessor"></span>
+<a name="l00467"></a>00467         <span class="keywordtype">void</span> debugMarkerBegin(VkCommandBuffer cmd, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)<span class="keyword"> const </span>{
+<a name="l00468"></a>00468                 <span class="keywordflow">if</span> (mSupportsDebugMarkers)      {
+<a name="l00469"></a>00469                         VkDebugMarkerMarkerInfoEXT markerInfo = { VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT };
+<a name="l00470"></a>00470 
+<a name="l00471"></a>00471                         markerInfo.pMarkerName = name;
+<a name="l00472"></a>00472 
+<a name="l00473"></a>00473                         ext_vkCmdDebugMarkerBeginEXT(cmd, &amp;markerInfo);
+<a name="l00474"></a>00474                 }
+<a name="l00475"></a>00475         }
+<a name="l00476"></a>00476 
+<a name="l00477"></a>00477         <span class="keywordtype">void</span> debugMarkerEnd(VkCommandBuffer cmd)<span class="keyword"> const </span>{
+<a name="l00478"></a>00478                 <span class="keywordflow">if</span> (mSupportsDebugMarkers)      {
+<a name="l00479"></a>00479                         ext_vkCmdDebugMarkerEndEXT(cmd);
+<a name="l00480"></a>00480                 }
+<a name="l00481"></a>00481         }
+<a name="l00482"></a>00482         
+<a name="l00483"></a>00483         <span class="keywordtype">void</span> debugMarkerInsert(VkCommandBuffer cmd, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)<span class="keyword"> const </span>{
+<a name="l00484"></a>00484                 <span class="keywordflow">if</span> (mSupportsDebugMarkers) {
+<a name="l00485"></a>00485                         VkDebugMarkerMarkerInfoEXT markerInfo = { VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT };
+<a name="l00486"></a>00486 
+<a name="l00487"></a>00487                         markerInfo.pMarkerName = name;
 <a name="l00488"></a>00488 
-<a name="l00489"></a>00489                 ~DebugMarkerScope()
-<a name="l00490"></a>00490                 {
-<a name="l00491"></a>00491                         _context.debugMarkerEnd(_cmd);
+<a name="l00489"></a>00489                         ext_vkCmdDebugMarkerInsertEXT(cmd, &amp;markerInfo);
+<a name="l00490"></a>00490                 }
+<a name="l00491"></a>00491         }
 <a name="l00492"></a>00492 
-<a name="l00493"></a>00493                 }
-<a name="l00494"></a>00494 
-<a name="l00495"></a>00495                 <span class="keyword">const</span> <a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>&amp; _context;
-<a name="l00496"></a>00496                 VkCommandBuffer _cmd;
-<a name="l00497"></a>00497         };
-<a name="l00498"></a>00498 
-<a name="l00499"></a>00499 <span class="keyword">private</span>:
-<a name="l00500"></a>00500 
-<a name="l00501"></a>00501 
-<a name="l00502"></a>00502 <span class="keyword">protected</span>:
-<a name="l00503"></a>00503         <span class="keyword">enum</span> {
-<a name="l00504"></a>00504                 MAX_BUFFERED_FRAMES = 2
-<a name="l00505"></a>00505         };
-<a name="l00506"></a>00506 
-<a name="l00507"></a>00507         VkResult fillBuffer(<a class="code" href="class_nv_vk_staging_buffer.html" title="An allocatable staging buffer for transfers.">NvVkStagingBuffer</a>* staging, <a class="code" href="struct_nv_vk_buffer.html" title="A wrapper for a VkBuffer and its memory.">NvVkBuffer</a>&amp; buffer, <span class="keywordtype">size_t</span> offset, <span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <span class="keywordtype">void</span>* data);
-<a name="l00508"></a>00508         VkShaderModule createShader(<span class="keyword">const</span> <span class="keywordtype">char</span>* shaderSource, VkShaderStageFlagBits inStage);
-<a name="l00509"></a>00509 
-<a name="l00510"></a>00510         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> reshape(int32_t&amp; w, int32_t&amp; h);
-<a name="l00511"></a>00511 
-<a name="l00512"></a>00512         <span class="keyword">virtual</span> VkSemaphore* getWaitSync() = 0;
-<a name="l00513"></a>00513         <span class="keyword">virtual</span> VkSemaphore* getSignalSync() = 0;
-<a name="l00514"></a>00514 
-<a name="l00515"></a>00515         VkInstance    _instance;
-<a name="l00516"></a>00516 
-<a name="l00517"></a>00517         VkPhysicalDevice            _physicalDevice;
-<a name="l00518"></a>00518         VkPhysicalDeviceProperties  _physicalDeviceProperties;
-<a name="l00519"></a>00519         VkPhysicalDeviceMemoryProperties _physicalDeviceMemoryProperties;
-<a name="l00520"></a>00520         VkPhysicalDeviceLimits      _physicalDeviceLimits;
-<a name="l00521"></a>00521     VkPhysicalDeviceFeatures    _physicalDeviceFeatures;
-<a name="l00522"></a>00522     VkPhysicalDeviceFeatures    _physicalDeviceFeaturesEnabled;
-<a name="l00523"></a>00523         VkDevice      _device;
-<a name="l00524"></a>00524 
-<a name="l00525"></a>00525         VkQueue       _queue;
-<a name="l00526"></a>00526         VkQueueFamilyProperties _queueProperties;
-<a name="l00527"></a>00527 
-<a name="l00528"></a>00528     uint32_t        _queueFamilyIndex;
-<a name="l00529"></a>00529     uint32_t        _queueIndex;
-<a name="l00530"></a>00530         VkCommandPool mTempCmdPool;
-<a name="l00531"></a>00531 
-<a name="l00532"></a>00532         <span class="keyword">struct </span>FrameInfo {
-<a name="l00533"></a>00533                 VkFence                      mFence;
-<a name="l00534"></a>00534                 std::vector&lt;VkCommandBuffer&gt; mSubmittedTempCmdBuffers;
-<a name="l00535"></a>00535                 <span class="keywordtype">bool</span> mOpen;
-<a name="l00536"></a>00536                 VkCommandBuffer mCmdBuffers;
-<a name="l00537"></a>00537         };
-<a name="l00538"></a>00538 
-<a name="l00539"></a>00539         FrameInfo mFrames[MAX_BUFFERED_FRAMES];
-<a name="l00540"></a>00540         uint32_t mCurrFrameIndex;
-<a name="l00541"></a>00541 
-<a name="l00542"></a>00542         <a class="code" href="class_nv_vk_staging_buffer.html" title="An allocatable staging buffer for transfers.">NvVkStagingBuffer</a> mStaging;
-<a name="l00543"></a>00543 
-<a name="l00544"></a>00544         NvGPUTimerVK* m_frameTimer;
-<a name="l00545"></a>00545         
-<a name="l00546"></a>00546         <span class="comment">// extension and layer queries</span>
-<a name="l00547"></a>00547         std::vector&lt;VkExtensionProperties&gt; mInstanceExtensionsProperties;
-<a name="l00548"></a>00548         std::vector&lt;VkLayerProperties&gt; mInstanceLayerProperties;
+<a name="l00493"></a>00493         <span class="keywordtype">void</span> debugLabelImpl(uint64_t <span class="keywordtype">object</span>, VkDebugReportObjectTypeEXT type, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)<span class="keyword"> const </span>{
+<a name="l00494"></a>00494                 <span class="keywordflow">if</span> (mSupportsDebugMarkers)      {
+<a name="l00495"></a>00495                         VkDebugMarkerObjectNameInfoEXT nameInfo = { VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT };
+<a name="l00496"></a>00496                         nameInfo.object = object;
+<a name="l00497"></a>00497                         nameInfo.objectType = type;
+<a name="l00498"></a>00498                         nameInfo.pObjectName = name;
+<a name="l00499"></a>00499 
+<a name="l00500"></a>00500                         ext_vkDebugMarkerSetObjectNameEXT(<a class="code" href="class_nv_vk_context.html#6b0a497652e8af6e1c283fbe8d01b3a4" title="Device access.">device</a>(), &amp;nameInfo);
+<a name="l00501"></a>00501                 }
+<a name="l00502"></a>00502         }
+<a name="l00503"></a>00503 
+<a name="l00504"></a>00504 <span class="preprocessor">#else</span>
+<a name="l00505"></a>00505 <span class="preprocessor"></span>        <span class="keywordtype">void</span> debugMarkerBegin(VkCommandBuffer cmd, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)<span class="keyword"> const </span>{}
+<a name="l00506"></a>00506         <span class="keywordtype">void</span> debugMarkerEnd(VkCommandBuffer cmd)<span class="keyword"> const </span>{}
+<a name="l00507"></a>00507         <span class="keywordtype">void</span> debugMarkerInsert(VkCommandBuffer cmd, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)<span class="keyword"> const </span>{}
+<a name="l00508"></a>00508         <span class="keywordtype">void</span> debugLabelImpl(uint64_t <span class="keywordtype">object</span>, VkDebugReportObjectTypeEXT type, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)<span class="keyword"> const </span>{ }
+<a name="l00509"></a>00509 <span class="preprocessor">#endif </span>
+<a name="l00510"></a>00510 <span class="preprocessor"></span>        <span class="comment">// on 32-bit system Vk handles all are typedefed to uint64_t so we need different function names to avoid collisions :(</span>
+<a name="l00511"></a>00511 <span class="preprocessor">#define NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(t,e) void debugLabel##t(Vk##t handle, const std::string&amp; label) const { debugLabelImpl(uint64_t(handle),  VK_DEBUG_REPORT_OBJECT_TYPE_##e##_EXT, label.c_str()); }</span>
+<a name="l00512"></a>00512 <span class="preprocessor"></span>        NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Instance, INSTANCE)
+<a name="l00513"></a>00513         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(PhysicalDevice, PHYSICAL_DEVICE)
+<a name="l00514"></a>00514         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Device, DEVICE)
+<a name="l00515"></a>00515         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Queue, QUEUE)
+<a name="l00516"></a>00516         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Semaphore, SEMAPHORE)
+<a name="l00517"></a>00517         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(CommandBuffer, COMMAND_BUFFER)
+<a name="l00518"></a>00518         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Fence, FENCE)
+<a name="l00519"></a>00519         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(DeviceMemory, DEVICE_MEMORY)
+<a name="l00520"></a>00520         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Buffer, BUFFER)
+<a name="l00521"></a>00521         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Image, IMAGE)
+<a name="l00522"></a>00522         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Event, EVENT)
+<a name="l00523"></a>00523         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(QueryPool, QUERY_POOL)
+<a name="l00524"></a>00524         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(BufferView, BUFFER_VIEW)
+<a name="l00525"></a>00525         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(ImageView, IMAGE_VIEW)
+<a name="l00526"></a>00526         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(ShaderModule, SHADER_MODULE)
+<a name="l00527"></a>00527         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(PipelineCache, PIPELINE_CACHE)
+<a name="l00528"></a>00528         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(PipelineLayout, PIPELINE_LAYOUT)
+<a name="l00529"></a>00529         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(RenderPass, RENDER_PASS)
+<a name="l00530"></a>00530         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Pipeline, PIPELINE)
+<a name="l00531"></a>00531         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(DescriptorSetLayout, DESCRIPTOR_SET_LAYOUT)
+<a name="l00532"></a>00532         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Sampler, SAMPLER)
+<a name="l00533"></a>00533         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(DescriptorPool, DESCRIPTOR_POOL)
+<a name="l00534"></a>00534         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(DescriptorSet, DESCRIPTOR_SET)
+<a name="l00535"></a>00535         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(Framebuffer, FRAMEBUFFER)
+<a name="l00536"></a>00536         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(CommandPool, COMMAND_POOL)
+<a name="l00537"></a>00537         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(SurfaceKHR, SURFACE_KHR)
+<a name="l00538"></a>00538         NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION(SwapchainKHR, SWAPCHAIN_KHR)
+<a name="l00539"></a>00539 <span class="preprocessor">#undef NV_VKCONTEXT_H_DEBUG_LABEL_IMPLEMENTATION</span>
+<a name="l00540"></a>00540 <span class="preprocessor"></span>
+<a name="l00541"></a>00541         <span class="keyword">struct </span>DebugMarkerScope
+<a name="l00542"></a>00542         {
+<a name="l00543"></a>00543                 DebugMarkerScope(<span class="keyword">const</span> <a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>&amp; context, VkCommandBuffer cmd, <span class="keyword">const</span> <span class="keywordtype">char</span>* name )
+<a name="l00544"></a>00544                         : _context(context)
+<a name="l00545"></a>00545                         , _cmd(cmd)
+<a name="l00546"></a>00546                 {
+<a name="l00547"></a>00547                         _context.debugMarkerBegin(_cmd, name);
+<a name="l00548"></a>00548                 }
 <a name="l00549"></a>00549 
-<a name="l00550"></a>00550         std::vector&lt;VkExtensionProperties&gt; mPhysicalDeviceExtensionsProperties;
-<a name="l00551"></a>00551         std::vector&lt;VkLayerProperties&gt; mPhysicalDeviceLayerProperties;
-<a name="l00552"></a>00552 
-<a name="l00553"></a>00553         <span class="comment">// merged instance and layer properties</span>
-<a name="l00554"></a>00554         std::set&lt;std::string&gt; mCombinedExtensionNames;
-<a name="l00555"></a>00555         std::set&lt;std::string&gt; mCombinedLayerNames;
-<a name="l00556"></a>00556 
-<a name="l00557"></a>00557         <a class="code" href="struct_nv_v_k_configuration.html" title="VK config representation.">NvVKConfiguration</a> mConfiguration;
-<a name="l00558"></a>00558 
+<a name="l00550"></a>00550                 ~DebugMarkerScope()
+<a name="l00551"></a>00551                 {
+<a name="l00552"></a>00552                         _context.debugMarkerEnd(_cmd);
+<a name="l00553"></a>00553 
+<a name="l00554"></a>00554                 }
+<a name="l00555"></a>00555 
+<a name="l00556"></a>00556                 <span class="keyword">const</span> <a class="code" href="class_nv_vk_context.html" title="A wrapper for most major Vulkan objects used by an application.">NvVkContext</a>&amp; _context;
+<a name="l00557"></a>00557                 VkCommandBuffer _cmd;
+<a name="l00558"></a>00558         };
 <a name="l00559"></a>00559 
-<a name="l00560"></a>00560 <span class="preprocessor">#if defined(VK_EXT_debug_report )</span>
-<a name="l00561"></a>00561 <span class="preprocessor"></span>    PFN_vkCreateDebugReportCallbackEXT ext_vkCreateDebugReportCallbackEXT;
-<a name="l00562"></a>00562     PFN_vkDestroyDebugReportCallbackEXT ext_vkDestroyDebugReportCallbackEXT;
-<a name="l00563"></a>00563     VkDebugReportCallbackEXT msg_callback;
-<a name="l00564"></a>00564 <span class="preprocessor">#endif</span>
-<a name="l00565"></a>00565 <span class="preprocessor"></span>
-<a name="l00566"></a>00566 
-<a name="l00567"></a>00567         <span class="keywordtype">bool</span> mSupportsDebugMarkers;
-<a name="l00568"></a>00568 <span class="preprocessor">#if defined (VK_EXT_debug_marker)</span>
-<a name="l00569"></a>00569 <span class="preprocessor"></span>
-<a name="l00570"></a>00570         PFN_vkDebugMarkerSetObjectTagEXT  ext_vkDebugMarkerSetObjectTagEXT;
-<a name="l00571"></a>00571         PFN_vkDebugMarkerSetObjectNameEXT ext_vkDebugMarkerSetObjectNameEXT;
-<a name="l00572"></a>00572         PFN_vkCmdDebugMarkerBeginEXT      ext_vkCmdDebugMarkerBeginEXT;
-<a name="l00573"></a>00573         PFN_vkCmdDebugMarkerEndEXT        ext_vkCmdDebugMarkerEndEXT;
-<a name="l00574"></a>00574         PFN_vkCmdDebugMarkerInsertEXT     ext_vkCmdDebugMarkerInsertEXT;
+<a name="l00560"></a>00560 <span class="keyword">private</span>:
+<a name="l00561"></a>00561 
+<a name="l00562"></a>00562 
+<a name="l00563"></a>00563 <span class="keyword">protected</span>:
+<a name="l00564"></a>00564         <span class="keyword">enum</span> {
+<a name="l00565"></a>00565                 MAX_BUFFERED_FRAMES = 2
+<a name="l00566"></a>00566         };
+<a name="l00567"></a>00567 
+<a name="l00568"></a>00568         VkResult fillBuffer(<a class="code" href="class_nv_vk_staging_buffer.html" title="An allocatable staging buffer for transfers.">NvVkStagingBuffer</a>* staging, <a class="code" href="struct_nv_vk_buffer.html" title="A wrapper for a VkBuffer and its memory.">NvVkBuffer</a>&amp; buffer, <span class="keywordtype">size_t</span> offset, <span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <span class="keywordtype">void</span>* data);
+<a name="l00569"></a>00569         VkShaderModule createShader(<span class="keyword">const</span> <span class="keywordtype">char</span>* shaderSource, VkShaderStageFlagBits inStage);
+<a name="l00570"></a>00570 
+<a name="l00571"></a>00571         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> reshape(int32_t&amp; w, int32_t&amp; h);
+<a name="l00572"></a>00572 
+<a name="l00573"></a>00573         <span class="keyword">virtual</span> VkSemaphore* getWaitSync() = 0;
+<a name="l00574"></a>00574         <span class="keyword">virtual</span> VkSemaphore* getSignalSync() = 0;
 <a name="l00575"></a>00575 
-<a name="l00576"></a>00576 <span class="preprocessor">#endif</span>
-<a name="l00577"></a>00577 <span class="preprocessor"></span>};
-<a name="l00578"></a>00578 
-<a name="l00579"></a>00579 
-<a name="l00580"></a>00580 <span class="preprocessor">#endif</span>
+<a name="l00576"></a>00576         VkInstance    _instance;
+<a name="l00577"></a>00577 
+<a name="l00578"></a>00578         VkPhysicalDevice            _physicalDevice;
+<a name="l00579"></a>00579         VkPhysicalDeviceProperties  _physicalDeviceProperties;
+<a name="l00580"></a>00580         VkPhysicalDeviceMemoryProperties _physicalDeviceMemoryProperties;
+<a name="l00581"></a>00581         VkPhysicalDeviceLimits      _physicalDeviceLimits;
+<a name="l00582"></a>00582     VkPhysicalDeviceFeatures    _physicalDeviceFeatures;
+<a name="l00583"></a>00583     VkPhysicalDeviceFeatures    _physicalDeviceFeaturesEnabled;
+<a name="l00584"></a>00584         VkDevice      _device;
+<a name="l00585"></a>00585 
+<a name="l00586"></a>00586         VkQueue       _queue;
+<a name="l00587"></a>00587         VkQueueFamilyProperties _queueProperties;
+<a name="l00588"></a>00588 
+<a name="l00589"></a>00589     uint32_t        _queueFamilyIndex;
+<a name="l00590"></a>00590     uint32_t        _queueIndex;
+<a name="l00591"></a>00591         VkCommandPool mTempCmdPool;
+<a name="l00592"></a>00592 
+<a name="l00593"></a>00593         <span class="keyword">struct </span>FrameInfo {
+<a name="l00594"></a>00594                 VkFence                      mFence;
+<a name="l00595"></a>00595                 std::vector&lt;VkCommandBuffer&gt; mSubmittedTempCmdBuffers;
+<a name="l00596"></a>00596                 <span class="keywordtype">bool</span> mOpen;
+<a name="l00597"></a>00597                 VkCommandBuffer mCmdBuffers;
+<a name="l00598"></a>00598         };
+<a name="l00599"></a>00599 
+<a name="l00600"></a>00600         FrameInfo mFrames[MAX_BUFFERED_FRAMES];
+<a name="l00601"></a>00601         uint32_t mCurrFrameIndex;
+<a name="l00602"></a>00602 
+<a name="l00603"></a>00603         <a class="code" href="class_nv_vk_staging_buffer.html" title="An allocatable staging buffer for transfers.">NvVkStagingBuffer</a> mStaging;
+<a name="l00604"></a>00604 
+<a name="l00605"></a>00605         NvGPUTimerVK* m_frameTimer;
+<a name="l00606"></a>00606         
+<a name="l00607"></a>00607         <span class="comment">// extension and layer queries</span>
+<a name="l00608"></a>00608         std::vector&lt;VkExtensionProperties&gt; mInstanceExtensionsProperties;
+<a name="l00609"></a>00609         std::vector&lt;VkLayerProperties&gt; mInstanceLayerProperties;
+<a name="l00610"></a>00610 
+<a name="l00611"></a>00611         std::vector&lt;VkExtensionProperties&gt; mPhysicalDeviceExtensionsProperties;
+<a name="l00612"></a>00612         std::vector&lt;VkLayerProperties&gt; mPhysicalDeviceLayerProperties;
+<a name="l00613"></a>00613 
+<a name="l00614"></a>00614         <span class="comment">// merged instance and layer properties</span>
+<a name="l00615"></a>00615         std::set&lt;std::string&gt; mCombinedExtensionNames;
+<a name="l00616"></a>00616         std::set&lt;std::string&gt; mCombinedLayerNames;
+<a name="l00617"></a>00617 
+<a name="l00618"></a>00618         <a class="code" href="struct_nv_v_k_configuration.html" title="VK config representation.">NvVKConfiguration</a> mConfiguration;
+<a name="l00619"></a>00619 
+<a name="l00620"></a>00620 
+<a name="l00621"></a>00621 <span class="preprocessor">#if defined(VK_EXT_debug_report )</span>
+<a name="l00622"></a>00622 <span class="preprocessor"></span>    PFN_vkCreateDebugReportCallbackEXT ext_vkCreateDebugReportCallbackEXT;
+<a name="l00623"></a>00623     PFN_vkDestroyDebugReportCallbackEXT ext_vkDestroyDebugReportCallbackEXT;
+<a name="l00624"></a>00624     VkDebugReportCallbackEXT msg_callback;
+<a name="l00625"></a>00625 <span class="preprocessor">#endif</span>
+<a name="l00626"></a>00626 <span class="preprocessor"></span>
+<a name="l00627"></a>00627 
+<a name="l00628"></a>00628         <span class="keywordtype">bool</span> mSupportsDebugMarkers;
+<a name="l00629"></a>00629 <span class="preprocessor">#if defined (VK_EXT_debug_marker)</span>
+<a name="l00630"></a>00630 <span class="preprocessor"></span>
+<a name="l00631"></a>00631         PFN_vkDebugMarkerSetObjectTagEXT  ext_vkDebugMarkerSetObjectTagEXT;
+<a name="l00632"></a>00632         PFN_vkDebugMarkerSetObjectNameEXT ext_vkDebugMarkerSetObjectNameEXT;
+<a name="l00633"></a>00633         PFN_vkCmdDebugMarkerBeginEXT      ext_vkCmdDebugMarkerBeginEXT;
+<a name="l00634"></a>00634         PFN_vkCmdDebugMarkerEndEXT        ext_vkCmdDebugMarkerEndEXT;
+<a name="l00635"></a>00635         PFN_vkCmdDebugMarkerInsertEXT     ext_vkCmdDebugMarkerInsertEXT;
+<a name="l00636"></a>00636 
+<a name="l00637"></a>00637 <span class="preprocessor">#endif</span>
+<a name="l00638"></a>00638 <span class="preprocessor"></span>};
+<a name="l00639"></a>00639 
+<a name="l00640"></a>00640 
+<a name="l00641"></a>00641 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div> <!--content-->
 <!-- footer block-->
@@ -578,7 +633,7 @@
 	<div class="seperator"></div>
 	<div class="seperator"></div>
 	<address style="text-align: right;"><small>
-Generated on Thu Aug 25 12:48:26 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
+Generated on Mon Nov 28 16:24:59 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
 	<footer>
 		<div class="row">
 			<div class="text-center">&copy;2016 NVIDIA Corporation.</div>

@@ -99,12 +99,12 @@ void ThreadedRenderingVk::ThreadJobFunction(uint32_t threadIndex)
 	while (m_running) {
 		m_FrameStartLock->lockMutex();
 		{
-                        if (m_frameID == thread.m_frameID)	{
+			if (m_frameID == thread.m_frameID)	{
 				m_FrameStartCV->waitConditionVariable(
 					m_FrameStartLock);
 			}
-                        
-                                thread.m_frameID = m_frameID;
+
+			thread.m_frameID = m_frameID;
 
 			if (!m_running) {
 				m_FrameStartLock->unlockMutex();
@@ -230,7 +230,8 @@ ThreadedRenderingVk::ThreadedRenderingVk() :
     m_requestedThreadedRendering(true),
 	m_threadedRendering(true),
 	m_uiInstanceCount(INSTANCE_COUNT),
-	m_uiBatchSize(m_uiInstanceCount),
+    m_uiBatchSizeRequested(m_uiInstanceCount),
+    m_uiBatchSizeActual(m_uiInstanceCount),
 	m_uiSchoolInfoId(0),
     m_uiCameraFollow(false),
 	m_uiSchoolDisplayModelIndex(0),
@@ -313,8 +314,8 @@ ThreadedRenderingVk::ThreadedRenderingVk() :
 					break;
 				}
 				else {
-				m_initSchools = atoi(iter->c_str());
-			}
+					m_initSchools = atoi(iter->c_str());
+				}
 			}
 		}
 	}
@@ -973,7 +974,7 @@ void ThreadedRenderingVk::drawGL(NvAppContextGL* gl) {
 			{
 				CPU_TIMER_SCOPE(CPU_TIMER_MAIN_CMD_BUILD);
 				GPU_TIMER_SCOPE();
-				m_drawCallCount += pSchool->RenderGL(m_uiBatchSize);
+				m_drawCallCount += pSchool->RenderGL(m_uiBatchSizeActual);
 			}
 		}
 		m_shader_Fish->disable();
@@ -1008,7 +1009,7 @@ void ThreadedRenderingVk::InitPipeline(uint32_t shaderCount,
 	vpStateInfo.scissorCount = 1;
 
 	VkPipelineRasterizationStateCreateInfo rsStateInfo = { VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO };
-	rsStateInfo.depthClampEnable = VK_TRUE;
+	rsStateInfo.depthClampEnable = VK_FALSE;
 	rsStateInfo.rasterizerDiscardEnable = VK_FALSE;
 	rsStateInfo.polygonMode = VK_POLYGON_MODE_FILL;
 	rsStateInfo.cullMode = VK_CULL_MODE_NONE;
@@ -1261,7 +1262,7 @@ void ThreadedRenderingVk::initUI(void)
 	if (mTweakBar)
 	{
 		mTweakBar->setCompactLayout(true);
-        mTweakBar->SetNumRows(22);
+        mTweakBar->SetNumRows(24);
 
 		NvTweakVarBase* var;
 		mTweakBar->addLabel("Fish Settings", true);
@@ -1277,9 +1278,13 @@ void ThreadedRenderingVk::initUI(void)
         var = mTweakBar->addValue("Threaded Rendering", m_requestedThreadedRendering, 0, &m_pThreadedRenderingButton);
 		addTweakKeyBind(var, NvKey::K_T);
 		mTweakBar->addValue("Number of Worker Threads", m_uiThreadCount, 1, MAX_THREAD_COUNT, 1, UIACTION_THREADCOUNT);
-		mTweakBar->addValue("Batch Size (Fish per Draw Call)", m_uiBatchSize, 1, MAX_INSTANCE_COUNT, 1, UIACTION_BATCHSIZE,
+        
+        mTweakBar->addLabel("Batch Size (Fish per Draw Call)", true);
+        mTweakBar->addValue("Requested Size", m_uiBatchSizeRequested, 1, MAX_INSTANCE_COUNT, 1, UIACTION_BATCHSIZE,
 			&m_pBatchSlider, &m_pBatchVar);
+        mTweakBar->addValueReadout("Actual Size", m_uiBatchSizeActual);
 
+        mTweakBar->addPadding();
 		mTweakBar->addLabel("Animation Settings", true);
 		var = mTweakBar->addValue("Pause Animation", m_animPaused);
 		addTweakKeyBind(var, NvKey::K_P);
@@ -1435,17 +1440,9 @@ NvUIEventResponse ThreadedRenderingVk::handleReaction(const NvUIReaction &react)
 		// Update our readout of total number of active fish
 		m_uiFishCount = m_activeSchools * m_uiInstanceCount;
 
-		if (m_pBatchSlider->GetValue() > m_uiInstanceCount) {
-			m_pBatchSlider->SetValue(m_uiInstanceCount);
-			*m_pBatchVar = m_uiInstanceCount;
-		}
-
-		m_pBatchSlider->SetMaxValue(m_uiInstanceCount);
-		m_pBatchVar->SetMaxValue(m_uiInstanceCount);
+        m_uiBatchSizeActual = std::min((uint32_t)m_pBatchSlider->GetValue(), m_uiInstanceCount);
 
 		bStateModified = true;
-		m_bUIDirty = true;
-		UpdateUI();
 		break;
 	}
     case UIACTION_TANKSIZE:
@@ -1457,6 +1454,8 @@ NvUIEventResponse ThreadedRenderingVk::handleReaction(const NvUIReaction &react)
     }
 	case UIACTION_BATCHSIZE:
 	{
+        m_uiBatchSizeActual = std::min((uint32_t)m_pBatchSlider->GetValue(), m_uiInstanceCount);
+        bStateModified = true;
 		break;
 	}
 	case UIACTION_SCHOOLINFOID:
@@ -1731,7 +1730,7 @@ void ThreadedRenderingVk::reshape(int32_t width, int32_t height)
 		nv::inverse(m_projUBO_Data.m_projectionMatrix);
 
 	//setting the perspective projection matrix
-	nv::perspectiveLH(m_projUBO->m_projectionMatrix, NV_PI / 3.0f,
+	nv::perspectiveVk(m_projUBO->m_projectionMatrix, NV_PI / 3.0f,
 		static_cast<float>(NvSampleApp::m_width) /
 		static_cast<float>(NvSampleApp::m_height),
 		0.1f, 100.0f);
@@ -2224,7 +2223,7 @@ uint32_t ThreadedRenderingVk::DrawSchool(VkCommandBuffer& cmd, School* pSchool, 
 		offsets[1] = m_lightingUBO.getDynamicOffset();
 		vkCmdBindDescriptorSets(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, m_fishPipeLayout, 0, 1, &mDescriptorSet, DESC_FIRST_TEX, offsets);
 	}
-	return pSchool->Render(cmd, m_uiBatchSize);
+	return pSchool->Render(cmd, m_uiBatchSizeActual);
 }
 
 //  Draws the skybox with lighting in color and depth

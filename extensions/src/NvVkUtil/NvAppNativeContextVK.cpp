@@ -112,7 +112,7 @@ bool NvAppNativeContextVK::initialize() {
 
 	// Query for a valid render target format.
 	static VkFormat const cbFormats[] = {
-		VK_FORMAT_R8G8B8A8_UNORM,
+		VK_FORMAT_B8G8R8A8_UNORM,
 	};
 
     // Query for a valid depth stencil format.

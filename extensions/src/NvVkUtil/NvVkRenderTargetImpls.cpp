@@ -311,8 +311,7 @@ bool NvVkMultibufferedRenderTarget::resize(int32_t& w, int32_t& h) {
 
 		_targetFormat = match->format;
 
-		VkSwapchainCreateInfoKHR swapchain;
-		swapchain.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
+		VkSwapchainCreateInfoKHR swapchain = { VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR };
 		swapchain.pNext = NULL;
 		swapchain.surface = _surface;
 		swapchain.minImageCount = desiredNumberOfSwapchainImages;

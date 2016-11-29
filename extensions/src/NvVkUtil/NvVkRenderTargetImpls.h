@@ -50,6 +50,8 @@ public:
 
 	virtual void setSurface(VkSurfaceKHR surface);
 
+    VkSurfaceKHR getSurface() { return _surface; }
+
 	virtual bool beginFrame();
 	virtual bool endFrame();
 

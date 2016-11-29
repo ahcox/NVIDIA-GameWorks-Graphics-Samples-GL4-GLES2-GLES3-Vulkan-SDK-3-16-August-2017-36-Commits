@@ -59,6 +59,7 @@
 #define NV_MATRIX_H
 
 #include <NvSimpleTypes.h>
+#include <math.h>
 
 /// \file
 /// Basic matrix classes with math operations
@@ -265,10 +266,11 @@ public:
     }
 
     friend bool operator != ( const matrix4 & lhs, const matrix4 & rhs )  {
-        bool r = true;
-        for (int32_t i = 0; i < 16; i++)
-            r &= lhs._array[i] != rhs._array[i];
-        return r;
+        for (int32_t i = 0; i < 16; i++) {
+            if (lhs._array[i] != rhs._array[i])
+                return true;
+        }
+        return false;
     }
 
     union {
@@ -661,30 +663,10 @@ matrix4<T>& perspective(matrix4<T> & M, const T fovy, const T aspect, const T n,
 	return frustum(M, xmin, xmax, ymin, ymax, n, f);
 }
 
-//
-// Projection matrix creation (Left Handed)
-// From the fovy in radians, aspect ratio and near far definition
-//
-//   return the projection matrix
-////////////////////////////////////////////////////////////
-template<class T>
-matrix4<T>& perspectiveLH(matrix4<T> & M, const T fovy, const T aspect, const T n, const T f)
-{
-	T xmin, xmax, ymin, ymax;
-
-	ymax = n * (T)tan(fovy * 0.5);
-	ymin = -ymax;
-
-	xmin = ymin * aspect;
-	xmax = ymax * aspect;
-
-	return frustum(M, xmin, xmax, ymax, ymin, n, f);
-}
-
 template<class T>
 matrix4<T>& perspectivex( matrix4<T> & M, const T fovx, const T aspect, const T near, const T far)
 {
-    float e = 1.0f / tanf(fovx / 2.0f);
+    float e = 1.0f / ::tanf(fovx / 2.0f);
     float aspectInv = 1.0f / aspect;
     float fovy = 2.0f * atanf(aspectInv / e);
     float xScale = 1.0f / tanf(0.5f * fovy);

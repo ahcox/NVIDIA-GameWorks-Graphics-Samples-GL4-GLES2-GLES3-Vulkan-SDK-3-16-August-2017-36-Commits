@@ -233,11 +233,6 @@ namespace Nv
         // Array of all sub meshs that comprise the model
         std::vector<SubMeshObj*> m_subMeshes;
 
-        // Axis-aligned bounding box definition
-        nv::vec3f m_boundingBoxMin;
-        nv::vec3f m_boundingBoxMax;
-        nv::vec3f m_boundingBoxCenter;
-
         // Method to remap an index in an obj file to the corresponding index in the given vector.
         //
         // Indices in obj files are 1-based.  Since we're using 0-based vectors

@@ -46,7 +46,9 @@ using std::max;
 #define strcasecmp _stricmp
 #endif
 
-NvImage::FormatInfo NvImage::formatTable[] = {
+uint32_t NvImage::formatLoaderCount = 1;
+
+NvImage::FormatInfo NvImage::formatTable[MAX_LOADERS] = {
     { "dds", NvImage::readDDS, 0}
 };
 
@@ -212,18 +214,32 @@ void* NvImage::getLayerLevel( int32_t level, int32_t layer) {
 //
 ////////////////////////////////////////////////////////////
 bool NvImage::loadImageFromFileData(const uint8_t* fileData, size_t size, const char* fileExt) {
-    int32_t formatCount = sizeof(NvImage::formatTable) / sizeof(NvImage::FormatInfo);
 
     //try to match by format first
-    for ( int32_t ii = 0; ii < formatCount; ii++) {
+    for ( uint32_t ii = 0; ii < formatLoaderCount; ii++) {
         if ( ! strcasecmp( formatTable[ii].extension, fileExt)) {
             //extension matches, load it
             return formatTable[ii].reader( fileData, size, *this);
         }
     }
 
-
     return false;
+}
+
+bool NvImage::addFileLoader(const FormatInfo& loader) {
+	if (formatLoaderCount >= MAX_LOADERS) {
+		return false;
+	}
+	for (uint32_t ii = 0; ii < formatLoaderCount; ii++) {
+		if (!strcasecmp(formatTable[ii].extension, loader.extension)) {
+			return false;
+		}
+	}
+
+	formatTable[formatLoaderCount] = loader;
+	formatLoaderCount++;
+
+	return true;
 }
 
 //
@@ -564,139 +580,137 @@ bool NvImage::convertCrossToCubemap() {
 //
 //
 ////////////////////////////////////////////////////////////
-bool NvImage::setImage( int32_t width, int32_t height, uint32_t format, uint32_t type, const void* data){
+bool NvImage::reformatImage(int32_t width, int32_t height, uint32_t format, uint32_t type) {
     //check parameters before destroying the old image
     int32_t elementSize;
     uint32_t internalFormat;
 
     switch (format) {
-        case NVIMAGE_ALPHA:
-            switch (type) {
-                case NVIMAGE_UNSIGNED_BYTE:
-                    internalFormat = NVIMAGE_ALPHA8;
-                    elementSize = 1;
-                    break;
-                case NVIMAGE_UNSIGNED_SHORT:
-                    internalFormat = NVIMAGE_ALPHA16;
-                    elementSize = 2;
-                    break;
-                case NVIMAGE_FLOAT:
-                    internalFormat = NVIMAGE_ALPHA32F;
-                    elementSize = 4;
-                    break;
-                case NVIMAGE_HALF_FLOAT:
-                    internalFormat = NVIMAGE_ALPHA16F;
-                    elementSize = 2;
-                    break;
-                default:
-                    return false; //format/type combo not supported
-            }
+    case NVIMAGE_ALPHA:
+        switch (type) {
+        case NVIMAGE_UNSIGNED_BYTE:
+            internalFormat = NVIMAGE_ALPHA8;
+            elementSize = 1;
             break;
-        case NVIMAGE_LUMINANCE:
-            switch (type) {
-                case NVIMAGE_UNSIGNED_BYTE:
-                    internalFormat = NVIMAGE_LUMINANCE8;
-                    elementSize = 1;
-                    break;
-                case NVIMAGE_UNSIGNED_SHORT:
-                    internalFormat = NVIMAGE_LUMINANCE16;
-                    elementSize = 2;
-                    break;
-                case NVIMAGE_FLOAT:
-                    internalFormat = NVIMAGE_LUMINANCE32F;
-                    elementSize = 4;
-                    break;
-                case NVIMAGE_HALF_FLOAT:
-                    internalFormat = NVIMAGE_LUMINANCE16F;
-                    elementSize = 2;
-                    break;
-                default:
-                    return false; //format/type combo not supported
-            }
+        case NVIMAGE_UNSIGNED_SHORT:
+            internalFormat = NVIMAGE_ALPHA16;
+            elementSize = 2;
             break;
-        case NVIMAGE_LUMINANCE_ALPHA:
-            switch (type) {
-                case NVIMAGE_UNSIGNED_BYTE:
-                    internalFormat = NVIMAGE_LUMINANCE8_ALPHA8;
-                    elementSize = 2;
-                    break;
-                case NVIMAGE_UNSIGNED_SHORT:
-                    internalFormat = NVIMAGE_LUMINANCE16_ALPHA16;
-                    elementSize = 4;
-                    break;
-                case NVIMAGE_FLOAT:
-                    internalFormat = NVIMAGE_LUMINANCE_ALPHA32F;
-                    elementSize = 8;
-                    break;
-                case NVIMAGE_HALF_FLOAT:
-                    internalFormat = NVIMAGE_LUMINANCE_ALPHA16F;
-                    elementSize = 4;
-                    break;
-                default:
-                    return false; //format/type combo not supported
-            }
+        case NVIMAGE_FLOAT:
+            internalFormat = NVIMAGE_ALPHA32F;
+            elementSize = 4;
             break;
-        case NVIMAGE_RGB:
-            switch (type) {
-                case NVIMAGE_UNSIGNED_BYTE:
-                    internalFormat = NVIMAGE_RGB8;
-                    elementSize = 3;
-                    break;
-                case NVIMAGE_UNSIGNED_SHORT:
-                    internalFormat = NVIMAGE_RGB16;
-                    elementSize = 6;
-                    break;
-                case NVIMAGE_FLOAT:
-                    internalFormat = NVIMAGE_RGB32F;
-                    elementSize = 12;
-                    break;
-                case NVIMAGE_HALF_FLOAT:
-                    internalFormat = NVIMAGE_RGB16F;
-                    elementSize = 6;
-                    break;
-                default:
-                    return false; //format/type combo not supported
-            }
-            break;
-        case NVIMAGE_RGBA:
-            switch (type) {
-                case NVIMAGE_UNSIGNED_BYTE:
-                    internalFormat = NVIMAGE_RGBA8;
-                    elementSize = 4;
-                    break;
-                case NVIMAGE_UNSIGNED_SHORT:
-                    internalFormat = NVIMAGE_RGBA16;
-                    elementSize = 8;
-                    break;
-                case NVIMAGE_FLOAT:
-                    internalFormat = NVIMAGE_RGBA32F;
-                    elementSize = 16;
-                    break;
-                case NVIMAGE_HALF_FLOAT:
-                    internalFormat = NVIMAGE_RGBA16F;
-                    elementSize = 8;
-                    break;
-                default:
-                    return false; //format/type combo not supported
-            }
+        case NVIMAGE_HALF_FLOAT:
+            internalFormat = NVIMAGE_ALPHA16F;
+            elementSize = 2;
             break;
         default:
-            //bad format
-            return false;
+            return false; //format/type combo not supported
+        }
+        break;
+    case NVIMAGE_LUMINANCE:
+        switch (type) {
+        case NVIMAGE_UNSIGNED_BYTE:
+            internalFormat = NVIMAGE_LUMINANCE8;
+            elementSize = 1;
             break;
+        case NVIMAGE_UNSIGNED_SHORT:
+            internalFormat = NVIMAGE_LUMINANCE16;
+            elementSize = 2;
+            break;
+        case NVIMAGE_FLOAT:
+            internalFormat = NVIMAGE_LUMINANCE32F;
+            elementSize = 4;
+            break;
+        case NVIMAGE_HALF_FLOAT:
+            internalFormat = NVIMAGE_LUMINANCE16F;
+            elementSize = 2;
+            break;
+        default:
+            return false; //format/type combo not supported
+        }
+        break;
+    case NVIMAGE_LUMINANCE_ALPHA:
+        switch (type) {
+        case NVIMAGE_UNSIGNED_BYTE:
+            internalFormat = NVIMAGE_LUMINANCE8_ALPHA8;
+            elementSize = 2;
+            break;
+        case NVIMAGE_UNSIGNED_SHORT:
+            internalFormat = NVIMAGE_LUMINANCE16_ALPHA16;
+            elementSize = 4;
+            break;
+        case NVIMAGE_FLOAT:
+            internalFormat = NVIMAGE_LUMINANCE_ALPHA32F;
+            elementSize = 8;
+            break;
+        case NVIMAGE_HALF_FLOAT:
+            internalFormat = NVIMAGE_LUMINANCE_ALPHA16F;
+            elementSize = 4;
+            break;
+        default:
+            return false; //format/type combo not supported
+        }
+        break;
+    case NVIMAGE_RGB:
+        switch (type) {
+        case NVIMAGE_UNSIGNED_BYTE:
+            internalFormat = NVIMAGE_RGB8;
+            elementSize = 3;
+            break;
+        case NVIMAGE_UNSIGNED_SHORT:
+            internalFormat = NVIMAGE_RGB16;
+            elementSize = 6;
+            break;
+        case NVIMAGE_FLOAT:
+            internalFormat = NVIMAGE_RGB32F;
+            elementSize = 12;
+            break;
+        case NVIMAGE_HALF_FLOAT:
+            internalFormat = NVIMAGE_RGB16F;
+            elementSize = 6;
+            break;
+        default:
+            return false; //format/type combo not supported
+        }
+        break;
+    case NVIMAGE_RGBA:
+        switch (type) {
+        case NVIMAGE_UNSIGNED_BYTE:
+            internalFormat = NVIMAGE_RGBA8;
+            elementSize = 4;
+            break;
+        case NVIMAGE_UNSIGNED_SHORT:
+            internalFormat = NVIMAGE_RGBA16;
+            elementSize = 8;
+            break;
+        case NVIMAGE_FLOAT:
+            internalFormat = NVIMAGE_RGBA32F;
+            elementSize = 16;
+            break;
+        case NVIMAGE_HALF_FLOAT:
+            internalFormat = NVIMAGE_RGBA16F;
+            elementSize = 8;
+            break;
+        default:
+            return false; //format/type combo not supported
+        }
+        break;
+    default:
+        //bad format
+        return false;
+        break;
     }
-
 
     //clear old data
     freeData();
 
-	_dataBlockSize = width*height*elementSize;
-	_dataBlock = new uint8_t[_dataBlockSize];
-	memcpy(_dataBlock, data, _dataBlockSize);
+    _dataBlockSize = width*height*elementSize;
+    _dataBlock = new uint8_t[_dataBlockSize];
 
-	_data = new uint8_t*[1];
-	_data[0] = _dataBlock;
-	_dataArrayCount = 1;
+    _data = new uint8_t*[1];
+    _data[0] = _dataBlock;
+    _dataArrayCount = 1;
 
 
     _width = width;
@@ -709,6 +723,18 @@ bool NvImage::setImage( int32_t width, int32_t height, uint32_t format, uint32_t
     _format = format;
     _type = type;
     _cubeMap = false;
+
+    return true;
+}
+
+//
+//
+////////////////////////////////////////////////////////////
+bool NvImage::setImage( int32_t width, int32_t height, uint32_t format, uint32_t type, const void* data){
+    if (!reformatImage(width, height, format, type))
+        return false;
+
+    memcpy(_dataBlock, data, _dataBlockSize);
 
     return true;
 }

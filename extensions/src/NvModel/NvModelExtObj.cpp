@@ -108,9 +108,7 @@ namespace Nv
         m_numTexCoordComponents(2),
         m_normals(normMergeThreshold, initialVertCount),
         m_texCoords(0.00001f, initialVertCount),
-        m_tangents(0.00001f, initialVertCount),
-        m_boundingBoxMin(0.0f, 0.0f, 0.0f),
-        m_boundingBoxMax(0.0f, 0.0f, 0.0f)
+        m_tangents(0.00001f, initialVertCount)
     {
         m_rawMaterials.reserve(32);
         m_subMeshes.reserve(32);
@@ -254,10 +252,11 @@ namespace Nv
                 {
                     nv::vec4f pos;
                     //vertex position, 3 or 4 components
-                    pos.w = 1.0f;  //default w coordinate
 
                     compCount = tok.getTokenFloatArray((float*)pos, 4);
-                    NV_ASSERT(compCount > 2 && compCount < 5);
+					if (compCount > 3) compCount = 3;
+					pos.w = 1.0f;  //default w coordinate
+					NV_ASSERT(compCount > 2 && compCount < 5);
                     if (bBoundingBoxInitialized)
                     {
                         // Grow our bounding box, if necessary

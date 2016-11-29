@@ -129,15 +129,33 @@ namespace Nv
                 return 0;
             return m_textures[textureIndex];
         }
-        
+
+        /// Sets a texture name for the model
+        /// \param[in] textureIndex Index of the texture within the model to set
+        /// \param[in] tex the GL texture name to set
+        void SetTexture(uint32_t textureIndex, GLuint tex)
+        {
+            if (textureIndex >= m_textures.size())
+                return;
+            m_textures[textureIndex] = tex;
+        }
+
         /// Copy the current transforms from bones in the skeleton
         /// to contained meshes in preparation for rendering
         /// \return True if the mesh's transforms could be updated from 
         ///         the model's skeleton, false if they could not.
         bool UpdateBoneTransforms();
 
-        // Very limited way to bind textures to shaders.  Use -1 to indicate no diffuse texture supported by shader.
+        /// Very limited way to bind textures to shaders.  Use -1 to indicate no diffuse texture supported by shader.
         void SetDiffuseTextureLocation(int32_t textureLocation) { m_diffuseTextureLocation = textureLocation; }
+
+        /// Enable/Disable automatic loading of texture image files when loading the
+        /// model.  Disabling this allows an app to do their own loading as they see fit
+        /// and can allow for more responsive apps by not blocking on image load
+        /// \param[i] use sets whether auto-loading is used (initially true/enabled)
+        static void UseAutomaticTextureLoading(bool use) {
+            ms_loadTextures = use;
+        }
 
     private:
         // NvGLModelExt may only be created through the factory method
@@ -172,6 +190,8 @@ namespace Nv
 
         // Shader binding locations
         int32_t m_diffuseTextureLocation;
+
+        static bool ms_loadTextures;
 	};
 }
 #endif

@@ -111,7 +111,7 @@ namespace Nv
 		for (uint32_t textureIndex = 0; textureIndex < textureCount; ++textureIndex)
 		{
 			NvVkTexture* t = new NvVkTexture;
-			if (vk.uploadTextureFromDDSFile(m_pSourceModel->GetTextureName(textureIndex).c_str(), *t)) {
+			if (vk.uploadTextureFromFile(m_pSourceModel->GetTextureName(textureIndex).c_str(), *t)) {
 				m_textures[textureIndex] = t;
 			}
 		}

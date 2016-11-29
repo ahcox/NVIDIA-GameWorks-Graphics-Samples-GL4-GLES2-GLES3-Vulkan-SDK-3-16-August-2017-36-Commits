@@ -340,70 +340,76 @@
 <a name="l00386"></a>00386 
 <a name="l00390"></a>00390     <span class="keywordtype">bool</span> <a class="code" href="class_nv_image.html#b892c768859283dbb91ad5db05652b0b" title="Convert a flat &amp;quot;cross&amp;quot; image to a cubemap Convert a suitable image from...">convertCrossToCubemap</a>();
 <a name="l00391"></a>00391 
-<a name="l00392"></a>00392     <span class="keywordtype">bool</span> setImage( int32_t width, int32_t height, uint32_t format, uint32_t type, <span class="keyword">const</span> <span class="keywordtype">void</span>* data);
-<a name="l00393"></a>00393 
-<a name="l00397"></a><a class="code" href="class_nv_image.html#1ec8ddf20497e516ac9f40c38c7ca65f">00397</a>     <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_nv_image.html#1ec8ddf20497e516ac9f40c38c7ca65f" title="Enables or disables automatic swapping of BGR-order images to RGB.">setSupportsBGR</a>(<span class="keywordtype">bool</span> bgr) { m_supportsBGR = bgr; }
-<a name="l00398"></a>00398 
-<a name="l00401"></a><a class="code" href="class_nv_image.html#834e81801abf7141554e86f51c0e5f25">00401</a>     <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="class_nv_image.html#834e81801abf7141554e86f51c0e5f25" title="Gets the status of automatic swapping of BGR-order images to RGB.">getSupportsBGR</a>() { <span class="keywordflow">return</span> m_supportsBGR; }
+<a name="l00399"></a>00399     <span class="keywordtype">bool</span> <a class="code" href="class_nv_image.html#a73d67c3e9030806255ab4c48743a5ee" title="Replace (destructive to all content) the storage data and format of the image Mainly...">reformatImage</a>(int32_t width, int32_t height, uint32_t format, uint32_t type);
+<a name="l00400"></a>00400 
+<a name="l00401"></a>00401     <span class="keywordtype">bool</span> setImage( int32_t width, int32_t height, uint32_t format, uint32_t type, <span class="keyword">const</span> <span class="keywordtype">void</span>* data);
 <a name="l00402"></a>00402 
-<a name="l00406"></a><a class="code" href="class_nv_image.html#649ac5c8a11f3c7fce25df7187cb93fc">00406</a>     <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_nv_image.html#649ac5c8a11f3c7fce25df7187cb93fc" title="Enables or disables automatic expansion of DXT images to RGBA.">setDXTExpansion</a>(<span class="keywordtype">bool</span> expand) { m_expandDXT = expand; }
+<a name="l00406"></a><a class="code" href="class_nv_image.html#1ec8ddf20497e516ac9f40c38c7ca65f">00406</a>     <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_nv_image.html#1ec8ddf20497e516ac9f40c38c7ca65f" title="Enables or disables automatic swapping of BGR-order images to RGB.">setSupportsBGR</a>(<span class="keywordtype">bool</span> bgr) { m_supportsBGR = bgr; }
 <a name="l00407"></a>00407 
-<a name="l00410"></a><a class="code" href="class_nv_image.html#3c4f922a82aa52107b67f1b1cca6e4a2">00410</a>     <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="class_nv_image.html#3c4f922a82aa52107b67f1b1cca6e4a2" title="Gets the status of automatic DXT expansion.">getDXTExpansion</a>() { <span class="keywordflow">return</span> m_expandDXT; }
+<a name="l00410"></a><a class="code" href="class_nv_image.html#834e81801abf7141554e86f51c0e5f25">00410</a>     <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="class_nv_image.html#834e81801abf7141554e86f51c0e5f25" title="Gets the status of automatic swapping of BGR-order images to RGB.">getSupportsBGR</a>() { <span class="keywordflow">return</span> m_supportsBGR; }
 <a name="l00411"></a>00411 
-<a name="l00412"></a>00412 <span class="keyword">protected</span>:
-<a name="l00414"></a>00414 
-<a name="l00415"></a>00415     int32_t _width;
-<a name="l00416"></a>00416     int32_t _height;
-<a name="l00417"></a>00417     int32_t _depth;
-<a name="l00418"></a>00418     int32_t _levelCount;
-<a name="l00419"></a>00419     int32_t _layers;
-<a name="l00420"></a>00420     uint32_t _format;
-<a name="l00421"></a>00421     uint32_t _internalFormat;
-<a name="l00422"></a>00422     uint32_t _type;
-<a name="l00423"></a>00423     int32_t _elementSize;
-<a name="l00424"></a>00424         int32_t _blockSize_x;
-<a name="l00425"></a>00425         int32_t _blockSize_y;
-<a name="l00426"></a>00426 
-<a name="l00427"></a>00427     <span class="keywordtype">bool</span> _cubeMap;
-<a name="l00428"></a>00428 
-<a name="l00429"></a>00429         <span class="comment">// the root block from which all levels are taken</span>
-<a name="l00430"></a>00430         uint8_t* _dataBlock;
-<a name="l00431"></a>00431         <span class="comment">//pointers to the levels</span>
-<a name="l00432"></a>00432         uint8_t** _data;
-<a name="l00433"></a>00433         int32_t _dataArrayCount;
-<a name="l00434"></a>00434         int32_t _dataBlockSize;
-<a name="l00435"></a>00435 
-<a name="l00436"></a>00436     <span class="keywordtype">void</span> freeData();
-<a name="l00437"></a>00437     <span class="keywordtype">void</span> flipSurface(uint8_t *surf, int32_t width, int32_t height, int32_t depth);
-<a name="l00438"></a>00438     uint32_t componentSwapSurface(uint8_t *surf, int32_t width, int32_t height, int32_t depth);
-<a name="l00439"></a>00439         <span class="keywordtype">void</span> expandDXT(uint8_t *surf, int32_t width, int32_t height, int32_t depth, int32_t srcSize);
-<a name="l00440"></a>00440 
-<a name="l00441"></a>00441     <span class="comment">//</span>
-<a name="l00442"></a>00442     <span class="comment">// Static elements used to dispatch to proper sub-readers</span>
-<a name="l00443"></a>00443     <span class="comment">//</span>
-<a name="l00445"></a>00445 <span class="comment"></span>    <span class="keyword">struct </span>FormatInfo {
-<a name="l00446"></a>00446         <span class="keyword">const</span> <span class="keywordtype">char</span>* extension;
-<a name="l00447"></a>00447         bool (*reader)(<span class="keyword">const</span> uint8_t* fileData, <span class="keywordtype">size_t</span> size, <a class="code" href="class_nv_image.html" title="Image loading, representation and handling Support loading of images from DDS files...">NvImage</a>&amp; i);
-<a name="l00448"></a>00448         bool (*writer)(uint8_t* fileData, <span class="keywordtype">size_t</span> size, <a class="code" href="class_nv_image.html" title="Image loading, representation and handling Support loading of images from DDS files...">NvImage</a>&amp; i);
-<a name="l00449"></a>00449     };
+<a name="l00415"></a><a class="code" href="class_nv_image.html#649ac5c8a11f3c7fce25df7187cb93fc">00415</a>     <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_nv_image.html#649ac5c8a11f3c7fce25df7187cb93fc" title="Enables or disables automatic expansion of DXT images to RGBA.">setDXTExpansion</a>(<span class="keywordtype">bool</span> expand) { m_expandDXT = expand; }
+<a name="l00416"></a>00416 
+<a name="l00419"></a><a class="code" href="class_nv_image.html#3c4f922a82aa52107b67f1b1cca6e4a2">00419</a>     <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="class_nv_image.html#3c4f922a82aa52107b67f1b1cca6e4a2" title="Gets the status of automatic DXT expansion.">getDXTExpansion</a>() { <span class="keywordflow">return</span> m_expandDXT; }
+<a name="l00420"></a>00420 
+<a name="l00422"></a><a class="code" href="struct_nv_image_1_1_format_info.html">00422</a>         <span class="keyword">struct </span><a class="code" href="struct_nv_image_1_1_format_info.html" title="Format handlers descriptor for custom image loading.">FormatInfo</a> {
+<a name="l00423"></a>00423                 <span class="keyword">const</span> <span class="keywordtype">char</span>* extension; 
+<a name="l00424"></a>00424                 bool(*<a class="code" href="struct_nv_image_1_1_format_info.html#8744b9d0f2f15d86c1656ae8d45c2242" title="string with the filename extension (no .)">reader</a>)(<span class="keyword">const</span> uint8_t* fileData, <span class="keywordtype">size_t</span> size, <a class="code" href="class_nv_image.html" title="Image loading, representation and handling Support loading of images from DDS files...">NvImage</a>&amp; i); 
+<a name="l00425"></a>00425                 bool(*<a class="code" href="struct_nv_image_1_1_format_info.html#dc2991cc9b35a1edc17d35ff404c3ffe" title="reader function">writer</a>)(uint8_t* fileData, <span class="keywordtype">size_t</span> size, <a class="code" href="class_nv_image.html" title="Image loading, representation and handling Support loading of images from DDS files...">NvImage</a>&amp; i); 
+<a name="l00426"></a>00426         };
+<a name="l00427"></a>00427 
+<a name="l00432"></a>00432         <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="class_nv_image.html#dda7823c13309aa3b63cf92fbfee7b2e" title="Adds a file loader for the given file extension.">addFileLoader</a>(<span class="keyword">const</span> <a class="code" href="struct_nv_image_1_1_format_info.html" title="Format handlers descriptor for custom image loading.">FormatInfo</a>&amp; loader);
+<a name="l00433"></a>00433 
+<a name="l00434"></a>00434 <span class="keyword">protected</span>:
+<a name="l00436"></a>00436 
+<a name="l00437"></a>00437     int32_t _width;
+<a name="l00438"></a>00438     int32_t _height;
+<a name="l00439"></a>00439     int32_t _depth;
+<a name="l00440"></a>00440     int32_t _levelCount;
+<a name="l00441"></a>00441     int32_t _layers;
+<a name="l00442"></a>00442     uint32_t _format;
+<a name="l00443"></a>00443     uint32_t _internalFormat;
+<a name="l00444"></a>00444     uint32_t _type;
+<a name="l00445"></a>00445     int32_t _elementSize;
+<a name="l00446"></a>00446         int32_t _blockSize_x;
+<a name="l00447"></a>00447         int32_t _blockSize_y;
+<a name="l00448"></a>00448 
+<a name="l00449"></a>00449     <span class="keywordtype">bool</span> _cubeMap;
 <a name="l00450"></a>00450 
-<a name="l00451"></a>00451     <span class="keyword">static</span> FormatInfo formatTable[]; 
-<a name="l00452"></a>00452     <span class="keyword">static</span> <span class="keywordtype">bool</span> vertFlip;
-<a name="l00453"></a>00453     <span class="keyword">static</span> <span class="keywordtype">bool</span> m_expandDXT;
-<a name="l00454"></a>00454     <span class="keyword">static</span> <span class="keywordtype">bool</span> m_supportsBGR;
-<a name="l00455"></a>00455 
-<a name="l00456"></a>00456     <span class="keyword">static</span> <span class="keywordtype">bool</span> readDDS(<span class="keyword">const</span> uint8_t* fileData, <span class="keywordtype">size_t</span> size, <a class="code" href="class_nv_image.html" title="Image loading, representation and handling Support loading of images from DDS files...">NvImage</a>&amp; i);
+<a name="l00451"></a>00451         <span class="comment">// the root block from which all levels are taken</span>
+<a name="l00452"></a>00452         uint8_t* _dataBlock;
+<a name="l00453"></a>00453         <span class="comment">//pointers to the levels</span>
+<a name="l00454"></a>00454         uint8_t** _data;
+<a name="l00455"></a>00455         int32_t _dataArrayCount;
+<a name="l00456"></a>00456         int32_t _dataBlockSize;
 <a name="l00457"></a>00457 
-<a name="l00458"></a>00458     <span class="keyword">static</span> <span class="keywordtype">void</span> flip_blocks_dxtc1(uint8_t *ptr, uint32_t numBlocks);
-<a name="l00459"></a>00459     <span class="keyword">static</span> <span class="keywordtype">void</span> flip_blocks_dxtc3(uint8_t *ptr, uint32_t numBlocks);
-<a name="l00460"></a>00460     <span class="keyword">static</span> <span class="keywordtype">void</span> flip_blocks_dxtc5(uint8_t *ptr, uint32_t numBlocks);
-<a name="l00461"></a>00461     <span class="keyword">static</span> <span class="keywordtype">void</span> flip_blocks_bc4(uint8_t *ptr, uint32_t numBlocks);
-<a name="l00462"></a>00462     <span class="keyword">static</span> <span class="keywordtype">void</span> flip_blocks_bc5(uint8_t *ptr, uint32_t numBlocks);
-<a name="l00463"></a>00463 
-<a name="l00464"></a>00464     <span class="keyword">friend</span> <span class="keywordtype">bool</span> TranslateDX10Format( <span class="keyword">const</span> <span class="keywordtype">void</span> *ptr, <a class="code" href="class_nv_image.html" title="Image loading, representation and handling Support loading of images from DDS files...">NvImage</a> &amp;i, int32_t &amp;bytesPerElement, <span class="keywordtype">bool</span> &amp;btcCompressed);
-<a name="l00465"></a>00465 };
-<a name="l00466"></a>00466 
-<a name="l00467"></a>00467 <span class="preprocessor">#endif //NV_IMAGE_H</span>
+<a name="l00458"></a>00458     <span class="keywordtype">void</span> freeData();
+<a name="l00459"></a>00459     <span class="keywordtype">void</span> flipSurface(uint8_t *surf, int32_t width, int32_t height, int32_t depth);
+<a name="l00460"></a>00460     uint32_t componentSwapSurface(uint8_t *surf, int32_t width, int32_t height, int32_t depth);
+<a name="l00461"></a>00461         <span class="keywordtype">void</span> expandDXT(uint8_t *surf, int32_t width, int32_t height, int32_t depth, int32_t srcSize);
+<a name="l00462"></a>00462 
+<a name="l00463"></a>00463     <span class="comment">//</span>
+<a name="l00464"></a>00464     <span class="comment">// Static elements used to dispatch to proper sub-readers</span>
+<a name="l00465"></a>00465     <span class="comment">//</span>
+<a name="l00467"></a>00467 <span class="comment"></span>        <span class="keyword">enum</span> { MAX_LOADERS = 8 };
+<a name="l00468"></a>00468         <span class="keyword">static</span> uint32_t formatLoaderCount;
+<a name="l00469"></a>00469     <span class="keyword">static</span> FormatInfo formatTable[MAX_LOADERS];
+<a name="l00470"></a>00470     <span class="keyword">static</span> <span class="keywordtype">bool</span> vertFlip;
+<a name="l00471"></a>00471     <span class="keyword">static</span> <span class="keywordtype">bool</span> m_expandDXT;
+<a name="l00472"></a>00472     <span class="keyword">static</span> <span class="keywordtype">bool</span> m_supportsBGR;
+<a name="l00473"></a>00473 
+<a name="l00474"></a>00474     <span class="keyword">static</span> <span class="keywordtype">bool</span> readDDS(<span class="keyword">const</span> uint8_t* fileData, <span class="keywordtype">size_t</span> size, <a class="code" href="class_nv_image.html" title="Image loading, representation and handling Support loading of images from DDS files...">NvImage</a>&amp; i);
+<a name="l00475"></a>00475 
+<a name="l00476"></a>00476     <span class="keyword">static</span> <span class="keywordtype">void</span> flip_blocks_dxtc1(uint8_t *ptr, uint32_t numBlocks);
+<a name="l00477"></a>00477     <span class="keyword">static</span> <span class="keywordtype">void</span> flip_blocks_dxtc3(uint8_t *ptr, uint32_t numBlocks);
+<a name="l00478"></a>00478     <span class="keyword">static</span> <span class="keywordtype">void</span> flip_blocks_dxtc5(uint8_t *ptr, uint32_t numBlocks);
+<a name="l00479"></a>00479     <span class="keyword">static</span> <span class="keywordtype">void</span> flip_blocks_bc4(uint8_t *ptr, uint32_t numBlocks);
+<a name="l00480"></a>00480     <span class="keyword">static</span> <span class="keywordtype">void</span> flip_blocks_bc5(uint8_t *ptr, uint32_t numBlocks);
+<a name="l00481"></a>00481 
+<a name="l00482"></a>00482     <span class="keyword">friend</span> <span class="keywordtype">bool</span> TranslateDX10Format( <span class="keyword">const</span> <span class="keywordtype">void</span> *ptr, <a class="code" href="class_nv_image.html" title="Image loading, representation and handling Support loading of images from DDS files...">NvImage</a> &amp;i, int32_t &amp;bytesPerElement, <span class="keywordtype">bool</span> &amp;btcCompressed);
+<a name="l00483"></a>00483 };
+<a name="l00484"></a>00484 
+<a name="l00485"></a>00485 <span class="preprocessor">#endif //NV_IMAGE_H</span>
 </pre></div></div>
 </div> <!--content-->
 <!-- footer block-->
@@ -411,7 +417,7 @@
 	<div class="seperator"></div>
 	<div class="seperator"></div>
 	<address style="text-align: right;"><small>
-Generated on Thu Aug 25 12:48:26 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
+Generated on Mon Nov 28 16:24:59 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
 	<footer>
 		<div class="row">
 			<div class="text-center">&copy;2016 NVIDIA Corporation.</div>

@@ -212,7 +212,10 @@ void DedicatedAllocationVk::initRendering(void) {
 
 #if defined ( VK_NV_dedicated_allocation )
 	mSupportsDedicatedAllocation = isExtensionSupported(VK_NV_DEDICATED_ALLOCATION_EXTENSION_NAME);
-    LOGI("VK_NV_dedicated_allocation not supported at run time. Some functionality of this sample will be unavailable.");
+	if (mSupportsDedicatedAllocation)
+	{
+		LOGI("VK_NV_dedicated_allocation not supported at run time. Some functionality of this sample will be unavailable.");
+	}
 #else
 	mSupportsDedicatedAllocation = false;
     LOGI("VK_NV_dedicated_allocation not supported at compile time. Please update to a more recent version of Vulkan SDK. Some functionality of this sample will be unavailable.");
@@ -322,7 +325,7 @@ void DedicatedAllocationVk::initRendering(void) {
 	vpStateInfo.scissorCount = 1;
 
 	VkPipelineRasterizationStateCreateInfo rsStateInfo = { VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO };
-	rsStateInfo.depthClampEnable = VK_TRUE;
+	rsStateInfo.depthClampEnable = VK_FALSE;
 	rsStateInfo.rasterizerDiscardEnable = VK_FALSE;
 	rsStateInfo.polygonMode = VK_POLYGON_MODE_FILL;
 	rsStateInfo.cullMode = VK_CULL_MODE_NONE;

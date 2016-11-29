@@ -400,7 +400,8 @@ void TerrainTessellation::initUI(void) {
 
         mTweakBar->addPadding();
         var = mTweakBar->addValue("Auto LOD", mLod);
-        mTweakBar->subgroupSwitchStart(var);
+		addTweakKeyBind(var, 'L');
+		mTweakBar->subgroupSwitchStart(var);
             mTweakBar->subgroupSwitchCase(true);
                 var = mTweakBar->addValue("Triangle size", mParams.triSize, 1.0f, 50.0f, 1.0f);
                 addTweakKeyBind(var, ']', '[');

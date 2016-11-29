@@ -35,6 +35,7 @@
 #include "NvAssetLoader/NvAssetLoader.h"
 #include "NvImage/NvImage.h"
 #include "NvGLUtils/NvImageGL.h"
+#include <string.h>
 
 namespace NvImageGL {
 	static NvGLAPIVersion m_glAPIVersion = NvGLAPIVersionGL4_3();
@@ -53,6 +54,34 @@ namespace NvImageGL {
         NvAssetLoaderFree(ddsData);
 
         return result;
+    }
+
+    uint32_t UploadTextureFromFile(const char* filename) {
+        int32_t len;
+        NvImage* image = new NvImage;
+        char* ddsData = NvAssetLoaderRead(filename, len);
+
+        if (!ddsData)
+            return 0;
+
+        const char* ext = filename + strlen(filename) - 1;
+
+        while (ext > filename) {
+            if (*ext == '.') {
+                ext++;
+                break;
+            }
+            ext--;
+        }
+
+        GLuint texID = 0;
+        if (image->loadImageFromFileData((const uint8_t*)ddsData, len, ext)) {
+            texID = UploadTexture(image);
+        }
+
+        NvAssetLoaderFree(ddsData);
+
+        return texID;
     }
 
     uint32_t UploadTextureFromDDSData(const char* ddsData, int32_t length) {

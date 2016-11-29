@@ -60,6 +60,13 @@ namespace NvImageGL {
     /// \return the GL texture ID on success, 0 on failure
     uint32_t UploadTextureFromDDSFile(const char* filename);
 
+    /// Create a new GL texture directly from any supported file-
+    /// Uses #NvAssetLoaderRead for opening the file.  See the documentation for
+    /// that package to understand the correct paths
+    /// \param[in] filename the image filename (and path) to load
+    /// \return the GL texture ID on success, 0 on failure
+    uint32_t UploadTextureFromFile(const char* filename);
+
     /// Create a new GL texture directly from DDS file-formatted data
     /// \param[in] ddsData the pointer to the DDS file data
     /// \param[in] length the size in bytes of the file block
