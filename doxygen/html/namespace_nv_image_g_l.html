@@ -75,6 +75,9 @@
 <tr><td class="memItemLeft" nowrap align="right" valign="top">uint32_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nv_image_g_l.html#426db1851aa1c345023ac43eaf1d0550">UploadTextureFromDDSFile</a> (const char *filename)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Create a new GL texture directly from DDS file Uses <a class="el" href="_nv_asset_loader_8h.html#f84eaa6db008c8acdcfa5d4333e8da58" title="Reads an asset file as a block.">NvAssetLoaderRead</a> for opening the file.  <a href="#426db1851aa1c345023ac43eaf1d0550"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">uint32_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nv_image_g_l.html#dee73057e9313f7a437000dbfc53d2c9">UploadTextureFromFile</a> (const char *filename)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Create a new GL texture directly from any supported file- Uses <a class="el" href="_nv_asset_loader_8h.html#f84eaa6db008c8acdcfa5d4333e8da58" title="Reads an asset file as a block.">NvAssetLoaderRead</a> for opening the file.  <a href="#dee73057e9313f7a437000dbfc53d2c9"></a><br></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">uint32_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nv_image_g_l.html#40f53884f9c88b34fa45867db11ac15c">UploadTextureFromDDSData</a> (const char *ddsData, int32_t length)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Create a new GL texture directly from DDS file-formatted data.  <a href="#40f53884f9c88b34fa45867db11ac15c"></a><br></td></tr>
@@ -209,6 +212,34 @@ See the documentation for that package to understand the correct paths <dl compa
 
 </div>
 </div><p>
+<a class="anchor" name="dee73057e9313f7a437000dbfc53d2c9"></a><!-- doxytag: member="NvImageGL::UploadTextureFromFile" ref="dee73057e9313f7a437000dbfc53d2c9" args="(const char *filename)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t NvImageGL::UploadTextureFromFile           </td>
+          <td>(</td>
+          <td class="paramtype">const char *&nbsp;</td>
+          <td class="paramname"> <em>filename</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Create a new GL texture directly from any supported file- Uses <a class="el" href="_nv_asset_loader_8h.html#f84eaa6db008c8acdcfa5d4333e8da58" title="Reads an asset file as a block.">NvAssetLoaderRead</a> for opening the file. 
+<p>
+See the documentation for that package to understand the correct paths <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"><tt>[in]</tt>&nbsp;</td><td valign="top"><em>filename</em>&nbsp;</td><td>the image filename (and path) to load </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>the GL texture ID on success, 0 on failure </dd></dl>
+
+</div>
+</div><p>
 </div>
 </div> <!--content-->
 <!-- footer block-->
@@ -216,7 +247,7 @@ See the documentation for that package to understand the correct paths <dl compa
 	<div class="seperator"></div>
 	<div class="seperator"></div>
 	<address style="text-align: right;"><small>
-Generated on Thu Aug 25 12:48:27 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
+Generated on Mon Nov 28 16:25:00 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
 	<footer>
 		<div class="row">
 			<div class="text-center">&copy;2016 NVIDIA Corporation.</div>

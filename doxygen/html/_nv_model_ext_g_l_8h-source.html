@@ -122,38 +122,50 @@
 <a name="l00097"></a>00097                 <span class="keywordflow">return</span> 0;
 <a name="l00098"></a>00098             <span class="keywordflow">return</span> m_textures[textureIndex];
 <a name="l00099"></a>00099         }
-<a name="l00100"></a>00100         
-<a name="l00105"></a>00105         <span class="keywordtype">bool</span> UpdateBoneTransforms();
-<a name="l00106"></a>00106 
-<a name="l00107"></a>00107         <span class="comment">// Very limited way to bind textures to shaders.  Use -1 to indicate no diffuse texture supported by shader.</span>
-<a name="l00108"></a>00108         <span class="keywordtype">void</span> SetDiffuseTextureLocation(int32_t textureLocation) { m_diffuseTextureLocation = textureLocation; }
-<a name="l00109"></a>00109 
-<a name="l00110"></a>00110     <span class="keyword">private</span>:
-<a name="l00111"></a>00111         <span class="comment">// NvGLModelExt may only be created through the factory method</span>
-<a name="l00112"></a>00112                 NvModelExtGL(NvModelExt* pSourceModel = NULL);
-<a name="l00113"></a>00113 
-<a name="l00122"></a>00122                 <span class="keywordtype">void</span> PrepareForRendering(NvModelExt* pModel);
-<a name="l00123"></a>00123 
-<a name="l00126"></a>00126         <span class="keywordtype">void</span> ActivateMaterial(uint32_t materialId);
+<a name="l00100"></a>00100 
+<a name="l00104"></a>00104         <span class="keywordtype">void</span> SetTexture(uint32_t textureIndex, GLuint tex)
+<a name="l00105"></a>00105         {
+<a name="l00106"></a>00106             <span class="keywordflow">if</span> (textureIndex &gt;= m_textures.size())
+<a name="l00107"></a>00107                 <span class="keywordflow">return</span>;
+<a name="l00108"></a>00108             m_textures[textureIndex] = tex;
+<a name="l00109"></a>00109         }
+<a name="l00110"></a>00110 
+<a name="l00115"></a>00115         <span class="keywordtype">bool</span> UpdateBoneTransforms();
+<a name="l00116"></a>00116 
+<a name="l00118"></a>00118         <span class="keywordtype">void</span> SetDiffuseTextureLocation(int32_t textureLocation) { m_diffuseTextureLocation = textureLocation; }
+<a name="l00119"></a>00119 
+<a name="l00124"></a>00124         <span class="keyword">static</span> <span class="keywordtype">void</span> UseAutomaticTextureLoading(<span class="keywordtype">bool</span> use) {
+<a name="l00125"></a>00125             ms_loadTextures = use;
+<a name="l00126"></a>00126         }
 <a name="l00127"></a>00127 
-<a name="l00128"></a>00128                 <span class="comment">// Pointer to the original source model that contains the data which the</span>
-<a name="l00129"></a>00129                 <span class="comment">// GL model was derived from</span>
-<a name="l00130"></a>00130                 NvModelExt* m_pSourceModel;
+<a name="l00128"></a>00128     <span class="keyword">private</span>:
+<a name="l00129"></a>00129         <span class="comment">// NvGLModelExt may only be created through the factory method</span>
+<a name="l00130"></a>00130                 NvModelExtGL(NvModelExt* pSourceModel = NULL);
 <a name="l00131"></a>00131 
-<a name="l00132"></a>00132                 <span class="comment">// Array of all sub-meshes within the model</span>
-<a name="l00133"></a>00133                 std::vector&lt;NvMeshExtGL*&gt; m_meshes;
-<a name="l00134"></a>00134 
-<a name="l00135"></a>00135                 <span class="comment">// Array of all materials used by meshes within the model</span>
-<a name="l00136"></a>00136                 std::vector&lt;NvMaterialGL&gt; m_materials;
-<a name="l00137"></a>00137 
-<a name="l00138"></a>00138         <span class="comment">// Array of all textures used by meshes within the model</span>
-<a name="l00139"></a>00139         std::vector&lt;GLuint&gt; m_textures;
-<a name="l00140"></a>00140 
-<a name="l00141"></a>00141         <span class="comment">// Shader binding locations</span>
-<a name="l00142"></a>00142         int32_t m_diffuseTextureLocation;
-<a name="l00143"></a>00143         };
-<a name="l00144"></a>00144 }
-<a name="l00145"></a>00145 <span class="preprocessor">#endif</span>
+<a name="l00140"></a>00140                 <span class="keywordtype">void</span> PrepareForRendering(NvModelExt* pModel);
+<a name="l00141"></a>00141 
+<a name="l00144"></a>00144         <span class="keywordtype">void</span> ActivateMaterial(uint32_t materialId);
+<a name="l00145"></a>00145 
+<a name="l00146"></a>00146                 <span class="comment">// Pointer to the original source model that contains the data which the</span>
+<a name="l00147"></a>00147                 <span class="comment">// GL model was derived from</span>
+<a name="l00148"></a>00148                 NvModelExt* m_pSourceModel;
+<a name="l00149"></a>00149 
+<a name="l00150"></a>00150                 <span class="comment">// Array of all sub-meshes within the model</span>
+<a name="l00151"></a>00151                 std::vector&lt;NvMeshExtGL*&gt; m_meshes;
+<a name="l00152"></a>00152 
+<a name="l00153"></a>00153                 <span class="comment">// Array of all materials used by meshes within the model</span>
+<a name="l00154"></a>00154                 std::vector&lt;NvMaterialGL&gt; m_materials;
+<a name="l00155"></a>00155 
+<a name="l00156"></a>00156         <span class="comment">// Array of all textures used by meshes within the model</span>
+<a name="l00157"></a>00157         std::vector&lt;GLuint&gt; m_textures;
+<a name="l00158"></a>00158 
+<a name="l00159"></a>00159         <span class="comment">// Shader binding locations</span>
+<a name="l00160"></a>00160         int32_t m_diffuseTextureLocation;
+<a name="l00161"></a>00161 
+<a name="l00162"></a>00162         <span class="keyword">static</span> <span class="keywordtype">bool</span> ms_loadTextures;
+<a name="l00163"></a>00163         };
+<a name="l00164"></a>00164 }
+<a name="l00165"></a>00165 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div> <!--content-->
 <!-- footer block-->
@@ -161,7 +173,7 @@
 	<div class="seperator"></div>
 	<div class="seperator"></div>
 	<address style="text-align: right;"><small>
-Generated on Thu Aug 25 12:48:26 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
+Generated on Mon Nov 28 16:24:59 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
 	<footer>
 		<div class="row">
 			<div class="text-center">&copy;2016 NVIDIA Corporation.</div>
