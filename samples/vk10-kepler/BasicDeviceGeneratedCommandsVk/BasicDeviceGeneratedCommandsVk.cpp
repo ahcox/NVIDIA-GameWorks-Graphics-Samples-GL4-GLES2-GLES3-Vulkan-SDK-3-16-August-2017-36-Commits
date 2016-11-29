@@ -708,7 +708,6 @@ void BasicDeviceGeneratedCommandsVk::shutdownRendering(void) {
 void BasicDeviceGeneratedCommandsVk::initUI(void) {
 
 	if (mTweakBar) {
-		mTweakBar->SetWidth(mTweakBar->GetWidth() * 1.0f);
 		NvTweakVarBase *var;
 	
 		std::vector<NvTweakEnum<uint32_t>>	modelUiItems;
@@ -737,7 +736,6 @@ void BasicDeviceGeneratedCommandsVk::initUI(void) {
 
 		var = mTweakBar->addEnum("Render mode override 1", mRenderModeOverride[1], renderModes, NumDrawModes);
 		addTweakKeyBind(var, NvKey::K_W);
-		addTweakButtonBind(var, NvGamepad::BUTTON_B);
 
 		static NvTweakEnum<uint32_t> drawmodes[NumDrawModesDeviceGenerated] =
 		{
@@ -750,12 +748,9 @@ void BasicDeviceGeneratedCommandsVk::initUI(void) {
 
 		var = mTweakBar->addEnum("Draw mode override", (uint32_t&) mDrawMode, drawmodes, mSupportsDeviceGeneratedCommands ? NumDrawModesDeviceGenerated : NumDrawModesIndirect);
 		addTweakKeyBind(var, NvKey::K_R);
-		addTweakButtonBind(var, NvGamepad::BUTTON_A);
 		
 		var = mTweakBar->addValue("split ratio", meshSplitRatio, 0, MeshSplitRange);
 		addTweakKeyBind(var, NvKey::K_KP_ADD, NvKey::K_KP_SUBTRACT);
-		addTweakButtonBind(var, NvGamepad::BUTTON_DPAD_LEFT);
-		addTweakButtonBind(var, NvGamepad::BUTTON_DPAD_RIGHT);
 
 		mTweakBar->syncValues();
 	}
