@@ -52,7 +52,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef VK_NVX_device_generated_commands 
 #define VK_NVX_device_generated_commands 1
 
-#define VK_NVX_DEVICE_GENERATED_COMMANDS_SPEC_VERSION   2
+#define VK_NVX_DEVICE_GENERATED_COMMANDS_SPEC_VERSION   1
 #define VK_NVX_DEVICE_GENERATED_COMMANDS_EXTENSION_NAME "VK_NVX_device_generated_commands"
 
 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkObjectTableNVX)
@@ -86,6 +86,7 @@ typedef enum VkIndirectCommandsTokenTypeNVX {
   VK_INDIRECT_COMMANDS_TOKEN_PUSH_CONSTANT_NVX,  // an array of (32 bit tableEntry + variable count 32bit values)
   VK_INDIRECT_COMMANDS_TOKEN_DRAW_INDEXED_NVX,   // an array of VkDrawIndexedIndirectCommand
   VK_INDIRECT_COMMANDS_TOKEN_DRAW_NVX,           // an array of VkDrawIndirectCommand
+  VK_INDIRECT_COMMANDS_TOKEN_DISPATCH_NVX,       // an array of VkDispatchIndirectCommand
 } VkIndirectCommandsTokenTypeNVX;
 
 typedef enum VkObjectEntryUsageFlagBitsNVX {
