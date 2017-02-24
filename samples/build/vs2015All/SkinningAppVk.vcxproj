@@ -205,7 +205,7 @@
 			<AdditionalOptions>/DEBUG /MACHINE:x86 /LARGEADDRESSAWARE /NOLOGO /OPT:REF /OPT:ICF /INCREMENTAL:NO</AdditionalOptions>
 			<AdditionalDependencies>xinput9_1_0.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;vulkan-1.lib;glew32sd.lib;glfw3d.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)SkinningAppVkD.exe</OutputFile>
-			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/vs2015x86;./../../../extensions/lib/vs2015x86;./../../../extensions/externals/linux-aarch64;$(VK_SDK_PATH)/Bin32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/vs2015x86;./../../../extensions/lib/vs2015x86;./../../../extensions/externals/linux-aarch64;$(VK_SDK_PATH)/Bin32;$(VK_SDK_PATH)/Lib32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/SkinningAppVkD.exe.pdb</ProgramDatabaseFile>
 			<SubSystem>Windows</SubSystem>
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
@@ -245,7 +245,7 @@
 			<AdditionalOptions>/DEBUG /MACHINE:x86 /LARGEADDRESSAWARE /NOLOGO /OPT:REF /OPT:ICF /INCREMENTAL:NO</AdditionalOptions>
 			<AdditionalDependencies>xinput9_1_0.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;vulkan-1.lib;glew32s.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)SkinningAppVk.exe</OutputFile>
-			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/vs2015x86;./../../../extensions/lib/vs2015x86;./../../../extensions/externals/linux-aarch64;$(VK_SDK_PATH)/Bin32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/vs2015x86;./../../../extensions/lib/vs2015x86;./../../../extensions/externals/linux-aarch64;$(VK_SDK_PATH)/Bin32;$(VK_SDK_PATH)/Lib32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/SkinningAppVk.exe.pdb</ProgramDatabaseFile>
 			<SubSystem>Windows</SubSystem>
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
@@ -285,7 +285,7 @@
 			<AdditionalOptions>/DEBUG /MACHINE:x64 /LARGEADDRESSAWARE /NOLOGO /OPT:REF /OPT:ICF /INCREMENTAL:NO</AdditionalOptions>
 			<AdditionalDependencies>xinput9_1_0.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;vulkan-1.lib;glew32sd.lib;glfw3d.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)SkinningAppVkD.exe</OutputFile>
-			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/vs2015x64;./../../../extensions/lib/vs2015x64;./../../../extensions/externals/linux-aarch64;$(VK_SDK_PATH)/Bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/vs2015x64;./../../../extensions/lib/vs2015x64;./../../../extensions/externals/linux-aarch64;$(VK_SDK_PATH)/Bin;$(VK_SDK_PATH)/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/SkinningAppVkD.exe.pdb</ProgramDatabaseFile>
 			<SubSystem>Windows</SubSystem>
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
@@ -324,7 +324,7 @@
 			<AdditionalOptions>/DEBUG /MACHINE:x64 /LARGEADDRESSAWARE /NOLOGO /OPT:REF /OPT:ICF /INCREMENTAL:NO</AdditionalOptions>
 			<AdditionalDependencies>xinput9_1_0.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;vulkan-1.lib;glew32s.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)SkinningAppVk.exe</OutputFile>
-			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/vs2015x64;./../../../extensions/lib/vs2015x64;./../../../extensions/externals/linux-aarch64;$(VK_SDK_PATH)/Bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories>./../../../extensions/externals/lib/vs2015x64;./../../../extensions/lib/vs2015x64;./../../../extensions/externals/linux-aarch64;$(VK_SDK_PATH)/Bin;$(VK_SDK_PATH)/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/SkinningAppVk.exe.pdb</ProgramDatabaseFile>
 			<SubSystem>Windows</SubSystem>
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>

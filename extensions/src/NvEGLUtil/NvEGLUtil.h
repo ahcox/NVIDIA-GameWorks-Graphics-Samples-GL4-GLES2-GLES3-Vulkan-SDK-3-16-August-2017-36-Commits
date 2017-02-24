@@ -57,6 +57,62 @@ typedef EGLuint64NV (EGLAPIENTRYP PFNEGLGETSYSTEMTIMEFREQUENCYNVPROC)(void);
 typedef EGLuint64NV (EGLAPIENTRYP PFNEGLGETSYSTEMTIMENVPROC)(void);
 #endif
 
+///////////////////////////////////////////////////////////////////////////////
+
+// EGL attributes and values for FP16 format (EGL_NV_pixel_format_float)
+#ifndef EGL_EXT_pixel_format_float
+#define EGL_EXT_pixel_format_float 1
+#define EGL_COLOR_COMPONENT_TYPE_EXT             0x3339
+#define EGL_COLOR_COMPONENT_TYPE_FIXED_EXT       0x333A
+#define EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT       0x333B
+#endif
+
+///////////////////////////////////////////////////////////////////////////////
+
+// EGL Colorspace token 
+#ifndef EGL_GL_COLORSPACE
+#define EGL_GL_COLORSPACE                       0x309D
+#endif
+
+// EGL tokens for BT.2020 colorspace encoding (EGL_NV_gl_colorspace_bt2020)
+#ifndef EGL_EXT_gl_colorspace_bt2020
+#define EGL_EXT_gl_colorspace_bt2020 1
+#define EGL_GL_COLORSPACE_BT2020_LINEAR_EXT      0x333F
+#define EGL_GL_COLORSPACE_BT2020_PQ_EXT          0x3340
+#endif
+
+/* EGL tokens for scRGB colorspace encoding (EGL_NV_gl_colorspace_scrgb)*/
+#ifndef EGL_NV_gl_colorspace_scrgb
+#define EGL_NV_gl_colorspace_scrgb 1
+#define EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT       0x3350
+#endif
+
+///////////////////////////////////////////////////////////////////////////////
+
+// EGL tokens for HDR metadata encoding (EGL_NV_surface_SMPTE2086_metadata)
+#ifndef EGL_EXT_surface_SMPTE2086_metadata
+#define EGL_EXT_surface_SMPTE2086_metadata 1
+#define EGL_SMPTE2086_DISPLAY_PRIMARY_RX_EXT       0x3341
+#define EGL_SMPTE2086_DISPLAY_PRIMARY_RY_EXT       0x3342
+#define EGL_SMPTE2086_DISPLAY_PRIMARY_GX_EXT       0x3343
+#define EGL_SMPTE2086_DISPLAY_PRIMARY_GY_EXT       0x3344
+#define EGL_SMPTE2086_DISPLAY_PRIMARY_BX_EXT       0x3345
+#define EGL_SMPTE2086_DISPLAY_PRIMARY_BY_EXT       0x3346
+#define EGL_SMPTE2086_WHITE_POINT_X_EXT            0x3347
+#define EGL_SMPTE2086_WHITE_POINT_Y_EXT            0x3348
+#define EGL_SMPTE2086_MAX_LUMINANCE_EXT            0x3349
+#define EGL_SMPTE2086_MIN_LUMINANCE_EXT            0x334A
+#endif
+
+///////////////////////////////////////////////////////////////////////////////
+
+/* Constant scale factor by which SMPTE 2086 metadata values are scaled when
+* queried as integer values.
+*/
+#define EGL_METADATA_SCALING    50000
+
+///////////////////////////////////////////////////////////////////////////////
+
 class NvEGLWinUtil : public NvAndroidWinUtil {
 public:
     // typedef for a function pointer that can be used by the app to find their own

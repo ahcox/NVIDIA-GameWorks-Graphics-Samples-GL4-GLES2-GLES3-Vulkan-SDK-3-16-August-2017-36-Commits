@@ -48,6 +48,15 @@ struct saved_state {
     float y;
 };
 
+struct HDRDisplayState {
+	enum Enum {
+		UNCHECKED,
+		COMPATIBLE,
+		INCOMPATIBLE,
+	};
+};
+
+
 struct AInputEvent;
 struct android_app;
 class NvGamepadAndroid;
@@ -99,8 +108,11 @@ public:
     void requestForceRender() { mForceRender = 1; }
 
     bool useChoreographer(bool use);
+	bool isDisplayHDRCompatible();
 
     NvRedrawMode::Enum mRedrawMode;
+	HDRDisplayState::Enum mDisplayIsHDRCompatible;
+	
 };
 
 #endif

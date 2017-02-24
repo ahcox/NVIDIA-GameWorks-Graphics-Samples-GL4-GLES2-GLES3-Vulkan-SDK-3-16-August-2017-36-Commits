@@ -46,6 +46,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
@@ -148,7 +149,7 @@ void android_main(struct android_app* app) {
 
     Engine* engine = new Engine(app);
 
-    char* commandLine = NULL;
+	char* commandLine = NULL;
 	if (getCommandLine(engine, commandLine)) {
 		LOGI("Found command line %s", commandLine);
 		// add command line arguments
@@ -177,6 +178,16 @@ void android_main(struct android_app* app) {
 		width = defaultWidth;
 		height = defaultHeight;
 	}
+
+	// Check if connected sink is HDR compatible and set flag.	
+	engine->mWin->setHDRSinkFlag(engine->isDisplayHDRCompatible());
+
+	// Check if the application has declared support for HDR
+	engine->mWin->setHDRAppFlag(sdkapp->getHDRReady());
+	
+	// Set HDR in Base application notifying if the final output should be in HDR or not.
+	// This flag can be used within the application to make decisions based on the nature of the final output.
+	sdkapp->setHDREnable(engine->mWin->getHDRAppFlag() && engine->mWin->getHDRSinkFlag());
 
 	if (!sdkapp->initialize(NvPlatformInfo(NvPlatformCategory::PLAT_MOBILE, NvPlatformOS::OS_ANDROID), width, height)) {
 		// if we have a basic EGL failure, we need to exit immediately; nothing else we can do

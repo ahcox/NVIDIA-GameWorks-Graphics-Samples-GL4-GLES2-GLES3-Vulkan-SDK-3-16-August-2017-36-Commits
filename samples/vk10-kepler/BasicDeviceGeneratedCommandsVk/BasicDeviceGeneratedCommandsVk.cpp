@@ -69,11 +69,13 @@ public:
 
 BasicDeviceGeneratedCommandsVk::BasicDeviceGeneratedCommandsVk()
 	: mCurrentModel(0)
-	, mRenderModeOverride{ FillSolid, FillLine }
 	, mDrawMode(DrawIndexed)
 	, meshSplitRatio (MeshSplitRange / 3)
 	, mSupportsDeviceGeneratedCommands (false)
 {
+	mRenderModeOverride[0] = FillSolid;
+	mRenderModeOverride[1] = FillLine;
+
 	m_transformer->setTranslationVec(nv::vec3f(0.0f, 0.0f, -3.0f));
 	m_transformer->setRotationVec(nv::vec3f(NV_PI*0.35f, 0.0f, 0.0f));
 
@@ -467,7 +469,7 @@ void BasicDeviceGeneratedCommandsVk::initRendering(void) {
 
 			VkIndirectCommandsLayoutTokenNVX commandTokenLayouts[1];
 
-			commandTokenLayouts[0].type = VK_INDIRECT_COMMANDS_TOKEN_DRAW_INDEXED_NVX;
+			commandTokenLayouts[0].tokenType = VK_INDIRECT_COMMANDS_TOKEN_DRAW_INDEXED_NVX;
 			commandTokenLayouts[0].divisor = 1;
 			commandTokenLayouts[0].bindingUnit  = 0; /* unused for VK_INDIRECT_COMMANDS_TOKEN_DRAW_INDEXED_NVX*/
 			commandTokenLayouts[0].dynamicCount = 0; /* unused for VK_INDIRECT_COMMANDS_TOKEN_DRAW_INDEXED_NVX*/
@@ -486,12 +488,12 @@ void BasicDeviceGeneratedCommandsVk::initRendering(void) {
 
 			VkIndirectCommandsLayoutTokenNVX commandTokenLayouts[2];
 
-			commandTokenLayouts[0].type = VK_INDIRECT_COMMANDS_TOKEN_PIPELINE_NVX;
+			commandTokenLayouts[0].tokenType = VK_INDIRECT_COMMANDS_TOKEN_PIPELINE_NVX;
 			commandTokenLayouts[0].divisor = 1;
 			commandTokenLayouts[0].bindingUnit = 0; /* unused for VK_INDIRECT_COMMANDS_TOKEN_PIPELINE_NVX*/
 			commandTokenLayouts[0].dynamicCount = 0; /* unused for VK_INDIRECT_COMMANDS_TOKEN_PIPELINE_NVX*/
 
-			commandTokenLayouts[1].type = VK_INDIRECT_COMMANDS_TOKEN_DRAW_INDEXED_NVX;
+			commandTokenLayouts[1].tokenType = VK_INDIRECT_COMMANDS_TOKEN_DRAW_INDEXED_NVX;
 			commandTokenLayouts[1].divisor = 1;
 			commandTokenLayouts[1].bindingUnit = 0; /* unused for VK_INDIRECT_COMMANDS_TOKEN_DRAW_INDEXED_NVX*/
 			commandTokenLayouts[1].dynamicCount = 0; /* unused for VK_INDIRECT_COMMANDS_TOKEN_DRAW_INDEXED_NVX*/
@@ -509,22 +511,22 @@ void BasicDeviceGeneratedCommandsVk::initRendering(void) {
 			VkIndirectCommandsLayoutCreateInfoNVX commandsLayoutInfo = {/* remove cast when proper header*/ (VkStructureType)VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NVX };
 
 			VkIndirectCommandsLayoutTokenNVX commandTokenLayouts[4];
-			commandTokenLayouts[0].type = VK_INDIRECT_COMMANDS_TOKEN_VERTEX_BUFFER_NVX;
+			commandTokenLayouts[0].tokenType = VK_INDIRECT_COMMANDS_TOKEN_VERTEX_BUFFER_NVX;
 			commandTokenLayouts[0].divisor = 1;
 			commandTokenLayouts[0].bindingUnit = 0; 
 			commandTokenLayouts[0].dynamicCount = 0;
 
-			commandTokenLayouts[1].type = VK_INDIRECT_COMMANDS_TOKEN_INDEX_BUFFER_NVX;
+			commandTokenLayouts[1].tokenType = VK_INDIRECT_COMMANDS_TOKEN_INDEX_BUFFER_NVX;
 			commandTokenLayouts[1].divisor = 1;
 			commandTokenLayouts[1].bindingUnit = 0; 
 			commandTokenLayouts[1].dynamicCount = 0; 
 
-			commandTokenLayouts[2].type = VK_INDIRECT_COMMANDS_TOKEN_PIPELINE_NVX;
+			commandTokenLayouts[2].tokenType = VK_INDIRECT_COMMANDS_TOKEN_PIPELINE_NVX;
 			commandTokenLayouts[2].divisor = 1;
 			commandTokenLayouts[2].bindingUnit = 0; /* unused for VK_INDIRECT_COMMANDS_TOKEN_PIPELINE_NVX*/
 			commandTokenLayouts[2].dynamicCount = 0; /* unused for VK_INDIRECT_COMMANDS_TOKEN_PIPELINE_NVX*/
 
-			commandTokenLayouts[3].type = VK_INDIRECT_COMMANDS_TOKEN_DRAW_INDEXED_NVX;
+			commandTokenLayouts[3].tokenType = VK_INDIRECT_COMMANDS_TOKEN_DRAW_INDEXED_NVX;
 			commandTokenLayouts[3].divisor = 1;
 			commandTokenLayouts[3].bindingUnit = 0; /* unused for VK_INDIRECT_COMMANDS_TOKEN_DRAW_INDEXED_NVX*/
 			commandTokenLayouts[3].dynamicCount = 0; /* unused for VK_INDIRECT_COMMANDS_TOKEN_DRAW_INDEXED_NVX*/
@@ -567,20 +569,20 @@ void BasicDeviceGeneratedCommandsVk::initRendering(void) {
 
 			objectTableEntries.push_back(VK_OBJECT_ENTRY_PIPELINE_NVX);
 			objectTableEntryCounts.push_back(numPSOs);
-			objectTableEntryFlags.push_back(VK_OBJECT_ENTRY_USAGE_FLAG_GRAPHICS_BIT_NVX);
+			objectTableEntryFlags.push_back(VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX);
 
 			objectTableEntries.push_back(VK_OBJECT_ENTRY_INDEX_BUFFER_NVX);
 			objectTableEntryCounts.push_back(numvVBOsIBOS);
-			objectTableEntryFlags.push_back(VK_OBJECT_ENTRY_USAGE_FLAG_GRAPHICS_BIT_NVX);
+			objectTableEntryFlags.push_back(VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX);
 
 			objectTableEntries.push_back(VK_OBJECT_ENTRY_VERTEX_BUFFER_NVX);
 			objectTableEntryCounts.push_back(numvVBOsIBOS);
-			objectTableEntryFlags.push_back(VK_OBJECT_ENTRY_USAGE_FLAG_GRAPHICS_BIT_NVX);
+			objectTableEntryFlags.push_back(VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX);
 			objectTableInfo.objectCount = objectTableEntries.size();
 
 			objectTableInfo.pObjectEntryTypes = objectTableEntries.data();
 			objectTableInfo.pObjectEntryCounts = objectTableEntryCounts.data();
-			objectTableInfo.pObjectEntryFlags = objectTableEntryFlags.data();
+			objectTableInfo.pObjectEntryUsageFlags = objectTableEntryFlags.data();
 
 			objectTableInfo.maxUniformBuffersPerDescriptor = 0;
 			objectTableInfo.maxStorageBuffersPerDescriptor = 0;
@@ -610,7 +612,7 @@ void BasicDeviceGeneratedCommandsVk::initRendering(void) {
 
 					LOGI("    registering VBO %p and IBO %p to object table entry %u", vbo, ibo, availableVBOIBOEntry);
 
-					VkObjectTableIndexBufferEntryNVX iboEntry  = { VK_OBJECT_ENTRY_INDEX_BUFFER_NVX, VK_OBJECT_ENTRY_USAGE_FLAG_GRAPHICS_BIT_NVX };
+					VkObjectTableIndexBufferEntryNVX iboEntry  = { VK_OBJECT_ENTRY_INDEX_BUFFER_NVX, VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX };
 					iboEntry.buffer = ibo;
 					iboEntry.indexType = models[i].model->getIndexType();
 					iboEntry.flags = 0;
@@ -622,7 +624,7 @@ void BasicDeviceGeneratedCommandsVk::initRendering(void) {
 
 					CHECK_VK_RESULT();
 
-					VkObjectTableVertexBufferEntryNVX vboEntry{ VK_OBJECT_ENTRY_VERTEX_BUFFER_NVX, VK_OBJECT_ENTRY_USAGE_FLAG_GRAPHICS_BIT_NVX };
+					VkObjectTableVertexBufferEntryNVX vboEntry{ VK_OBJECT_ENTRY_VERTEX_BUFFER_NVX, VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX };
 					vboEntry.buffer = vbo;
 					vboEntry.flags = 0;
 					

@@ -35,6 +35,8 @@
 
 
 NvAndroidWinUtil* NvAndroidWinUtil::ms_defaultWindow = NULL;
+bool NvAndroidWinUtil::m_HDRAppFlag = false;
+bool NvAndroidWinUtil::m_HDRSinkFlag = false;
 
 NvAndroidWinUtil::~NvAndroidWinUtil() {
 }

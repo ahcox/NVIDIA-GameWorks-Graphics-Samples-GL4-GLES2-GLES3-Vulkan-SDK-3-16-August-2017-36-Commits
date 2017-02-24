@@ -246,6 +246,20 @@ public:
 
 	void setPlatformContext(NvPlatformContext* platform) { mPlatform = platform; }
 
+	// Returns true if the final output will be in HDR format. Useful for making decisions 
+	// within the app based on if the output will be in HDR/SDR mode.
+	bool getHDREnable() const { return m_hdrEnable; }
+
+	// Set if the final output should be in HDR based on sink's capabilities and app's readiness
+	void setHDREnable(bool flag) { m_hdrEnable = flag; }
+
+	// Gets application's readiness for HDR. This should be set by the application upon creation.
+	bool getHDRReady() const { return m_hdrReady; }
+
+	// Set HDR readiness of the application. This should be called as soon at the sample's instance has
+	// been created.
+	void setHDRReady(bool flag) { m_hdrReady = flag; }
+
 protected:
 	virtual bool isTestMode() { return false; }
 
@@ -259,6 +273,12 @@ protected:
 
     int32_t m_width; ///< the current window width
     int32_t m_height; ///< the current window height
+
+	// This flag determines if the output should be in HDR mode or not.
+	bool m_hdrEnable = false;
+
+	// Is the app built with HDR support
+	bool m_hdrReady = false;
 
     /// \privatesection
     NvPlatformContext* mPlatform;

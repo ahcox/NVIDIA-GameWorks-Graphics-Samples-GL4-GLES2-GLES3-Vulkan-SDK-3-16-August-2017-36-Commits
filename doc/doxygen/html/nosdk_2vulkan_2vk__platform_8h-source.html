@@ -90,52 +90,52 @@
 <a name="l00027"></a>00027 {
 <a name="l00028"></a>00028 <span class="preprocessor">#endif // __cplusplus</span>
 <a name="l00029"></a>00029 <span class="preprocessor"></span>
-<a name="l00030"></a>00030 <span class="comment">/*</span>
-<a name="l00031"></a>00031 <span class="comment">***************************************************************************************************</span>
-<a name="l00032"></a>00032 <span class="comment">*   Platform-specific directives and type declarations</span>
-<a name="l00033"></a>00033 <span class="comment">***************************************************************************************************</span>
-<a name="l00034"></a>00034 <span class="comment">*/</span>
+<a name="l00030"></a>00030         <span class="comment">/*</span>
+<a name="l00031"></a>00031 <span class="comment">        ***************************************************************************************************</span>
+<a name="l00032"></a>00032 <span class="comment">        *   Platform-specific directives and type declarations</span>
+<a name="l00033"></a>00033 <span class="comment">        ***************************************************************************************************</span>
+<a name="l00034"></a>00034 <span class="comment">        */</span>
 <a name="l00035"></a>00035 
-<a name="l00036"></a>00036 <span class="comment">/* Platform-specific calling convention macros.</span>
-<a name="l00037"></a>00037 <span class="comment"> *</span>
-<a name="l00038"></a>00038 <span class="comment"> * Platforms should define these so that Vulkan clients call Vulkan commands</span>
-<a name="l00039"></a>00039 <span class="comment"> * with the same calling conventions that the Vulkan implementation expects.</span>
-<a name="l00040"></a>00040 <span class="comment"> *</span>
-<a name="l00041"></a>00041 <span class="comment"> * VKAPI_ATTR - Placed before the return type in function declarations.</span>
-<a name="l00042"></a>00042 <span class="comment"> *              Useful for C++11 and GCC/Clang-style function attribute syntax.</span>
-<a name="l00043"></a>00043 <span class="comment"> * VKAPI_CALL - Placed after the return type in function declarations.</span>
-<a name="l00044"></a>00044 <span class="comment"> *              Useful for MSVC-style calling convention syntax.</span>
-<a name="l00045"></a>00045 <span class="comment"> * VKAPI_PTR  - Placed between the '(' and '*' in function pointer types.</span>
-<a name="l00046"></a>00046 <span class="comment"> *</span>
-<a name="l00047"></a>00047 <span class="comment"> * Function declaration:  VKAPI_ATTR void VKAPI_CALL vkCommand(void);</span>
-<a name="l00048"></a>00048 <span class="comment"> * Function pointer type: typedef void (VKAPI_PTR *PFN_vkCommand)(void);</span>
-<a name="l00049"></a>00049 <span class="comment"> */</span>
+<a name="l00036"></a>00036         <span class="comment">/* Platform-specific calling convention macros.</span>
+<a name="l00037"></a>00037 <span class="comment">        *</span>
+<a name="l00038"></a>00038 <span class="comment">        * Platforms should define these so that Vulkan clients call Vulkan commands</span>
+<a name="l00039"></a>00039 <span class="comment">        * with the same calling conventions that the Vulkan implementation expects.</span>
+<a name="l00040"></a>00040 <span class="comment">        *</span>
+<a name="l00041"></a>00041 <span class="comment">        * VKAPI_ATTR - Placed before the return type in function declarations.</span>
+<a name="l00042"></a>00042 <span class="comment">        *              Useful for C++11 and GCC/Clang-style function attribute syntax.</span>
+<a name="l00043"></a>00043 <span class="comment">        * VKAPI_CALL - Placed after the return type in function declarations.</span>
+<a name="l00044"></a>00044 <span class="comment">        *              Useful for MSVC-style calling convention syntax.</span>
+<a name="l00045"></a>00045 <span class="comment">        * VKAPI_PTR  - Placed between the '(' and '*' in function pointer types.</span>
+<a name="l00046"></a>00046 <span class="comment">        *</span>
+<a name="l00047"></a>00047 <span class="comment">        * Function declaration:  VKAPI_ATTR void VKAPI_CALL vkCommand(void);</span>
+<a name="l00048"></a>00048 <span class="comment">        * Function pointer type: typedef void (VKAPI_PTR *PFN_vkCommand)(void);</span>
+<a name="l00049"></a>00049 <span class="comment">        */</span>
 <a name="l00050"></a>00050 <span class="preprocessor">#if defined(_WIN32)</span>
-<a name="l00051"></a>00051 <span class="preprocessor"></span>    <span class="comment">// On Windows, Vulkan commands use the stdcall convention</span>
-<a name="l00052"></a>00052 <span class="preprocessor">    #define VKAPI_ATTR</span>
-<a name="l00053"></a>00053 <span class="preprocessor"></span><span class="preprocessor">    #define VKAPI_CALL __stdcall</span>
-<a name="l00054"></a>00054 <span class="preprocessor"></span><span class="preprocessor">    #define VKAPI_PTR  VKAPI_CALL</span>
-<a name="l00055"></a>00055 <span class="preprocessor"></span><span class="preprocessor">#elif defined(__ANDROID__) &amp;&amp; defined(__ARM_EABI__) &amp;&amp; !defined(__ARM_ARCH_7A__)</span>
-<a name="l00056"></a>00056 <span class="preprocessor"></span>    <span class="comment">// Android does not support Vulkan in native code using the "armeabi" ABI.</span>
-<a name="l00057"></a>00057 <span class="preprocessor">    #error "Vulkan requires the 'armeabi-v7a' or 'armeabi-v7a-hard' ABI on 32-bit ARM CPUs"</span>
-<a name="l00058"></a>00058 <span class="preprocessor"></span><span class="preprocessor">#elif defined(__ANDROID__) &amp;&amp; defined(__ARM_ARCH_7A__)</span>
-<a name="l00059"></a>00059 <span class="preprocessor"></span>    <span class="comment">// On Android/ARMv7a, Vulkan functions use the armeabi-v7a-hard calling</span>
-<a name="l00060"></a>00060     <span class="comment">// convention, even if the application's native code is compiled with the</span>
-<a name="l00061"></a>00061     <span class="comment">// armeabi-v7a calling convention.</span>
-<a name="l00062"></a>00062 <span class="preprocessor">    #define VKAPI_ATTR __attribute__((pcs("aapcs-vfp")))</span>
-<a name="l00063"></a>00063 <span class="preprocessor"></span><span class="preprocessor">    #define VKAPI_CALL</span>
-<a name="l00064"></a>00064 <span class="preprocessor"></span><span class="preprocessor">    #define VKAPI_PTR  VKAPI_ATTR</span>
+<a name="l00051"></a>00051 <span class="preprocessor"></span>        <span class="comment">// On Windows, Vulkan commands use the stdcall convention</span>
+<a name="l00052"></a>00052 <span class="preprocessor">#define VKAPI_ATTR</span>
+<a name="l00053"></a>00053 <span class="preprocessor"></span><span class="preprocessor">#define VKAPI_CALL __stdcall</span>
+<a name="l00054"></a>00054 <span class="preprocessor"></span><span class="preprocessor">#define VKAPI_PTR  VKAPI_CALL</span>
+<a name="l00055"></a>00055 <span class="preprocessor"></span><span class="preprocessor">#elif defined(__ANDROID__) &amp;&amp; defined(__ARM_ARCH) &amp;&amp; __ARM_ARCH &lt; 7</span>
+<a name="l00056"></a>00056 <span class="preprocessor"></span><span class="preprocessor">#error "Vulkan isn't supported for the 'armeabi' NDK ABI"</span>
+<a name="l00057"></a>00057 <span class="preprocessor"></span><span class="preprocessor">#elif defined(__ANDROID__) &amp;&amp; defined(__ARM_ARCH) &amp;&amp; __ARM_ARCH &gt;= 7 &amp;&amp; defined(__ARM_32BIT_STATE)</span>
+<a name="l00058"></a>00058 <span class="preprocessor"></span>        <span class="comment">// On Android 32-bit ARM targets, Vulkan functions use the "hardfloat"</span>
+<a name="l00059"></a>00059         <span class="comment">// calling convention, i.e. float parameters are passed in registers. This</span>
+<a name="l00060"></a>00060         <span class="comment">// is true even if the rest of the application passes floats on the stack,</span>
+<a name="l00061"></a>00061         <span class="comment">// as it does by default when compiling for the armeabi-v7a NDK ABI.</span>
+<a name="l00062"></a>00062 <span class="preprocessor">#define VKAPI_ATTR __attribute__((pcs("aapcs-vfp")))</span>
+<a name="l00063"></a>00063 <span class="preprocessor"></span><span class="preprocessor">#define VKAPI_CALL</span>
+<a name="l00064"></a>00064 <span class="preprocessor"></span><span class="preprocessor">#define VKAPI_PTR  VKAPI_ATTR</span>
 <a name="l00065"></a>00065 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00066"></a>00066 <span class="preprocessor"></span>    <span class="comment">// On other platforms, use the default calling convention</span>
-<a name="l00067"></a>00067 <span class="preprocessor">    #define VKAPI_ATTR</span>
-<a name="l00068"></a>00068 <span class="preprocessor"></span><span class="preprocessor">    #define VKAPI_CALL</span>
-<a name="l00069"></a>00069 <span class="preprocessor"></span><span class="preprocessor">    #define VKAPI_PTR</span>
+<a name="l00066"></a>00066 <span class="preprocessor"></span>        <span class="comment">// On other platforms, use the default calling convention</span>
+<a name="l00067"></a>00067 <span class="preprocessor">#define VKAPI_ATTR</span>
+<a name="l00068"></a>00068 <span class="preprocessor"></span><span class="preprocessor">#define VKAPI_CALL</span>
+<a name="l00069"></a>00069 <span class="preprocessor"></span><span class="preprocessor">#define VKAPI_PTR</span>
 <a name="l00070"></a>00070 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
 <a name="l00071"></a>00071 <span class="preprocessor"></span>
 <a name="l00072"></a>00072 <span class="preprocessor">#include &lt;stddef.h&gt;</span>
 <a name="l00073"></a>00073 
 <a name="l00074"></a>00074 <span class="preprocessor">#if !defined(VK_NO_STDINT_H)</span>
-<a name="l00075"></a>00075 <span class="preprocessor"></span><span class="preprocessor">    #if defined(_MSC_VER) &amp;&amp; (_MSC_VER &lt; 1600)</span>
+<a name="l00075"></a>00075 <span class="preprocessor"></span><span class="preprocessor">#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &lt; 1600)</span>
 <a name="l00076"></a>00076 <span class="preprocessor"></span>        <span class="keyword">typedef</span> <span class="keywordtype">signed</span>   __int8  int8_t;
 <a name="l00077"></a>00077         <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> __int8  uint8_t;
 <a name="l00078"></a>00078         <span class="keyword">typedef</span> <span class="keywordtype">signed</span>   __int16 int16_t;
@@ -144,9 +144,9 @@
 <a name="l00081"></a>00081         <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> __int32 uint32_t;
 <a name="l00082"></a>00082         <span class="keyword">typedef</span> <span class="keywordtype">signed</span>   __int64 int64_t;
 <a name="l00083"></a>00083         <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> __int64 uint64_t;
-<a name="l00084"></a>00084 <span class="preprocessor">    #else</span>
-<a name="l00085"></a>00085 <span class="preprocessor"></span><span class="preprocessor">        #include &lt;stdint.h&gt;</span>
-<a name="l00086"></a>00086 <span class="preprocessor">    #endif</span>
+<a name="l00084"></a>00084 <span class="preprocessor">#else</span>
+<a name="l00085"></a>00085 <span class="preprocessor"></span><span class="preprocessor">#include &lt;stdint.h&gt;</span>
+<a name="l00086"></a>00086 <span class="preprocessor">#endif</span>
 <a name="l00087"></a>00087 <span class="preprocessor"></span><span class="preprocessor">#endif // !defined(VK_NO_STDINT_H)</span>
 <a name="l00088"></a>00088 <span class="preprocessor"></span>
 <a name="l00089"></a>00089 <span class="preprocessor">#ifdef __cplusplus</span>
@@ -189,7 +189,7 @@
 	<div class="seperator"></div>
 	<div class="seperator"></div>
 	<address style="text-align: right;"><small>
-Generated on Mon Nov 28 16:24:59 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
+Generated on Fri Feb 24 10:54:05 2017 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
 	<footer>
 		<div class="row">
 			<div class="text-center">&copy;2016 NVIDIA Corporation.</div>

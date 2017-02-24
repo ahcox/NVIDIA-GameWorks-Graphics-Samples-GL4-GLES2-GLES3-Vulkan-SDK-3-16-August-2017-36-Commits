@@ -199,6 +199,7 @@ protected:
 
     NvUIWindow *mUIWindow;
     NvUIValueText *mFPSText;
+	bool mEnableFPS;
     NvTweakBar *mTweakBar;
     NvUIButton *mTweakTab;
 
@@ -225,6 +226,7 @@ protected:
     void baseUpdate(void);
     void baseDraw(void);
     void baseDrawUI(void);
+	void setFPSEnable(bool flag) { mEnableFPS = flag; }
     void baseHandleReaction(void);
     virtual void platformLogTestResults(float frameRate, int32_t frames) = 0;
     void logTestResults(float frameRate, int32_t frames);

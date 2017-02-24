@@ -90,7 +90,14 @@ public:
 
 	static NvAndroidWinUtil* getDefaultWindow() { return ms_defaultWindow; }
 
+	static bool getHDRSinkFlag() { return m_HDRSinkFlag; }
+	static void setHDRSinkFlag(bool flag) { m_HDRSinkFlag = flag; }
+	static bool getHDRAppFlag() { return m_HDRAppFlag; }
+	static void setHDRAppFlag(bool flag) { m_HDRAppFlag = flag; }
+
 protected:
 	static NvAndroidWinUtil* ms_defaultWindow;
+	static bool m_HDRSinkFlag;
+	static bool m_HDRAppFlag;
 };
 #endif

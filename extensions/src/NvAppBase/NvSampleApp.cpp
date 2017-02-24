@@ -48,25 +48,26 @@
 #include <stdarg.h>
 #include <sstream>
 
-NvSampleApp::NvSampleApp() : 
-    NvAppBase()
-    , mFramerate(0L)
-    , mFrameDelta(0.0f)
-    , mUIWindow(0L)
-    , mFPSText(0L)
-    , mTweakBar(0L)
-    , mTweakTab(0L)
-    , m_desiredWidth(0)
-    , m_desiredHeight(0)
-    , mTestMode(false)
-    , mTestDuration(0.0f)
-    , mTestRepeatFrames(1)
-    , m_testModeIssues(TEST_MODE_ISSUE_NONE)
-    , mEnableInputCallbacks(true)
-    , mUseRenderThread(false)
-    , mThread(NULL)
-    , mRenderThreadRunning(false)
-    , mUseFBOPair(false)
+NvSampleApp::NvSampleApp() :
+	NvAppBase()
+	, mFramerate(0L)
+	, mFrameDelta(0.0f)
+	, mUIWindow(0L)
+	, mFPSText(0L)
+	, mEnableFPS(true)
+	, mTweakBar(0L)
+	, mTweakTab(0L)
+	, m_desiredWidth(0)
+	, m_desiredHeight(0)
+	, mTestMode(false)
+	, mTestDuration(0.0f)
+	, mTestRepeatFrames(1)
+	, m_testModeIssues(TEST_MODE_ISSUE_NONE)
+	, mEnableInputCallbacks(true)
+	, mUseRenderThread(false)
+	, mThread(NULL)
+	, mRenderThreadRunning(false)
+	, mUseFBOPair(false)
     , m_fboWidth(0)
     , m_fboHeight(0)
 	, m_inputHandler(NULL)
@@ -157,11 +158,16 @@ void NvSampleApp::baseInitUI(void) {
         const int32_t w = getAppContext()->width(), h = getAppContext()->height();
 
         mUIWindow = new NvUIWindow((float)w, (float)h);
+
+		if (mEnableFPS)
+		{
         mFPSText = new NvUIValueText("", NvUIFontFamily::SANS, w/40.0f, NvUITextAlign::RIGHT,
                                     0.0f, 1, NvUITextAlign::RIGHT);
 		mFPSText->SetColor(NV_PACKED_COLOR(192, 192, 64, 255));
         mFPSText->SetShadow();
         mUIWindow->Add(mFPSText, (float)w-8, 0);
+		}
+        
 
         if (mTweakBar==NULL) {
             mTweakBar = NvTweakBar::CreateTweakBar(mUIWindow); // adds to window internally.

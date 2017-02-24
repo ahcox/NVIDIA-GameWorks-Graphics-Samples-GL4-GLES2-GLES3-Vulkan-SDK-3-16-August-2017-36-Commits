@@ -15,7 +15,7 @@ void main()
     vec4 transformed_position = vec4(a_Position, 1.0);
     gl_Position = u_ViewProjMatrix * transformed_position;
     v_ShadowMapTexCoord = (u_LightMatrix * transformed_position);
-	v_ShadowMapTexCoord.z -= 0.04;
+	v_ShadowMapTexCoord.z -= 0.01;
 
     v_Normal = a_Normal;
     v_TexCoord = a_TexCoord.xy*2.0;

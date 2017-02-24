@@ -96,7 +96,6 @@ void Bloom::initRendering(void) {
         gLumaTypeEnum = 0x1903; // GL_RED, not declared in ES
     }
 
-    //glClearColor(0.5f, 0.5f, 0.5f, 1.0f); 
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);    
 
     NvAssetLoaderAddSearchPath("es2-aurora/Bloom");
@@ -225,7 +224,7 @@ void Bloom::renderGate()
 
     nv::matrix4f light_scale_matrix;
     light_scale_matrix.make_identity();
-    light_scale_matrix.set_scale(-0.5f);
+    light_scale_matrix.set_scale(0.5f);
     light_scale_matrix.set_translate(nv::vec3f(0.5f, 0.5f, 0.5f));
 
     nv::matrix4f light_final_matrix = light_scale_matrix * mDynamics.mShadowMVP;
@@ -680,7 +679,6 @@ GLuint Bloom::initDepthTexFBO(GLuint width, GLuint height, GLuint internalformat
 
 void Bloom::updateDynamics()
 {
-    nv::matrix4f translation_matrix;
     nv::matrix4f rotation_matrix1;
     nv::matrix4f rotation_matrix2;
     nv::matrix4f projection_matrix;
@@ -696,17 +694,20 @@ void Bloom::updateDynamics()
     nv::rotationY(rotation_matrix1, (float)atan2(-light_direction[0],light_direction[2]));
     nv::rotationX(rotation_matrix2, (float)asin(light_direction[1]));
 
-    nv::translation(translation_matrix, 0.0f,0.0f,0.0f);
-
-    nv::matrix4f shadow_view_matrix = rotation_matrix2 * rotation_matrix1 * translation_matrix *
+    nv::matrix4f shadow_view_matrix = rotation_matrix2 * rotation_matrix1 *
         m_transformer->getRotationMat();
 
     const float xs = 1.0f;
     const float ys = 1.0f;
-    const float zs = 1.5f;
+    const float zs = 1.0f;
     nv::ortho3D(projection_matrix,-xs,xs,-ys,ys, -zs, zs);
 
-    mDynamics.mShadowMVP = projection_matrix * shadow_view_matrix;
+    // nv::ortho3D is left-handed. 
+    // Scale our matrix in z to get back to the right-handed opengl standard.
+    nv::matrix4f shadow_inv_z;
+    shadow_inv_z.set_scale(nv::vec3f(1.0f, 1.0f, -1.0f));
+
+    mDynamics.mShadowMVP = shadow_inv_z * projection_matrix * shadow_view_matrix;
 
     // setting up normal viewproj matrix
     nv::perspective(projection_matrix, FOV * 0.5f, m_width/(float)m_height, Z_NEAR, Z_FAR);

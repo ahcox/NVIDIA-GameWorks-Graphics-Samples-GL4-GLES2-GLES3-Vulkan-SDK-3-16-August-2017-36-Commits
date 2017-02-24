@@ -36,6 +36,7 @@
 #include "NvAndroidNativeAppGlue.h"
 #include "NvAndroidWinUtil.h"
 #include "NV/NvLogs.h"
+#include <assert.h>
 
 Engine::Engine(struct android_app* app) {
     mApp = app;
@@ -61,6 +62,7 @@ Engine::Engine(struct android_app* app) {
     }
 
     mRedrawMode = NvRedrawMode::UNBOUNDED;
+	mDisplayIsHDRCompatible = HDRDisplayState::UNCHECKED;
 }
 
 Engine::~Engine()
@@ -437,5 +439,47 @@ void Engine::handleCommand(int32_t cmd) {
         case APP_CMD_DESTROY:
             break;
     }
+}
+
+bool Engine::isDisplayHDRCompatible() {
+	if (mDisplayIsHDRCompatible == HDRDisplayState::Enum::UNCHECKED)
+	{
+		assert(mApp != NULL);
+
+		jmethodID mid = 0;
+		jclass thisClass = mApp->appThreadEnv->GetObjectClass(mApp->appThreadThis);
+		if (mApp->appThreadEnv->ExceptionOccurred()) {
+			mApp->appThreadEnv->ExceptionDescribe();
+			mApp->appThreadEnv->ExceptionClear();
+			return false;
+		}
+
+		if (thisClass != 0) {
+			mid = mApp->appThreadEnv->GetMethodID(thisClass, "JavaCallback_isDisplayHDRCompatible", "()Z");
+			if (mApp->appThreadEnv->ExceptionOccurred()) {
+				mApp->appThreadEnv->ExceptionDescribe();
+				mApp->appThreadEnv->ExceptionClear();
+				return false;
+			}
+
+			mApp->appThreadEnv->DeleteLocalRef(thisClass);
+		}
+
+		jboolean result = mApp->appThreadEnv->CallBooleanMethod(mApp->appThreadThis, mid);
+
+		if ((bool)result == true) {
+			mDisplayIsHDRCompatible = HDRDisplayState::Enum::COMPATIBLE;
+			LOGI("Connected Display is HDR Compatible")
+		}
+		else {
+			mDisplayIsHDRCompatible = HDRDisplayState::Enum::INCOMPATIBLE;
+			LOGI("Connected Display is not HDR Compatible")
+		}
+		return (bool)result;
+	}
+	else if (mDisplayIsHDRCompatible == HDRDisplayState::Enum::COMPATIBLE)
+		return true;
+	
+	return false;
 }
 

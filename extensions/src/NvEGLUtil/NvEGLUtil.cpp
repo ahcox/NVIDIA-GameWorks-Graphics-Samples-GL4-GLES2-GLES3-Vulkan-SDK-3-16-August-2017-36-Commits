@@ -529,7 +529,32 @@ bool NvEGLWinUtil::createSurface()
 
     ANativeWindow_setBuffersGeometry(m_window, 0, 0, m_format);
 
-    m_surface = eglCreateWindowSurface(m_display, m_config, m_window, NULL);
+	if ( m_HDRAppFlag && m_HDRSinkFlag ) {
+		EGLint surfaceAttribsBT2020PQ[] =
+		{
+			EGL_GL_COLORSPACE, EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+			EGL_NONE
+		};
+		EGLint surfaceAttribsBT2020Linear[] =
+		{
+			EGL_GL_COLORSPACE, EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
+			EGL_NONE
+		};
+		EGLint surfaceAttribsscRGB[] =
+		{
+			EGL_GL_COLORSPACE, EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
+			EGL_NONE
+		};
+		m_surface = eglCreateWindowSurface(m_display, m_config, m_window, surfaceAttribsscRGB);
+		EGL_STATUS_LOG("creating HDR window surface");
+
+	}
+	else {
+		m_surface = eglCreateWindowSurface(m_display, m_config, m_window, NULL);
+		EGL_STATUS_LOG("creating SDR window surface");
+	}
+	
+
     if (m_surface != EGL_NO_SURFACE)
     {
         EGL_STATUS_LOG("eglCreateWindowSurface");
@@ -547,6 +572,69 @@ bool NvEGLWinUtil::createSurface()
         return false;
     }
 
+	if (m_HDRAppFlag && m_HDRSinkFlag)
+	{
+		struct Chromacities
+		{
+			float red_x, red_y;
+			float green_x, green_y;
+			float blue_x, blue_y;
+			float wp_x, wp_y;
+		};
+
+		const Chromacities chromacityList[] =
+		{
+			{ 0.64000f, 0.33000f, 0.30000f, 0.60000f, 0.15000f, 0.06000f, 0.31270f, 0.32900f }, // rec709
+			{ 0.68000f, 0.32000f, 0.26500f, 0.69000f, 0.15000f, 0.06000f, 0.31400f, 0.35100f }, // DCI-P3
+			{ 0.70800f, 0.29200f, 0.17000f, 0.79700f, 0.13100f, 0.04600f, 0.31270f, 0.32900f }, // bt2020
+			{ 0.68000f, 0.32000f, 0.26500f, 0.69000f, 0.15000f, 0.06000f, 0.32168f, 0.33767f }, // D60 DCI
+			{ 0.64000f, 0.33000f, 0.21000f, 0.71000f, 0.15000f, 0.06000f, 0.31270f, 0.32900f }, // Adobe98
+		};
+
+		// Based on mastering display
+		const float maxLum = 1000.0f;
+		const float minLum = 0.0f;
+
+		const Chromacities* masteringDisplayChromaticity = &(chromacityList[0]);
+
+		int metadata[10];
+		metadata[0] = (int)(masteringDisplayChromaticity->red_x * EGL_METADATA_SCALING);
+		metadata[1] = (int)(masteringDisplayChromaticity->red_y * EGL_METADATA_SCALING);
+		metadata[2] = (int)(masteringDisplayChromaticity->green_x * EGL_METADATA_SCALING);
+		metadata[3] = (int)(masteringDisplayChromaticity->green_y * EGL_METADATA_SCALING);
+		metadata[4] = (int)(masteringDisplayChromaticity->blue_x * EGL_METADATA_SCALING);
+		metadata[5] = (int)(masteringDisplayChromaticity->blue_y * EGL_METADATA_SCALING);
+		metadata[6] = (int)(masteringDisplayChromaticity->wp_x * EGL_METADATA_SCALING);
+		metadata[7] = (int)(masteringDisplayChromaticity->wp_y * EGL_METADATA_SCALING);
+		metadata[8] = (int)(maxLum * EGL_METADATA_SCALING);
+		LOGD("Setting Max Luminance :         %f", maxLum);
+		metadata[9] = (int)(minLum * EGL_METADATA_SCALING);
+		LOGD("Setting Min Luminance :         %f", minLum);
+
+		EGLBoolean result = false;
+
+		result = eglSurfaceAttrib(m_display, m_surface, EGL_SMPTE2086_DISPLAY_PRIMARY_RX_EXT, metadata[0]);
+		if (result != EGL_TRUE) EGL_ERROR_LOG("Error setting red primary X");
+		result = eglSurfaceAttrib(m_display, m_surface, EGL_SMPTE2086_DISPLAY_PRIMARY_RY_EXT, metadata[1]);
+		if (result != EGL_TRUE) EGL_ERROR_LOG("Error setting red primary Y");
+		result = eglSurfaceAttrib(m_display, m_surface, EGL_SMPTE2086_DISPLAY_PRIMARY_GX_EXT, metadata[2]);
+		if (result != EGL_TRUE) EGL_ERROR_LOG("Error setting green primary X");
+		result = eglSurfaceAttrib(m_display, m_surface, EGL_SMPTE2086_DISPLAY_PRIMARY_GY_EXT, metadata[3]);
+		if (result != EGL_TRUE) EGL_ERROR_LOG("Error setting green primary Y");
+		result = eglSurfaceAttrib(m_display, m_surface, EGL_SMPTE2086_DISPLAY_PRIMARY_BX_EXT, metadata[4]);
+		if (result != EGL_TRUE) EGL_ERROR_LOG("Error setting blue primary X");
+		result = eglSurfaceAttrib(m_display, m_surface, EGL_SMPTE2086_DISPLAY_PRIMARY_BY_EXT, metadata[5]);
+		if (result != EGL_TRUE) EGL_ERROR_LOG("Error setting blue primary Y");
+		result = eglSurfaceAttrib(m_display, m_surface, EGL_SMPTE2086_WHITE_POINT_X_EXT, metadata[6]);
+		if (result != EGL_TRUE) EGL_ERROR_LOG("Error setting white point X");
+		result = eglSurfaceAttrib(m_display, m_surface, EGL_SMPTE2086_WHITE_POINT_Y_EXT, metadata[7]);
+		if (result != EGL_TRUE) EGL_ERROR_LOG("Error setting white point Y");
+		result = eglSurfaceAttrib(m_display, m_surface, EGL_SMPTE2086_MAX_LUMINANCE_EXT, metadata[8]);
+		if (result != EGL_TRUE) EGL_ERROR_LOG("Error setting max luminance");
+		result = eglSurfaceAttrib(m_display, m_surface, EGL_SMPTE2086_MIN_LUMINANCE_EXT, metadata[9]);
+		if (result != EGL_TRUE) EGL_ERROR_LOG("Error setting min luminance");
+	}
+	
     m_status = NV_HAS_SURFACE;
 
     return true;

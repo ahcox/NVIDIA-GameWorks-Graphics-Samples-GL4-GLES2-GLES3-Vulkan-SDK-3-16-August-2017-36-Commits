@@ -34,7 +34,6 @@
 #include "NvVkUtil/NvSampleAppVK.h"
 #include "NvVkUtil/NvSimpleUBO.h"
 #include "NV/NvMath.h"
-#define USEVULKANSDK 1
 #include "vk_nvx_device_generated_commands.h"
 
 
