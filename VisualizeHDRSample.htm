@@ -1,0 +1,334 @@
+<!doctype html>
+<html class="csstransforms csstransforms3d csstransitions" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+	
+	<title>Visualize HDR Sample</title>
+	<meta name="description" content="Visualize HDR Sample" />
+	
+	<!-- CSS files -->
+    <link href="./css/application.css" rel="stylesheet" type="text/css" />
+    <link href="./css/styleguide.css" rel="stylesheet" type="text/css" />
+	<!--<link rel="stylesheet" type="text/css" href="sdk_samples.css" />-->
+	<!-- scripts to include -->
+    <script src="./js/jquery.js"></script>
+    <script src="./js/owl.carousel.js"></script>
+    <script src="./js/jquery.fitvids.js"></script>
+    <script src="./js/jquery.colorbox.js"></script>
+    <script src="./js/jquery.isotope.js"></script>
+    <script src="./js/jquery.sidr.js"></script>
+    <script src="./js/bootstrap.js"></script>
+    <script src="./js/application.js"></script>
+    <script src="./js/prettify.js"></script>
+</head>
+
+<body style="">
+
+<!--Navbar-->
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <div class="container">
+	<div class="row">
+	  <!--<button class="navbar-toggle" type="button"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>-->
+	  <div class="logo-header col-sm-8 col-md-9">
+		<a class="navbar-brand logo" href="http://developer.nvidia.com/gameworks"><img alt="NVidia GameWorks" height="21" src="./images/developerzone_gameworks_logo.png" width="245"></a>
+	  </div>
+	  <div class="logo-header navbar-right col-sm-4 col-md-3">
+		<a class="navbar-brand logo" href="https://github.com/NVIDIAGameWorks/GraphicsSamples"><img src="./images/gameworks_at_github.png" alt="GameWorks at GitHub" height="21" width="226"/></a>
+	  </div>
+	</div>
+  </div>
+</nav>
+
+<!-- main body block -->
+<div id="content" class="container">
+
+<div class="row" id="subprojcontent">
+ <div class="col-xs-12">
+    <ol class="breadcrumb"><br/>
+		<li><a href="./index.html">Home</a></li>
+		
+		<li><a href="./gfx_samples_gl.htm">GameWorks OpenGL Graphics Samples</a></li>
+		
+		<li class="active">Visualize HDR Sample</li>
+	</ol> 
+	<div class="page-header">
+		<h1>Visualize HDR Sample</h1>
+	</div>
+
+	<div class="row">
+		
+			<div class="subprojmetadata">
+			<b class="small">Category:</b>
+			
+				<span class="btn btn-primary btn-xs subprojmetacat">&nbsp;Visuals&nbsp;</span>
+			
+			</div>
+		
+		<div class="subprojmetadata">
+			<b class="small">Min PC GPU:</b>
+			<span class="subprojmetagpu">GeForce Kepler-class</span>
+		</div>
+		
+		<div class="subprojmetadata">
+			<b class="small">Min Tegra Device:</b>
+			<span class="subprojmetagpu">Tegra K1</span>
+		</div>
+		
+		
+		<div class="subprojmetadata">
+			<b class="small">@ GitHub:</b>
+			<span class="subprojmetagpu"><a target="_blank" href="https://github.com/NVIDIAGameWorks/GraphicsSamples/tree/master/samples/es3aep-kepler/VisualizeHDR">Visualize HDR Sample Source Code</a></span>
+		</div>
+		
+	</div>
+	
+	<div class="row">
+		<h3>Description</h3>
+		<p>The Visualize HDR sample acts as a viewer for HDR images.</p>
+			
+		<a data-colorbox="true" href="images/visualizehdr-screenshot.jpg"><img class="subprojscreen" src="images/visualizehdr-screenshot.jpg" width="400" alt="Screenshot" /></a>
+		
+	</div>
+	
+	
+	<div class="row">
+		<h3>APIs Used</h3>
+		<ul>
+		
+		  <li class="odd">OpenGL ES 3 AEP</li>
+		
+		</ul>
+	</div>
+	
+
+	
+	
+	
+	
+	<div class="row">
+		<h3>Shared User Interface</h3>
+		<p>The Graphics samples all share a common app framework and certain user interface elements, centered around the "Tweakbar" panel on the left side of the screen which lets you interactively control certain variables in each sample.</p>
+		<p>To show and hide the Tweakbar, simply click or touch the triangular button positioned in the top-left of the view.</p>
+		<div class="subprojmetadata">
+			<p>Other controls are listed below.</p>
+			
+		<table class="table table-striped small subprojcontrolstable" id="sharedcontrolstable">
+		
+		<tr>
+			<th class="subprojcontrolsdevice">Device</th>
+			<th class="subprojcontrolsinput">Input</th>
+			<th class="subprojcontrolsresult">Result</th>
+		</tr>
+	
+		
+		
+			
+			<tr class="odd">
+				
+				<td class="subprojcontrolsdevicekind">touch</td>
+				
+				<td>1-Finger Drag</td> <td>Orbit-rotate the camera</td>
+			</tr>
+			
+			<tr class="even">
+				
+				<td> </td>
+				
+				<td>2-Finger Drag</td> <td>Move up/down/left/right</td>
+			</tr>
+			
+			<tr class="odd">
+				
+				<td> </td>
+				
+				<td>2-Finger Pinch</td> <td>Scale the view</td>
+			</tr>
+			
+		
+			
+			<tr class="even">
+				
+				<td class="subprojcontrolsdevicekind">mouse</td>
+				
+				<td>Left-Button Drag</td> <td>Orbit-rotate the camera</td>
+			</tr>
+			
+			<tr class="odd">
+				
+				<td> </td>
+				
+				<td>Right-Button Drag</td> <td>Move up/down/left/right</td>
+			</tr>
+			
+			<tr class="even">
+				
+				<td> </td>
+				
+				<td>Middle-Click Drag</td> <td>Scale the view (up:out, down:in)</td>
+			</tr>
+			
+		
+			
+			<tr class="odd">
+				
+				<td class="subprojcontrolsdevicekind">keyboard</td>
+				
+				<td>Escape</td> <td>Quit the application</td>
+			</tr>
+			
+			<tr class="even">
+				
+				<td> </td>
+				
+				<td>Tab</td> <td>Toggle TweakBar visibility</td>
+			</tr>
+			
+		
+			
+			<tr class="odd">
+				
+				<td class="subprojcontrolsdevicekind">gamepad</td>
+				
+				<td>Start</td> <td>Toggle TweakBar visibility</td>
+			</tr>
+			
+			<tr class="even">
+				
+				<td> </td>
+				
+				<td>Right ThumbStick</td> <td>Orbit-rotate the camera</td>
+			</tr>
+			
+			<tr class="odd">
+				
+				<td> </td>
+				
+				<td>Left ThumbStick</td> <td>Move forward/backward, Slide left/right</td>
+			</tr>
+			
+			<tr class="even">
+				
+				<td> </td>
+				
+				<td>Left/Right Triggers</td> <td>Move up/down</td>
+			</tr>
+			
+			<tr class="odd">
+				
+				<td> </td>
+				
+				<td>A</td> <td>Show TweakBar, Toggle Focused Item</td>
+			</tr>
+			
+			<tr class="even">
+				
+				<td> </td>
+				
+				<td>B</td> <td>Close Focused UI, Hide TweakBar</td>
+			</tr>
+			
+			<tr class="odd">
+				
+				<td> </td>
+				
+				<td>DPAD Up/Down</td> <td>Move Focus to Prev/Next Item</td>
+			</tr>
+			
+			<tr class="even">
+				
+				<td> </td>
+				
+				<td>DPAD Left/Right</td> <td>Decrease/Increase Focused Item</td>
+			</tr>
+			
+		
+		</table>
+	
+		</div>
+	</div>
+	
+		
+	
+
+		
+	<div class="row" id="subprojfulldoc">
+		<h3>Technical Details</h3>
+		<div id="detaileddoc">
+<p>This sample is an implementation of the Weighted Blended OIT (Order Independent Transparency) algorithm from this research paper:<br/>
+<a href="http://jcgt.org/published/0002/02/09/">McGuire and Bavoil, Weighted Blended Order-Independent Transparency, Journal of Computer Graphics Techniques (JCGT), vol. 2, no. 2, 122--141, 2013</a>.
+</p>
+
+<h4>Introduction</h4>
+<a href="https://en.wikipedia.org/wiki/Radiance_(software)">The Radiance</a> format (.HDR/.RGBE) is a popular format used for storing HDR images. This application is specially designed to work with HDR displays as displays images saved in the Radiance format. When connected to a compatible display, options show up in the application UI that allow tweaking of various settings of the <a href="https://en.wikipedia.org/wiki/Academy_Color_Encoding_System">ACES</a> tonemapper and visualize their effect on the image. 
+
+<p>All images used in this sample are courtesy of <a href="https://www.epicgames.com/">Epic Games Inc</a>.</p>
+
+
+<h4>Rendering Procedure</h4>
+A typical HDR image has values that go from 0.0 to well beyond 1.0. Typically images of this form are tonemapped to fit between the 0 to 1 range so that they work well with backbuffers that are RGB888. In our case, we use the ACES tonemapper to tonemap our image to an alternate range which has far more precision and range than the previous 0-1 range. The ACES tonemapper also takes into account the color space that the original image is stored in (scene-referred) and also the final output color gamut capabilities of the display. If the display is capable of higher peak brightness levels, the tonemapper curve can tone the final output based on that as well. The ACES tonemapper could be run completely as a final pass in the fragment shader, but in this case, it is implemented as a LUT. The 32x32x32 FP16 LUT stores the entire range of input to output color mappings for quick access from the fragment shader. This significantly reduces performance overhead.
+
+<h4>UI</h4>
+<ul>
+<li>Image Chooser</li>
+<li>Output Curve (based on max display brightness)</li>
+<li>Output Color Space</li>
+<li>Output Mode (final image passed to the driver)</li>
+<li>Enable ACES D60 to D65 White Adjustment</li>
+<li>Enable ACES desaturation</li>
+<li>Enable ACES Dim Surround</li>
+<li>Adjustment of Middle Gray</li>
+<li>Tone Curve Saturation</li>
+<li>Surround Gamma</li>
+<li>Max CLL</li>
+<li>Splitscreen mode</li>
+</ul>
+
+
+</div>
+	</div>
+	
+
+	
+	<div class="row" id="subprojseealso">
+		<h3>See Also</h3>
+		<ul>
+		
+		  <li class="odd">
+		  <!-- tbd file static refs will need to turn into an nvidia.com relative URL... -->
+		  <span class="subprojseeone">
+		  <a href="https://en.wikipedia.org/wiki/Radiance_(software)">
+		  The Radiance file format
+		  </a>
+		  </span></li>
+		
+		  <li class="even">
+		  <!-- tbd file static refs will need to turn into an nvidia.com relative URL... -->
+		  <span class="subprojseeone">
+		  <a href="https://en.wikipedia.org/wiki/Academy_Color_Encoding_System">
+		  The ACES tonemapper
+		  </a>
+		  </span></li>
+		
+		</ul>
+	</div>
+		
+	
+</div>
+</div>
+
+</div> <!--content-->
+<!-- footer block-->
+<div id="footer" class="container">
+	<div class="seperator"></div>
+	<div class="seperator"></div>
+	<footer>
+		<div class="row">
+			<div class="text-center">&copy;2016 NVIDIA Corporation.</div>
+			<div class="seperator"></div>
+		</div>
+	</footer>
+</div> <!--footer-->
+
+</body>
+</html>

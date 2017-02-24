@@ -159,29 +159,49 @@
 <a name="l00214"></a>00214 
 <a name="l00215"></a>00215         <span class="keywordtype">void</span> setPlatformContext(<a class="code" href="class_nv_platform_context.html" title="Basic platform functionality interface.">NvPlatformContext</a>* platform) { mPlatform = platform; }
 <a name="l00216"></a>00216 
-<a name="l00217"></a>00217 <span class="keyword">protected</span>:
-<a name="l00218"></a>00218         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> isTestMode() { <span class="keywordflow">return</span> <span class="keyword">false</span>; }
-<a name="l00219"></a>00219 
-<a name="l00222"></a>00222     <span class="keywordtype">void</span> <a class="code" href="class_nv_app_base.html#924ae06c05ad513c1ce65044a1957991" title="Request exit.">appRequestExit</a>();
+<a name="l00217"></a>00217         <span class="comment">// Returns true if the final output will be in HDR format. Useful for making decisions </span>
+<a name="l00218"></a>00218         <span class="comment">// within the app based on if the output will be in HDR/SDR mode.</span>
+<a name="l00219"></a>00219         <span class="keywordtype">bool</span> getHDREnable()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_hdrEnable; }
+<a name="l00220"></a>00220 
+<a name="l00221"></a>00221         <span class="comment">// Set if the final output should be in HDR based on sink's capabilities and app's readiness</span>
+<a name="l00222"></a>00222         <span class="keywordtype">void</span> setHDREnable(<span class="keywordtype">bool</span> flag) { m_hdrEnable = flag; }
 <a name="l00223"></a>00223 
-<a name="l00226"></a><a class="code" href="class_nv_app_base.html#f04421e42621930a31be559bd2471e62">00226</a>     <span class="keywordtype">bool</span> <a class="code" href="class_nv_app_base.html#f04421e42621930a31be559bd2471e62" title="Exit query.">isExiting</a>() { <span class="keywordflow">return</span> m_requestedExit; }
-<a name="l00227"></a>00227 
-<a name="l00228"></a><a class="code" href="class_nv_app_base.html#7e04ef9b95136b4a826ee66c523b4593">00228</a>     int32_t <a class="code" href="class_nv_app_base.html#7e04ef9b95136b4a826ee66c523b4593" title="the current window width">m_width</a>; 
-<a name="l00229"></a><a class="code" href="class_nv_app_base.html#e0582cb5dc48d72b56d1dcfa6971f3e5">00229</a>     int32_t <a class="code" href="class_nv_app_base.html#e0582cb5dc48d72b56d1dcfa6971f3e5" title="the current window height">m_height</a>; 
+<a name="l00224"></a>00224         <span class="comment">// Gets application's readiness for HDR. This should be set by the application upon creation.</span>
+<a name="l00225"></a>00225         <span class="keywordtype">bool</span> getHDRReady()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_hdrReady; }
+<a name="l00226"></a>00226 
+<a name="l00227"></a>00227         <span class="comment">// Set HDR readiness of the application. This should be called as soon at the sample's instance has</span>
+<a name="l00228"></a>00228         <span class="comment">// been created.</span>
+<a name="l00229"></a>00229         <span class="keywordtype">void</span> setHDRReady(<span class="keywordtype">bool</span> flag) { m_hdrReady = flag; }
 <a name="l00230"></a>00230 
-<a name="l00232"></a>00232     <a class="code" href="class_nv_platform_context.html" title="Basic platform functionality interface.">NvPlatformContext</a>* mPlatform;
-<a name="l00233"></a>00233     NvAppContext* mContext;
-<a name="l00234"></a>00234         <a class="code" href="class_nv_thread_manager.html" title="Abstract class used to create, destroy and manage the threading API&amp;#39;s data structures...">NvThreadManager</a>* mThreadManager;
-<a name="l00235"></a>00235         std::string mAppTitle;
-<a name="l00236"></a>00236 
-<a name="l00237"></a>00237         <span class="keyword">static</span> std::vector&lt;std::string&gt; ms_commandLine;
-<a name="l00238"></a>00238 
-<a name="l00239"></a>00239         <span class="keywordtype">bool</span> m_requestedExit;
-<a name="l00240"></a>00240 };
+<a name="l00231"></a>00231 <span class="keyword">protected</span>:
+<a name="l00232"></a>00232         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> isTestMode() { <span class="keywordflow">return</span> <span class="keyword">false</span>; }
+<a name="l00233"></a>00233 
+<a name="l00236"></a>00236     <span class="keywordtype">void</span> <a class="code" href="class_nv_app_base.html#924ae06c05ad513c1ce65044a1957991" title="Request exit.">appRequestExit</a>();
+<a name="l00237"></a>00237 
+<a name="l00240"></a><a class="code" href="class_nv_app_base.html#f04421e42621930a31be559bd2471e62">00240</a>     <span class="keywordtype">bool</span> <a class="code" href="class_nv_app_base.html#f04421e42621930a31be559bd2471e62" title="Exit query.">isExiting</a>() { <span class="keywordflow">return</span> m_requestedExit; }
 <a name="l00241"></a>00241 
-<a name="l00246"></a>00246 <span class="keyword">extern</span> <a class="code" href="class_nv_app_base.html" title="A basic app framework, including mainloop, setup and input processing.">NvAppBase</a>* <a class="code" href="_nv_app_base_8h.html#954850d0313b1a6267e0cedd93b90430" title="App creation entrypoint.">NvAppFactory</a>();
+<a name="l00242"></a><a class="code" href="class_nv_app_base.html#7e04ef9b95136b4a826ee66c523b4593">00242</a>     int32_t <a class="code" href="class_nv_app_base.html#7e04ef9b95136b4a826ee66c523b4593" title="the current window width">m_width</a>; 
+<a name="l00243"></a><a class="code" href="class_nv_app_base.html#e0582cb5dc48d72b56d1dcfa6971f3e5">00243</a>     int32_t <a class="code" href="class_nv_app_base.html#e0582cb5dc48d72b56d1dcfa6971f3e5" title="the current window height">m_height</a>; 
+<a name="l00244"></a>00244 
+<a name="l00245"></a>00245         <span class="comment">// This flag determines if the output should be in HDR mode or not.</span>
+<a name="l00246"></a>00246         <span class="keywordtype">bool</span> m_hdrEnable = <span class="keyword">false</span>;
 <a name="l00247"></a>00247 
-<a name="l00248"></a>00248 <span class="preprocessor">#endif</span>
+<a name="l00248"></a>00248         <span class="comment">// Is the app built with HDR support</span>
+<a name="l00249"></a>00249         <span class="keywordtype">bool</span> m_hdrReady = <span class="keyword">false</span>;
+<a name="l00250"></a>00250 
+<a name="l00252"></a>00252     <a class="code" href="class_nv_platform_context.html" title="Basic platform functionality interface.">NvPlatformContext</a>* mPlatform;
+<a name="l00253"></a>00253     NvAppContext* mContext;
+<a name="l00254"></a>00254         <a class="code" href="class_nv_thread_manager.html" title="Abstract class used to create, destroy and manage the threading API&amp;#39;s data structures...">NvThreadManager</a>* mThreadManager;
+<a name="l00255"></a>00255         std::string mAppTitle;
+<a name="l00256"></a>00256 
+<a name="l00257"></a>00257         <span class="keyword">static</span> std::vector&lt;std::string&gt; ms_commandLine;
+<a name="l00258"></a>00258 
+<a name="l00259"></a>00259         <span class="keywordtype">bool</span> m_requestedExit;
+<a name="l00260"></a>00260 };
+<a name="l00261"></a>00261 
+<a name="l00266"></a>00266 <span class="keyword">extern</span> <a class="code" href="class_nv_app_base.html" title="A basic app framework, including mainloop, setup and input processing.">NvAppBase</a>* <a class="code" href="_nv_app_base_8h.html#954850d0313b1a6267e0cedd93b90430" title="App creation entrypoint.">NvAppFactory</a>();
+<a name="l00267"></a>00267 
+<a name="l00268"></a>00268 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div> <!--content-->
 <!-- footer block-->
@@ -189,7 +209,7 @@
 	<div class="seperator"></div>
 	<div class="seperator"></div>
 	<address style="text-align: right;"><small>
-Generated on Mon Nov 28 16:24:59 2016 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
+Generated on Fri Feb 24 10:54:04 2017 for NVIDIA GameWorks Graphics App Framework and Libraries by&nbsp;<a href="http://www.doxygen.org/index.html">Doxygen</a></small></address>
 	<footer>
 		<div class="row">
 			<div class="text-center">&copy;2016 NVIDIA Corporation.</div>
