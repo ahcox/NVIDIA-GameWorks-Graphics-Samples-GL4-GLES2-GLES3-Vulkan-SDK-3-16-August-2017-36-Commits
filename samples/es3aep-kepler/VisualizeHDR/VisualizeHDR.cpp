@@ -472,12 +472,12 @@ void VisualizeHDR::draw(void)
 
 		const int texUnit = 1;
 		acesManager.updateAcesUniforms(mVisualizationProg->getProgram(), texUnit);		
-
-		// Binding buffer with HDR image
+		
+		// Binding buffer with HDR image		
+		loc = glGetUniformLocation(mVisualizationProg->getProgram(), "uTexture");
+		glProgramUniform1i(mVisualizationProg->getProgram(), loc, 0);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, mHDRTexture);
-		loc = glGetUniformLocation(mVisualizationProg->getProgram(), "uTexture");
-		glProgramUniform1i(mVisualizationProg->getProgram(), 0, mHDRTexture);
 		
 		drawScreenAlignedQuad(mVisualizationProg->getProgram());
 		mVisualizationProg->disable();
