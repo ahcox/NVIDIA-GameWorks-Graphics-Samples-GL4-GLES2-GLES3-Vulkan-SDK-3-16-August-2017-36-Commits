@@ -182,7 +182,16 @@ const char *font_names[NUM_FONTS] = {
 
 const float EM_SCALE = 2048;
 
-#define PRE_glPathGlyphIndexRangeNV  // Uncomment for older drivers.
+// Comment out if you want to use the glyph index range and file-loaded font cases
+// IMPORTANT NOTE - in order to make GL_FILE_NAME_NV mode work, you must ensure that
+// a copy of the Freetype from GTK3 DLL, named freetype6.dll (this may require renaming)
+// and all dependent DLLs must be in the system path.  Note that the build of FT must
+// match the 32/64 bit of the app.  If this is not done, glPathGlyphIndexArrayNV will
+// return GL_FONT_TARGET_UNAVAILABLE_NV
+#define PRE_glPathGlyphIndexRangeNV
+
+
+
 #ifdef PRE_glPathGlyphIndexRangeNV
 struct PathGenState {
     bool needs_close;
@@ -378,10 +387,14 @@ void ShapedText::initHarfBuzz()
             case GLYPH_INDEX_ARRAY:
                 nvpr_glyph_base[ii] = glGenPathsNV(ft_face->num_glyphs);
                 nvpr_glyph_count[ii] = ft_face->num_glyphs;
-                fontStatus = glPathGlyphIndexArrayNV(nvpr_glyph_base[ii],
-                    GL_FILE_NAME_NV, font_names[ii], /*fontStyle */0,
-                    /*firstGlyphIndex*/0, ft_face->num_glyphs,
-                    path_template, EM_SCALE);
+                {
+                    std::string pathName;
+                    NvAssetGetFilePath(font_names[ii], pathName);
+                    fontStatus = glPathGlyphIndexArrayNV(nvpr_glyph_base[ii],
+                        GL_FILE_NAME_NV, pathName.c_str(), /*fontStyle */0,
+                        /*firstGlyphIndex*/0, ft_face->num_glyphs,
+                        path_template, EM_SCALE);
+                }
                 break;
             case MEMORY_GLYPH_INDEX_ARRAY:
                 {
@@ -411,7 +424,7 @@ void ShapedText::initHarfBuzz()
                 NV_ASSERT(!"unknown NVprAPImode");
             }
             if (fontStatus == GL_FONT_GLYPHS_AVAILABLE_NV) {
-                printf("Font <%s> is available @ %d for %d glyphs\n",
+                LOGI("Font <%s> is available @ %d for %d glyphs\n",
                     font_names[ii], nvpr_glyph_base[ii], nvpr_glyph_count[ii]);
 
                 GLuint ids[3] = { 0, nvpr_glyph_count[ii]-1, nvpr_glyph_count[ii] };
@@ -421,7 +434,7 @@ void ShapedText::initHarfBuzz()
                     &ids, nvpr_glyph_base[ii],
                     0, num_glyphs);
                 for (size_t i=0; i<countof(ids); i++) {
-                    printf("num_glyphs = %f\n", num_glyphs[i]);
+                    LOGI("num_glyphs = %f\n", num_glyphs[i]);
                 }
             } else {
                 error_count++;
@@ -430,28 +443,28 @@ void ShapedText::initHarfBuzz()
                     NV_ASSERT(base_and_count[0] == 0);
                     NV_ASSERT(base_and_count[1] == 0);
                 }
-                printf("Font glyphs could not be populated (0x%x)\n", fontStatus);
+                LOGE("Font glyphs could not be populated (0x%x)\n", fontStatus);
                 switch (fontStatus) {
                 case GL_FONT_TARGET_UNAVAILABLE_NV:
-                    printf("> Font target unavailable\n");
+                    LOGE("> Font target unavailable; check for correctly installed freetype6.dll\n");
                     break;
                 case GL_FONT_UNAVAILABLE_NV:
-                    printf("> Font unavailable\n");
+                    LOGE("> Font unavailable\n");
                     break;
                 case GL_FONT_CORRUPT_NV:
-                    printf("> Font corrupt\n");
+                    LOGE("> Font corrupt\n");
                     break;
                 case GL_OUT_OF_MEMORY:
-                    printf("> Out of memory\n");
+                    LOGE("> Out of memory\n");
                     break;
                 case GL_INVALID_VALUE:
-                    printf("> Invalid value for glPathGlyphIndexRangeNV (should not happen)\n");
+                    LOGE("> Invalid value for glPathGlyphIndexRangeNV (should not happen)\n");
                     break;
                 case GL_INVALID_ENUM:
-                    printf("> Invalid enum for glPathGlyphIndexRangeNV (should not happen)\n");
+                    LOGE("> Invalid enum for glPathGlyphIndexRangeNV (should not happen)\n");
                     break;
                 default:
-                    printf("> UNKNOWN reason (should not happen)\n");
+                    LOGE("> UNKNOWN reason (should not happen)\n");
                     break;
                 }
             }
@@ -462,9 +475,9 @@ void ShapedText::initHarfBuzz()
     }
 
     if (error_count > 0) {
-        printf("NVpr font setup failed with %d errors\n", error_count);
+        LOGE("NVpr font setup failed with %d errors\n", error_count);
 #ifdef _WIN32
-        printf("\nCould it be you don't have freetype6.dll in your current directory?\n");
+        LOGE("\nCould it be you don't have freetype6.dll in your current directory?\n");
 #endif
         exit(1);
     }
@@ -866,6 +879,14 @@ void ShapedText::initRendering()
 
 	if(!requireExtension("GL_NV_path_rendering")) return;
     if (!es_context && !requireExtension("GL_EXT_direct_state_access")) return;
+
+
+#ifndef PRE_glPathGlyphIndexRangeNV
+    glPathGlyphIndexArrayNV = (PFNGLPATHGLYPHINDEXARRAYNVPROC)getGLContext()->getGLProcAddress("glPathGlyphIndexArrayNV");
+    glPathMemoryGlyphIndexArrayNV = (PFNGLPATHMEMORYGLYPHINDEXARRAYNVPROC)getGLContext()->getGLProcAddress("glPathMemoryGlyphIndexArrayNV");
+    glPathGlyphIndexRangeNV = (PFNGLPATHGLYPHINDEXRANGENVPROC)getGLContext()->getGLProcAddress("glPathGlyphIndexRangeNV");
+
+#endif
 
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);    
 
