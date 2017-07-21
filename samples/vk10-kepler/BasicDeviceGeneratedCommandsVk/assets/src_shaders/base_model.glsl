@@ -50,7 +50,7 @@ layout(binding = 1) uniform Material {
     vec4 mDiffuse;
 };
 
-out IO { vec4 color; };
+layout(location = 0) out vec4 color;
 
 void main() {
 
@@ -63,7 +63,7 @@ void main() {
 #GLSL_FS
 #version 440 core
 
-in IO { vec4 color; };
+layout(location = 0) in vec4 color;
 
 layout(location = 0) out vec4 colorOut;
 

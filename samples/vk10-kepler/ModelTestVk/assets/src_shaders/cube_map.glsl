@@ -44,7 +44,7 @@ layout(binding = 0) uniform Block {
     vec3 g_modelLight;
 };
 
-out IO { vec3 v_vCubemapCoord; };
+layout(location = 0) out vec3 v_vCubemapCoord; 
 
 void main() {
   gl_Position = vec4(position.xy, 0.9999, 1.0);
@@ -66,7 +66,7 @@ layout(binding = 0) uniform Block {
 
 layout(binding = 2) uniform samplerCube tex;
 
-in IO { vec3 v_vCubemapCoord; };
+layout(location = 0) in vec3 v_vCubemapCoord; 
 
 layout(location = 0) out vec4 colorOut;
 
