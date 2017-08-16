@@ -140,3 +140,6 @@ int64_t NvAssetFileSeek64(NvAssetFilePtr fp, int64_t offset, NvAssetSeekBase whe
     return AAsset_seek64((AAsset*)fp, offset, (int32_t)whence);
 }
 
+bool NvAssetGetFilePath(const std::string fileName, std::string& path) {
+    return false;
+}
