@@ -189,3 +189,7 @@ int64_t NvAssetFileRead64(NvAssetFilePtr file, int32_t offset, int32_t size, voi
 int64_t NvAssetFileSeek64(NvAssetFilePtr fp, int64_t offset, NvAssetSeekBase whence) {
     return fseek((FILE*)fp, offset, (int32_t)whence);
 }
+
+bool NvAssetGetFilePath(const std::string fileName, std::string& path) {
+    return false;
+}
